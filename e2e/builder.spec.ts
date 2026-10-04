@@ -1,3 +1,4 @@
+import AxeBuilder from '@axe-core/playwright';
 import { test, expect } from '@playwright/test';
 test('edit six slots, prevent duplicates, replace, remove and restore a shared team', async ({ page, context }) => {
   const errors: string[] = [];
@@ -114,4 +115,24 @@ test('SEO routes prefill their Pokémon, honor explicit share state and expose m
   expect((await request.get('/og.png')).ok()).toBe(true);
   await page.goto('/weakness-calculator?v=1&team=charizard');
   await expect(page.getByRole('table')).toBeVisible();
+});
+
+test('accessible empty, populated and picker states', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByRole('button', { name: 'Add Pokémon to slot 1', exact: true })).toBeEnabled();
+  expect((await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze()).violations).toEqual([]);
+  await page.goto('/pokemon/garchomp');
+  await expect(page.getByTestId('slot-0').getByRole('heading', {name:'Garchomp',exact:true})).toBeVisible();
+  expect((await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze()).violations).toEqual([]);
+  await page.getByRole('button', {name:'Add Pokémon to slot 2',exact:true}).click();
+  expect((await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze()).violations).toEqual([]);
+});
+test('unknown routes and unsupported URL versions have safe fallbacks', async ({page}) => {
+  const response = await page.goto('/this-page-does-not-exist');
+  expect(response?.status()).toBe(404);
+  await expect(page.getByRole('heading', {level:1})).toHaveText('That page wandered off.');
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content','noindex, follow');
+  await page.goto('/?v=99&team=pikachu');
+  await expect(page.getByRole('button', {name:/Add Pokémon to slot/})).toHaveCount(6);
+  await expect(page.getByTestId('team-score')).toHaveText('0/ 100');
 });

@@ -4,6 +4,12 @@
 - [x] Phase 3: deterministic type engine and four scores; tests for immunities, dual types, 4x weaknesses, repeated weaknesses, empty/full teams.
 - [x] Phase 4: evaluate candidates using the same score function; explain computed deltas.
 - [x] Phase 5: SEO routes, sitemap, robots, OG and structured data; analytics only after configuration.
-- Phase 6: keyboard/mobile/browser QA, invalid URLs, performance and deployment.
+- [x] Phase 6: keyboard/mobile/browser QA, invalid URLs, performance and deployment.
 
 The Phase 2 builder supports editing and sharing. Type analysis, deterministic scores and computed recommendations are now available. Hosting and DNS are not configured by this change.
+
+## Launch configuration still needed
+- Choose Cloudflare Pages or Vercel, import this repository, deploy and connect the custom domain.
+- Add actual GA4/GSC identifiers if wanted, rebuild and submit the sitemap after HTTPS is live.
+- Verify production redirects, headers, 404 and domain ownership; run a production performance check.
+- Review the implemented tool visually. Pokémon artwork remains placeholders; alternate forms and competitive rules are outside this MVP.

@@ -13,7 +13,7 @@ Requires Node.js 24 and npm. Run `npm ci`, then `npm run dev`. Open the local ad
 - `npm run preview` — serve the built output locally.
 
 ## Current scope
-Phase 0–5 complete: validated local 1,025-species dataset, casual format, six-slot React builder, name/number search, type/generation filters, add/remove/replace, duplicate protection and versioned share URLs. Deterministic type analysis and four explainable scores are implemented. Computed recommendations evaluate all eligible local candidates for a selected empty or occupied slot, show the real score delta, and apply the change in one click. The last 24 team/slot queries are cached. See DATA_SOURCES.md for scope and attribution.
+Phase 0–6 implementation complete: validated local 1,025-species dataset, casual format, six-slot React builder, name/number search, type/generation filters, add/remove/replace, duplicate protection and versioned share URLs. Deterministic type analysis and four explainable scores are implemented. Computed recommendations evaluate all eligible local candidates for a selected empty or occupied slot, show the real score delta, and apply the change in one click. The last 24 team/slot queries are cached. See DATA_SOURCES.md for scope and attribution.
 
 Read PRODUCT_SPEC.md for the supplied plan and TODO.md for the next phases. The team builder is hydrated with React; SEO content remains static. Styling uses plain CSS until the functional UI phase needs further tooling.
 
@@ -31,3 +31,8 @@ Run `npx playwright install chromium`, then `npm run test:e2e`. The suite builds
 
 ## SEO scope
 The build includes two focused calculator routes, one casual format route and six curated Pokémon analysis/teammate pairs. No thousands of thin pages are generated. Page templates prefill the relevant Pokémon; an explicit team query overrides this default. Canonical URLs omit team parameters. The sitemap lists static indexable routes.
+
+## Release checks and deployment
+See QA_REPORT.md for the local verification results and remaining launch configuration. See DEPLOYMENT.md for Cloudflare Pages or Vercel import settings. A deployment has not been performed.
+
+`npm run check` also validates all generated sitemap pages, canonical links, H1 counts, structured data, 404, robots and OG output. `npm run audit` runs local mobile Lighthouse checks against the built home and populated-team pages; Chrome must be installed, or set CHROME_PATH to a compatible Chromium executable. Reports go to ignored qa-output/. Automated accessibility checks are included in the browser suite. Local lab results do not replace production Core Web Vitals.
