@@ -1,3 +1,5 @@
+import TeamAnalysis from './TeamAnalysis';
+import { analyzeTeam } from '../lib/scoring';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { formats, getFormat, isAllowed } from '../data/formats';
 import { normalizeSearch, pokemon, pokemonById } from '../data/pokemon';
@@ -21,7 +23,9 @@ export default function TeamBuilder() {
   const opener = useRef<HTMLButtonElement | null>(null);
   const format = getFormat(team.format);
   const members = team.slots.map(id => id ? pokemonById.get(id) : undefined);
-  const count = members.filter(Boolean).length;
+  const selectedPokemon = useMemo(() => team.slots.flatMap(id => { const p = id ? pokemonById.get(id) : undefined; return p ? [p] : []; }), [team]);
+  const analysis = useMemo(() => analyzeTeam(selectedPokemon), [selectedPokemon]);
+  const count = selectedPokemon.length;
   useEffect(() => {
     const restore = () => {
       const parsed = parseTeamState(window.location.search);
@@ -74,7 +78,7 @@ export default function TeamBuilder() {
       {shareLink && <label className="share-field">Your team link<input readOnly value={shareLink} onFocus={e => e.currentTarget.select()}/></label>}
       <noscript><p>Enable JavaScript to search, edit, and share your Pokémon team.</p></noscript>
     </section>
-    <section className="next-analysis"><span className="coming-label">COMING NEXT</span><div><h2>Get to know your team's strengths</h2><p>Weakness analysis, explainable scores, and teammate recommendations will arrive in the next development phases.</p></div></section>
+    <TeamAnalysis team={selectedPokemon} analysis={analysis}/>
     <dialog ref={dialog} className="pokemon-dialog" aria-labelledby="picker-title" onKeyDown={e => { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); closePicker(); } }} onClose={() => { setActiveSlot(null); opener.current?.focus(); }} onClick={e => { if (e.target === e.currentTarget) { const r = e.currentTarget.getBoundingClientRect(); if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) closePicker(); } }}>
       <div className="dialog-head"><div><p className="eyebrow">FIND YOUR NEXT PICK</p><h2 id="picker-title">Choose Pokémon · Slot {(activeSlot ?? 0) + 1}</h2></div><button className="close-button" onClick={closePicker} aria-label="Close Pokémon picker">×</button></div>
       <label className="search-label">Name or Pokédex number<input ref={search} value={query} onChange={e => { setQuery(e.target.value); setLimit(60); }} placeholder="Try Pikachu, Garchomp, or #025" type="search" /></label>

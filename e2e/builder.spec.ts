@@ -59,3 +59,20 @@ test('malformed links repair safely and blocked clipboard has a manual fallback'
   await expect(page.getByText('Copy the team link below to share your team.', { exact: true })).toBeVisible();
   await expect(page.getByRole('textbox', { name: 'Your team link' })).toHaveValue(/team=pikachu/);
 });
+test('analysis updates live and exposes the damage matrix and methodology', async ({ page }) => {
+  await page.goto('/?v=1&team=charizard,moltres,hooh');
+  await expect(page.getByText('Rock attacks threaten 3 of 3 teammates, with no teammate resisting them by type.', { exact: true })).toBeVisible();
+  const before = Number(await page.getByTestId('score-defense').textContent());
+  await page.getByRole('button', { name: 'Add Pokémon to slot 4', exact: true }).click();
+  await page.getByRole('searchbox').fill('Excadrill');
+  await page.getByRole('button', { name: 'Choose Excadrill', exact: true }).click();
+  await expect.poll(async () => Number(await page.getByTestId('score-defense').textContent())).toBeGreaterThan(before);
+  await page.getByText('Detailed type analysis · all 18 types', { exact: true }).click();
+  const rock = page.getByRole('row').filter({ has: page.getByRole('rowheader', { name: 'Rock', exact: true }) });
+  await expect(rock.getByRole('cell', { name: '4×', exact: true })).toHaveCount(3);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await page.getByText('How is the score calculated?', { exact: true }).click();
+  await expect(page.getByText('Small teams are provisional', { exact: false })).toBeVisible();
+  await page.getByRole('button', { name: 'Clear team', exact: true }).click();
+  await expect(page.getByTestId('team-score')).toHaveText('0/ 100');
+});

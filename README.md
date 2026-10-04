@@ -13,7 +13,7 @@ Requires Node.js 24 and npm. Run `npm ci`, then `npm run dev`. Open the local ad
 - `npm run preview` — serve the built output locally.
 
 ## Current scope
-Phase 0–2 complete: validated local 1,025-species dataset, casual format, six-slot React builder, name/number search, type/generation filters, add/remove/replace, duplicate protection and versioned share URLs. Scoring and recommendations are planned for Phase 3–4. See DATA_SOURCES.md for scope and attribution.
+Phase 0–3 complete: validated local 1,025-species dataset, casual format, six-slot React builder, name/number search, type/generation filters, add/remove/replace, duplicate protection and versioned share URLs. Deterministic type analysis and four explainable scores are implemented. Recommendations are planned for Phase 4. See DATA_SOURCES.md for scope and attribution.
 
 Read PRODUCT_SPEC.md for the supplied plan and TODO.md for the next phases. The team builder is hydrated with React; SEO content remains static. Styling uses plain CSS until the functional UI phase needs further tooling.
 

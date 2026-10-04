@@ -7,3 +7,5 @@ Run `npm run data:generate` to reproduce the snapshot. Review the generated diff
 The initial format is an explicitly **casual National Dex planning pool**, not an official or Showdown competitive format. Earlier species marked Past in the Gen 9 game are deliberately retained. Do not use this pool to assert Scarlet/Violet availability, VGC legality, tier bans or current metagame performance.
 
 The upstream code/data package is MIT-licensed. See THIRD_PARTY_NOTICES.md for the license notice. Pokémon names and intellectual property remain with their owners; this notice does not grant rights to official artwork. This project currently uses CSS/letter placeholders and bundles no Pokémon sprites or official art.
+
+The generated type-chart.json stores all 324 Generation 9 standard matchups from the same pinned Dex source. Rows are attackers and columns are defenders; dual types multiply. Stellar and battle mechanics are excluded.
