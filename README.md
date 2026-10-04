@@ -13,7 +13,7 @@ Requires Node.js 24 and npm. Run `npm ci`, then `npm run dev`. Open the local ad
 - `npm run preview` — serve the built output locally.
 
 ## Current scope
-Phase 0 only: project tooling, layout, static development preview, 404, configuration, CI and architecture boundaries. Team slots are visual placeholders. Selection, scoring and recommendations are not implemented.
+Phase 1: project foundation plus a validated, local 1,025-species data snapshot and one casual format. See DATA_SOURCES.md for scope and attribution. Selection, scoring and recommendations are not implemented yet.
 
 Read PRODUCT_SPEC.md for the supplied plan and TODO.md for the next phases. React is installed for the future interactive builder; this foundation does not hydrate unused components. Styling uses plain CSS until the functional UI phase needs further tooling.
 
@@ -24,4 +24,4 @@ Read PRODUCT_SPEC.md for the supplied plan and TODO.md for the next phases. Reac
 Build with `npm ci && npm run build`; publish `dist/` to Cloudflare Pages or Vercel. This commit does not deploy or change DNS. Update the centralized origin in src/config/site.ts and astro.config.mjs together if the domain changes. No environment secrets are needed; .env.example documents future configuration.
 
 ## Data and rights
-No Pokémon dataset or third-party artwork is bundled yet. Pokémon and related names belong to their respective owners; this is an unofficial fan project. Data licenses and sprite attribution must be documented before Phase 1 assets are added.
+The local dataset is derived from MIT-licensed @pkmn/dex; see DATA_SOURCES.md and THIRD_PARTY_NOTICES.md. No third-party artwork is bundled. Pokémon and related names belong to their respective owners; this is an unofficial fan project. Data licenses and sprite attribution must be documented before Phase 1 assets are added.
