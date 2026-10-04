@@ -76,3 +76,23 @@ test('analysis updates live and exposes the damage matrix and methodology', asyn
   await page.getByRole('button', { name: 'Clear team', exact: true }).click();
   await expect(page.getByTestId('team-score')).toHaveText('0/ 100');
 });
+test('recommendations apply the displayed score and target an explicit replacement slot', async ({ page }) => {
+  await page.goto('/?v=1&team=charizard,moltres,hooh');
+  await expect(page.getByLabel('Slot to optimize', { exact: true })).toHaveValue('3');
+  const first = page.getByTestId('recommendation').first();
+  await expect(first).toBeVisible();
+  const addedId = await first.getAttribute('data-pokemon');
+  const expected = await first.getAttribute('data-new-score');
+  await first.getByRole('button').click();
+  await expect(page.getByTestId('team-score')).toHaveText(`${expected}/ 100`);
+  expect(new URL(page.url()).searchParams.get('team')?.split(',')[3]).toBe(addedId);
+  await page.getByLabel('Slot to optimize', { exact: true }).selectOption('0');
+  await expect(page.getByText('Replacing Charizard in slot 1.', { exact: false })).toBeVisible();
+  const replacement = page.getByTestId('recommendation').first();
+  const replacementId = await replacement.getAttribute('data-pokemon');
+  const replacementScore = await replacement.getAttribute('data-new-score');
+  await replacement.getByRole('button').click();
+  await expect(page.getByTestId('team-score')).toHaveText(`${replacementScore}/ 100`);
+  const ids = new URL(page.url()).searchParams.get('team')?.split(',');
+  expect(ids?.[0]).toBe(replacementId); expect(ids?.[1]).toBe('moltres'); expect(ids?.[3]).toBe(addedId);
+});

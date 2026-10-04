@@ -1,3 +1,5 @@
+import TeamRecommendations from './TeamRecommendations';
+import type { Recommendation } from '../lib/recommendations';
 import TeamAnalysis from './TeamAnalysis';
 import { analyzeTeam } from '../lib/scoring';
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -48,6 +50,12 @@ export default function TeamBuilder() {
     setTeam(next); setShareLink(''); setMessage(notice);
     window.history.replaceState(null, '', teamUrl(window.location.href, next));
   }
+  function applyRecommendation(r: Recommendation) {
+    const next = setTeamSlot(team, r.targetSlot, r.pokemon.id);
+    if (next === team) return;
+    const newScore = analyzeTeam(next.slots.flatMap(id => id ? [pokemonById.get(id)!] : [])).total;
+    update(next, `${r.pokemon.name} added to slot ${r.targetSlot + 1}. Team score ${analysis.total} → ${newScore}.`);
+  }
   function openSlot(index: number, button: HTMLButtonElement) {
     opener.current = button; setQuery(''); setType(''); setGeneration(''); setLimit(60); setActiveSlot(index);
   }
@@ -79,6 +87,7 @@ export default function TeamBuilder() {
       <noscript><p>Enable JavaScript to search, edit, and share your Pokémon team.</p></noscript>
     </section>
     <TeamAnalysis team={selectedPokemon} analysis={analysis}/>
+    <TeamRecommendations state={team} currentScore={analysis.total} apply={applyRecommendation}/>
     <dialog ref={dialog} className="pokemon-dialog" aria-labelledby="picker-title" onKeyDown={e => { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); closePicker(); } }} onClose={() => { setActiveSlot(null); opener.current?.focus(); }} onClick={e => { if (e.target === e.currentTarget) { const r = e.currentTarget.getBoundingClientRect(); if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) closePicker(); } }}>
       <div className="dialog-head"><div><p className="eyebrow">FIND YOUR NEXT PICK</p><h2 id="picker-title">Choose Pokémon · Slot {(activeSlot ?? 0) + 1}</h2></div><button className="close-button" onClick={closePicker} aria-label="Close Pokémon picker">×</button></div>
       <label className="search-label">Name or Pokédex number<input ref={search} value={query} onChange={e => { setQuery(e.target.value); setLimit(60); }} placeholder="Try Pikachu, Garchomp, or #025" type="search" /></label>
