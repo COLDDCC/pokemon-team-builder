@@ -1,0 +1,61 @@
+import { test, expect } from '@playwright/test';
+test('edit six slots, prevent duplicates, replace, remove and restore a shared team', async ({ page, context }) => {
+  const errors: string[] = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.goto('/');
+  const names = ['Pikachu', 'Charizard', 'Venusaur', 'Blastoise', 'Gengar', 'Dragonite'];
+  for (const [index, name] of names.entries()) {
+    await page.getByRole('button', { name: `Add Pokémon to slot ${index + 1}`, exact: true }).click();
+    await page.getByRole('searchbox').fill(name);
+    await page.getByRole('button', { name: `Choose ${name}`, exact: true }).click();
+    await expect(page.getByTestId(`slot-${index}`).getByRole('heading', { name, exact: true })).toBeVisible();
+  }
+  await page.getByRole('button', { name: 'Replace Charizard', exact: true }).click();
+  await page.getByRole('searchbox').fill('Pikachu');
+  await expect(page.getByRole('button', { name: 'Pikachu, already in team', exact: true })).toBeDisabled();
+  await page.getByRole('searchbox').fill('Garchomp');
+  await page.getByRole('button', { name: 'Choose Garchomp', exact: true }).click();
+  await page.getByRole('button', { name: 'Remove Venusaur', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Add Pokémon to slot 3', exact: true })).toBeVisible();
+  await page.getByRole('button', { name: 'Share team', exact: false }).click();
+  const link = await page.getByRole('textbox', { name: 'Your team link' }).inputValue();
+  const other = await context.newPage();
+  await other.goto(link);
+  await expect(other.getByTestId('slot-0').getByRole('heading', { name: 'Pikachu', exact: true })).toBeVisible();
+  await expect(other.getByTestId('slot-1').getByRole('heading', { name: 'Garchomp', exact: true })).toBeVisible();
+  await expect(other.getByRole('button', { name: 'Add Pokémon to slot 3', exact: true })).toBeVisible();
+  await expect(other.getByTestId('slot-5').getByRole('heading', { name: 'Dragonite', exact: true })).toBeVisible();
+  await page.getByRole('button', { name: 'Clear team', exact: true }).click();
+  await expect(page.getByRole('button', { name: /Add Pokémon to slot/ })).toHaveCount(6);
+  expect(errors).toEqual([]);
+});
+test('search and filters work with keyboard dialog dismissal and no horizontal overflow', async ({ page }) => {
+  await page.goto('/');
+  const add = page.getByRole('button', { name: 'Add Pokémon to slot 1', exact: true });
+  await expect(add).toBeEnabled();
+  await add.focus(); await page.keyboard.press('Enter');
+  await expect(page.getByRole('searchbox')).toBeFocused();
+  await page.getByRole('searchbox').fill('#025');
+  await expect(page.getByRole('button', { name: 'Choose Pikachu', exact: true })).toBeVisible();
+  await page.getByRole('searchbox').fill('');
+  await page.getByLabel('Type', { exact: true }).selectOption('Fire');
+  await page.getByLabel('Generation', { exact: true }).selectOption('1');
+  await expect(page.getByRole('button', { name: 'Choose Charmander', exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Choose Pikachu', exact: true })).toHaveCount(0);
+  await page.getByRole('searchbox').fill('zzzzzz');
+  await expect(page.getByText('No Pokémon match these filters.', { exact: false })).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('dialog')).not.toBeVisible();
+  await expect(add).toBeFocused();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+});
+test('malformed links repair safely and blocked clipboard has a manual fallback', async ({ page }) => {
+  await page.addInitScript(() => Object.defineProperty(navigator, 'clipboard', { value: { writeText: () => Promise.reject(new Error('blocked')) }, configurable: true }));
+  await page.goto('/?v=1&format=unknown&team=pikachu,pikachu,nope');
+  await expect(page.getByText('Some invalid or duplicate entries in this link were removed.', { exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Pikachu', exact: true })).toHaveCount(1);
+  await page.getByRole('button', { name: 'Share team', exact: false }).click();
+  await expect(page.getByText('Copy the team link below to share your team.', { exact: true })).toBeVisible();
+  await expect(page.getByRole('textbox', { name: 'Your team link' })).toHaveValue(/team=pikachu/);
+});

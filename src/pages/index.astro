@@ -1,17 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import TeamBuilder from '../components/TeamBuilder';
 ---
 <BaseLayout>
-  <header><a class="brand" href="/">SUPER<span>TEAM BUILDER</span></a><span class="status">Development preview</span></header>
+  <header><a class="brand" href="/">SUPER<span>TEAM BUILDER</span></a><span class="status">Builder beta</span></header>
   <main id="main">
     <p class="eyebrow">YOUR NEXT GREAT TEAM STARTS HERE</p>
     <h1>Pokémon Team Builder</h1>
     <p class="intro">Pick your favorites. Find your strengths. Build a better team.</p>
-    <section class="preview" aria-labelledby="preview-title">
-      <div class="section-head"><h2 id="preview-title">Your team</h2><span>Builder coming in Phase 2</span></div>
-      <div class="slots">{Array.from({ length: 6 }, (_, index) => <div class="slot"><span class="slot-number">0{index + 1}</span><span class="plus" aria-hidden="true">+</span><span>Empty slot</span></div>)}</div>
-      <p class="note">Project foundation is ready. Pokémon selection, scoring, and recommendations are being built in separate phases.</p>
-    </section>
+    <TeamBuilder client:load />
     <div class="features"><article><span>01</span><h2>Choose your team</h2><p>Six slots, a searchable Pokémon list, and shareable team links.</p></article><article><span>02</span><h2>Understand the gaps</h2><p>Clear explanations of weaknesses, coverage, and team synergy.</p></article><article><span>03</span><h2>Find your next pick</h2><p>Recommendations based on the same explainable scoring rules.</p></article></div>
   </main>
   <footer>Unofficial fan project. Pokémon and related names belong to their respective owners.</footer>
