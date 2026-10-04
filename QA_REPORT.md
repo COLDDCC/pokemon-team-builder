@@ -50,3 +50,6 @@ Shared stylesheet now uses warm white, blue, yellow and red across all routes. L
 
 ## Compact core workflow
 Verified the 1366×768 home: example team, score and first recommendation action remain inside the initial viewport with scrollY=0; Undo restores the empty team. Desktop/mobile analysis, recommendation application and axe checks pass. Smaller screens may need page scrolling for recommendations; the selection picker exposes the current score and Done action.
+
+## Compact header and portrait selection
+Home H1 now lives in the navigation brand with its short functional subtitle, removing the separate hero. Picker results use compact portrait buttons with names, numbers and selected markers; search and filters remain. Lint, typecheck, 22 unit tests, build/static SEO checks and seven applicable desktop/mobile browser checks pass (one desktop-only check skipped on mobile).

@@ -1,1 +1,5 @@
-<header><a class="brand" href="/">SUPER<span>TEAM BUILDER</span></a><nav aria-label="Main navigation"><a href="/">Builder</a><a href="/weakness-calculator">Weaknesses</a><a href="/type-coverage">Coverage</a></nav></header>
+---
+interface Props { home?: boolean; }
+const { home = false } = Astro.props;
+---
+<header><div class="brand-block">{home ? <h1 class="brand-title"><a class="brand" href="/">Super Pokémon Team Builder</a></h1> : <a class="brand" href="/">Super Pokémon Team Builder</a>}<p class="brand-description">Choose six Pokémon. See your score. Find your next teammate.</p></div><nav aria-label="Main navigation"><a href="/">Builder</a><a href="/weakness-calculator">Weaknesses</a><a href="/type-coverage">Coverage</a></nav></header>

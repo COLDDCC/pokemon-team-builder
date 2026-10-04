@@ -235,3 +235,27 @@ header { padding: 14px 0; }
 @media (min-width: 1536px) {
  .site-frame { grid-template-columns: 160px minmax(0,1120px) 160px; max-width: 1480px; }
 }
+
+/* One compact brand/intro block; select Pokémon by portrait. */
+.brand-block { min-width: 0; }
+.brand-title { margin: 0; font-size: inherit; letter-spacing: normal; }
+.brand { font-size: 22px; letter-spacing: -.4px; font-weight: 800; display: inline-block; }
+.brand-description { margin: 4px 0 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
+.pokemon-results { grid-template-columns: repeat(auto-fill,minmax(86px,1fr)); gap: 8px; }
+.result-card { position: relative; display: flex; flex-direction: column; text-align: center; gap: 5px; padding: 8px 4px; min-height: 114px; }
+.result-card .pokemon-sprite { width: 68px; height: 68px; }
+.result-info { gap: 2px; width: 100%; }
+.result-info strong { font-size: 11px; line-height: 1.3; }
+.result-info .dex-number { font-size: 9px; }
+.result-info .type-badges { display: none; }
+.result-card:disabled { opacity: .55; }
+.result-card:disabled::after { content: '✓'; position: absolute; top: 5px; right: 7px; font-size: 15px; color: var(--blue); }
+@media (max-width: 600px) {
+ header { align-items: flex-start; flex-direction: column; gap: 8px; }
+ header nav { gap: 16px; }
+ .brand { font-size: 20px; }
+ .brand-description { font-size: 11px; }
+ .pokemon-results { grid-template-columns: repeat(auto-fill,minmax(72px,1fr)); gap: 6px; }
+ .result-card { min-height: 108px; }
+ .result-card .pokemon-sprite { width: 60px; height: 60px; }
+}
