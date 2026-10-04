@@ -53,3 +53,8 @@ Verified the 1366×768 home: example team, score and first recommendation action
 
 ## Compact header and portrait selection
 Home H1 now lives in the navigation brand with its short functional subtitle, removing the separate hero. Picker results use compact portrait buttons with names, numbers and selected markers; search and filters remain. Lint, typecheck, 22 unit tests, build/static SEO checks and seven applicable desktop/mobile browser checks pass (one desktop-only check skipped on mobile).
+
+## Compact team controls — 2026-10-04
+Removed Undo and moved removal to the upper corner of each selected Pokémon card. Total score now sits beside Build team; Share team sits below the team grid. Picker search, Filters and close controls share one row, with the dialog title and result count retained for assistive technology.
+
+Validation: npm run check passed (lint, Astro typecheck, 22 unit tests, build and 17 static SEO page checks). Affected desktop/mobile browser suite: 11 passed, 1 viewport-specific test skipped. Interactive preview verified removal, search, selection and Done; desktop screenshot reviewed.

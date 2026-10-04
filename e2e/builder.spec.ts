@@ -139,7 +139,7 @@ test('unknown routes and unsupported URL versions have safe fallbacks', async ({
   await expect(page.getByTestId('team-score')).toHaveText('0/ 100');
 });
 
-test('saved teams survive reload and load, clear and recommendations can be undone', async ({ page }) => {
+test('saved teams survive reload and load, clear and recommendations can be restored', async ({ page }) => {
   await page.goto('/?v=1&team=pikachu,,,gengar');
   await page.getByText('Saved teams · 0', {exact:true}).click();
   await page.getByRole('textbox', {name:'Team name',exact:true}).fill('Adventure');
@@ -147,7 +147,7 @@ test('saved teams survive reload and load, clear and recommendations can be undo
   await expect(page.getByRole('button', {name:'Load Adventure',exact:true})).toBeVisible();
   await page.getByRole('button', {name:'Clear team',exact:true}).click();
   await expect(page.getByRole('button', {name:/Add Pokémon to slot/})).toHaveCount(6);
-  await page.getByRole('button', {name:'Undo',exact:true}).click();
+  await page.getByRole('button', {name:'Load Adventure',exact:true}).click();
   await expect(page.getByTestId('slot-3').getByRole('heading', {name:'Gengar',exact:true})).toBeVisible();
   await page.reload();
   await page.getByText('Saved teams · 1', {exact:true}).click();
@@ -157,7 +157,7 @@ test('saved teams survive reload and load, clear and recommendations can be undo
   await expect(page.getByRole('button', {name:'Add Pokémon to slot 2',exact:true})).toBeVisible();
   const previousScore = await page.getByTestId('team-score').textContent();
   await page.getByTestId('recommendation').first().getByRole('button').click();
-  await page.getByRole('button', {name:'Undo',exact:true}).click();
+  await page.getByRole('button', {name:'Load Adventure',exact:true}).click();
   await expect(page.getByTestId('team-score')).toHaveText(previousScore!);
   await page.getByRole('button', {name:'Delete Adventure',exact:true}).click();
   await expect(page.getByText('No saved teams yet.', {exact:true})).toBeVisible();
@@ -179,9 +179,8 @@ test('blocked storage keeps editing and sharing usable', async ({ page }) => {
 test('continuous building fills six slots without reopening and permits stopping early', async ({page}) => {
   await page.goto('/');
   await page.getByRole('button', {name:'Build team',exact:true}).click();
-  await expect(page.getByRole('checkbox', {name:'Keep adding to empty slots'})).toBeChecked();
   for (const [index, name] of ['Pikachu','Charizard','Venusaur','Blastoise','Gengar','Dragonite'].entries()) {
-    await expect(page.getByRole('heading', {name:`Choose Pokémon · Slot ${index + 1}`,exact:true})).toBeVisible();
+    await expect(page.getByRole('heading', {name:`Choose Pokémon · Slot ${index + 1}`,exact:true})).toHaveText(`Choose Pokémon · Slot ${index + 1}`);
     await page.getByRole('searchbox').fill(name);
     await page.getByRole('button', {name:`Choose ${name}`,exact:true}).click();
     if(index < 5) await expect(page.getByRole('dialog')).toBeVisible();
@@ -199,7 +198,6 @@ test('continuous building fills six slots without reopening and permits stopping
   await page.getByRole('button', {name:'Done · 1/6',exact:true}).click();
   await expect(page.getByRole('button', {name:'Build team',exact:true})).toBeFocused();
   await page.getByRole('button', {name:'Replace Pikachu',exact:true}).click();
-  await page.getByRole('checkbox', {name:'Keep adding to empty slots'}).check();
   await page.getByRole('searchbox').fill('Raichu');
   await page.getByRole('button', {name:'Choose Raichu',exact:true}).click();
   await expect(page.getByRole('dialog')).not.toBeVisible();
@@ -225,8 +223,7 @@ test('compact picker resets filters and follows a shortened visual viewport', as
   await expect(page.getByRole('button', {name:'Choose Pikachu',exact:true})).toHaveCount(0);
   await page.getByRole('button', {name:'Reset filters',exact:true}).click();
   await page.getByRole('searchbox').fill('Pikachu');
-  await page.getByRole('button', {name:'Clear search',exact:true}).click();
-  await expect(page.getByRole('searchbox')).toBeFocused();
+  await page.getByRole('searchbox').fill('');
   await page.evaluate(() => {
     Object.assign(window.visualViewport!, {height:420,offsetTop:30});
     window.visualViewport!.dispatchEvent(new Event('resize'));
@@ -266,7 +263,7 @@ test('sprites appear in team, picker and recommendations with a safe image failu
   await expect(page.getByTestId('slot-0').locator('.sprite-fallback')).toHaveText('#6');
 });
 
-test('desktop core tools fit the first screen and an example can be undone', async ({page}, testInfo) => {
+test('desktop core tools fit the first screen and an example can be cleared', async ({page}, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop');
   await page.setViewportSize({width:1366,height:768});
   await page.goto('/');
@@ -277,6 +274,6 @@ test('desktop core tools fit the first screen and an example can be undone', asy
   const bounds=await button.boundingBox();
   expect(bounds!.y+bounds!.height).toBeLessThanOrEqual(768);
   expect(await page.evaluate(()=>window.scrollY)).toBe(0);
-  await page.getByRole('button',{name:'Undo',exact:true}).click();
+  await page.getByRole('button',{name:'Clear team',exact:true}).click();
   await expect(page.getByTestId('team-score')).toHaveText('0/ 100');
 });

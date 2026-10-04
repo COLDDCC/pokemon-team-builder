@@ -38,7 +38,7 @@ See QA_REPORT.md for the local verification results and remaining launch configu
 `npm run check` also validates all generated sitemap pages, canonical links, H1 counts, structured data, 404, robots and OG output. `npm run audit` runs local mobile Lighthouse checks against the built home and populated-team pages; Chrome must be installed, or set CHROME_PATH to a compatible Chromium executable. Reports go to ignored qa-output/. Automated accessibility checks are included in the browser suite. Local lab results do not replace production Core Web Vitals.
 
 ## Saving and undo
-Saved teams are kept only in the current browser (up to 20 named teams); load and delete are explicit. Team edits support 20 levels of undo during the current page session. Shared URL state and Pokémon-page defaults retain priority; saved teams never silently replace a shared team. If browser storage is blocked or full, users can still edit and share a team.
+Saved teams are kept only in the current browser (up to 20 named teams); load and delete are explicit. Each selected Pokémon has a direct remove action; saved teams can be explicitly reloaded. Shared URL state and Pokémon-page defaults retain priority; saved teams never silently replace a shared team. If browser storage is blocked or full, users can still edit and share a team.
 
 ## Fast team selection
 Use Build team to fill empty slots in one picker session; each selection moves to the next empty slot. Done stops at any time, and the sixth member closes the picker automatically. Individual slot clicks retain the one-pick workflow. Replacements always close after selection. On narrow screens, the picker fills the viewport with fixed search/filter controls, a scrolling results region, and a fixed Done action. Each team edit displays its previous/current score and signed difference.
@@ -49,6 +49,6 @@ The picker now collapses filters until requested, displays active filters, and p
 The site uses a Pokémon-inspired light palette: warm white surfaces, blue headings, yellow primary actions, and red selection accents. Shared CSS applies the same theme to the picker, scores, recommendations, and static routes.
 
 ## Compact first screen
-The home title and description are shortened. Desktop team editing and live scores sit side by side, with compact recommendation actions underneath. Rules, saved teams, recommendation reasons and detailed analysis expand on demand. Try example loads six familiar Pokémon only into an empty team and supports Undo. At 1366×768, the example team, live score and recommendation action fit without page scrolling; smaller screens retain responsive layouts and the picker’s score/Done footer.
+The home title and description are shortened. Desktop team editing and live scores sit side by side, with compact recommendation actions underneath. Rules, saved teams, recommendation reasons and detailed analysis expand on demand. Try example loads six familiar Pokémon only into an empty team and can be cleared. At 1366×768, the example team, live score and recommendation action fit without page scrolling; smaller screens retain responsive layouts and the picker’s score/Done footer.
 
 Desktop side rails are reserved without ad scripts: 120px per side at widths ≥1440px and 160px at ≥1536px. The central tool stays at up to 1120px; smaller screens hide the rails.
