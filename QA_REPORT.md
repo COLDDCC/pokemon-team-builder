@@ -19,7 +19,7 @@ Mobile-mode local Lighthouse runs gave 100 for Accessibility, Best Practices and
 ## Remaining launch work
 Import the repository into Cloudflare Pages or Vercel, connect the purchased domain and confirm HTTPS. Optional GA4 and GSC identifiers remain unset. No DNS changes, production deployment or Search Console submission were performed. See DEPLOYMENT.md.
 
-The MVP deliberately uses placeholder artwork, base species only, casual rules and a type/base-stat heuristic. Moves, abilities, items, EV/IVs, battle simulation and competitive legality are outside this release.
+The MVP uses PokéAPI sprites, base species only, casual rules and a type/base-stat heuristic. Moves, abilities, items, EV/IVs, battle simulation and competitive legality are outside this release.
 
 ## Pre-launch usability verification
 - Added local named saves, explicit load/delete, 20-edit undo, and centralized rating-band explanations.
@@ -39,3 +39,8 @@ The MVP deliberately uses placeholder artwork, base species only, casual rules a
 - Eight affected desktop/mobile browser cases passed: search/filter dismissal, continuous selection, accessibility states, and compact picker reset/viewport adaptation.
 - A mocked VisualViewport shrink to 420px with a 30px offset kept the footer in bounds and left more than 50px of results space; closing restored body scrolling and focus. This simulates the resize event, not a physical software keyboard.
 - Inspected a 390×420 screenshot with no horizontal overflow. Filters are collapsed by default; active filters remain visible in the toggle label. Reset/clear actions preserve a usable search flow, and the footer retains the current score during continuous additions.
+
+## Sprite update
+- Team cards, picker results and recommendation cards now use a shared 96px PokéAPI sprite source through a pinned jsDelivr URL. Team images load eagerly; candidate images load lazily. Failed requests leave a numbered fallback and the existing visible name/types.
+- Lint/typecheck/build/static output checks and 22 unit tests passed. Six desktop/mobile browser cases passed for image rendering/failure recovery, continuous picking, and accessibility.
+- Rendering tests use a controlled PNG response and deliberately abort requests to verify failure handling. The live pinned Pikachu PNG was separately retrieved and verified as a 96×96 PNG. Container Chromium external CDN navigation returned ERR_EMPTY_RESPONSE, so this environment cannot establish general live CDN reliability.

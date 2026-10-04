@@ -26,3 +26,4 @@ The Phase 2 builder supports editing and sharing. Type analysis, deterministic s
 - [x] Collapsible picker filters with active labels, clear search and no-results reset.
 - [x] Respond to VisualViewport height/offset changes and restore background scrolling on close.
 - [x] Restore keyboard focus to an enabled toolbar action when filling the last slot disables the original opener.
+- [x] Replace letter tokens with PokéAPI sprites in team cards, search results and recommendations, with fixed dimensions and request-failure fallback.

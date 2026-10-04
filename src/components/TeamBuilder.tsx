@@ -1,3 +1,4 @@
+import PokemonSprite from './PokemonSprite';
 import { parseSavedTeams, savedTeamsKey, serializeSavedTeams, type SavedTeam } from '../lib/saved-teams';
 import TeamRecommendations from './TeamRecommendations';
 import type { Recommendation } from '../lib/recommendations';
@@ -142,7 +143,7 @@ export default function TeamBuilder({ initialPokemon, focus = 'all' }: { initial
       <p className="format-note">{format.description}</p>
       <div className="team-grid">{members.map((p, index) => <article className={`team-card ${p ? 'filled' : ''}`} key={index} data-testid={`slot-${index}`}>
         <span className="slot-number">SLOT 0{index + 1}</span>
-        {p ? <><div className={`pokemon-token type-${p.types[0].toLowerCase()}`} aria-hidden="true">{p.name.slice(0, 2).toUpperCase()}</div><span className="dex-number">#{String(p.number).padStart(3, '0')}</span><h3>{p.name}</h3><TypeBadges item={p}/><div className="card-actions"><button onClick={e => openSlot(index, e.currentTarget)} aria-label={`Replace ${p.name}`}>Replace</button><button onClick={() => update(setTeamSlot(team, index, null), `${p.name} removed.`)} aria-label={`Remove ${p.name}`}>Remove</button></div></> : <button className="empty-slot" disabled={!ready} onClick={e => openSlot(index, e.currentTarget)} aria-label={`Add Pokémon to slot ${index + 1}`}><span className="plus" aria-hidden="true">+</span><strong>Add Pokémon</strong><span>Choose your next teammate</span></button>}
+        {p ? <><PokemonSprite key={p.id} pokemon={p} size="large" eager/><span className="dex-number">#{String(p.number).padStart(3, '0')}</span><h3>{p.name}</h3><TypeBadges item={p}/><div className="card-actions"><button onClick={e => openSlot(index, e.currentTarget)} aria-label={`Replace ${p.name}`}>Replace</button><button onClick={() => update(setTeamSlot(team, index, null), `${p.name} removed.`)} aria-label={`Remove ${p.name}`}>Remove</button></div></> : <button className="empty-slot" disabled={!ready} onClick={e => openSlot(index, e.currentTarget)} aria-label={`Add Pokémon to slot ${index + 1}`}><span className="plus" aria-hidden="true">+</span><strong>Add Pokémon</strong><span>Choose your next teammate</span></button>}
       </article>)}</div>
       <p className="live-message" role="status">{message || (ready ? 'Click any empty slot to start. Search 1,025 Pokémon by name or Pokédex number.' : 'Loading team workspace…')}</p>
       {shareLink && <label className="share-field">Your team link<input readOnly value={shareLink} onFocus={e => e.currentTarget.select()}/></label>}
@@ -166,12 +167,12 @@ export default function TeamBuilder({ initialPokemon, focus = 'all' }: { initial
       <p className="result-count" role="status">{results.length} Pokémon found · already selected teammates are disabled</p>
       <div className="pokemon-results">{results.slice(0, limit).map(p => {
         const selected = team.slots.some((id, index) => index !== activeSlot && id === p.id);
-        return <button key={p.id} className="result-card" disabled={selected} onClick={() => choose(p)} aria-label={selected ? `${p.name}, already in team` : `Choose ${p.name}`}><span className={`mini-token type-${p.types[0].toLowerCase()}`} aria-hidden="true">{p.name.slice(0, 2).toUpperCase()}</span><span className="result-info"><span className="dex-number">#{String(p.number).padStart(3, '0')}{selected ? ' · In team' : ''}</span><strong>{p.name}</strong><TypeBadges item={p}/></span></button>;
+        return <button key={p.id} className="result-card" disabled={selected} onClick={() => choose(p)} aria-label={selected ? `${p.name}, already in team` : `Choose ${p.name}`}><PokemonSprite pokemon={p}/><span className="result-info"><span className="dex-number">#{String(p.number).padStart(3, '0')}{selected ? ' · In team' : ''}</span><strong>{p.name}</strong><TypeBadges item={p}/></span></button>;
       })}</div>
       {!results.length && <div className="no-results"><p>No Pokémon match these filters. Try another name, number, or type.</p><button className="button secondary" onClick={() => { setQuery(''); setType(''); setGeneration(''); setLimit(60); search.current?.focus(); }}>Reset search and filters</button></div>}
       {results.length > limit && <button className="button secondary load-more" onClick={() => setLimit(old => old + 60)}>Show more Pokémon ({results.length - limit} remaining)</button>}
       </div><div className="picker-footer"><p role="status">{pickerNotice && <span>{pickerNotice}<br/></span>}{count}/6 selected · Team score {analysis.total}</p><button className="button primary" onClick={closePicker}>Done · {count}/6</button></div>
     </dialog>
-    <p className="data-credit">Data: Pokémon Showdown / @pkmn/dex · Base species only · Artwork placeholders</p>
+    <p className="data-credit">Data: Pokémon Showdown / @pkmn/dex · Sprites: PokéAPI contributors · Base species only</p>
   </>;
 }

@@ -24,7 +24,7 @@ Read PRODUCT_SPEC.md for the supplied plan and TODO.md for the next phases. The 
 Build with `npm ci && npm run build`; publish `dist/` to Cloudflare Pages or Vercel. This commit does not deploy or change DNS. The centralized origin in src/config/site.ts is shared by Astro, metadata, robots and sitemap. No environment secrets are needed. Optional GA4 and GSC public identifiers are documented in .env.example; analytics is omitted when no valid ID is configured.
 
 ## Data and rights
-The local dataset is derived from MIT-licensed @pkmn/dex; see DATA_SOURCES.md and THIRD_PARTY_NOTICES.md. No third-party artwork is bundled. Pokémon and related names belong to their respective owners; this is an unofficial fan project. Data licenses and sprite attribution must be documented before Phase 1 assets are added.
+The local dataset is derived from MIT-licensed @pkmn/dex; see DATA_SOURCES.md and THIRD_PARTY_NOTICES.md. PokéAPI sprites are loaded from a pinned jsDelivr source; no sprite binaries are bundled. Pokémon and related names belong to their respective owners; this is an unofficial fan project. Data licenses and sprite attribution must be documented before Phase 1 assets are added.
 
 ## Browser checks
 Run `npx playwright install chromium`, then `npm run test:e2e`. The suite builds and previews production output and checks real builder interactions at desktop and mobile sizes.

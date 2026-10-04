@@ -52,3 +52,11 @@ header nav,footer nav{display:flex;gap:20px;flex-wrap:wrap}header nav a,footer n
  .picker-controls .continuous-choice { margin-top: 6px; min-height: 32px; }
  .picker-footer p { font-size: 11px; }
 }
+
+.pokemon-sprite { display: grid; place-items: center; flex-shrink: 0; background: #202b3e; border-radius: 14px; overflow: hidden; }
+.pokemon-sprite img { display: block; width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; }
+.sprite-small { width: 64px; height: 64px; }
+.sprite-large { width: 112px; height: 112px; }
+.team-card > .pokemon-sprite { margin: 12px 0 8px; }
+.sprite-fallback { font-size: 13px; color: #bac7dc; }
+@media (max-width: 520px) { .sprite-large { width: 96px; height: 96px; } }

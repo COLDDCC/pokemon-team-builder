@@ -9,3 +9,9 @@ The initial format is an explicitly **casual National Dex planning pool**, not a
 The upstream code/data package is MIT-licensed. See THIRD_PARTY_NOTICES.md for the license notice. Pokémon names and intellectual property remain with their owners; this notice does not grant rights to official artwork. This project currently uses CSS/letter placeholders and bundles no Pokémon sprites or official art.
 
 The generated type-chart.json stores all 324 Generation 9 standard matchups from the same pinned Dex source. Rows are attackers and columns are defenders; dual types multiply. Stellar and battle mechanics are excluded.
+
+## Pokémon sprites
+The shared PokemonSprite component loads the default 96×96 PNG sprites from PokeAPI/sprites at commit a3a1432e688ea028f12c51371d5253037cb9f17b via jsDelivr, keyed by National Pokédex number. Team cards, search results and recommendations use the same source, fixed image dimensions and lazy loading outside selected team cards. A failed request falls back to the Pokédex number while the name and type badges stay visible.
+Source: https://github.com/PokeAPI/sprites
+License statement: https://github.com/PokeAPI/sprites/blob/a3a1432e688ea028f12c51371d5253037cb9f17b/LICENCE.txt
+The repository states CC0 1.0 Universal and explicitly reserves image copyright to The Pokémon Company. This project claims no ownership or official endorsement of Pokémon imagery. CDN availability is required to display sprites; scoring and selection remain local.
