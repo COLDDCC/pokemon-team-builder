@@ -47,3 +47,6 @@ The MVP uses PokéAPI sprites, base species only, casual rules and a type/base-s
 
 ## Pokémon-inspired light theme
 Shared stylesheet now uses warm white, blue, yellow and red across all routes. Lint, typecheck, 22 unit tests, production build and static SEO checks pass. Four desktop/mobile browser checks pass for search, keyboard dismissal, no horizontal overflow and axe accessibility in empty, populated and picker states.
+
+## Compact core workflow
+Verified the 1366×768 home: example team, score and first recommendation action remain inside the initial viewport with scrollY=0; Undo restores the empty team. Desktop/mobile analysis, recommendation application and axe checks pass. Smaller screens may need page scrolling for recommendations; the selection picker exposes the current score and Done action.

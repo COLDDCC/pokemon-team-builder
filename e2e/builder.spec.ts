@@ -63,6 +63,7 @@ test('malformed links repair safely and blocked clipboard has a manual fallback'
 });
 test('analysis updates live and exposes the damage matrix and methodology', async ({ page }) => {
   await page.goto('/?v=1&team=charizard,moltres,hooh');
+  await page.getByText('Key insights', {exact:true}).click();
   await expect(page.getByText('Rock attacks threaten 3 of 3 teammates, with no teammate resisting them by type.', { exact: true })).toBeVisible();
   const before = Number(await page.getByTestId('score-defense').textContent());
   await page.getByRole('button', { name: 'Add Pokémon to slot 4', exact: true }).click();
@@ -263,4 +264,19 @@ test('sprites appear in team, picker and recommendations with a safe image failu
   await page.getByRole('searchbox').fill('Charizard');
   await page.getByRole('button',{name:'Choose Charizard',exact:true}).click();
   await expect(page.getByTestId('slot-0').locator('.sprite-fallback')).toHaveText('#6');
+});
+
+test('desktop core tools fit the first screen and an example can be undone', async ({page}, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop');
+  await page.setViewportSize({width:1366,height:768});
+  await page.goto('/');
+  await page.getByRole('button',{name:'Try example',exact:true}).click();
+  await expect(page.getByTestId('slot-5').getByRole('heading')).toHaveText('Dragonite');
+  const button=page.getByTestId('recommendation').first().getByRole('button');
+  await expect(button).toBeVisible();
+  const bounds=await button.boundingBox();
+  expect(bounds!.y+bounds!.height).toBeLessThanOrEqual(768);
+  expect(await page.evaluate(()=>window.scrollY)).toBe(0);
+  await page.getByRole('button',{name:'Undo',exact:true}).click();
+  await expect(page.getByTestId('team-score')).toHaveText('0/ 100');
 });

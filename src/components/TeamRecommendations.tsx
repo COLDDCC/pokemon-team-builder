@@ -16,7 +16,7 @@ export default function TeamRecommendations({ state, currentScore, apply }: { st
     {!hasTeam ? <p className="recommend-empty">Choose your first Pokémon above to get personalized teammate suggestions.</p> : !results.length ? <p className="recommend-empty">No candidate improves the score for this slot. Try another replacement slot or keep your favorites.</p> : <div className="recommend-grid">{results.map(r => <article key={r.pokemon.id} className="recommend-card" data-testid="recommendation" data-pokemon={r.pokemon.id} data-new-score={r.newScore}>
       <div className="recommend-top"><PokemonSprite pokemon={r.pokemon} size="large"/><span className="delta">+{r.delta} pts</span></div>
       <h3>{r.pokemon.name}</h3><div className="type-badges">{r.pokemon.types.map(t => <span key={t} className={`type-badge type-${t.toLowerCase()}`}>{t}</span>)}</div>
-      <p className="score-comparison">Team score {currentScore} → <strong>{r.newScore}</strong></p><ul>{r.reasons.map(reason => <li key={reason}>{reason}</li>)}</ul>
+      <p className="score-comparison">Team score {currentScore} → <strong>{r.newScore}</strong></p><details className="recommend-reasons"><summary>Why this Pokémon?</summary><ul>{r.reasons.map(reason => <li key={reason}>{reason}</li>)}</ul></details>
       <button className="button secondary" onClick={() => { apply(r); setSelectedSlot(null); }} aria-label={`${replacement ? 'Replace with' : 'Add recommended'} ${r.pokemon.name}`}>{replacement ? `Replace ${replacement.name}` : 'Add to team'} ↗</button>
     </article>)}</div>}
     <p className="recommend-note">Suggestions optimize this initial planning heuristic. Your preferences and actual battle strategy may favor another Pokémon.</p>
