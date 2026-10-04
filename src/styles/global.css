@@ -223,3 +223,15 @@ header { padding: 14px 0; }
  .compact-home > .intro { margin-bottom: 6px; }
  .team-card > .sprite-large { width: 64px; height: 64px; }
 }
+
+/* Reserve side rails without ad scripts or visible placeholder banners. */
+.site-content { min-width: 0; }
+.ad-rail { display: none; }
+@media (min-width: 1440px) {
+ .site-frame { display: grid; grid-template-columns: 120px minmax(0,1120px) 120px; gap: 20px; max-width: 1400px; width: calc(100% - 32px); margin: auto; }
+ .site-content > header, .site-content > main, .site-content > footer { width: 100%; }
+ .ad-rail { display: block; min-height: 600px; }
+}
+@media (min-width: 1536px) {
+ .site-frame { grid-template-columns: 160px minmax(0,1120px) 160px; max-width: 1480px; }
+}

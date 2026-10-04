@@ -38,5 +38,5 @@ const safeJson = JSON.stringify(jsonld).replace(/</g, '\u003c');
     {!noindex && <script type="application/ld+json" set:html={safeJson} />}
     {gaId && <><script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script><script is:inline define:vars={{ gaId }}>window.dataLayer=window.dataLayer||[];function gtag(...args){window.dataLayer.push(args);}gtag('js',new Date());gtag('config',gaId,{send_page_view:false});gtag('event','page_view',{page_location:window.location.origin+window.location.pathname});</script></>}
   </head>
-  <body><a class="skip" href="#main">Skip to content</a><slot /></body>
+  <body><a class="skip" href="#main">Skip to content</a><div class="site-frame"><aside class="ad-rail" data-ad-slot="left" aria-hidden="true"></aside><div class="site-content"><slot /></div><aside class="ad-rail" data-ad-slot="right" aria-hidden="true"></aside></div></body>
 </html>

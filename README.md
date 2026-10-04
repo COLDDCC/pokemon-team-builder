@@ -50,3 +50,5 @@ The site uses a Pokémon-inspired light palette: warm white surfaces, blue headi
 
 ## Compact first screen
 The home title and description are shortened. Desktop team editing and live scores sit side by side, with compact recommendation actions underneath. Rules, saved teams, recommendation reasons and detailed analysis expand on demand. Try example loads six familiar Pokémon only into an empty team and supports Undo. At 1366×768, the example team, live score and recommendation action fit without page scrolling; smaller screens retain responsive layouts and the picker’s score/Done footer.
+
+Desktop side rails are reserved without ad scripts: 120px per side at widths ≥1440px and 160px at ≥1536px. The central tool stays at up to 1120px; smaller screens hide the rails.
