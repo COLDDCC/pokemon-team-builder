@@ -244,18 +244,18 @@ test('compact picker resets filters and follows a shortened visual viewport', as
 });
 
 test('sprites appear in team, picker and recommendations with a safe image failure fallback', async ({page}) => {
-  await page.route('https://cdn.jsdelivr.net/gh/PokeAPI/sprites@*/sprites/pokemon/*.png', route => route.fulfill({status:200,contentType:'image/png',body:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aXioAAAAASUVORK5CYII=','base64')}));
+  await page.route('https://cdn.jsdelivr.net/gh/PokeAPI/sprites@*/sprites/pokemon/other/official-artwork/*.png', route => route.fulfill({status:200,contentType:'image/png',body:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aXioAAAAASUVORK5CYII=','base64')}));
   await page.goto('/?v=1&team=pikachu');
   const selected = page.getByTestId('slot-0').locator('img');
-  await expect(selected).toHaveAttribute('src', /\/25\.png$/);
+  await expect(selected).toHaveAttribute('src', /\/official-artwork\/25\.png$/);
   await expect.poll(()=>selected.evaluate((el:HTMLImageElement)=>el.complete && el.naturalWidth>0)).toBe(true);
   await expect(page.getByTestId('recommendation').first().locator('img')).toHaveCount(1);
   await page.getByRole('button',{name:'Add Pokémon to slot 2',exact:true}).click();
   await page.getByRole('searchbox').fill('Charizard');
   await expect(page.getByRole('button',{name:'Choose Charizard',exact:true}).locator('img')).toHaveAttribute('src',/\/6\.png$/);
   await page.getByRole('button',{name:'Close Pokémon picker',exact:true}).click();
-  await page.unroute('https://cdn.jsdelivr.net/gh/PokeAPI/sprites@*/sprites/pokemon/*.png');
-  await page.route('https://cdn.jsdelivr.net/gh/PokeAPI/sprites@*/sprites/pokemon/*.png', route=>route.abort());
+  await page.unroute('https://cdn.jsdelivr.net/gh/PokeAPI/sprites@*/sprites/pokemon/other/official-artwork/*.png');
+  await page.route('https://cdn.jsdelivr.net/gh/PokeAPI/sprites@*/sprites/pokemon/other/official-artwork/*.png', route=>route.abort());
   await page.reload();
   await expect(page.getByTestId('slot-0').locator('.sprite-fallback')).toHaveText('#25');
   await expect(page.getByTestId('slot-0').getByRole('heading',{name:'Pikachu',exact:true})).toBeVisible();
