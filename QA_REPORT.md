@@ -58,3 +58,7 @@ Home H1 now lives in the navigation brand with its short functional subtitle, re
 Removed Undo and moved removal to the upper corner of each selected Pokémon card. Total score now sits beside Build team; Share team sits below the team grid. Picker search, Filters and close controls share one row, with the dialog title and result count retained for assistive technology.
 
 Validation: npm run check passed (lint, Astro typecheck, 22 unit tests, build and 17 static SEO page checks). Affected desktop/mobile browser suite: 11 passed, 1 viewport-specific test skipped. Interactive preview verified removal, search, selection and Done; desktop screenshot reviewed.
+
+## Type icon filters — 2026-10-04
+Replaced type dropdown with 18 local SVG icon buttons, accessible type names, hover titles and pressed states. Clicking the selected icon clears that type. Filters toolbar uses a sliders icon and selected type symbol; generation remains a labeled selector.
+Validation: npm run check passed, six affected desktop/mobile browser tests passed including accessibility. Preview icon selection and toggle reset verified; screenshot reviewed.
