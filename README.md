@@ -39,3 +39,6 @@ See QA_REPORT.md for the local verification results and remaining launch configu
 
 ## Saving and undo
 Saved teams are kept only in the current browser (up to 20 named teams); load and delete are explicit. Team edits support 20 levels of undo during the current page session. Shared URL state and Pokémon-page defaults retain priority; saved teams never silently replace a shared team. If browser storage is blocked or full, users can still edit and share a team.
+
+## Fast team selection
+Use Build team to fill empty slots in one picker session; each selection moves to the next empty slot. Done stops at any time, and the sixth member closes the picker automatically. Individual slot clicks retain the one-pick workflow. Replacements always close after selection. On narrow screens, the picker fills the viewport with fixed search/filter controls, a scrolling results region, and a fixed Done action. Each team edit displays its previous/current score and signed difference.

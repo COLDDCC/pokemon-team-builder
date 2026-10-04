@@ -19,3 +19,7 @@ The Phase 2 builder supports editing and sharing. Type analysis, deterministic s
 - [x] Undo the last 20 team edits, including clear, load and recommendation changes.
 - [x] Explain score tier thresholds using the centralized scoring configuration.
 - Artwork/forms and actual game-specific availability remain follow-up work; scoring remains a casual planning heuristic.
+- [x] Continuous six-slot selection with explicit Done, duplicate protection and one-pick replacement behavior.
+- [x] Full-screen mobile picker with persistent controls and scrolling results; larger touch targets.
+- [x] Show previous/current score and signed difference after team edits.
+- [ ] Validate the picker with a physical iPhone/Android software keyboard after deployment; Chromium viewport checks do not emulate real keyboard resizing.

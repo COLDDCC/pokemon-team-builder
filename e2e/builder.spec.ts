@@ -173,3 +173,33 @@ test('blocked storage keeps editing and sharing usable', async ({ page }) => {
   await page.getByRole('button', {name:'Share team',exact:false}).click();
   await expect(page.getByRole('textbox', {name:'Your team link',exact:true})).toHaveValue(/team=pikachu/);
 });
+
+test('continuous building fills six slots without reopening and permits stopping early', async ({page}) => {
+  await page.goto('/');
+  await page.getByRole('button', {name:'Build team',exact:true}).click();
+  await expect(page.getByRole('checkbox', {name:'Keep adding to empty slots'})).toBeChecked();
+  for (const [index, name] of ['Pikachu','Charizard','Venusaur','Blastoise','Gengar','Dragonite'].entries()) {
+    await expect(page.getByRole('heading', {name:`Choose Pokémon · Slot ${index + 1}`,exact:true})).toBeVisible();
+    await page.getByRole('searchbox').fill(name);
+    await page.getByRole('button', {name:`Choose ${name}`,exact:true}).click();
+    if(index < 5) await expect(page.getByRole('dialog')).toBeVisible();
+  }
+  await expect(page.getByRole('dialog')).not.toBeVisible();
+  await expect(page.getByRole('button', {name:'Build team',exact:true})).toBeDisabled();
+  await expect(page.locator('.score-change')).toContainText('points');
+  await page.getByRole('button', {name:'Clear team',exact:true}).click();
+  await page.getByRole('button', {name:'Build team',exact:true}).click();
+  await page.getByRole('searchbox').fill('Pikachu');
+  await page.getByRole('button', {name:'Choose Pikachu',exact:true}).click();
+  await expect(page.getByRole('searchbox')).toHaveValue('');
+  await page.getByRole('searchbox').fill('Pikachu');
+  await expect(page.getByRole('button', {name:'Pikachu, already in team',exact:true})).toBeDisabled();
+  await page.getByRole('button', {name:'Done · 1/6',exact:true}).click();
+  await expect(page.getByRole('button', {name:'Build team',exact:true})).toBeFocused();
+  await page.getByRole('button', {name:'Replace Pikachu',exact:true}).click();
+  await page.getByRole('checkbox', {name:'Keep adding to empty slots'}).check();
+  await page.getByRole('searchbox').fill('Raichu');
+  await page.getByRole('button', {name:'Choose Raichu',exact:true}).click();
+  await expect(page.getByRole('dialog')).not.toBeVisible();
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});

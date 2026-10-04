@@ -27,3 +27,9 @@ The MVP deliberately uses placeholder artwork, base species only, casual rules a
 - All 20 desktop/mobile browser cases passed across the full run and targeted rerun. The initial 20-worker container run had one SEO hydration wait timeout (19 passed); both viewport versions of that case passed when rerun with two workers.
 - New browser cases cover saved-team reload/slot preservation, clearing/loading/recommendation undo, deletion, and blocked-storage sharing fallback.
 - No mobile overflow in the saved-team interaction checks. No scoring weights were changed.
+
+## Mobile picker and continuous selection
+- Full-screen narrow-screen picker keeps search/filter controls and Done visible while results scroll. A 390×844 screenshot was inspected; scroll checks confirmed search and Done stay visible.
+- Continuous building filled all six slots, stopped early with Done, prevented duplicates and closed after replacements in both viewport projects. Score differences display after edits.
+- Lint/typecheck/build/static output checks and 22 unit tests passed. All 22 browser cases passed across the full run and targeted rerun: the 22-worker run had two initial hydration timeouts (20 passed), and all four desktop/mobile analysis/recommendation checks passed with four workers on rerun. Accessibility cases passed.
+- Physical mobile keyboard and Safari behavior still require a device check after deployment.
