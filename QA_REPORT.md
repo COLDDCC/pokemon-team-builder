@@ -44,3 +44,6 @@ The MVP uses PokéAPI sprites, base species only, casual rules and a type/base-s
 - Team cards, picker results and recommendation cards now use a shared 96px PokéAPI sprite source through a pinned jsDelivr URL. Team images load eagerly; candidate images load lazily. Failed requests leave a numbered fallback and the existing visible name/types.
 - Lint/typecheck/build/static output checks and 22 unit tests passed. Six desktop/mobile browser cases passed for image rendering/failure recovery, continuous picking, and accessibility.
 - Rendering tests use a controlled PNG response and deliberately abort requests to verify failure handling. The live pinned Pikachu PNG was separately retrieved and verified as a 96×96 PNG. Container Chromium external CDN navigation returned ERR_EMPTY_RESPONSE, so this environment cannot establish general live CDN reliability.
+
+## Pokémon-inspired light theme
+Shared stylesheet now uses warm white, blue, yellow and red across all routes. Lint, typecheck, 22 unit tests, production build and static SEO checks pass. Four desktop/mobile browser checks pass for search, keyboard dismissal, no horizontal overflow and axe accessibility in empty, populated and picker states.
