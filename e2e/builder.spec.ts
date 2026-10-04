@@ -39,6 +39,7 @@ test('search and filters work with keyboard dialog dismissal and no horizontal o
   await page.getByRole('searchbox').fill('#025');
   await expect(page.getByRole('button', { name: 'Choose Pikachu', exact: true })).toBeVisible();
   await page.getByRole('searchbox').fill('');
+  await page.getByRole('button', {name:'Filters',exact:true}).click();
   await page.getByLabel('Type', { exact: true }).selectOption('Fire');
   await page.getByLabel('Generation', { exact: true }).selectOption('1');
   await expect(page.getByRole('button', { name: 'Choose Charmander', exact: true })).toBeVisible();
@@ -202,4 +203,42 @@ test('continuous building fills six slots without reopening and permits stopping
   await page.getByRole('button', {name:'Choose Raichu',exact:true}).click();
   await expect(page.getByRole('dialog')).not.toBeVisible();
   expect(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
+test('compact picker resets filters and follows a shortened visual viewport', async ({page}) => {
+  await page.setViewportSize({width:390,height:844});
+  await page.addInitScript(() => {
+    const viewport = Object.assign(new EventTarget(), {height:844,offsetTop:0,scale:1});
+    Object.defineProperty(window, 'visualViewport', {value:viewport,configurable:true});
+  });
+  await page.goto('/');
+  await page.getByRole('button', {name:'Build team',exact:true}).click();
+  await expect(page.getByLabel('Type', {exact:true})).not.toBeVisible();
+  await page.getByRole('searchbox').fill('zzzzzz');
+  await page.getByRole('button', {name:'Reset search and filters',exact:true}).click();
+  await expect(page.getByRole('searchbox')).toHaveValue('');
+  await page.getByRole('button', {name:'Filters',exact:true}).click();
+  await page.getByLabel('Type', {exact:true}).selectOption('Fire');
+  await page.getByRole('button', {name:'Filters · Fire',exact:true}).click();
+  await expect(page.getByLabel('Type', {exact:true})).not.toBeVisible();
+  await expect(page.getByRole('button', {name:'Choose Pikachu',exact:true})).toHaveCount(0);
+  await page.getByRole('button', {name:'Reset filters',exact:true}).click();
+  await page.getByRole('searchbox').fill('Pikachu');
+  await page.getByRole('button', {name:'Clear search',exact:true}).click();
+  await expect(page.getByRole('searchbox')).toBeFocused();
+  await page.evaluate(() => {
+    Object.assign(window.visualViewport!, {height:420,offsetTop:30});
+    window.visualViewport!.dispatchEvent(new Event('resize'));
+  });
+  await expect.poll(async () => (await page.getByRole('dialog').boundingBox())?.height).toBe(420);
+  const footer = await page.locator('.picker-footer').boundingBox();
+  expect(footer!.y + footer!.height).toBeLessThanOrEqual(451);
+  const results = await page.locator('.picker-results-scroll').boundingBox();
+  expect(results!.height).toBeGreaterThan(50);
+  await page.getByRole('searchbox').fill('Pikachu');
+  await page.getByRole('button', {name:'Choose Pikachu',exact:true}).click();
+  await expect(page.locator('.picker-footer')).toContainText('Team score');
+  await page.getByRole('button', {name:'Done · 1/6',exact:true}).click();
+  expect(await page.evaluate(()=>document.body.style.overflow)).toBe('');
+  await expect(page.getByRole('button', {name:'Build team',exact:true})).toBeFocused();
 });

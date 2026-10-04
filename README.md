@@ -42,3 +42,5 @@ Saved teams are kept only in the current browser (up to 20 named teams); load an
 
 ## Fast team selection
 Use Build team to fill empty slots in one picker session; each selection moves to the next empty slot. Done stops at any time, and the sixth member closes the picker automatically. Individual slot clicks retain the one-pick workflow. Replacements always close after selection. On narrow screens, the picker fills the viewport with fixed search/filter controls, a scrolling results region, and a fixed Done action. Each team edit displays its previous/current score and signed difference.
+
+The picker now collapses filters until requested, displays active filters, and provides clear/reset actions. On narrow screens it follows VisualViewport height/offset changes so the Done action stays within the available area when a software keyboard shrinks it. Background scrolling is locked only while the picker is open and restored on close. Real mobile keyboard/Safari verification remains a deployment check.

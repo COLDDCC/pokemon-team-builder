@@ -41,3 +41,14 @@ header nav,footer nav{display:flex;gap:20px;flex-wrap:wrap}header nav a,footer n
  .result-card { min-height: 72px; }
  .card-actions button { min-height: 44px; padding: 8px 4px; }
 }
+
+.picker-tools { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.picker-tools .button { padding: 8px 12px; min-height: 44px; }
+.filter-fields[hidden] { display: none; }
+.picker-controls { min-height: 0; overflow-y: auto; max-height: 60%; }
+.picker-results-scroll { flex: 1; }
+@media (max-width: 520px) {
+ .pokemon-dialog { position: fixed; inset: var(--picker-top, 0px) 0 auto; height: var(--picker-height, 100dvh); max-height: var(--picker-height, 100dvh); }
+ .picker-controls .continuous-choice { margin-top: 6px; min-height: 32px; }
+ .picker-footer p { font-size: 11px; }
+}

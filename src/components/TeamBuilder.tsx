@@ -18,6 +18,7 @@ export default function TeamBuilder({ initialPokemon, focus = 'all' }: { initial
   const [undoStack, setUndoStack] = useState<TeamState[]>([]);
   const [ready, setReady] = useState(false);
   const [activeSlot, setActiveSlot] = useState<number | null>(null);
+  const [filtersOpen, setFiltersOpen] = useState(false);
   const [keepAdding, setKeepAdding] = useState(false);
   const [scoreChange, setScoreChange] = useState<{before: number; after: number} | null>(null);
   const [pickerNotice, setPickerNotice] = useState('');
@@ -51,6 +52,30 @@ export default function TeamBuilder({ initialPokemon, focus = 'all' }: { initial
   }, [initialPokemon]);
   useEffect(() => {
     if (activeSlot !== null && !dialog.current?.open) { dialog.current?.showModal(); search.current?.focus(); }
+  }, [activeSlot]);
+  useEffect(() => {
+    if (activeSlot === null) return;
+    const viewport = window.visualViewport;
+    const element = dialog.current;
+    const oldOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const resize = () => {
+      if (!element) return;
+      const height = viewport && viewport.scale === 1 ? viewport.height : window.innerHeight;
+      const top = viewport && viewport.scale === 1 ? viewport.offsetTop : 0;
+      element.style.setProperty('--picker-height', `${height}px`);
+      element.style.setProperty('--picker-top', `${top}px`);
+    };
+    resize();
+    viewport?.addEventListener('resize', resize);
+    viewport?.addEventListener('scroll', resize);
+    window.addEventListener('resize', resize);
+    return () => {
+      document.body.style.overflow = oldOverflow;
+      viewport?.removeEventListener('resize', resize);
+      viewport?.removeEventListener('scroll', resize);
+      window.removeEventListener('resize', resize);
+    };
   }, [activeSlot]);
   const results = useMemo(() => {
     const key = normalizeSearch(query);
@@ -87,7 +112,7 @@ export default function TeamBuilder({ initialPokemon, focus = 'all' }: { initial
     update(next, `${r.pokemon.name} added to slot ${r.targetSlot + 1}. Team score ${analysis.total} → ${newScore}.`);
   }
   function openSlot(index: number, button: HTMLButtonElement, continuous = false) {
-    opener.current = button; setKeepAdding(continuous); setPickerNotice(''); setQuery(''); setType(''); setGeneration(''); setLimit(60); setActiveSlot(index);
+    opener.current = button; setFiltersOpen(false); setKeepAdding(continuous); setPickerNotice(''); setQuery(''); setType(''); setGeneration(''); setLimit(60); setActiveSlot(index);
   }
   function closePicker() { dialog.current?.close(); }
   function choose(p: Pokemon) {
@@ -131,10 +156,11 @@ export default function TeamBuilder({ initialPokemon, focus = 'all' }: { initial
     </section>
     <TeamAnalysis team={selectedPokemon} analysis={analysis} focus={focus} scoreChange={scoreChange}/>
     <TeamRecommendations state={team} currentScore={analysis.total} apply={applyRecommendation}/>
-    <dialog ref={dialog} className="pokemon-dialog" aria-labelledby="picker-title" onKeyDown={e => { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); closePicker(); } }} onClose={() => { setActiveSlot(null); if (opener.current?.isConnected) opener.current.focus(); else document.querySelector<HTMLButtonElement>('.builder-toolbar button')?.focus(); }} onClick={e => { if (e.target === e.currentTarget) { const r = e.currentTarget.getBoundingClientRect(); if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) closePicker(); } }}>
+    <dialog ref={dialog} className="pokemon-dialog" aria-labelledby="picker-title" onKeyDown={e => { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); closePicker(); } }} onClose={() => { setActiveSlot(null); if (opener.current?.isConnected && !opener.current.disabled) opener.current.focus(); else document.querySelector<HTMLButtonElement>('.builder-toolbar button:not(:disabled)')?.focus(); }} onClick={e => { if (e.target === e.currentTarget) { const r = e.currentTarget.getBoundingClientRect(); if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) closePicker(); } }}>
       <div className="picker-controls"><div className="dialog-head"><div><p className="eyebrow">FIND YOUR NEXT PICK</p><h2 id="picker-title">Choose Pokémon · Slot {(activeSlot ?? 0) + 1}</h2></div><button className="close-button" onClick={closePicker} aria-label="Close Pokémon picker">×</button></div>
-      <label className="search-label">Name or Pokédex number<input ref={search} value={query} onChange={e => { setQuery(e.target.value); setLimit(60); }} placeholder="Try Pikachu, Garchomp, or #025" type="search" /></label>
-      <div className="filter-fields"><label>Type<select aria-label="Type" value={type} onChange={e => { setType(e.target.value); setLimit(60); }}><option value="">All types</option>{pokemonTypes.map(t => <option key={t}>{t}</option>)}</select></label><label>Generation<select aria-label="Generation" value={generation} onChange={e => { setGeneration(e.target.value); setLimit(60); }}><option value="">All generations</option>{Array.from({ length: 9 }, (_, i) => <option key={i} value={i + 1}>Generation {i + 1}</option>)}</select></label></div>
+      <label className="search-label">Name or Pokédex number<input ref={search} value={query} onChange={e => { setQuery(e.target.value); setLimit(60); }} placeholder="Try Pikachu, Garchomp, or #025" type="search" enterKeyHint="search" /></label>
+      <div className="picker-tools"><button className="button secondary" aria-expanded={filtersOpen} aria-controls="pokemon-filters" onClick={() => setFiltersOpen(old => !old)}>Filters{type || generation ? ` · ${[type, generation && `Gen ${generation}`].filter(Boolean).join(', ')}` : ''}</button>{query && <button className="button secondary" onClick={() => { setQuery(''); setLimit(60); search.current?.focus(); }}>Clear search</button>}{(type || generation) && <button className="button secondary" onClick={() => { setType(''); setGeneration(''); setLimit(60); }}>Reset filters</button>}</div>
+      <div className="filter-fields" id="pokemon-filters" hidden={!filtersOpen}><label>Type<select aria-label="Type" value={type} onChange={e => { setType(e.target.value); setLimit(60); }}><option value="">All types</option>{pokemonTypes.map(t => <option key={t}>{t}</option>)}</select></label><label>Generation<select aria-label="Generation" value={generation} onChange={e => { setGeneration(e.target.value); setLimit(60); }}><option value="">All generations</option>{Array.from({ length: 9 }, (_, i) => <option key={i} value={i + 1}>Generation {i + 1}</option>)}</select></label></div>
       <label className="continuous-choice"><input type="checkbox" checked={keepAdding} onChange={e => setKeepAdding(e.target.checked)}/>Keep adding to empty slots</label>
       </div><div className="picker-results-scroll">
       <p className="result-count" role="status">{results.length} Pokémon found · already selected teammates are disabled</p>
@@ -142,9 +168,9 @@ export default function TeamBuilder({ initialPokemon, focus = 'all' }: { initial
         const selected = team.slots.some((id, index) => index !== activeSlot && id === p.id);
         return <button key={p.id} className="result-card" disabled={selected} onClick={() => choose(p)} aria-label={selected ? `${p.name}, already in team` : `Choose ${p.name}`}><span className={`mini-token type-${p.types[0].toLowerCase()}`} aria-hidden="true">{p.name.slice(0, 2).toUpperCase()}</span><span className="result-info"><span className="dex-number">#{String(p.number).padStart(3, '0')}{selected ? ' · In team' : ''}</span><strong>{p.name}</strong><TypeBadges item={p}/></span></button>;
       })}</div>
-      {!results.length && <p className="no-results">No Pokémon match these filters. Try another name, number, or type.</p>}
+      {!results.length && <div className="no-results"><p>No Pokémon match these filters. Try another name, number, or type.</p><button className="button secondary" onClick={() => { setQuery(''); setType(''); setGeneration(''); setLimit(60); search.current?.focus(); }}>Reset search and filters</button></div>}
       {results.length > limit && <button className="button secondary load-more" onClick={() => setLimit(old => old + 60)}>Show more Pokémon ({results.length - limit} remaining)</button>}
-      </div><div className="picker-footer"><p role="status">{pickerNotice || `${count}/6 selected · Team score ${analysis.total}`}</p><button className="button primary" onClick={closePicker}>Done · {count}/6</button></div>
+      </div><div className="picker-footer"><p role="status">{pickerNotice && <span>{pickerNotice}<br/></span>}{count}/6 selected · Team score {analysis.total}</p><button className="button primary" onClick={closePicker}>Done · {count}/6</button></div>
     </dialog>
     <p className="data-credit">Data: Pokémon Showdown / @pkmn/dex · Base species only · Artwork placeholders</p>
   </>;

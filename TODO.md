@@ -23,3 +23,6 @@ The Phase 2 builder supports editing and sharing. Type analysis, deterministic s
 - [x] Full-screen mobile picker with persistent controls and scrolling results; larger touch targets.
 - [x] Show previous/current score and signed difference after team edits.
 - [ ] Validate the picker with a physical iPhone/Android software keyboard after deployment; Chromium viewport checks do not emulate real keyboard resizing.
+- [x] Collapsible picker filters with active labels, clear search and no-results reset.
+- [x] Respond to VisualViewport height/offset changes and restore background scrolling on close.
+- [x] Restore keyboard focus to an enabled toolbar action when filling the last slot disables the original opener.
