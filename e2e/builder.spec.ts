@@ -81,7 +81,7 @@ test('analysis updates live and exposes the damage matrix and methodology', asyn
 });
 test('recommendations apply the displayed score and target an explicit replacement slot', async ({ page }) => {
   await page.goto('/?v=1&team=charizard,moltres,hooh');
-  await expect(page.getByLabel('Slot to optimize', { exact: true })).toHaveValue('3');
+  await expect(page.getByLabel('Slot to optimize', { exact: true })).toHaveValue('auto');
   const first = page.getByTestId('recommendation').first();
   await expect(first).toBeVisible();
   const addedId = await first.getAttribute('data-pokemon');
@@ -276,4 +276,19 @@ test('desktop core tools fit the first screen and an example can be cleared', as
   expect(await page.evaluate(()=>window.scrollY)).toBe(0);
   await page.getByRole('button',{name:'Clear team',exact:true}).click();
   await expect(page.getByTestId('team-score')).toHaveText('0/ 100');
+});
+
+test('automatic replacements preserve locked favorites and unlock restores suggestions', async ({ page }) => {
+  await page.goto('/?team=charizard,moltres,hooh,talonflame,articuno,butterfree&v=1');
+  await expect(page.getByLabel('Slot to optimize', {exact:true})).toHaveValue('auto');
+  const names=['Charizard','Moltres','Ho-Oh','Talonflame','Articuno','Butterfree'];
+  for (const name of names) await page.getByRole('button',{name:`Lock ${name}`,exact:true}).click();
+  await expect(page.getByTestId('recommendation')).toHaveCount(0);
+  await page.getByRole('button',{name:'Unlock Butterfree',exact:true}).click();
+  const first=page.getByTestId('recommendation').first();
+  await expect(first.getByRole('button')).toHaveText('Replace Butterfree ↗');
+  const score=await first.getAttribute('data-new-score');
+  await first.getByRole('button').click();
+  await expect(page.getByTestId('team-score')).toHaveText(`${score}/ 100`);
+  for (const name of names.slice(0,5)) await expect(page.getByRole('button',{name:`Unlock ${name}`,exact:true})).toHaveAttribute('aria-pressed','true');
 });

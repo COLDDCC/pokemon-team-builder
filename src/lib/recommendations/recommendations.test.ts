@@ -3,7 +3,7 @@ import { pokemonById } from '../../data/pokemon';
 import { getFormat, isAllowed } from '../../data/formats';
 import { analyzeTeam } from '../scoring';
 import { emptyTeam, setTeamSlot } from '../url-state';
-import { recommend } from './index';
+import { recommend, recommendBest } from './index';
 const team = (slots: (string | null)[]) => ({...emptyTeam(), slots});
 const members = (slots: (string | null)[]) => slots.flatMap(id => id ? [pokemonById.get(id)!] : []);
 describe('computed recommendations', () => {
@@ -47,5 +47,29 @@ describe('computed recommendations', () => {
     expect(recommend(a, 1).every(r => r.targetSlot === 1)).toBe(true);
     const b = setTeamSlot(a, 1, 'blastoise');
     expect(recommend(b, 0)).not.toEqual(rows);
+  });
+});
+
+describe('automatic recommendations and favorites', () => {
+  const state = team(['charizard','moltres','hooh','talonflame','articuno','butterfree']);
+  it('finds the best positive change across every replacement slot', () => {
+    const all = state.slots.flatMap((_, slot) => [...recommend(state, slot)]);
+    const rows = recommendBest(state);
+    expect(rows[0].delta).toBe(Math.max(...all.map(r => r.delta)));
+    expect(new Set(rows.map(r => r.pokemon.id)).size).toBe(rows.length);
+    for (const r of rows) expect(r.newScore).toBe(analyzeTeam(members(setTeamSlot(state, r.targetSlot, r.pokemon.id).slots)).total);
+  });
+  it('excludes locked teammates and allows no changes when all are locked', () => {
+    const ids = state.slots.filter((id): id is string => Boolean(id));
+    const rows = recommendBest(state, ids.slice(0, 5));
+    expect(rows.length).toBeGreaterThan(0);
+    expect(rows.every(r => r.targetSlot === 5)).toBe(true);
+    expect(recommendBest(state, ids)).toEqual([]);
+    expect(recommendBest(state).length).toBeGreaterThan(0);
+  });
+  it('fills gaps without replacing locked favorites', () => {
+    const partial = team(['pikachu',null,'charizard',null,null,null]);
+    expect(recommendBest(partial, ['pikachu','charizard'])).toEqual(recommend(partial, 1));
+    expect(recommendBest(emptyTeam())).toEqual([]);
   });
 });

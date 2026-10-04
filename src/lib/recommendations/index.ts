@@ -44,3 +44,14 @@ export function recommend(state: TeamState, targetSlot: number): readonly Recomm
   cache.set(key, top);
   return top;
 }
+
+// Fill an empty slot first; full teams compare all unlocked replacement slots.
+export function recommendBest(state: TeamState, lockedIds: readonly string[] = []): readonly Recommendation[] {
+  if (state.slots.length !== 6 || !state.slots.some(Boolean)) return [];
+  const empty = state.slots.findIndex(id => !id);
+  if (empty !== -1) return recommend(state, empty);
+  const rows = state.slots.flatMap((id, slot) => id && lockedIds.includes(id) ? [] : [...recommend(state, slot)]);
+  rows.sort((a, b) => b.delta - a.delta || a.pokemon.number - b.pokemon.number || a.targetSlot - b.targetSlot);
+  const seen = new Set<string>();
+  return rows.filter(r => { if (seen.has(r.pokemon.id)) return false; seen.add(r.pokemon.id); return true; }).slice(0, 6);
+}

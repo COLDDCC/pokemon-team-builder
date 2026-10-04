@@ -15,6 +15,7 @@ function TypeBadges({ item }: { item: Pokemon }) {
 }
 export default function TeamBuilder({ initialPokemon, focus = 'all' }: { initialPokemon?: string; focus?: 'all' | 'weakness' | 'coverage' }) {
   const [team, setTeam] = useState<TeamState>(() => initialPokemon ? setTeamSlot(emptyTeam(), 0, initialPokemon) : emptyTeam());
+  const [lockedIds, setLockedIds] = useState<string[]>([]);
   const [savedTeams, setSavedTeams] = useState<SavedTeam[]>([]);
   const [teamName, setTeamName] = useState('');
   const [ready, setReady] = useState(false);
@@ -41,7 +42,7 @@ export default function TeamBuilder({ initialPokemon, focus = 'all' }: { initial
     const restore = () => {
       const params = new URLSearchParams(window.location.search);
       const parsed = params.has('team') || params.has('v') || params.has('format') ? parseTeamState(window.location.search) : { state: initialPokemon ? setTeamSlot(emptyTeam(), 0, initialPokemon) : emptyTeam(), repaired: false };
-      setTeam(parsed.state); setScoreChange(null);
+      setTeam(parsed.state); setLockedIds([]); setScoreChange(null);
       setMessage(parsed.repaired ? 'Some invalid or duplicate entries in this link were removed.' : '');
       setShareLink('');
     };
@@ -85,6 +86,7 @@ export default function TeamBuilder({ initialPokemon, focus = 'all' }: { initial
   function update(next: TeamState, notice: string) {
     const after = analyzeTeam(next.slots.flatMap(id => id ? [pokemonById.get(id)!] : [])).total;
     setScoreChange({before: analysis.total, after});
+    setLockedIds(ids => ids.filter(id => next.slots.includes(id)));
     setTeam(next); setShareLink(''); setMessage(notice);
     window.history.replaceState(null, '', teamUrl(window.location.href, next));
   }
@@ -100,10 +102,12 @@ export default function TeamBuilder({ initialPokemon, focus = 'all' }: { initial
     if (persistSaved([...savedTeams, { id: crypto.randomUUID(), name: teamName.trim().slice(0, 60), state: team }], 'Team saved in this browser.')) setTeamName('');
   }
   function applyRecommendation(r: Recommendation) {
+    if (team.slots[r.targetSlot] && lockedIds.includes(team.slots[r.targetSlot]!)) return;
     const next = setTeamSlot(team, r.targetSlot, r.pokemon.id);
     if (next === team) return;
     const newScore = analyzeTeam(next.slots.flatMap(id => id ? [pokemonById.get(id)!] : [])).total;
-    update(next, `${r.pokemon.name} added to slot ${r.targetSlot + 1}. Team score ${analysis.total} → ${newScore}.`);
+    const old = team.slots[r.targetSlot] ? pokemonById.get(team.slots[r.targetSlot]!) : undefined;
+    update(next, `${old ? `${old.name} replaced with ${r.pokemon.name}` : `${r.pokemon.name} added to slot ${r.targetSlot + 1}`}. Team score ${analysis.total} → ${newScore}.`);
   }
   function openSlot(index: number, button: HTMLButtonElement, continuous = false) {
     opener.current = button; setFiltersOpen(false); setKeepAdding(continuous); setPickerNotice(''); setQuery(''); setType(''); setGeneration(''); setLimit(60); setActiveSlot(index);
@@ -136,7 +140,7 @@ export default function TeamBuilder({ initialPokemon, focus = 'all' }: { initial
       <details className="format-note"><summary>Format scope · casual planning</summary><p>{format.description}</p></details></details>
       <div className="team-grid">{members.map((p, index) => <article className={`team-card ${p ? 'filled' : ''}`} key={index} data-testid={`slot-${index}`}>
         <span className="slot-number">SLOT 0{index + 1}</span>
-        {p ? <><button className="remove-pokemon" onClick={() => update(setTeamSlot(team, index, null), `${p.name} removed.`)} aria-label={`Remove ${p.name}`}>×</button><PokemonSprite key={p.id} pokemon={p} size="large" eager/><span className="dex-number">#{String(p.number).padStart(3, '0')}</span><h3>{p.name}</h3><TypeBadges item={p}/><div className="card-actions"><button onClick={e => openSlot(index, e.currentTarget)} aria-label={`Replace ${p.name}`}>Replace</button></div></> : <button className="empty-slot" disabled={!ready} onClick={e => openSlot(index, e.currentTarget)} aria-label={`Add Pokémon to slot ${index + 1}`}><span className="plus" aria-hidden="true">+</span><strong>Add Pokémon</strong><span>Choose your next teammate</span></button>}
+        {p ? <><button className="lock-pokemon" aria-label={`${lockedIds.includes(p.id) ? 'Unlock' : 'Lock'} ${p.name}`} title="Keep this teammate in recommendations" aria-pressed={lockedIds.includes(p.id)} onClick={() => setLockedIds(ids => ids.includes(p.id) ? ids.filter(id => id !== p.id) : [...ids, p.id])}><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d={lockedIds.includes(p.id) ? 'M8 10V6a4 4 0 0 1 8 0v4' : 'M8 10V6a4 4 0 0 1 8 0'}/></svg></button><button className="remove-pokemon" onClick={() => update(setTeamSlot(team, index, null), `${p.name} removed.`)} aria-label={`Remove ${p.name}`}>×</button><PokemonSprite key={p.id} pokemon={p} size="large" eager/><span className="dex-number">#{String(p.number).padStart(3, '0')}</span><h3>{p.name}</h3><TypeBadges item={p}/><div className="card-actions"><button onClick={e => openSlot(index, e.currentTarget)} aria-label={`Replace ${p.name}`}>Replace</button></div></> : <button className="empty-slot" disabled={!ready} onClick={e => openSlot(index, e.currentTarget)} aria-label={`Add Pokémon to slot ${index + 1}`}><span className="plus" aria-hidden="true">+</span><strong>Add Pokémon</strong><span>Choose your next teammate</span></button>}
       </article>)}</div>
       <div className="team-bottom-actions"><button className="button secondary" disabled={!ready} onClick={share}>Share team ↗</button>{scoreChange && <span className="score-change" role="status">{scoreChange.before} → {scoreChange.after} · {scoreChange.after - scoreChange.before > 0 ? '+' : ''}{scoreChange.after - scoreChange.before} points</span>}</div>
       <p className="live-message" role="status">{message || (ready ? 'Click any empty slot to start. Search 1,025 Pokémon by name or Pokédex number.' : 'Loading team workspace…')}</p>
@@ -150,11 +154,11 @@ export default function TeamBuilder({ initialPokemon, focus = 'all' }: { initial
       <noscript><p>Enable JavaScript to search, edit, and share your Pokémon team.</p></noscript>
     </section>
     <TeamAnalysis team={selectedPokemon} analysis={analysis} focus={focus}/>
-    <TeamRecommendations state={team} currentScore={analysis.total} apply={applyRecommendation}/>
+    <TeamRecommendations lockedIds={lockedIds} state={team} currentScore={analysis.total} apply={applyRecommendation}/>
     <dialog ref={dialog} className="pokemon-dialog" aria-labelledby="picker-title" onKeyDown={e => { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); closePicker(); } }} onClose={() => { setActiveSlot(null); if (opener.current?.isConnected && !opener.current.disabled) opener.current.focus(); else document.querySelector<HTMLButtonElement>('.builder-toolbar button:not(:disabled)')?.focus(); }} onClick={e => { if (e.target === e.currentTarget) { const r = e.currentTarget.getBoundingClientRect(); if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) closePicker(); } }}>
       <div className="picker-controls"><h2 className="visually-hidden" id="picker-title">Choose Pokémon · Slot {(activeSlot ?? 0) + 1}</h2><div className="picker-search-row">
       <label className="search-label"><span className="visually-hidden">Name or Pokédex number</span><input ref={search} value={query} onChange={e => { setQuery(e.target.value); setLimit(60); }} placeholder="Search Pokémon or #025" type="search" enterKeyHint="search" /></label>
-      <button className="button secondary" aria-label="Filters" title="Filters" aria-expanded={filtersOpen} aria-controls="pokemon-filters" onClick={() => setFiltersOpen(old => !old)}><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 6h18M3 12h18M3 18h18M8 3v6M16 9v6M8 15v6"/></svg>{type && <TypeIcon type={type as typeof pokemonTypes[number]}/>}{generation && <span>{generation}</span>}</button><button className="close-button" onClick={closePicker} aria-label="Close Pokémon picker">×</button></div>
+      <button className="button secondary" aria-label="Filters" title="Filters" aria-expanded={filtersOpen} aria-controls="pokemon-filters" onClick={() => setFiltersOpen(old => !old)}><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 6h18M3 12h18M3 18h18M8 3v6M16 9v6M8 15v6"/></svg>{type && <><TypeIcon type={type as typeof pokemonTypes[number]}/><span className="active-type-name">{type}</span></>}{generation && <span>{generation}</span>}</button><button className="close-button" onClick={closePicker} aria-label="Close Pokémon picker">×</button></div>
       {(type || generation) && <button className="button secondary" onClick={() => { setType(''); setGeneration(''); setLimit(60); }}>Reset filters</button>}
       <div className="filter-fields" id="pokemon-filters" hidden={!filtersOpen}><div className="type-icon-filters" role="group" aria-label="Pokémon types">{pokemonTypes.map(t => <button type="button" key={t} className="type-filter-button" aria-label={`Filter ${t}`} title={t} aria-pressed={type === t} onClick={() => { setType(type === t ? '' : t); setLimit(60); }}><TypeIcon type={t}/><span className="type-filter-check" aria-hidden="true">{type === t ? '✓' : ''}</span></button>)}</div><label>Generation<select aria-label="Generation" value={generation} onChange={e => { setGeneration(e.target.value); setLimit(60); }}><option value="">All generations</option>{Array.from({ length: 9 }, (_, i) => <option key={i} value={i + 1}>Generation {i + 1}</option>)}</select></label></div>
       </div><div className="picker-results-scroll">

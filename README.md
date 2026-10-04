@@ -52,3 +52,10 @@ The site uses a Pokémon-inspired light palette: warm white surfaces, blue headi
 The home title and description are shortened. Desktop team editing and live scores sit side by side, with compact recommendation actions underneath. Rules, saved teams, recommendation reasons and detailed analysis expand on demand. Try example loads six familiar Pokémon only into an empty team and can be cleared. At 1366×768, the example team, live score and recommendation action fit without page scrolling; smaller screens retain responsive layouts and the picker’s score/Done footer.
 
 Desktop side rails are reserved without ad scripts: 120px per side at widths ≥1440px and 160px at ≥1536px. The central tool stays at up to 1120px; smaller screens hide the rails.
+
+## Automatic improvements and favorite locks
+Recommendations default to Auto: incomplete teams fill their first empty slot; full teams compare all six unlocked replacement positions and show the six best distinct candidates. Each card identifies the outgoing teammate, uses the unchanged deterministic score, and offers expandable reasons. Manual slot selection remains available.
+
+The small lock on a selected Pokémon protects it from recommendations, including manual recommendation-slot selection. Manual editing and Clear team remain explicit user actions. Locks are local to this editing session; URLs and saved teams continue to store the roster and format only. Removing a member clears its lock; browser navigation/reload resets locks.
+
+Type filter symbols are original simplified SVG drawings, not official Pokémon type logos. They have accessible names, hover titles and a short selected-type label; each has a 44px touch target.

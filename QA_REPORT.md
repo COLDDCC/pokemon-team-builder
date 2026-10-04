@@ -62,3 +62,8 @@ Validation: npm run check passed (lint, Astro typecheck, 22 unit tests, build an
 ## Type icon filters — 2026-10-04
 Replaced type dropdown with 18 local SVG icon buttons, accessible type names, hover titles and pressed states. Clicking the selected icon clears that type. Filters toolbar uses a sliders icon and selected type symbol; generation remains a labeled selector.
 Validation: npm run check passed, six affected desktop/mobile browser tests passed including accessibility. Preview icon selection and toggle reset verified; screenshot reviewed.
+
+## Automatic replacement selection and favorites — 2026-10-04
+Auto mode fills empty slots first, then compares all unlocked full-team slots using the existing deterministic score. Results identify the outgoing teammate, retain reasons and actual delta, and deduplicate incoming species. Favorite locks constrain auto and explicit recommendation selection; manual edits remain available. Locks are session-only and cleared on navigation or removal. Type icons are custom drawings, with selected type names for recognition.
+
+Validation: npm run check passed with 25 unit tests and static SEO/build checks. Affected browser tests: seven passed, one desktop-only case skipped on mobile; includes auto/explicit application, all-locked empty state, unlocking, preserving five favorites, accessibility and 1366×768 first-screen action. Preview replacement preserved locked Pikachu; desktop screenshot reviewed.
