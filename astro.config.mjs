@@ -1,3 +1,4 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
-export default defineConfig({ site: 'https://superpokemonteambuilder.com', output: 'static', integrations: [react()] });
+import { site } from './src/config/site.ts';
+export default defineConfig({ site: site.url, trailingSlash: 'never', output: 'static', integrations: [react()] });

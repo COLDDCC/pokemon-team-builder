@@ -96,3 +96,22 @@ test('recommendations apply the displayed score and target an explicit replaceme
   const ids = new URL(page.url()).searchParams.get('team')?.split(',');
   expect(ids?.[0]).toBe(replacementId); expect(ids?.[1]).toBe('moltres'); expect(ids?.[3]).toBe(addedId);
 });
+test('SEO routes prefill their Pokémon, honor explicit share state and expose metadata', async ({ page, request }) => {
+  await page.goto('/pokemon/garchomp/best-teammates');
+  await expect(page.getByTestId('slot-0').getByRole('heading', { name: 'Garchomp', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Garchomp Teammate Suggestions');
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://superpokemonteambuilder.com/pokemon/garchomp/best-teammates');
+  await page.goto('/pokemon/garchomp/best-teammates?v=1&team=pikachu');
+  await expect(page.getByTestId('slot-0').getByRole('heading', { name: 'Pikachu', exact: true })).toBeVisible();
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://superpokemonteambuilder.com/pokemon/garchomp/best-teammates');
+  const structured = JSON.parse(await page.locator('script[type="application/ld+json"]').textContent() ?? '{}');
+  expect(structured['@type']).toBe('WebApplication');
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', 'https://superpokemonteambuilder.com/og.png');
+  const sitemap = await request.get('/sitemap.xml');
+  expect(sitemap.ok()).toBe(true); expect(await sitemap.text()).toContain('/pokemon/garchomp/best-teammates');
+  expect(await sitemap.text()).not.toContain('?team=');
+  expect(await (await request.get('/robots.txt')).text()).toContain('Sitemap: https://superpokemonteambuilder.com/sitemap.xml');
+  expect((await request.get('/og.png')).ok()).toBe(true);
+  await page.goto('/weakness-calculator?v=1&team=charizard');
+  await expect(page.getByRole('table')).toBeVisible();
+});

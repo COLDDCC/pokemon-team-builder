@@ -10,8 +10,8 @@ import { emptyTeam, parseTeamState, setTeamSlot, teamUrl, type TeamState } from 
 function TypeBadges({ item }: { item: Pokemon }) {
   return <span className="type-badges">{item.types.map(t => <span key={t} className={`type-badge type-${t.toLowerCase()}`}>{t}</span>)}</span>;
 }
-export default function TeamBuilder() {
-  const [team, setTeam] = useState<TeamState>(emptyTeam);
+export default function TeamBuilder({ initialPokemon, focus = 'all' }: { initialPokemon?: string; focus?: 'all' | 'weakness' | 'coverage' }) {
+  const [team, setTeam] = useState<TeamState>(() => initialPokemon ? setTeamSlot(emptyTeam(), 0, initialPokemon) : emptyTeam());
   const [ready, setReady] = useState(false);
   const [activeSlot, setActiveSlot] = useState<number | null>(null);
   const [query, setQuery] = useState('');
@@ -30,7 +30,8 @@ export default function TeamBuilder() {
   const count = selectedPokemon.length;
   useEffect(() => {
     const restore = () => {
-      const parsed = parseTeamState(window.location.search);
+      const params = new URLSearchParams(window.location.search);
+      const parsed = params.has('team') || params.has('v') || params.has('format') ? parseTeamState(window.location.search) : { state: initialPokemon ? setTeamSlot(emptyTeam(), 0, initialPokemon) : emptyTeam(), repaired: false };
       setTeam(parsed.state);
       setMessage(parsed.repaired ? 'Some invalid or duplicate entries in this link were removed.' : '');
       setShareLink('');
@@ -38,7 +39,7 @@ export default function TeamBuilder() {
     restore(); setReady(true);
     window.addEventListener('popstate', restore);
     return () => window.removeEventListener('popstate', restore);
-  }, []);
+  }, [initialPokemon]);
   useEffect(() => {
     if (activeSlot !== null && !dialog.current?.open) { dialog.current?.showModal(); search.current?.focus(); }
   }, [activeSlot]);
@@ -86,7 +87,7 @@ export default function TeamBuilder() {
       {shareLink && <label className="share-field">Your team link<input readOnly value={shareLink} onFocus={e => e.currentTarget.select()}/></label>}
       <noscript><p>Enable JavaScript to search, edit, and share your Pokémon team.</p></noscript>
     </section>
-    <TeamAnalysis team={selectedPokemon} analysis={analysis}/>
+    <TeamAnalysis team={selectedPokemon} analysis={analysis} focus={focus}/>
     <TeamRecommendations state={team} currentScore={analysis.total} apply={applyRecommendation}/>
     <dialog ref={dialog} className="pokemon-dialog" aria-labelledby="picker-title" onKeyDown={e => { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); closePicker(); } }} onClose={() => { setActiveSlot(null); opener.current?.focus(); }} onClick={e => { if (e.target === e.currentTarget) { const r = e.currentTarget.getBoundingClientRect(); if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) closePicker(); } }}>
       <div className="dialog-head"><div><p className="eyebrow">FIND YOUR NEXT PICK</p><h2 id="picker-title">Choose Pokémon · Slot {(activeSlot ?? 0) + 1}</h2></div><button className="close-button" onClick={closePicker} aria-label="Close Pokémon picker">×</button></div>

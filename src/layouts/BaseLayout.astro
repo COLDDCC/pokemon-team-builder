@@ -1,9 +1,16 @@
 ---
 import { site } from '../config/site';
 import '../styles/global.css';
-interface Props { title?: string; description?: string; }
-const { title = site.title, description = site.description } = Astro.props;
-const canonical = new URL(Astro.url.pathname, site.url);
+interface Props { title?: string; description?: string; noindex?: boolean; schema?: Record<string, unknown>; }
+const { title = site.title, description = site.description, noindex = false, schema } = Astro.props;
+const path = Astro.url.pathname === '/' ? '/' : Astro.url.pathname.replace(/\/$/, '');
+const canonical = new URL(path, site.url).toString();
+const image = new URL('/og.png', site.url).toString();
+const verification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
+const rawGaId = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID;
+const gaId = typeof rawGaId === 'string' && /^G-[A-Z0-9]+$/.test(rawGaId) ? rawGaId : undefined;
+const jsonld = { '@context': 'https://schema.org', ...(schema ?? { '@type': 'WebApplication', name: title, description, url: canonical, applicationCategory: 'EntertainmentApplication', operatingSystem: 'Any', browserRequirements: 'JavaScript required for the interactive builder' }) };
+const safeJson = JSON.stringify(jsonld).replace(/</g, '\u003c');
 ---
 <!doctype html>
 <html lang="en">
@@ -11,9 +18,25 @@ const canonical = new URL(Astro.url.pathname, site.url);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    {verification && <meta name="google-site-verification" content={verification} />}
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
     <title>{title}</title>
+    {!noindex && <script type="application/ld+json" set:html={safeJson} />}
+    {gaId && <><script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script><script is:inline define:vars={{ gaId }}>window.dataLayer=window.dataLayer||[];function gtag(...args){window.dataLayer.push(args);}gtag('js',new Date());gtag('config',gaId,{send_page_view:false});gtag('event','page_view',{page_location:window.location.origin+window.location.pathname});</script></>}
   </head>
   <body><a class="skip" href="#main">Skip to content</a><slot /></body>
 </html>
