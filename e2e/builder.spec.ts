@@ -136,3 +136,40 @@ test('unknown routes and unsupported URL versions have safe fallbacks', async ({
   await expect(page.getByRole('button', {name:/Add Pokémon to slot/})).toHaveCount(6);
   await expect(page.getByTestId('team-score')).toHaveText('0/ 100');
 });
+
+test('saved teams survive reload and load, clear and recommendations can be undone', async ({ page }) => {
+  await page.goto('/?v=1&team=pikachu,,,gengar');
+  await page.getByText('Saved teams · 0', {exact:true}).click();
+  await page.getByRole('textbox', {name:'Team name',exact:true}).fill('Adventure');
+  await page.getByRole('button', {name:'Save current team',exact:true}).click();
+  await expect(page.getByRole('button', {name:'Load Adventure',exact:true})).toBeVisible();
+  await page.getByRole('button', {name:'Clear team',exact:true}).click();
+  await expect(page.getByRole('button', {name:/Add Pokémon to slot/})).toHaveCount(6);
+  await page.getByRole('button', {name:'Undo',exact:true}).click();
+  await expect(page.getByTestId('slot-3').getByRole('heading', {name:'Gengar',exact:true})).toBeVisible();
+  await page.reload();
+  await page.getByText('Saved teams · 1', {exact:true}).click();
+  await page.getByRole('button', {name:'Clear team',exact:true}).click();
+  await page.getByRole('button', {name:'Load Adventure',exact:true}).click();
+  await expect(page.getByTestId('slot-0').getByRole('heading', {name:'Pikachu',exact:true})).toBeVisible();
+  await expect(page.getByRole('button', {name:'Add Pokémon to slot 2',exact:true})).toBeVisible();
+  const previousScore = await page.getByTestId('team-score').textContent();
+  await page.getByTestId('recommendation').first().getByRole('button').click();
+  await page.getByRole('button', {name:'Undo',exact:true}).click();
+  await expect(page.getByTestId('team-score')).toHaveText(previousScore!);
+  await page.getByRole('button', {name:'Delete Adventure',exact:true}).click();
+  await expect(page.getByText('No saved teams yet.', {exact:true})).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+test('blocked storage keeps editing and sharing usable', async ({ page }) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(window, 'localStorage', {get() {throw new Error('blocked');}});
+  });
+  await page.goto('/?v=1&team=pikachu');
+  await page.getByText('Saved teams · 0', {exact:true}).click();
+  await page.getByRole('textbox', {name:'Team name',exact:true}).fill('Backup');
+  await page.getByRole('button', {name:'Save current team',exact:true}).click();
+  await expect(page.getByRole('status').filter({hasText:'Browser storage is unavailable or full.'})).toBeVisible();
+  await page.getByRole('button', {name:'Share team',exact:false}).click();
+  await expect(page.getByRole('textbox', {name:'Your team link',exact:true})).toHaveValue(/team=pikachu/);
+});

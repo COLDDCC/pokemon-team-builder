@@ -13,3 +13,9 @@ The Phase 2 builder supports editing and sharing. Type analysis, deterministic s
 - Add actual GA4/GSC identifiers if wanted, rebuild and submit the sitemap after HTTPS is live.
 - Verify production redirects, headers, 404 and domain ownership; run a production performance check.
 - Review the implemented tool visually. Pokémon artwork remains placeholders; alternate forms and competitive rules are outside this MVP.
+
+## Pre-launch usability update
+- [x] Browser-local named team saves (20 maximum), explicit load/delete and storage failure fallback.
+- [x] Undo the last 20 team edits, including clear, load and recommendation changes.
+- [x] Explain score tier thresholds using the centralized scoring configuration.
+- Artwork/forms and actual game-specific availability remain follow-up work; scoring remains a casual planning heuristic.

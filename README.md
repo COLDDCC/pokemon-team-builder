@@ -36,3 +36,6 @@ The build includes two focused calculator routes, one casual format route and si
 See QA_REPORT.md for the local verification results and remaining launch configuration. See DEPLOYMENT.md for Cloudflare Pages or Vercel import settings. A deployment has not been performed.
 
 `npm run check` also validates all generated sitemap pages, canonical links, H1 counts, structured data, 404, robots and OG output. `npm run audit` runs local mobile Lighthouse checks against the built home and populated-team pages; Chrome must be installed, or set CHROME_PATH to a compatible Chromium executable. Reports go to ignored qa-output/. Automated accessibility checks are included in the browser suite. Local lab results do not replace production Core Web Vitals.
+
+## Saving and undo
+Saved teams are kept only in the current browser (up to 20 named teams); load and delete are explicit. Team edits support 20 levels of undo during the current page session. Shared URL state and Pokémon-page defaults retain priority; saved teams never silently replace a shared team. If browser storage is blocked or full, users can still edit and share a team.

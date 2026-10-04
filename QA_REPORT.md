@@ -20,3 +20,10 @@ Mobile-mode local Lighthouse runs gave 100 for Accessibility, Best Practices and
 Import the repository into Cloudflare Pages or Vercel, connect the purchased domain and confirm HTTPS. Optional GA4 and GSC identifiers remain unset. No DNS changes, production deployment or Search Console submission were performed. See DEPLOYMENT.md.
 
 The MVP deliberately uses placeholder artwork, base species only, casual rules and a type/base-stat heuristic. Moves, abilities, items, EV/IVs, battle simulation and competitive legality are outside this release.
+
+## Pre-launch usability verification
+- Added local named saves, explicit load/delete, 20-edit undo, and centralized rating-band explanations.
+- Lint/typecheck/build/static output checks passed; 22 unit tests passed.
+- All 20 desktop/mobile browser cases passed across the full run and targeted rerun. The initial 20-worker container run had one SEO hydration wait timeout (19 passed); both viewport versions of that case passed when rerun with two workers.
+- New browser cases cover saved-team reload/slot preservation, clearing/loading/recommendation undo, deletion, and blocked-storage sharing fallback.
+- No mobile overflow in the saved-team interaction checks. No scoring weights were changed.
