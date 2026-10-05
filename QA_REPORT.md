@@ -225,3 +225,9 @@ Added clearly labeled feedback@example.com placeholder and Cloudflare build-vari
 - A published exact match excluded by filters also offers a direct Read guide action. Unknown names still produce no unrelated entry.
 - `ASTRO_TELEMETRY_DISABLED=1 npm run check` passes lint/typecheck, 28 tests, build and 210 static SEO routes.
 - Production-asset browser regressions pass at 390px and 1366px for existing search/filter/sort/URL state behavior, partial Eev-to-Eevee lookup, correct builder URL, candidate limit, type-filter exclusion and filtered Pikachu's direct guide URL. All 102 static guide links remain present without JavaScript. External artwork requests were blocked; remote image delivery is excluded.
+
+## Directory keyboard and touch polish — 2026-10-05
+- Added Enter navigation for a single result and Escape to clear only the search query. IME composition is ignored; ambiguous results remain on the directory. A compact search hint describes both shortcuts.
+- Search and select controls have 44px minimum touch heights. Filtering no longer re-appends every guide card; DOM ordering updates only when the sort changes.
+- `ASTRO_TELEMETRY_DISABLED=1 npm run check` passes lint/typecheck, 28 tests, build and 210 static SEO routes.
+- Production-asset browser regressions pass at 390px and 1366px, including all previous directory checks, Escape preserving type/generation, Enter navigation to Pikachu, Enter targeting Eevee's builder link, ambiguous Enter remaining on the directory, IME safety and control heights. All 102 guide links remain available without JavaScript. External artwork requests were blocked; remote image delivery and production performance measurements are excluded.

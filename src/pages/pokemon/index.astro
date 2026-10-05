@@ -12,9 +12,9 @@ const guides = featuredPokemonIds.map(id => pokemonById.get(id)!).sort((a,b) => 
 <BaseLayout title="Pokémon Team Guides | Super Pokémon Team Builder" description={`Explore ${guides.length} Pokémon build guides with starter movesets, evolution chains, type weaknesses and teammate ideas.`}>
 <SiteHeader/><main id="main"><h1>Pokémon team guides</h1><p>Choose a Pokémon for moves, evolution, weaknesses and teammate ideas.</p>
 <div class="directory-controls" id="guide-controls" hidden>
-<div class="directory-search"><label for="guide-search">Find a guide</label><input id="guide-search" type="search" placeholder="Name or Pokédex number" autocomplete="off" maxlength="80"/><label for="guide-generation">Debut gen</label><select id="guide-generation" title="Generation introduced, not game availability"><option value="">All generations</option>{Array.from({length:9},(_,i) => <option value={i+1}>Gen {i+1}</option>)}</select><label for="guide-sort" class="sort-label">Sort</label><select id="guide-sort"><option value="number">Pokédex number</option><option value="name">Name A–Z</option></select></div>
+<div class="directory-search"><label for="guide-search">Find a guide</label><input id="guide-search" type="search" aria-describedby="guide-search-help" placeholder="Name or Pokédex number" autocomplete="off" maxlength="80"/><label for="guide-generation">Debut gen</label><select id="guide-generation" title="Generation introduced, not game availability"><option value="">All generations</option>{Array.from({length:9},(_,i) => <option value={i+1}>Gen {i+1}</option>)}</select><label for="guide-sort" class="sort-label">Sort</label><select id="guide-sort"><option value="number">Pokédex number</option><option value="name">Name A–Z</option></select></div>
 <div class="directory-types" role="group" aria-label="Filter guides by type"><button type="button" data-type="" aria-pressed="true">All</button>{pokemonTypes.map(type => <button type="button" data-type={type} aria-label={type} title={type} aria-pressed="false"><TypeIcon type={type}/></button>)}</div>
-<div class="directory-status"><p id="guide-count" role="status" aria-live="polite">{guides.length} guides</p><button id="guide-reset" type="button" hidden>Clear filters</button></div>
+<p id="guide-search-help" class="directory-help">Enter opens a single match · Esc clears search</p><div class="directory-status"><p id="guide-count" role="status" aria-live="polite">{guides.length} guides</p><button id="guide-reset" type="button" hidden>Clear filters</button></div>
 </div>
 <div class="guide-grid" id="guide-grid">{guides.map(p => <a class="guide-card" href={`/pokemon/${p.id}`} data-name={p.name} data-search={normalizeSearch(p.name)} data-number={p.number} data-generation={p.generation} data-types={p.types.join(',')}><PokemonSprite pokemon={p} size="large"/><small>#{String(p.number).padStart(3,'0')}</small><h2>{p.name}</h2><p>{p.types.join(' / ')}</p><span>View guide →</span></a>)}</div>
 <div id="guide-empty" hidden><p>No published guide matches. Try another name, number, type or generation.</p><div id="guide-builder-fallback" hidden><img id="fallback-art" width="96" height="96" alt=""/><div><strong id="fallback-name"></strong><p id="fallback-description"></p><div class="fallback-actions"><a id="fallback-guide" href="/pokemon" hidden>Read guide →</a><a id="fallback-link" href="/">Build a team →</a></div></div></div><div id="guide-suggestions" hidden><p>Other Pokémon you can try in the team builder:</p><div id="suggestion-grid"></div></div></div>
@@ -43,6 +43,7 @@ const fallbackArt = document.querySelector<HTMLImageElement>('#fallback-art')!;
 const species = JSON.parse(document.querySelector('#directory-species')!.textContent!) as {id:string;name:string;number:number;search:string;types:string[];generation:number}[];
 fallbackArt.addEventListener('error',()=>{fallbackArt.hidden=true;});
 let selectedType = '';
+let renderedSort = 'number';
 function update() {
  const query = search.value.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');
  const numeric = /^\d+$/.test(query);
@@ -52,8 +53,10 @@ function update() {
   card.hidden = !(matchesName && (!selectedType || card.dataset.types!.split(',').includes(selectedType)) && (!generation.value || card.dataset.generation === generation.value));
   if (!card.hidden) visible++;
  }
- cards.sort((a,b)=>sort.value==='name' ? a.dataset.name!.localeCompare(b.dataset.name!,'en') : Number(a.dataset.number)-Number(b.dataset.number));
- grid.append(...cards);
+ if(renderedSort !== sort.value) {
+  cards.sort((a,b)=>sort.value==='name' ? a.dataset.name!.localeCompare(b.dataset.name!,'en') : Number(a.dataset.number)-Number(b.dataset.number));
+  grid.append(...cards);renderedSort=sort.value;
+ }
  for (const button of buttons) button.setAttribute('aria-pressed', String(button.dataset.type === selectedType));
  count.textContent = `${visible} of ${cards.length} guides${selectedType ? ` · ${selectedType}` : ''}${generation.value ? ` · Gen ${generation.value}` : ''}`;
  reset.hidden = !search.value && !selectedType && !generation.value;
@@ -101,6 +104,16 @@ function restore() {
  update();
 }
 search.addEventListener('input',update);
+search.addEventListener('keydown',event=>{
+ if(event.isComposing) return;
+ if(event.key==='Escape') { event.preventDefault();search.value='';update(); }
+ if(event.key==='Enter') {
+  const visibleCards=cards.filter(card=>!card.hidden);
+  const suggested=Array.from(suggestionGrid.querySelectorAll<HTMLAnchorElement>('a'));
+  const target=visibleCards.length===1 ? visibleCards[0] : !fallback.hidden ? (!fallbackGuide.hidden ? fallbackGuide : fallbackLink) : !suggestions.hidden && suggested.length===1 ? suggested[0] : undefined;
+  if(target) { event.preventDefault();target.click(); }
+ }
+});
 generation.addEventListener('change',update);
 sort.addEventListener('change',update);
 for(const button of buttons) button.addEventListener('click',()=>{selectedType=button.dataset.type!;update();});
@@ -111,5 +124,5 @@ controls.hidden=false;
 restore();
 </script>
 <style>
-.fallback-actions{display:flex;flex-wrap:wrap;gap:16px}#fallback-guide[hidden],#guide-suggestions[hidden]{display:none}#suggestion-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}#suggestion-grid a{display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px;background:white;border:1px solid #dce5ed;border-radius:12px;text-decoration:none}#suggestion-grid small{font-size:.78rem}#suggestion-grid img{object-fit:contain}#suggestion-grid img[hidden]{display:none}#guide-builder-fallback{display:flex;align-items:center;gap:16px;padding:16px;border:1px solid #dce5ed;border-radius:14px;background:white}#guide-builder-fallback[hidden]{display:none}#fallback-art[hidden]{display:none}#fallback-art{object-fit:contain}#guide-builder-fallback p{font-size:.9rem} .directory-controls{border:1px solid #dce5ed;background:#fff;border-radius:14px;padding:14px}.directory-controls[hidden],.guide-card[hidden],#guide-empty[hidden],#guide-reset[hidden]{display:none}.directory-search{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.directory-search label{font-size:.88rem;font-weight:600}.directory-search input{flex:1;min-width:140px;padding:9px 12px;border:1px solid #9db5db;border-radius:9px;font:inherit}.directory-search select{padding:9px;border:1px solid #9db5db;border-radius:9px;font:inherit;background:white}.directory-types{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}.directory-types button{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1px solid #dce5ed;border-radius:10px;background:white;cursor:pointer}.directory-types button[aria-pressed="true"]{background:#fff4bd;border:2px solid #c68b14}.directory-status{display:flex;align-items:center;justify-content:space-between;gap:10px}.directory-status p{margin:12px 0 0;font-size:.85rem;color:#536477}.directory-status button{margin-top:10px;min-height:44px}.guide-card small{margin-top:7px;color:#536477}.directory-controls :focus-visible{outline:3px solid #1765ad;outline-offset:3px}@media(max-width:600px){.directory-search label:first-child{width:100%}.directory-search input{width:100%;flex-basis:100%}.guide-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.guide-card{padding:12px}.guide-card h2{font-size:1rem}.guide-card p{font-size:.8rem}.directory-search select{flex:1;min-width:0}}
+.fallback-actions{display:flex;flex-wrap:wrap;gap:16px}#fallback-guide[hidden],#guide-suggestions[hidden]{display:none}#suggestion-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}#suggestion-grid a{display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px;background:white;border:1px solid #dce5ed;border-radius:12px;text-decoration:none}#suggestion-grid small{font-size:.78rem}#suggestion-grid img{object-fit:contain}#suggestion-grid img[hidden]{display:none}#guide-builder-fallback{display:flex;align-items:center;gap:16px;padding:16px;border:1px solid #dce5ed;border-radius:14px;background:white}#guide-builder-fallback[hidden]{display:none}#fallback-art[hidden]{display:none}#fallback-art{object-fit:contain}#guide-builder-fallback p{font-size:.9rem} .directory-controls{border:1px solid #dce5ed;background:#fff;border-radius:14px;padding:14px}.directory-controls[hidden],.guide-card[hidden],#guide-empty[hidden],#guide-reset[hidden]{display:none}.directory-search{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.directory-search label{font-size:.88rem;font-weight:600}.directory-help{font-size:.78rem;color:#536477;margin:10px 0 0}.directory-search input,.directory-search select{min-height:44px}.directory-search input{flex:1;min-width:140px;padding:9px 12px;border:1px solid #9db5db;border-radius:9px;font:inherit}.directory-search select{padding:9px;border:1px solid #9db5db;border-radius:9px;font:inherit;background:white}.directory-types{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}.directory-types button{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1px solid #dce5ed;border-radius:10px;background:white;cursor:pointer}.directory-types button[aria-pressed="true"]{background:#fff4bd;border:2px solid #c68b14}.directory-status{display:flex;align-items:center;justify-content:space-between;gap:10px}.directory-status p{margin:12px 0 0;font-size:.85rem;color:#536477}.directory-status button{margin-top:10px;min-height:44px}.guide-card small{margin-top:7px;color:#536477}.directory-controls :focus-visible{outline:3px solid #1765ad;outline-offset:3px}@media(max-width:600px){.directory-search label:first-child{width:100%}.directory-search input{width:100%;flex-basis:100%}.guide-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.guide-card{padding:12px}.guide-card h2{font-size:1rem}.guide-card p{font-size:.8rem}.directory-search select{flex:1;min-width:0}}
 </style>
