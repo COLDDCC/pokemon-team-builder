@@ -231,3 +231,9 @@ Added clearly labeled feedback@example.com placeholder and Cloudflare build-vari
 - Search and select controls have 44px minimum touch heights. Filtering no longer re-appends every guide card; DOM ordering updates only when the sort changes.
 - `ASTRO_TELEMETRY_DISABLED=1 npm run check` passes lint/typecheck, 28 tests, build and 210 static SEO routes.
 - Production-asset browser regressions pass at 390px and 1366px, including all previous directory checks, Escape preserving type/generation, Enter navigation to Pikachu, Enter targeting Eevee's builder link, ambiguous Enter remaining on the directory, IME safety and control heights. All 102 guide links remain available without JavaScript. External artwork requests were blocked; remote image delivery and production performance measurements are excluded.
+
+## Guide navigation paths — 2026-10-05
+- Added a shared static breadcrumb to all 102 species guides and 102 teammate pages. Users can return directly to the directory, or from teammate comparisons to the species guide. Current-page text uses aria-current; links wrap and have 44px touch heights with visible keyboard focus.
+- `ASTRO_TELEMETRY_DISABLED=1 npm run check` passes with zero typecheck errors/warnings, 28 tests and 210 static SEO routes.
+- JavaScript-disabled browser checks at 390px and 1366px cover all 204 pages: breadcrumb destinations/current-page labels, layout overflow, and existing guide move cards, section order, local links and disclosures. This static check excludes hydrated team-builder behavior and external artwork delivery.
+- The previous directory production-asset regression also passes at both widths, including filtering, URL restoration, keyboard navigation and no-JavaScript guide links.

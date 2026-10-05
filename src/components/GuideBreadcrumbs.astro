@@ -1,0 +1,8 @@
+---
+interface Props { name: string; id: string; teammates?: boolean; }
+const { name, id, teammates = false } = Astro.props;
+---
+<nav class="guide-breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/pokemon">Pokémon guides</a></li>{teammates ? <><li><a href={`/pokemon/${id}`}>{name} build</a></li><li><span aria-current="page">Teammates</span></li></> : <li><span aria-current="page">{name} build</span></li>}</ol></nav>
+<style>
+.guide-breadcrumbs ol{display:flex;flex-wrap:wrap;align-items:center;gap:0 10px;list-style:none;padding:0;margin:0;font-size:.85rem;color:#536477}.guide-breadcrumbs li{display:flex;align-items:center;gap:10px;min-height:44px}.guide-breadcrumbs li+li::before{content:'›';color:#536477}.guide-breadcrumbs a{display:inline-flex;align-items:center;min-height:44px}.guide-breadcrumbs a:focus-visible{outline:3px solid #1765ad;outline-offset:3px;border-radius:3px}
+</style>

@@ -72,3 +72,5 @@ If an exact species name or number has no matching guide, the directory offers a
 When no guide matches a partial name, up to six matching species provide portrait links into the builder, respecting the selected type and debut generation. Exact matches excluded by filters also offer a direct link to their published guide.
 
 Search supports Enter to open a single matching guide or species action, and Escape to clear the query while retaining filters. Enter does not navigate ambiguous results or interrupt IME composition. Search/select controls have 44px minimum touch heights; cards are reordered only when sorting changes.
+
+Guide and teammate pages include a compact, static breadcrumb path back to the guide directory and the species build guide. Links wrap on small screens, have 44px touch heights and work without JavaScript.

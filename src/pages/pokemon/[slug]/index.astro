@@ -2,6 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import SiteHeader from '../../../components/SiteHeader.astro';
 import SiteFooter from '../../../components/SiteFooter.astro';
+import GuideBreadcrumbs from '../../../components/GuideBreadcrumbs.astro';
 import TeamBuilder from '../../../components/TeamBuilder';
 import { featuredPokemonIds } from '../../../config/seo-pages';
 import { pokemonById } from '../../../data/pokemon';
@@ -21,7 +22,7 @@ const resist = analysis.defense.filter(row => row.resist.length);
 const visual = guideVisuals[p.id];
 ---
 <BaseLayout title={`${p.name} Build Guide, Team Builder & Evolution | Super Pokémon Team Builder`} description={`Build around ${p.name}: starter moveset, item, ability, type weaknesses, teammate ideas and evolution. Try your team in the interactive builder.`}>
-<SiteHeader/><main id="main" class="guide-page">
+<SiteHeader/><main id="main" class="guide-page"><GuideBreadcrumbs name={p.name} id={p.id}/>
 <section class="guide-hero"><PokemonSprite pokemon={p} size="large" eager/><div><p class="eyebrow">POKÉDEX #{String(p.number).padStart(3,'0')} · GENERATION {p.generation}</p><h1>{p.name} Build Guide</h1><div class="type-row">{p.types.map(type=><span><TypeIcon type={type}/>{type}</span>)}</div><p class="role">{guide.role}</p><a class="guide-cta" href="#build-team">Build a team with {p.name} ↓</a></div></section>
 <nav class="guide-jumps" aria-label="Guide sections"><a href="#loadout">Moveset</a><a href="#partners">Teammates</a><a href="#matchups">Weaknesses</a><a href="#evolution">Evolution</a></nav>
 <section id="loadout" class="guide-panel"><h2>Starter moveset</h2><p class="scope">Generation 9 · casual singles · base form</p><div class="loadout"><div><small>ITEM</small><strong>{guide.item}</strong></div><div><small>ABILITY</small><strong>{guide.ability}</strong></div><div><small>NATURE</small><strong>{guide.nature}</strong></div></div><div class="move-grid">{guide.moves.map((move,i)=><div><span>{i+1}</span><strong>{move}</strong></div>)}</div><div class="advice-grid"><article><h3>How to play</h3><p>{guide.plan}</p></article><article class="watch"><h3>Watch out for</h3><p>{guide.caution}</p></article></div><details><summary>About this example</summary><p>This editorial starting point is not a ranked-format recommendation or a legality check. It does not specify EVs or Tera type. Moves, items and abilities here do not change the builder score.</p></details></section>
