@@ -870,5 +870,141 @@ export const guideVisuals: Record<string, { evolution: { id: string; condition: 
         "reason": "Resists Ice, Dragon and Fairy attacks."
       }
     ]
+  },
+  "magnezone": {
+    "evolution": [
+      {
+        "id": "magnemite",
+        "condition": ""
+      },
+      {
+        "id": "magneton",
+        "condition": "Level 30"
+      },
+      {
+        "id": "magnezone",
+        "condition": "Thunder Stone (Generation 9)"
+      }
+    ],
+    "partners": [
+      {
+        "id": "gyarados",
+        "reason": "Immune to Ground and resists Fire and Fighting."
+      },
+      {
+        "id": "gastrodon",
+        "reason": "Resists Fire; Magnezone resists its Grass weakness."
+      }
+    ]
+  },
+  "milotic": {
+    "evolution": [
+      {
+        "id": "feebas",
+        "condition": ""
+      },
+      {
+        "id": "milotic",
+        "condition": "Trade while holding Prism Scale (Scarlet/Violet)"
+      }
+    ],
+    "partners": [
+      {
+        "id": "garchomp",
+        "reason": "Immune to Electric; Milotic resists Ice attacks."
+      },
+      {
+        "id": "corviknight",
+        "reason": "Resists Grass; both still need an Electric answer."
+      }
+    ]
+  },
+  "jolteon": {
+    "evolution": [
+      {
+        "id": "eevee",
+        "condition": ""
+      },
+      {
+        "id": "jolteon",
+        "condition": "Thunder Stone"
+      }
+    ],
+    "partners": [
+      {
+        "id": "corviknight",
+        "reason": "Immune to Ground; Jolteon covers its Electric weakness."
+      },
+      {
+        "id": "gastrodon",
+        "reason": "Adds bulk and resists Fire and Rock attacks."
+      }
+    ]
+  },
+  "vaporeon": {
+    "evolution": [
+      {
+        "id": "eevee",
+        "condition": ""
+      },
+      {
+        "id": "vaporeon",
+        "condition": "Water Stone"
+      }
+    ],
+    "partners": [
+      {
+        "id": "garchomp",
+        "reason": "Immune to Electric; Vaporeon resists Ice attacks."
+      },
+      {
+        "id": "scizor",
+        "reason": "Resists Grass; Vaporeon resists Scizor\u2019s Fire weakness."
+      }
+    ]
+  },
+  "leafeon": {
+    "evolution": [
+      {
+        "id": "eevee",
+        "condition": ""
+      },
+      {
+        "id": "leafeon",
+        "condition": "Leaf Stone (Generation 9)"
+      }
+    ],
+    "partners": [
+      {
+        "id": "corviknight",
+        "reason": "Immune to Poison and resists Flying and Bug attacks."
+      },
+      {
+        "id": "arcanine",
+        "reason": "Resists Fire, Ice and Bug attacks."
+      }
+    ]
+  },
+  "glaceon": {
+    "evolution": [
+      {
+        "id": "eevee",
+        "condition": ""
+      },
+      {
+        "id": "glaceon",
+        "condition": "Ice Stone (Generation 9)"
+      }
+    ],
+    "partners": [
+      {
+        "id": "milotic",
+        "reason": "Resists Fire and Steel attacks."
+      },
+      {
+        "id": "mimikyu",
+        "reason": "Immune to Fighting attacks; both need a Steel answer."
+      }
+    ]
   }
 };

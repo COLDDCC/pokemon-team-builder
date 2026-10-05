@@ -119,3 +119,10 @@ Added clearly labeled feedback@example.com placeholder and Cloudflare build-vari
 - New content explains Choice locking, Torch Song and Aqua Step boosts, Mold Breaker not removing type immunities, Assault Vest restrictions and Goodra's overworld-rain evolution condition.
 - `npm run check`: lint/typecheck, 28 tests, static build and 78 SEO route checks pass.
 - All 36 rendered guides pass browser checks at 390px and 1366px for overflow, move cards, section order, local guide links and disclosures. This remains a static guide check; remote artwork delivery, competitive legality and hydrated builder behavior are excluded.
+
+## Guide batch 7 — 2026-10-05
+- Added Magnezone, Milotic, Jolteon, Vaporeon, Leafeon and Glaceon: 42 build guides and 42 computed teammate pages.
+- Rechecked all six earlier batches with the fixed all-guide mechanics tests and browser checks. All 168 starter moves including inherited moves, abilities, items, natures and evolution-chain structure pass.
+- Evolution conditions explicitly scope Magnezone/Leafeon/Glaceon stones to Generation 9 and Milotic's Prism Scale trade to Scarlet/Violet. New cautions explain trapping exceptions, inactive abilities without required status/weather and delayed Wish recovery.
+- `npm run check` passes lint/typecheck, 28 tests, build and 90 static SEO routes.
+- All 42 rendered guides pass 390px and 1366px overflow, move-card, section-order, local-guide-link and disclosure checks. These checks do not validate remote artwork delivery, ranked-format legality or hydrated builder interactions.
