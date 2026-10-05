@@ -50,3 +50,5 @@ PokéAPI sprites: https://github.com/PokeAPI/sprites
 Pinned commit: a3a1432e688ea028f12c51371d5253037cb9f17b
 Repository distribution: CC0 1.0 Universal. Image copyright: The Pokémon Company.
 License: https://github.com/PokeAPI/sprites/blob/a3a1432e688ea028f12c51371d5253037cb9f17b/LICENCE.txt
+
+Type icon artwork: original SVG assets from the official Japanese Pokémon Pokédex, https://zukan.pokemon.co.jp/. © Pokémon. © Nintendo/Creatures Inc./GAME FREAK inc. This tool is unofficial and is not endorsed by these owners.

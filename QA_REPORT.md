@@ -67,3 +67,8 @@ Validation: npm run check passed, six affected desktop/mobile browser tests pass
 Auto mode fills empty slots first, then compares all unlocked full-team slots using the existing deterministic score. Results identify the outgoing teammate, retain reasons and actual delta, and deduplicate incoming species. Favorite locks constrain auto and explicit recommendation selection; manual edits remain available. Locks are session-only and cleared on navigation or removal. Type icons are custom drawings, with selected type names for recognition.
 
 Validation: npm run check passed with 25 unit tests and static SEO/build checks. Affected browser tests: seven passed, one desktop-only case skipped on mobile; includes auto/explicit application, all-locked empty state, unlocking, preserving five favorites, accessibility and 1366×768 first-screen action. Preview replacement preserved locked Pikachu; desktop screenshot reviewed.
+
+## Official type icons and selection effects — 2026-10-05
+Replaced all 18 custom symbols with byte-preserved original SVGs from zukan.pokemon.co.jp. Verified mapping against official masters data. Added one 650ms soft slot glow and one 480ms score-number bounce on actual changes; replay pending picker feedback after the dialog closes. Reduced-motion preference disables both animations. No score logic changes.
+
+Validation: npm run check passed (25 unit tests, lint/typecheck/build/static SEO). Five affected desktop/mobile browser tests passed, one desktop-only check skipped on mobile; final two icon/effect tests passed after picker replay adjustment. All 18 assets load; accessibility and reduced-motion behavior verified. Interactive preview and official icon screenshot inspected.

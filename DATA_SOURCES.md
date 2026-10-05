@@ -15,3 +15,6 @@ The shared PokemonSprite component loads the 475×475 official-artwork PNG image
 Source: https://github.com/PokeAPI/sprites
 License statement: https://github.com/PokeAPI/sprites/blob/a3a1432e688ea028f12c51371d5253037cb9f17b/LICENCE.txt
 The repository states CC0 1.0 Universal and explicitly reserves image copyright to The Pokémon Company. This project claims no ownership or official endorsement of Pokémon imagery. CDN availability is required to display sprites; scoring and selection remain local.
+
+## Official type symbols
+The 18 SVG files in public/type-icons are original assets downloaded from the official Japanese Pokémon Pokédex, https://zukan.pokemon.co.jp/img/icon_type_1.svg through icon_type_18.svg. The mapping was verified against https://zukan.pokemon.co.jp/zukan-api/api/masters/ and the site's CSS/search implementation on 2026-10-05. Order: Normal, Fire, Water, Grass, Electric, Ice, Fighting, Poison, Ground, Flying, Psychic, Bug, Rock, Ghost, Dragon, Dark, Steel, Fairy. SVG bytes are preserved; no competitor or fan redraw is used. Pokémon assets remain the property of their respective owners; attribution is not a license grant or endorsement.

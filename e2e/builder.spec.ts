@@ -292,3 +292,20 @@ test('automatic replacements preserve locked favorites and unlock restores sugge
   await expect(page.getByTestId('team-score')).toHaveText(`${score}/ 100`);
   for (const name of names.slice(0,5)) await expect(page.getByRole('button',{name:`Unlock ${name}`,exact:true})).toHaveAttribute('aria-pressed','true');
 });
+
+test('official type assets load and selection feedback respects reduced motion', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button',{name:'Build team',exact:true}).click();
+  await page.getByRole('button',{name:'Filters',exact:true}).click();
+  const icons=page.locator('.type-icon-filters img');
+  await expect(icons).toHaveCount(18);
+  await expect.poll(() => icons.evaluateAll(images => images.every(image => (image as HTMLImageElement).complete && (image as HTMLImageElement).naturalWidth > 0))).toBe(true);
+  await page.getByRole('searchbox').fill('Pikachu');
+  await page.getByRole('button',{name:'Choose Pikachu',exact:true}).click();
+  await page.getByRole('button',{name:/Done/}).click();
+  await expect(page.getByTestId('slot-0').locator('.selection-flash')).toHaveCount(1);
+  await expect(page.locator('.score-value')).toHaveCSS('animation-name','score-bounce');
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await expect(page.locator('.score-value')).toHaveCSS('animation-name','none');
+  await expect(page.locator('.selection-flash')).toHaveCSS('animation-name','none');
+});

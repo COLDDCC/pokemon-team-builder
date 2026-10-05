@@ -58,4 +58,6 @@ Recommendations default to Auto: incomplete teams fill their first empty slot; f
 
 The small lock on a selected Pokémon protects it from recommendations, including manual recommendation-slot selection. Manual editing and Clear team remain explicit user actions. Locks are local to this editing session; URLs and saved teams continue to store the roster and format only. Removing a member clears its lock; browser navigation/reload resets locks.
 
-Type filter symbols are original simplified SVG drawings, not official Pokémon type logos. They have accessible names, hover titles and a short selected-type label; each has a 44px touch target.
+Type filter symbols use the original SVG assets from the official Japanese Pokémon Pokédex (zukan.pokemon.co.jp). They have accessible names, hover titles and a short selected-type label; each has a 44px touch target.
+
+Selecting or replacing a Pokémon triggers one soft golden flash on that slot. An actual total-score change triggers one short bounce of the score number. Reduced-motion preferences disable both effects; scores update immediately.
