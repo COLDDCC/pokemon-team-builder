@@ -83,3 +83,10 @@ Validation: npm run check passed, including 25 unit tests and 18 static SEO page
 
 ## Feedback placeholder — 2026-10-05
 Added clearly labeled feedback@example.com placeholder and Cloudflare build-variable/redeploy instructions. Placeholder never enables email sending; a real PUBLIC_FEEDBACK_EMAIL activates the mailto draft. npm run check passed with 25 unit tests, typecheck/lint/build and 18 static SEO page checks.
+
+## Guide batch 2 — 2026-10-05
+- Added Corviknight, Gastrodon, Scizor, Azumarill, Gyarados and Clefable guides, plus their computed teammate pages (12 guides total).
+- Reviewed batch 1 again: corrected stale directory copy about moves/items/abilities, clarified Gastrodon's Electric immunity on Pikachu's page, aligned jump navigation with section order, and connected available teammate guides.
+- Verified all 48 starter moves against Generation 9 learnsets, including pre-evolution learning; checked abilities, items, natures and all evolution chains against Pokémon Showdown data.
+- Added permanent guide regression tests to `npm run check`. Each future batch must validate all published guides, including prior batches, not just new pages.
+- Browser checks on rendered build HTML: all 12 guides at 390px and 1366px have no horizontal overflow; four move cards, section order, local teammate guide links and native disclosures pass. Remote image delivery and hydrated builder interactions were not part of this static guide check.
