@@ -5,7 +5,7 @@ import SiteFooter from '../../components/SiteFooter.astro';
 import PokemonSprite from '../../components/PokemonSprite';
 import TypeIcon from '../../components/TypeIcon';
 import { featuredPokemonIds } from '../../config/seo-pages';
-import { pokemonById, normalizeSearch } from '../../data/pokemon';
+import { pokemonById, pokemon, normalizeSearch } from '../../data/pokemon';
 import { pokemonTypes } from '../../data/pokemon/schema';
 const guides = featuredPokemonIds.map(id => pokemonById.get(id)!).sort((a,b) => a.number-b.number);
 ---
@@ -17,7 +17,8 @@ const guides = featuredPokemonIds.map(id => pokemonById.get(id)!).sort((a,b) => 
 <div class="directory-status"><p id="guide-count" role="status" aria-live="polite">{guides.length} guides</p><button id="guide-reset" type="button" hidden>Clear filters</button></div>
 </div>
 <div class="guide-grid" id="guide-grid">{guides.map(p => <a class="guide-card" href={`/pokemon/${p.id}`} data-name={p.name} data-search={normalizeSearch(p.name)} data-number={p.number} data-generation={p.generation} data-types={p.types.join(',')}><PokemonSprite pokemon={p} size="large"/><small>#{String(p.number).padStart(3,'0')}</small><h2>{p.name}</h2><p>{p.types.join(' / ')}</p><span>View guide →</span></a>)}</div>
-<p id="guide-empty" hidden>No published guide matches. Try another name, number, type or generation.</p>
+<div id="guide-empty" hidden><p>No published guide matches. Try another name, number, type or generation.</p><div id="guide-builder-fallback" hidden><img id="fallback-art" width="96" height="96" alt=""/><div><strong id="fallback-name"></strong><p id="fallback-description"></p><a id="fallback-link" href="/">Build a team →</a></div></div></div>
+<script type="application/json" id="directory-species" set:html={JSON.stringify(pokemon.map(p => ({id:p.id,name:p.name,number:p.number,search:normalizeSearch(p.name)})))}/>
 <section class="seo-content"><h2>What these guides cover</h2><p>Each guide explains a casual Generation 9 starter moveset, item, ability and nature, plus type matchups, evolution and teammate ideas. Try the Pokémon in the team builder or follow a teammate’s guide. These examples do not include EV spreads or Tera types and are not ranked-format recommendations.</p></section>
 </main><SiteFooter/></BaseLayout>
 <script>
@@ -31,6 +32,13 @@ const buttons = Array.from(controls.querySelectorAll<HTMLButtonElement>('[data-t
 const count = document.querySelector<HTMLElement>('#guide-count')!;
 const reset = document.querySelector<HTMLButtonElement>('#guide-reset')!;
 const empty = document.querySelector<HTMLElement>('#guide-empty')!;
+const fallback = document.querySelector<HTMLElement>('#guide-builder-fallback')!;
+const fallbackName = document.querySelector<HTMLElement>('#fallback-name')!;
+const fallbackDescription = document.querySelector<HTMLElement>('#fallback-description')!;
+const fallbackLink = document.querySelector<HTMLAnchorElement>('#fallback-link')!;
+const fallbackArt = document.querySelector<HTMLImageElement>('#fallback-art')!;
+const species = JSON.parse(document.querySelector('#directory-species')!.textContent!) as {id:string;name:string;number:number;search:string}[];
+fallbackArt.addEventListener('error',()=>{fallbackArt.hidden=true;});
 let selectedType = '';
 function update() {
  const query = search.value.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');
@@ -47,6 +55,16 @@ function update() {
  count.textContent = `${visible} of ${cards.length} guides${selectedType ? ` · ${selectedType}` : ''}${generation.value ? ` · Gen ${generation.value}` : ''}`;
  reset.hidden = !search.value && !selectedType && !generation.value;
  empty.hidden = visible !== 0;
+ const match = !visible && query ? species.find(p => numeric ? p.number === Number(query) : p.search === query) : undefined;
+ fallback.hidden = !match;
+ if(match) {
+  const published = cards.some(card=>Number(card.dataset.number)===match.number);
+  fallbackName.textContent = match.name;
+  fallbackDescription.textContent = published ? 'This guide is excluded by your filters. You can still start a team.' : 'No guide yet. You can still explore this Pokémon in the team builder.';
+  fallbackLink.href = `/?v=1&team=${match.id}`;
+  const art = `https://cdn.jsdelivr.net/gh/PokeAPI/sprites@a3a1432e688ea028f12c51371d5253037cb9f17b/sprites/pokemon/other/official-artwork/${match.number}.png`;
+  if(fallbackArt.getAttribute('src') !== art) { fallbackArt.hidden=false;fallbackArt.src=art; }
+ }
  const url = new URL(location.href);
  for(const [key,value] of [['q',search.value.trim()],['type',selectedType],['gen',generation.value],['sort',sort.value==='name'?'name':'']]) {
   if(value) url.searchParams.set(key,value); else url.searchParams.delete(key);
@@ -74,5 +92,5 @@ controls.hidden=false;
 restore();
 </script>
 <style>
-.directory-controls{border:1px solid #dce5ed;background:#fff;border-radius:14px;padding:14px}.directory-controls[hidden],.guide-card[hidden],#guide-empty[hidden],#guide-reset[hidden]{display:none}.directory-search{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.directory-search label{font-size:.88rem;font-weight:600}.directory-search input{flex:1;min-width:140px;padding:9px 12px;border:1px solid #9db5db;border-radius:9px;font:inherit}.directory-search select{padding:9px;border:1px solid #9db5db;border-radius:9px;font:inherit;background:white}.directory-types{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}.directory-types button{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1px solid #dce5ed;border-radius:10px;background:white;cursor:pointer}.directory-types button[aria-pressed="true"]{background:#fff4bd;border:2px solid #c68b14}.directory-status{display:flex;align-items:center;justify-content:space-between;gap:10px}.directory-status p{margin:12px 0 0;font-size:.85rem;color:#536477}.directory-status button{margin-top:10px;min-height:44px}.guide-card small{margin-top:7px;color:#536477}.directory-controls :focus-visible{outline:3px solid #1765ad;outline-offset:3px}@media(max-width:600px){.directory-search label:first-child{width:100%}.directory-search input{width:100%;flex-basis:100%}.guide-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.guide-card{padding:12px}.guide-card h2{font-size:1rem}.guide-card p{font-size:.8rem}.directory-search select{flex:1;min-width:0}}
+#guide-builder-fallback{display:flex;align-items:center;gap:16px;padding:16px;border:1px solid #dce5ed;border-radius:14px;background:white}#guide-builder-fallback[hidden]{display:none}#fallback-art[hidden]{display:none}#fallback-art{object-fit:contain}#guide-builder-fallback p{font-size:.9rem} .directory-controls{border:1px solid #dce5ed;background:#fff;border-radius:14px;padding:14px}.directory-controls[hidden],.guide-card[hidden],#guide-empty[hidden],#guide-reset[hidden]{display:none}.directory-search{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.directory-search label{font-size:.88rem;font-weight:600}.directory-search input{flex:1;min-width:140px;padding:9px 12px;border:1px solid #9db5db;border-radius:9px;font:inherit}.directory-search select{padding:9px;border:1px solid #9db5db;border-radius:9px;font:inherit;background:white}.directory-types{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}.directory-types button{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1px solid #dce5ed;border-radius:10px;background:white;cursor:pointer}.directory-types button[aria-pressed="true"]{background:#fff4bd;border:2px solid #c68b14}.directory-status{display:flex;align-items:center;justify-content:space-between;gap:10px}.directory-status p{margin:12px 0 0;font-size:.85rem;color:#536477}.directory-status button{margin-top:10px;min-height:44px}.guide-card small{margin-top:7px;color:#536477}.directory-controls :focus-visible{outline:3px solid #1765ad;outline-offset:3px}@media(max-width:600px){.directory-search label:first-child{width:100%}.directory-search input{width:100%;flex-basis:100%}.guide-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.guide-card{padding:12px}.guide-card h2{font-size:1rem}.guide-card p{font-size:.8rem}.directory-search select{flex:1;min-width:0}}
 </style>

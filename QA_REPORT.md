@@ -213,3 +213,9 @@ Added clearly labeled feedback@example.com placeholder and Cloudflare build-vari
 - Filter changes replace the current history entry rather than creating per-keystroke entries. Filtering continues if browser history updates are unavailable; all 102 links remain in static HTML.
 - `ASTRO_TELEMETRY_DISABLED=1 npm run check` passes lint/typecheck, 28 tests, build and 210 static SEO routes.
 - Production-asset browser checks pass at 390px and 1366px: existing name/number/type/reset/sort checks, combined generation/type selection, URL encoding, reload/back restoration, clearing parameters, invalid-value fallbacks, no overflow and no page errors. All 102 guide links remain present with JavaScript disabled. Browser assets used an intercepted test origin; remote artwork delivery and production network behavior are excluded.
+
+## Directory empty-result builder fallback — 2026-10-05
+- Added an exact-name/number lookup across the existing 1,025-species local dataset for empty guide results. Known species receive a portrait/name and a prefilled builder link; no additional guide pages are generated.
+- Copy distinguishes unpublished guides from published guides excluded by filters. Unknown names produce no species link. Portrait failure hides the image while retaining the named builder action.
+- `ASTRO_TELEMETRY_DISABLED=1 npm run check` passes lint/typecheck, 28 tests, build and 210 static SEO routes.
+- Browser regression passes at 390px and 1366px for prior directory search/filter/sort/URL restoration checks plus unpublished Eevee name and leading-zero number lookup, correct prefilled URL, unknown-name handling and filtered-Pikachu messaging. All 102 static guide links remain present without JavaScript. Remote artwork requests were blocked during the test, so external image delivery is not verified.
