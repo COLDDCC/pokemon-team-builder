@@ -178,3 +178,10 @@ Added clearly labeled feedback@example.com placeholder and Cloudflare build-vari
 - Corrected a draft Poliwrath partner statement: Empoleon resists Flying, Psychic and Fairy but takes neutral Grass damage.
 - `ASTRO_TELEMETRY_DISABLED=1 npm run check` passes lint/typecheck, 28 tests, build and 174 static SEO routes. Rebuilt with telemetry disabled after prose correction.
 - All 84 rendered guides pass 390px and 1366px checks for overflow, four move cards, section order, local guide links and disclosures. Remote artwork delivery, ranked-format legality and hydrated builder interactions are excluded from this static check.
+
+## Guide batch 15 — 2026-10-05
+- Added Gallade, Conkeldurr, Luxray, Magmortar, Galvantula and Reuniclus: 90 build guides and 90 computed teammate pages. Updated README count. Alakazam was excluded from this batch because the data has no Gen 9 move sources for it.
+- All 84 earlier guides were included in mechanics and rendered-page regression checks. Tests cover all 360 moves including pre-evolution learning, abilities, items, natures and evolution-chain structure.
+- New notes cover male Kirlia's Dawn Stone condition, Mach Punch inherited learning, Guts retaining burn chip damage, Volt Switch being blocked by immunity, Sticky Web's grounded-target requirement, Compound Eyes not guaranteeing accuracy and Magic Guard avoiding Life Orb recoil.
+- `ASTRO_TELEMETRY_DISABLED=1 npm run check` passes lint/typecheck, 28 tests, build and 186 static SEO routes.
+- All 90 rendered guides pass 390px and 1366px checks for overflow, four move cards, section order, local guide links and disclosures. Remote artwork delivery, ranked-format legality and hydrated builder interactions are excluded from this static check.

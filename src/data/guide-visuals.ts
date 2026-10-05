@@ -2062,5 +2062,157 @@ export const guideVisuals: Record<string, { evolution: { id: string; condition: 
         "reason": "Resists Dark and adds stronger special attacks plus Fairy coverage."
       }
     ]
+  },
+  "gallade": {
+    "evolution": [
+      {
+        "id": "ralts",
+        "condition": ""
+      },
+      {
+        "id": "kirlia",
+        "condition": "Level 20"
+      },
+      {
+        "id": "gallade",
+        "condition": "Dawn Stone on male Kirlia"
+      }
+    ],
+    "partners": [
+      {
+        "id": "empoleon",
+        "reason": "Resists Flying and Fairy and adds special damage with recovery."
+      },
+      {
+        "id": "umbreon",
+        "reason": "Resists Ghost and offers delayed Wish support for a Life Orb attacker."
+      }
+    ]
+  },
+  "conkeldurr": {
+    "evolution": [
+      {
+        "id": "timburr",
+        "condition": ""
+      },
+      {
+        "id": "gurdurr",
+        "condition": "Level 25"
+      },
+      {
+        "id": "conkeldurr",
+        "condition": "Trade"
+      }
+    ],
+    "partners": [
+      {
+        "id": "empoleon",
+        "reason": "Resists Flying, Psychic and Fairy and supplies special damage."
+      },
+      {
+        "id": "gengar",
+        "reason": "Adds fast special attacks against targets immune to Fighting and Normal."
+      }
+    ]
+  },
+  "luxray": {
+    "evolution": [
+      {
+        "id": "shinx",
+        "condition": ""
+      },
+      {
+        "id": "luxio",
+        "condition": "Level 15"
+      },
+      {
+        "id": "luxray",
+        "condition": "Level 30"
+      }
+    ],
+    "partners": [
+      {
+        "id": "corviknight",
+        "reason": "Ground immunity and U-turn provide complementary switching options."
+      },
+      {
+        "id": "milotic",
+        "reason": "Adds special damage and direct recovery alongside a recoil attacker."
+      }
+    ]
+  },
+  "magmortar": {
+    "evolution": [
+      {
+        "id": "magby",
+        "condition": ""
+      },
+      {
+        "id": "magmar",
+        "condition": "Level 30"
+      },
+      {
+        "id": "magmortar",
+        "condition": "Trade holding Magmarizer"
+      }
+    ],
+    "partners": [
+      {
+        "id": "gyarados",
+        "reason": "Ground immunity and Water resistance help cover weaknesses."
+      },
+      {
+        "id": "gastrodon",
+        "reason": "Resists Rock and provides Water immunity through Storm Drain."
+      }
+    ]
+  },
+  "galvantula": {
+    "evolution": [
+      {
+        "id": "joltik",
+        "condition": ""
+      },
+      {
+        "id": "galvantula",
+        "condition": "Level 36"
+      }
+    ],
+    "partners": [
+      {
+        "id": "milotic",
+        "reason": "Resists Fire and adds recovery plus Water attacks against Rock targets."
+      },
+      {
+        "id": "gallade",
+        "reason": "Adds physical damage and can benefit from slower grounded opponents."
+      }
+    ]
+  },
+  "reuniclus": {
+    "evolution": [
+      {
+        "id": "solosis",
+        "condition": ""
+      },
+      {
+        "id": "duosion",
+        "condition": "Level 32"
+      },
+      {
+        "id": "reuniclus",
+        "condition": "Level 41"
+      }
+    ],
+    "partners": [
+      {
+        "id": "umbreon",
+        "reason": "Resists Ghost and Dark and provides another defensive support option."
+      },
+      {
+        "id": "scizor",
+        "reason": "Resists Bug and adds physical damage with priority."
+      }
+    ]
   }
 };
