@@ -1321,7 +1321,7 @@ export const guideVisuals: Record<string, { evolution: { id: string; condition: 
     "partners": [
       {
         "id": "corviknight",
-        "reason": "Resists Ice and Flying and can pivot an attacker into play."
+        "reason": "Resists Flying and can pivot an attacker into play; Ice damage is neutral."
       },
       {
         "id": "milotic",
@@ -1768,6 +1768,146 @@ export const guideVisuals: Record<string, { evolution: { id: string; condition: 
       {
         "id": "milotic",
         "reason": "Adds special damage and recovery alongside this physical attacker."
+      }
+    ]
+  },
+  "talonflame": {
+    "evolution": [
+      {
+        "id": "fletchling",
+        "condition": ""
+      },
+      {
+        "id": "fletchinder",
+        "condition": "Level 17"
+      },
+      {
+        "id": "talonflame",
+        "condition": "Level 35"
+      }
+    ],
+    "partners": [
+      {
+        "id": "gastrodon",
+        "reason": "Electric immunity and Rock resistance cover two weaknesses."
+      },
+      {
+        "id": "milotic",
+        "reason": "Resists Water and supplies recovery plus special damage."
+      }
+    ]
+  },
+  "staraptor": {
+    "evolution": [
+      {
+        "id": "starly",
+        "condition": ""
+      },
+      {
+        "id": "staravia",
+        "condition": "Level 14"
+      },
+      {
+        "id": "staraptor",
+        "condition": "Level 34"
+      }
+    ],
+    "partners": [
+      {
+        "id": "gastrodon",
+        "reason": "Electric immunity and Rock resistance help create switching options."
+      },
+      {
+        "id": "empoleon",
+        "reason": "Resists Ice and Rock and adds special damage with recovery."
+      }
+    ]
+  },
+  "heracross": {
+    "evolution": [
+      {
+        "id": "heracross",
+        "condition": ""
+      }
+    ],
+    "partners": [
+      {
+        "id": "empoleon",
+        "reason": "Resists Flying, Psychic and Fairy and adds special damage."
+      },
+      {
+        "id": "milotic",
+        "reason": "Resists Fire and supplies recovery alongside a worn-down attacker."
+      }
+    ]
+  },
+  "weavile": {
+    "evolution": [
+      {
+        "id": "sneasel",
+        "condition": ""
+      },
+      {
+        "id": "weavile",
+        "condition": "Level up at night holding Razor Claw"
+      }
+    ],
+    "partners": [
+      {
+        "id": "gyarados",
+        "reason": "Resists Fighting, Fire and Steel and provides Ground immunity."
+      },
+      {
+        "id": "clefable",
+        "reason": "Resists Fighting and adds a bulkier special attacking option."
+      }
+    ]
+  },
+  "mamoswine": {
+    "evolution": [
+      {
+        "id": "swinub",
+        "condition": ""
+      },
+      {
+        "id": "piloswine",
+        "condition": "Level 33"
+      },
+      {
+        "id": "mamoswine",
+        "condition": "Level up knowing Ancient Power"
+      }
+    ],
+    "partners": [
+      {
+        "id": "gyarados",
+        "reason": "Resists Water, Fighting and Steel and is immune to Ground."
+      },
+      {
+        "id": "corviknight",
+        "reason": "Resists Grass and Steel and provides Ground immunity; Fighting damage is neutral."
+      }
+    ]
+  },
+  "donphan": {
+    "evolution": [
+      {
+        "id": "phanpy",
+        "condition": ""
+      },
+      {
+        "id": "donphan",
+        "condition": "Level 25"
+      }
+    ],
+    "partners": [
+      {
+        "id": "corviknight",
+        "reason": "Resists Grass and can pivot another teammate into play; Ice damage is neutral."
+      },
+      {
+        "id": "milotic",
+        "reason": "Resists Water and Ice and adds special damage with recovery."
       }
     ]
   }

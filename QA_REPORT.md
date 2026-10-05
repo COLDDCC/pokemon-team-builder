@@ -162,3 +162,11 @@ Added clearly labeled feedback@example.com placeholder and Cloudflare build-vari
 - Manual review corrected previous Tyranitar and Empoleon partner descriptions: Corviknight takes neutral Fighting damage, not resisted damage. Corrected the same draft claim in Garganacl's new partner card.
 - `npm run check` passes lint/typecheck, 28 tests, build and 150 static SEO routes. Rebuilt after the prose corrections.
 - All 72 rendered guides pass 390px and 1366px checks for overflow, four move cards, section order, local guide links and disclosures. This static check excludes remote artwork delivery, ranked-format legality and hydrated builder interactions.
+
+## Guide batch 13 — 2026-10-05
+- Added Talonflame, Staraptor, Heracross, Weavile, Mamoswine and Donphan: 78 build guides and 78 computed teammate pages. Updated README count. Togekiss was excluded because the mechanics data has no Gen 9 move sources for it.
+- All 72 prior guides were included in mechanics and rendered-page regression checks. Tests cover all 312 moves including pre-evolution learning, abilities, items, natures and evolution-chain structure.
+- New cautions cover recoil, Guts retaining burn chip damage, Ice Spinner removing terrain, Thick Fat limitations and Ghost types blocking Rapid Spin. Weavile's night/Razor Claw and Mamoswine's Ancient Power conditions are explicit.
+- Corrected the older Torterra partner card and new Donphan draft: Corviknight takes neutral Ice damage rather than resisting it.
+- `npm run check` passes lint/typecheck, 28 tests, build and 162 static SEO routes. Rebuild completion after prose corrections is confirmed by its log. Automatic approval rejected a later process-output poll due to Astro telemetry; no telemetry workaround was used. Browser checks were rerun independently against existing generated HTML.
+- All 78 rendered guides pass 390px and 1366px checks for overflow, four move cards, section order, local guide links and disclosures. Remote artwork delivery, ranked-format legality and hydrated builder interactions are excluded from this static check.
