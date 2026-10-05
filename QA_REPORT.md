@@ -97,3 +97,11 @@ Added clearly labeled feedback@example.com placeholder and Cloudflare build-vari
 - Verified all 72 moves, abilities, items and natures, plus evolution chains, using Generation 9 data including inherited moves.
 - `npm run check`: lint, typecheck, 28 unit tests, static build and 42 SEO routes pass.
 - Browser checks for all 18 rendered guides at 390px and 1366px: no horizontal overflow, four move cards, teammate section directly after loadout, guide links resolve and disclosures open. Remote image delivery and hydrated builder behavior remain outside this static check.
+
+## Guide batch 4 — 2026-10-05
+- Added Blastoise, Venusaur, Tyranitar, Gardevoir, Umbreon and Sylveon, taking the directory to 24 build guides and 24 computed teammate pages.
+- All three earlier batches were included in mechanics tests and browser regression checks. All 96 starter moves (including inherited moves), abilities/items/natures and evolution-chain structure passed the existing tests.
+- Evolution explanations distinguish Umbreon's nighttime friendship requirement from Sylveon's Generation 9 friendship plus Fairy-move condition. Starter cautions include sleep restrictions and sand damage to teammates.
+- Directory description now derives its guide count from the published configuration rather than a manually maintained number.
+- All 24 rendered guides passed 390px and 1366px overflow, section-order, local-guide-link and disclosure checks. Lint/typecheck, 28 tests, build and 54 SEO route checks passed before the description change; the final description change also rebuilt successfully.
+- These checks cover rendered guide structure and mechanics references, not ranked-format legality, win rates, remote image delivery or hydrated builder interactions.

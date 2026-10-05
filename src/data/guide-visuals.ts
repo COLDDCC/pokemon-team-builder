@@ -442,5 +442,153 @@ export const guideVisuals: Record<string, { evolution: { id: string; condition: 
         "reason": "Immune to Electric attacks; takes neutral Grass damage."
       }
     ]
+  },
+  "blastoise": {
+    "evolution": [
+      {
+        "id": "squirtle",
+        "condition": ""
+      },
+      {
+        "id": "wartortle",
+        "condition": "Level 16"
+      },
+      {
+        "id": "blastoise",
+        "condition": "Level 36"
+      }
+    ],
+    "partners": [
+      {
+        "id": "garchomp",
+        "reason": "Immune to Electric attacks; Blastoise resists Ice."
+      },
+      {
+        "id": "scizor",
+        "reason": "Resists Grass; Blastoise resists Scizor\u2019s Fire weakness."
+      }
+    ]
+  },
+  "venusaur": {
+    "evolution": [
+      {
+        "id": "bulbasaur",
+        "condition": ""
+      },
+      {
+        "id": "ivysaur",
+        "condition": "Level 16"
+      },
+      {
+        "id": "venusaur",
+        "condition": "Level 32"
+      }
+    ],
+    "partners": [
+      {
+        "id": "corviknight",
+        "reason": "Resists Flying and Psychic attacks; both need a Fire answer."
+      },
+      {
+        "id": "gastrodon",
+        "reason": "Resists Fire; Venusaur resists its Grass weakness."
+      }
+    ]
+  },
+  "tyranitar": {
+    "evolution": [
+      {
+        "id": "larvitar",
+        "condition": ""
+      },
+      {
+        "id": "pupitar",
+        "condition": "Level 30"
+      },
+      {
+        "id": "tyranitar",
+        "condition": "Level 55"
+      }
+    ],
+    "partners": [
+      {
+        "id": "corviknight",
+        "reason": "Resists Fighting and avoids sand damage through Steel typing."
+      },
+      {
+        "id": "clefable",
+        "reason": "Resists Fighting; Magic Guard prevents sand damage."
+      }
+    ]
+  },
+  "gardevoir": {
+    "evolution": [
+      {
+        "id": "ralts",
+        "condition": ""
+      },
+      {
+        "id": "kirlia",
+        "condition": "Level 20"
+      },
+      {
+        "id": "gardevoir",
+        "condition": "Level 30"
+      }
+    ],
+    "partners": [
+      {
+        "id": "scizor",
+        "reason": "Immune to Poison and resists Steel attacks."
+      },
+      {
+        "id": "umbreon",
+        "reason": "Resists Ghost attacks; Gardevoir resists Fighting."
+      }
+    ]
+  },
+  "umbreon": {
+    "evolution": [
+      {
+        "id": "eevee",
+        "condition": ""
+      },
+      {
+        "id": "umbreon",
+        "condition": "High friendship + level up at night; avoid meeting Sylveon\u2019s conditions"
+      }
+    ],
+    "partners": [
+      {
+        "id": "sylveon",
+        "reason": "Resists Fighting and Bug attacks."
+      },
+      {
+        "id": "scizor",
+        "reason": "Resists Fairy and Bug; takes neutral Fighting damage."
+      }
+    ]
+  },
+  "sylveon": {
+    "evolution": [
+      {
+        "id": "eevee",
+        "condition": ""
+      },
+      {
+        "id": "sylveon",
+        "condition": "High friendship + level up while knowing a Fairy move (Generation 9)"
+      }
+    ],
+    "partners": [
+      {
+        "id": "corviknight",
+        "reason": "Immune to Poison and takes neutral Steel damage."
+      },
+      {
+        "id": "garchomp",
+        "reason": "Resists Poison and can pressure Steel types with Earthquake."
+      }
+    ]
   }
 };
