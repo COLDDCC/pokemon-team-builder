@@ -1910,5 +1910,157 @@ export const guideVisuals: Record<string, { evolution: { id: string; condition: 
         "reason": "Resists Water and Ice and adds special damage with recovery."
       }
     ]
+  },
+  "blissey": {
+    "evolution": [
+      {
+        "id": "happiny",
+        "condition": ""
+      },
+      {
+        "id": "chansey",
+        "condition": "Level up in daytime holding Oval Stone"
+      },
+      {
+        "id": "blissey",
+        "condition": "High friendship + level up"
+      }
+    ],
+    "partners": [
+      {
+        "id": "corviknight",
+        "reason": "Adds physical defense and U-turn support; Fighting damage is neutral."
+      },
+      {
+        "id": "gengar",
+        "reason": "Immune to Fighting and adds faster special attacking pressure."
+      }
+    ]
+  },
+  "slowking": {
+    "evolution": [
+      {
+        "id": "slowpoke",
+        "condition": ""
+      },
+      {
+        "id": "slowking",
+        "condition": "Trade holding King's Rock"
+      }
+    ],
+    "partners": [
+      {
+        "id": "umbreon",
+        "reason": "Resists Ghost and Dark and gives a different defensive support option."
+      },
+      {
+        "id": "garchomp",
+        "reason": "Electric immunity and physical damage complement this special set."
+      }
+    ]
+  },
+  "poliwrath": {
+    "evolution": [
+      {
+        "id": "poliwag",
+        "condition": ""
+      },
+      {
+        "id": "poliwhirl",
+        "condition": "Level 25"
+      },
+      {
+        "id": "poliwrath",
+        "condition": "Water Stone"
+      }
+    ],
+    "partners": [
+      {
+        "id": "empoleon",
+        "reason": "Resists Flying, Psychic and Fairy and supplies special damage; Grass damage is neutral."
+      },
+      {
+        "id": "garchomp",
+        "reason": "Electric immunity and faster physical pressure support the team."
+      }
+    ]
+  },
+  "kingdra": {
+    "evolution": [
+      {
+        "id": "horsea",
+        "condition": ""
+      },
+      {
+        "id": "seadra",
+        "condition": "Level 32"
+      },
+      {
+        "id": "kingdra",
+        "condition": "Trade holding Dragon Scale"
+      }
+    ],
+    "partners": [
+      {
+        "id": "scizor",
+        "reason": "Resists Dragon and Fairy and adds physical priority."
+      },
+      {
+        "id": "empoleon",
+        "reason": "Resists Dragon and Fairy and provides a recoverable defensive option."
+      }
+    ]
+  },
+  "porygonz": {
+    "evolution": [
+      {
+        "id": "porygon",
+        "condition": ""
+      },
+      {
+        "id": "porygon2",
+        "condition": "Trade holding Up-Grade"
+      },
+      {
+        "id": "porygonz",
+        "condition": "Trade holding Dubious Disc"
+      }
+    ],
+    "partners": [
+      {
+        "id": "gengar",
+        "reason": "Immune to Fighting and can pressure targets that ignore Normal attacks."
+      },
+      {
+        "id": "gyarados",
+        "reason": "Resists Fighting and adds physical damage with Intimidate support."
+      }
+    ]
+  },
+  "dusknoir": {
+    "evolution": [
+      {
+        "id": "duskull",
+        "condition": ""
+      },
+      {
+        "id": "dusclops",
+        "condition": "Level 37"
+      },
+      {
+        "id": "dusknoir",
+        "condition": "Trade holding Reaper Cloth"
+      }
+    ],
+    "partners": [
+      {
+        "id": "umbreon",
+        "reason": "Resists Ghost and Dark and provides delayed Wish recovery."
+      },
+      {
+        "id": "primarina",
+        "reason": "Resists Dark and adds stronger special attacks plus Fairy coverage."
+      }
+    ]
   }
 };

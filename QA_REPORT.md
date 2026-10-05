@@ -170,3 +170,11 @@ Added clearly labeled feedback@example.com placeholder and Cloudflare build-vari
 - Corrected the older Torterra partner card and new Donphan draft: Corviknight takes neutral Ice damage rather than resisting it.
 - `npm run check` passes lint/typecheck, 28 tests, build and 162 static SEO routes. Rebuild completion after prose corrections is confirmed by its log. Automatic approval rejected a later process-output poll due to Astro telemetry; no telemetry workaround was used. Browser checks were rerun independently against existing generated HTML.
 - All 78 rendered guides pass 390px and 1366px checks for overflow, four move cards, section order, local guide links and disclosures. Remote artwork delivery, ranked-format legality and hydrated builder interactions are excluded from this static check.
+
+## Guide batch 14 — 2026-10-05
+- Added Blissey, Slowking, Poliwrath, Kingdra, Porygon-Z and Dusknoir: 84 build guides and 84 computed teammate pages. README count updated.
+- All 78 earlier guides were included in mechanics and rendered-page regression checks. Tests cover all 336 moves including pre-evolution learning, abilities, items, natures and evolution-chain structure.
+- New notes cover Natural Cure, delayed versus direct recovery, Water Absorb, self-set rain's team effects, Adaptability limitations and Pain Split's dependence on current HP. Evolution cards identify held trade items and Happiny's daytime/Oval Stone condition.
+- Corrected a draft Poliwrath partner statement: Empoleon resists Flying, Psychic and Fairy but takes neutral Grass damage.
+- `ASTRO_TELEMETRY_DISABLED=1 npm run check` passes lint/typecheck, 28 tests, build and 174 static SEO routes. Rebuilt with telemetry disabled after prose correction.
+- All 84 rendered guides pass 390px and 1366px checks for overflow, four move cards, section order, local guide links and disclosures. Remote artwork delivery, ranked-format legality and hydrated builder interactions are excluded from this static check.
