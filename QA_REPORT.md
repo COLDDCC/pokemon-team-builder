@@ -90,3 +90,10 @@ Added clearly labeled feedback@example.com placeholder and Cloudflare build-vari
 - Verified all 48 starter moves against Generation 9 learnsets, including pre-evolution learning; checked abilities, items, natures and all evolution chains against Pokémon Showdown data.
 - Added permanent guide regression tests to `npm run check`. Each future batch must validate all published guides, including prior batches, not just new pages.
 - Browser checks on rendered build HTML: all 12 guides at 390px and 1366px have no horizontal overflow; four move cards, section order, local teammate guide links and native disclosures pass. Remote image delivery and hydrated builder interactions were not part of this static guide check.
+
+## Guide batch 3 — 2026-10-05
+- Added Raichu, Arcanine, Flygon, Salamence, Primarina and Slowbro: 18 build guides and 18 computed teammate pages total.
+- Rechecked both earlier batches through all-guide mechanics tests and rendered-page browser checks. Existing alternative choices now link to their published guides, as well as keeping their builder action.
+- Verified all 72 moves, abilities, items and natures, plus evolution chains, using Generation 9 data including inherited moves.
+- `npm run check`: lint, typecheck, 28 unit tests, static build and 42 SEO routes pass.
+- Browser checks for all 18 rendered guides at 390px and 1366px: no horizontal overflow, four move cards, teammate section directly after loadout, guide links resolve and disclosures open. Remote image delivery and hydrated builder behavior remain outside this static check.

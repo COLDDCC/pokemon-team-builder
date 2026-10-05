@@ -294,5 +294,153 @@ export const guideVisuals: Record<string, { evolution: { id: string; condition: 
         "reason": "Resists Poison and can pressure Steel types with Ground attacks."
       }
     ]
+  },
+  "raichu": {
+    "evolution": [
+      {
+        "id": "pichu",
+        "condition": ""
+      },
+      {
+        "id": "pikachu",
+        "condition": "High friendship + level up"
+      },
+      {
+        "id": "raichu",
+        "condition": "Thunder Stone"
+      }
+    ],
+    "partners": [
+      {
+        "id": "corviknight",
+        "reason": "Immune to Ground attacks; Raichu covers its Electric weakness."
+      },
+      {
+        "id": "gastrodon",
+        "reason": "Adds bulk and resists Rock and Fire attacks."
+      }
+    ]
+  },
+  "arcanine": {
+    "evolution": [
+      {
+        "id": "growlithe",
+        "condition": ""
+      },
+      {
+        "id": "arcanine",
+        "condition": "Fire Stone"
+      }
+    ],
+    "partners": [
+      {
+        "id": "gyarados",
+        "reason": "Immune to Ground and resists Water attacks."
+      },
+      {
+        "id": "gastrodon",
+        "reason": "Resists Rock and has Water immunity with Storm Drain."
+      }
+    ]
+  },
+  "flygon": {
+    "evolution": [
+      {
+        "id": "trapinch",
+        "condition": ""
+      },
+      {
+        "id": "vibrava",
+        "condition": "Level 35"
+      },
+      {
+        "id": "flygon",
+        "condition": "Level 45"
+      }
+    ],
+    "partners": [
+      {
+        "id": "scizor",
+        "reason": "Resists Ice, Dragon and Fairy attacks."
+      },
+      {
+        "id": "primarina",
+        "reason": "Resists Ice and is immune to Dragon attacks."
+      }
+    ]
+  },
+  "salamence": {
+    "evolution": [
+      {
+        "id": "bagon",
+        "condition": ""
+      },
+      {
+        "id": "shelgon",
+        "condition": "Level 30"
+      },
+      {
+        "id": "salamence",
+        "condition": "Level 50"
+      }
+    ],
+    "partners": [
+      {
+        "id": "scizor",
+        "reason": "Resists Ice, Dragon and Fairy attacks."
+      },
+      {
+        "id": "clefable",
+        "reason": "Immune to Dragon attacks; adds a special attacker."
+      }
+    ]
+  },
+  "primarina": {
+    "evolution": [
+      {
+        "id": "popplio",
+        "condition": ""
+      },
+      {
+        "id": "brionne",
+        "condition": "Level 17"
+      },
+      {
+        "id": "primarina",
+        "condition": "Level 34"
+      }
+    ],
+    "partners": [
+      {
+        "id": "garchomp",
+        "reason": "Immune to Electric and resists Poison attacks."
+      },
+      {
+        "id": "corviknight",
+        "reason": "Immune to Poison and resists Grass; both need an Electric answer."
+      }
+    ]
+  },
+  "slowbro": {
+    "evolution": [
+      {
+        "id": "slowpoke",
+        "condition": ""
+      },
+      {
+        "id": "slowbro",
+        "condition": "Level 37"
+      }
+    ],
+    "partners": [
+      {
+        "id": "clefable",
+        "reason": "Resists Dark and Bug attacks."
+      },
+      {
+        "id": "garchomp",
+        "reason": "Immune to Electric attacks; takes neutral Grass damage."
+      }
+    ]
   }
 };
