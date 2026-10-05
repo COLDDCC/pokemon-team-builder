@@ -465,7 +465,7 @@ export const guideVisuals: Record<string, { evolution: { id: string; condition: 
       },
       {
         "id": "scizor",
-        "reason": "Resists Grass; Blastoise resists Scizor\u2019s Fire weakness."
+        "reason": "Resists Grass; Blastoise resists Scizor’s Fire weakness."
       }
     ]
   },
@@ -555,7 +555,7 @@ export const guideVisuals: Record<string, { evolution: { id: string; condition: 
       },
       {
         "id": "umbreon",
-        "condition": "High friendship + level up at night; avoid meeting Sylveon\u2019s conditions"
+        "condition": "High friendship + level up at night; avoid meeting Sylveon’s conditions"
       }
     ],
     "partners": [
@@ -959,7 +959,7 @@ export const guideVisuals: Record<string, { evolution: { id: string; condition: 
       },
       {
         "id": "scizor",
-        "reason": "Resists Grass; Vaporeon resists Scizor\u2019s Fire weakness."
+        "reason": "Resists Grass; Vaporeon resists Scizor’s Fire weakness."
       }
     ]
   },
@@ -1037,7 +1037,7 @@ export const guideVisuals: Record<string, { evolution: { id: string; condition: 
       },
       {
         "id": "espeon",
-        "condition": "High friendship + level up during daytime; avoid meeting Sylveon\u2019s conditions"
+        "condition": "High friendship + level up during daytime; avoid meeting Sylveon’s conditions"
       }
     ],
     "partners": [
@@ -1144,6 +1144,162 @@ export const guideVisuals: Record<string, { evolution: { id: string; condition: 
       {
         "id": "gastrodon",
         "reason": "Resists Rock and has Water immunity with Storm Drain."
+      }
+    ]
+  },
+  "meganium": {
+    "evolution": [
+      {
+        "id": "chikorita",
+        "condition": ""
+      },
+      {
+        "id": "bayleef",
+        "condition": "Level 16"
+      },
+      {
+        "id": "meganium",
+        "condition": "Level 32"
+      }
+    ],
+    "partners": [
+      {
+        "id": "scizor",
+        "reason": "Resists Ice, Flying, Poison and Bug; can use screen turns to set up."
+      },
+      {
+        "id": "gyarados",
+        "reason": "Resists Fire and Bug and can use Dragon Dance behind screens."
+      }
+    ]
+  },
+  "typhlosion": {
+    "evolution": [
+      {
+        "id": "cyndaquil",
+        "condition": ""
+      },
+      {
+        "id": "quilava",
+        "condition": "Level 14"
+      },
+      {
+        "id": "typhlosion",
+        "condition": "Level 36"
+      }
+    ],
+    "partners": [
+      {
+        "id": "tentacruel",
+        "reason": "Rapid Spin can remove hazards to help preserve Eruption power."
+      },
+      {
+        "id": "gastrodon",
+        "reason": "Resists Rock and provides Water immunity through Storm Drain."
+      }
+    ]
+  },
+  "feraligatr": {
+    "evolution": [
+      {
+        "id": "totodile",
+        "condition": ""
+      },
+      {
+        "id": "croconaw",
+        "condition": "Level 18"
+      },
+      {
+        "id": "feraligatr",
+        "condition": "Level 30"
+      }
+    ],
+    "partners": [
+      {
+        "id": "garchomp",
+        "reason": "Electric immunity and Stealth Rock support complement physical setup."
+      },
+      {
+        "id": "scizor",
+        "reason": "Resists Grass and offers priority when Dragon Dance is unsafe."
+      }
+    ]
+  },
+  "sceptile": {
+    "evolution": [
+      {
+        "id": "treecko",
+        "condition": ""
+      },
+      {
+        "id": "grovyle",
+        "condition": "Level 16"
+      },
+      {
+        "id": "sceptile",
+        "condition": "Level 36"
+      }
+    ],
+    "partners": [
+      {
+        "id": "corviknight",
+        "reason": "Resists several Grass weaknesses and can pivot with U-turn."
+      },
+      {
+        "id": "milotic",
+        "reason": "Resists Fire and Ice and provides recovery alongside a frailer attacker."
+      }
+    ]
+  },
+  "blaziken": {
+    "evolution": [
+      {
+        "id": "torchic",
+        "condition": ""
+      },
+      {
+        "id": "combusken",
+        "condition": "Level 16"
+      },
+      {
+        "id": "blaziken",
+        "condition": "Level 36"
+      }
+    ],
+    "partners": [
+      {
+        "id": "gyarados",
+        "reason": "Immune to Ground and resists Water and Fighting attacks."
+      },
+      {
+        "id": "umbreon",
+        "reason": "Immune to Psychic and can offer delayed recovery through Wish."
+      }
+    ]
+  },
+  "swampert": {
+    "evolution": [
+      {
+        "id": "mudkip",
+        "condition": ""
+      },
+      {
+        "id": "marshtomp",
+        "condition": "Level 16"
+      },
+      {
+        "id": "swampert",
+        "condition": "Level 36"
+      }
+    ],
+    "partners": [
+      {
+        "id": "corviknight",
+        "reason": "Resists Grass and provides Ground immunity plus U-turn support."
+      },
+      {
+        "id": "chandelure",
+        "reason": "Resists Grass and adds special damage against Steel opponents."
       }
     ]
   }

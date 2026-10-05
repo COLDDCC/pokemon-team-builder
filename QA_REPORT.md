@@ -133,3 +133,10 @@ Added clearly labeled feedback@example.com placeholder and Cloudflare build-vari
 - Breloom's guide explicitly warns to learn Spore as Shroomish before evolution; Espeon notes daytime friendship and Sylveon condition priority. New utility notes cover Magic Bounce limitations, Ghost types blocking Rapid Spin and item-exchange limitations.
 - `npm run check`: lint/typecheck, 28 tests, build and 102 static SEO routes pass.
 - All 48 rendered guides pass 390px and 1366px overflow, move-card, section-order, local-guide-link and disclosure checks. Remote artwork delivery, ranked-format legality and hydrated builder interactions remain outside this static guide check.
+
+## Guide batch 9 — 2026-10-05
+- Added Meganium, Typhlosion, Feraligatr, Sceptile, Blaziken and Swampert: 54 build guides and 54 computed teammate pages. Updated outdated six-guide counts in README.
+- Rechecked every earlier batch with all-guide mechanics tests, covering 216 moves including pre-evolution learning, abilities, items, natures and evolution-chain structure.
+- New cautions explain screen limitations, HP-dependent Eruption, Sheer Force removing secondary effects, Leaf Storm stat drops, setup risks and Swampert's four-times Grass weakness. Standard forms are distinguished from Hisuian and Mega forms where relevant.
+- `npm run check` passes lint/typecheck, 28 tests, build and 114 static SEO routes.
+- All 54 rendered guides pass 390px and 1366px overflow, move-card, section-order, local-guide-link and disclosure checks. Remote artwork delivery, ranked-format legality and hydrated builder interactions remain outside this static guide check.

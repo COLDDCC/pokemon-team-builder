@@ -30,7 +30,7 @@ The local dataset is derived from MIT-licensed @pkmn/dex; see DATA_SOURCES.md an
 Run `npx playwright install chromium`, then `npm run test:e2e`. The suite builds and previews production output and checks real builder interactions at desktop and mobile sizes.
 
 ## SEO scope
-The build includes two focused calculator routes, one casual format route and six curated Pokémon analysis/teammate pairs. No thousands of thin pages are generated. Page templates prefill the relevant Pokémon; an explicit team query overrides this default. Canonical URLs omit team parameters. The sitemap lists static indexable routes.
+The build includes two focused calculator routes, one casual format route and 54 curated Pokémon analysis/teammate pairs. No thousands of thin pages are generated. Page templates prefill the relevant Pokémon; an explicit team query overrides this default. Canonical URLs omit team parameters. The sitemap lists static indexable routes.
 
 ## Release checks and deployment
 See QA_REPORT.md for the local verification results and remaining launch configuration. See DEPLOYMENT.md for Cloudflare Pages or Vercel import settings. A deployment has not been performed.
@@ -63,4 +63,4 @@ Type filter symbols use the original SVG assets from the official Japanese Poké
 Selecting or replacing a Pokémon triggers one soft golden flash on that slot. An actual total-score change triggers one short bounce of the score number. Reduced-motion preferences disable both effects; scores update immediately.
 
 ## Guides, feedback and disclaimer
-/pokemon lists the six curated species guides with portrait links; each guide keeps the prefilled builder, stats and type analysis. The shared footer includes feedback, attribution and score limitations. /feedback lets users prepare, copy or download a report without sending it. Configure PUBLIC_FEEDBACK_EMAIL to enable an email draft action; the user must send the draft from their mail app. No feedback is collected by a backend, and the private GitHub repository is not exposed as a public reporting destination.
+/pokemon lists the curated species guides with portrait links; each guide keeps the prefilled builder, stats and type analysis. The shared footer includes feedback, attribution and score limitations. /feedback lets users prepare, copy or download a report without sending it. Configure PUBLIC_FEEDBACK_EMAIL to enable an email draft action; the user must send the draft from their mail app. No feedback is collected by a backend, and the private GitHub repository is not exposed as a public reporting destination.
