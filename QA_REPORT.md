@@ -206,3 +206,10 @@ Added clearly labeled feedback@example.com placeholder and Cloudflare build-vari
 - `ASTRO_TELEMETRY_DISABLED=1 npm run check` passes lint/typecheck, 28 tests, build and 210 static SEO routes.
 - Browser checks against generated production assets pass at 390px and 1366px: leading-zero number search, punctuation-insensitive Porygon-Z search, combined mismatches, type-only matching, selection ARIA state, reset, name and number sorting, no horizontal overflow and no page errors. A separate JavaScript-disabled browser confirms all 102 static guide links remain present.
 - Browser assets were served through an intercepted local test origin; external image requests were blocked. Remote artwork delivery and production network performance are not covered. The single-process test browser failed when opening a second context; rerunning the no-JavaScript check in a separate browser completed successfully.
+
+## Guide directory generation and URL state — 2026-10-05
+- Added a debut-generation selector, clearly distinguished from game availability. Name/number search, type and generation combine; sorting remains independent.
+- URL parameters `q`, `type`, `gen` and `sort` preserve directory state for sharing, reload and back navigation. Invalid type/generation/sort values fall back safely; search length is limited to 80 characters. Clearing filters also clears their URL parameters while retaining sorting.
+- Filter changes replace the current history entry rather than creating per-keystroke entries. Filtering continues if browser history updates are unavailable; all 102 links remain in static HTML.
+- `ASTRO_TELEMETRY_DISABLED=1 npm run check` passes lint/typecheck, 28 tests, build and 210 static SEO routes.
+- Production-asset browser checks pass at 390px and 1366px: existing name/number/type/reset/sort checks, combined generation/type selection, URL encoding, reload/back restoration, clearing parameters, invalid-value fallbacks, no overflow and no page errors. All 102 guide links remain present with JavaScript disabled. Browser assets used an intercepted test origin; remote artwork delivery and production network behavior are excluded.

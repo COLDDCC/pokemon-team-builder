@@ -67,3 +67,4 @@ Selecting or replacing a Pokémon triggers one soft golden flash on that slot. A
 
 ## Finding a guide
 The guide directory supports name or exact Pokédex-number search, one type filter using official type icons, live result counts, clearing filters and sorting by Pokédex number or name. Search tolerates punctuation and accents. All published portrait links are rendered statically and remain available without JavaScript; mobile cards use two columns.
+The directory also filters by debut generation (not game availability). Search, type, generation and sorting are encoded in the URL and restored on reload or browser navigation; invalid values fall back to defaults. Filter edits replace the current history entry rather than adding an entry for every keystroke.
