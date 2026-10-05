@@ -154,3 +154,11 @@ Added clearly labeled feedback@example.com placeholder and Cloudflare build-vari
 - New explanations distinguish standard Samurott from its Hisuian form, describe Bulletproof's limited move coverage, Grassy Terrain's effect on Earthquake, Court Change swapping field effects and U-turn's physical damage category. Corrected a draft claim: Incineroar resists Fire and Ice but takes neutral Bug damage.
 - `npm run check` passes lint/typecheck, 28 tests, build and 138 static SEO routes. Rebuilt after the text correction.
 - All 66 rendered guides pass checks at 390px and 1366px for overflow, four move cards, section order, local guide links and disclosures. Remote artwork delivery, ranked-format legality and hydrated builder interactions are excluded from this static guide check.
+
+## Guide batch 12 — 2026-10-05
+- Added Greninja, Emboar, Metagross, Hydreigon, Garganacl and Electivire: 72 build guides and 72 computed teammate pages. Updated README count. Aerodactyl was excluded because the mechanics data has no Gen 9 move sources for it.
+- All 66 prior guides were included in mechanics and rendered-page regression checks. Tests cover all 288 moves including pre-evolution learning, abilities, items, natures and evolution-chain structure.
+- New notes cover Reckless retaining recoil, standard Greninja's chosen Torrent ability, Levitate exceptions, full-HP Sturdy and Electirizer trade evolution. Garganacl explicitly uses Sturdy rather than Purifying Salt.
+- Manual review corrected previous Tyranitar and Empoleon partner descriptions: Corviknight takes neutral Fighting damage, not resisted damage. Corrected the same draft claim in Garganacl's new partner card.
+- `npm run check` passes lint/typecheck, 28 tests, build and 150 static SEO routes. Rebuilt after the prose corrections.
+- All 72 rendered guides pass 390px and 1366px checks for overflow, four move cards, section order, local guide links and disclosures. This static check excludes remote artwork delivery, ranked-format legality and hydrated builder interactions.
