@@ -212,14 +212,14 @@ test('compact picker resets filters and follows a shortened visual viewport', as
   });
   await page.goto('/');
   await page.getByRole('button', {name:'Build team',exact:true}).click();
-  await expect(page.getByRole('button', {name:'Filter Fire',exact:true})).not.toBeVisible();
+  await expect(page.getByRole('button', {name:'Filter Fire',exact:true})).toBeVisible();
   await page.getByRole('searchbox').fill('zzzzzz');
   await page.getByRole('button', {name:'Reset search and filters',exact:true}).click();
   await expect(page.getByRole('searchbox')).toHaveValue('');
   await page.getByRole('button', {name:'Filters',exact:true}).click();
   await page.getByRole('button', {name:'Filter Fire',exact:true}).click();
   await page.getByRole('button', {name:'Filters',exact:true}).click();
-  await expect(page.getByRole('button', {name:'Filter Fire',exact:true})).not.toBeVisible();
+  await expect(page.getByRole('button', {name:'Filter Fire',exact:true})).toBeVisible();
   await expect(page.getByRole('button', {name:'Choose Pikachu',exact:true})).toHaveCount(0);
   await page.getByRole('button', {name:'Reset filters',exact:true}).click();
   await page.getByRole('searchbox').fill('Pikachu');

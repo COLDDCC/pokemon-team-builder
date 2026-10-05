@@ -72,3 +72,7 @@ Validation: npm run check passed with 25 unit tests and static SEO/build checks.
 Replaced all 18 custom symbols with byte-preserved original SVGs from zukan.pokemon.co.jp. Verified mapping against official masters data. Added one 650ms soft slot glow and one 480ms score-number bounce on actual changes; replay pending picker feedback after the dialog closes. Reduced-motion preference disables both animations. No score logic changes.
 
 Validation: npm run check passed (25 unit tests, lint/typecheck/build/static SEO). Five affected desktop/mobile browser tests passed, one desktop-only check skipped on mobile; final two icon/effect tests passed after picker replay adjustment. All 18 assets load; accessibility and reduced-motion behavior verified. Interactive preview and official icon screenshot inspected.
+
+## Search and immediate type row — 2026-10-05
+Picker search reduced to 36px on desktop; official type buttons sit directly below it in one always-visible row. Narrow touch screens retain 44px targets and allow the type strip to scroll horizontally without page overflow. Filters now expands the generation selector.
+Validation: npm run check passed; eight affected desktop/mobile browser tests passed, including search, filters, accessibility, asset loads, viewport handling and effects. Interactive preview filter/selection checked and desktop screenshot reviewed.
