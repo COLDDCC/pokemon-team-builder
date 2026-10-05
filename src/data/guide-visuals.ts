@@ -1458,5 +1458,161 @@ export const guideVisuals: Record<string, { evolution: { id: string; condition: 
         "reason": "Resists Ice and Flying and adds special damage."
       }
     ]
+  },
+  "samurott": {
+    "evolution": [
+      {
+        "id": "oshawott",
+        "condition": ""
+      },
+      {
+        "id": "dewott",
+        "condition": "Level 17"
+      },
+      {
+        "id": "samurott",
+        "condition": "Level 36"
+      }
+    ],
+    "partners": [
+      {
+        "id": "garchomp",
+        "reason": "Electric immunity and Stealth Rock support complement this set."
+      },
+      {
+        "id": "corviknight",
+        "reason": "Resists Grass and can pivot a frailer attacker into play."
+      }
+    ]
+  },
+  "delphox": {
+    "evolution": [
+      {
+        "id": "fennekin",
+        "condition": ""
+      },
+      {
+        "id": "braixen",
+        "condition": "Level 16"
+      },
+      {
+        "id": "delphox",
+        "condition": "Level 36"
+      }
+    ],
+    "partners": [
+      {
+        "id": "umbreon",
+        "reason": "Resists Ghost and Dark and provides delayed Wish support."
+      },
+      {
+        "id": "gyarados",
+        "reason": "Immune to Ground and resists Water, but still needs Rock coverage."
+      }
+    ]
+  },
+  "chesnaught": {
+    "evolution": [
+      {
+        "id": "chespin",
+        "condition": ""
+      },
+      {
+        "id": "quilladin",
+        "condition": "Level 16"
+      },
+      {
+        "id": "chesnaught",
+        "condition": "Level 36"
+      }
+    ],
+    "partners": [
+      {
+        "id": "empoleon",
+        "reason": "Resists Flying, Psychic, Fairy and Ice and adds special damage."
+      },
+      {
+        "id": "milotic",
+        "reason": "Resists Fire and Ice and provides direct recovery."
+      }
+    ]
+  },
+  "rillaboom": {
+    "evolution": [
+      {
+        "id": "grookey",
+        "condition": ""
+      },
+      {
+        "id": "thwackey",
+        "condition": "Level 16"
+      },
+      {
+        "id": "rillaboom",
+        "condition": "Level 35"
+      }
+    ],
+    "partners": [
+      {
+        "id": "incineroar",
+        "reason": "Resists Fire and Ice and provides another pivoting option."
+      },
+      {
+        "id": "corviknight",
+        "reason": "Resists Flying, Poison and Bug and can pivot with U-turn."
+      }
+    ]
+  },
+  "cinderace": {
+    "evolution": [
+      {
+        "id": "scorbunny",
+        "condition": ""
+      },
+      {
+        "id": "raboot",
+        "condition": "Level 16"
+      },
+      {
+        "id": "cinderace",
+        "condition": "Level 35"
+      }
+    ],
+    "partners": [
+      {
+        "id": "gyarados",
+        "reason": "Ground immunity and Water resistance help cover common threats."
+      },
+      {
+        "id": "gastrodon",
+        "reason": "Water immunity through Storm Drain and Rock resistance support switching."
+      }
+    ]
+  },
+  "inteleon": {
+    "evolution": [
+      {
+        "id": "sobble",
+        "condition": ""
+      },
+      {
+        "id": "drizzile",
+        "condition": "Level 16"
+      },
+      {
+        "id": "inteleon",
+        "condition": "Level 35"
+      }
+    ],
+    "partners": [
+      {
+        "id": "garchomp",
+        "reason": "Electric immunity and physical damage complement a special attacker."
+      },
+      {
+        "id": "corviknight",
+        "reason": "Resists Grass and offers a sturdier pivot with U-turn."
+      }
+    ]
   }
 };

@@ -147,3 +147,10 @@ Added clearly labeled feedback@example.com placeholder and Cloudflare build-vari
 - New explanations cover Shell Smash, Contrary, Competitive, recoil, stat-drop immunity and trapping exceptions. Standard Decidueye is distinguished from its Hisuian form. Corrected a draft teammate claim: Empoleon resists Ice and Flying but takes neutral Fire damage.
 - `npm run check` passes lint/typecheck, 28 tests, build and 126 static SEO routes. Rebuilt after the text correction.
 - All 60 rendered guides pass 390px and 1366px checks for overflow, four move cards, section order, local guide links and working disclosures. This static guide check excludes remote artwork delivery, ranked-format legality and hydrated builder interactions.
+
+## Guide batch 11 — 2026-10-05
+- Added Samurott, Delphox, Chesnaught, Rillaboom, Cinderace and Inteleon: 66 build guides and 66 computed teammate pages. Updated the README count.
+- All 60 earlier guides were included in mechanics and rendered-page regression checks. Tests cover all 264 moves including pre-evolution learning, abilities, items, natures and evolution-chain structure.
+- New explanations distinguish standard Samurott from its Hisuian form, describe Bulletproof's limited move coverage, Grassy Terrain's effect on Earthquake, Court Change swapping field effects and U-turn's physical damage category. Corrected a draft claim: Incineroar resists Fire and Ice but takes neutral Bug damage.
+- `npm run check` passes lint/typecheck, 28 tests, build and 138 static SEO routes. Rebuilt after the text correction.
+- All 66 rendered guides pass checks at 390px and 1366px for overflow, four move cards, section order, local guide links and disclosures. Remote artwork delivery, ranked-format legality and hydrated builder interactions are excluded from this static guide check.
