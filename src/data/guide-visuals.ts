@@ -1302,5 +1302,161 @@ export const guideVisuals: Record<string, { evolution: { id: string; condition: 
         "reason": "Resists Grass and adds special damage against Steel opponents."
       }
     ]
+  },
+  "torterra": {
+    "evolution": [
+      {
+        "id": "turtwig",
+        "condition": ""
+      },
+      {
+        "id": "grotle",
+        "condition": "Level 18"
+      },
+      {
+        "id": "torterra",
+        "condition": "Level 32"
+      }
+    ],
+    "partners": [
+      {
+        "id": "corviknight",
+        "reason": "Resists Ice and Flying and can pivot an attacker into play."
+      },
+      {
+        "id": "milotic",
+        "reason": "Resists Fire and Ice and supplies a special attacking option."
+      }
+    ]
+  },
+  "infernape": {
+    "evolution": [
+      {
+        "id": "chimchar",
+        "condition": ""
+      },
+      {
+        "id": "monferno",
+        "condition": "Level 14"
+      },
+      {
+        "id": "infernape",
+        "condition": "Level 36"
+      }
+    ],
+    "partners": [
+      {
+        "id": "gyarados",
+        "reason": "Immune to Ground and resists Water and Fighting attacks."
+      },
+      {
+        "id": "umbreon",
+        "reason": "Psychic immunity and Wish support help a recoil-prone attacker."
+      }
+    ]
+  },
+  "empoleon": {
+    "evolution": [
+      {
+        "id": "piplup",
+        "condition": ""
+      },
+      {
+        "id": "prinplup",
+        "condition": "Level 16"
+      },
+      {
+        "id": "empoleon",
+        "condition": "Level 36"
+      }
+    ],
+    "partners": [
+      {
+        "id": "corviknight",
+        "reason": "Ground immunity and Fighting resistance cover two weaknesses."
+      },
+      {
+        "id": "garchomp",
+        "reason": "Electric immunity and faster physical damage complement this set."
+      }
+    ]
+  },
+  "serperior": {
+    "evolution": [
+      {
+        "id": "snivy",
+        "condition": ""
+      },
+      {
+        "id": "servine",
+        "condition": "Level 17"
+      },
+      {
+        "id": "serperior",
+        "condition": "Level 36"
+      }
+    ],
+    "partners": [
+      {
+        "id": "chandelure",
+        "reason": "Resists Fire, Ice, Poison and Bug and pressures Steel opponents."
+      },
+      {
+        "id": "scizor",
+        "reason": "Resists Ice, Flying, Poison and Bug and adds physical priority."
+      }
+    ]
+  },
+  "incineroar": {
+    "evolution": [
+      {
+        "id": "litten",
+        "condition": ""
+      },
+      {
+        "id": "torracat",
+        "condition": "Level 17"
+      },
+      {
+        "id": "incineroar",
+        "condition": "Level 34"
+      }
+    ],
+    "partners": [
+      {
+        "id": "gyarados",
+        "reason": "Ground immunity plus Water and Fighting resistance support pivoting."
+      },
+      {
+        "id": "gastrodon",
+        "reason": "Water immunity through Storm Drain and Rock resistance cover two weaknesses."
+      }
+    ]
+  },
+  "decidueye": {
+    "evolution": [
+      {
+        "id": "rowlet",
+        "condition": ""
+      },
+      {
+        "id": "dartrix",
+        "condition": "Level 17"
+      },
+      {
+        "id": "decidueye",
+        "condition": "Level 34"
+      }
+    ],
+    "partners": [
+      {
+        "id": "umbreon",
+        "reason": "Resists Ghost and Dark and can provide delayed Wish recovery."
+      },
+      {
+        "id": "empoleon",
+        "reason": "Resists Ice and Flying and adds special damage."
+      }
+    ]
   }
 };

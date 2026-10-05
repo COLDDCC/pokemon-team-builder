@@ -140,3 +140,10 @@ Added clearly labeled feedback@example.com placeholder and Cloudflare build-vari
 - New cautions explain screen limitations, HP-dependent Eruption, Sheer Force removing secondary effects, Leaf Storm stat drops, setup risks and Swampert's four-times Grass weakness. Standard forms are distinguished from Hisuian and Mega forms where relevant.
 - `npm run check` passes lint/typecheck, 28 tests, build and 114 static SEO routes.
 - All 54 rendered guides pass 390px and 1366px overflow, move-card, section-order, local-guide-link and disclosure checks. Remote artwork delivery, ranked-format legality and hydrated builder interactions remain outside this static guide check.
+
+## Guide batch 10 — 2026-10-05
+- Added Torterra, Infernape, Empoleon, Serperior, Incineroar and Decidueye: 60 build guides and 60 computed teammate pages. README now reflects the current guide count.
+- All 54 earlier guides were included in the mechanics and rendered-page checks. Tests cover all 240 moves including pre-evolution learning, abilities, items, natures and evolution-chain structure.
+- New explanations cover Shell Smash, Contrary, Competitive, recoil, stat-drop immunity and trapping exceptions. Standard Decidueye is distinguished from its Hisuian form. Corrected a draft teammate claim: Empoleon resists Ice and Flying but takes neutral Fire damage.
+- `npm run check` passes lint/typecheck, 28 tests, build and 126 static SEO routes. Rebuilt after the text correction.
+- All 60 rendered guides pass 390px and 1366px checks for overflow, four move cards, section order, local guide links and working disclosures. This static guide check excludes remote artwork delivery, ranked-format legality and hydrated builder interactions.
