@@ -80,3 +80,6 @@ Validation: npm run check passed; eight affected desktop/mobile browser tests pa
 ## Guide directory, feedback and footer disclaimer — 2026-10-05
 Added /pokemon portrait directory linking the six existing data-backed species/teammate guides and a Guides navigation link. Added /feedback with validated draft, copy/download, and optional configured email-draft action; no fake submission or link to inaccessible private Issues. Shared footer explains unofficial ownership and heuristic limitations. Corrected stale About artwork description.
 Validation: npm run check passed, including 25 unit tests and 18 static SEO pages. Three desktop/mobile guide/feedback/first-screen tests passed; one desktop-only case skipped on mobile. Public feedback receipt still requires the owner's support email configuration.
+
+## Feedback placeholder — 2026-10-05
+Added clearly labeled feedback@example.com placeholder and Cloudflare build-variable/redeploy instructions. Placeholder never enables email sending; a real PUBLIC_FEEDBACK_EMAIL activates the mailto draft. npm run check passed with 25 unit tests, typecheck/lint/build and 18 static SEO page checks.
