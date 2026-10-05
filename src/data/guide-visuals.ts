@@ -2338,5 +2338,137 @@ export const guideVisuals: Record<string, { evolution: { id: string; condition: 
         "reason": "Resists Fire and provides recovery plus special attacking options."
       }
     ]
+  },
+  "houndoom": {
+    "evolution": [
+      {
+        "id": "houndour",
+        "condition": ""
+      },
+      {
+        "id": "houndoom",
+        "condition": "Level 24"
+      }
+    ],
+    "partners": [
+      {
+        "id": "gyarados",
+        "reason": "Immune to Ground and resists Water and Fighting attacks."
+      },
+      {
+        "id": "milotic",
+        "reason": "Resists Water and adds recovery alongside a frailer attacker."
+      }
+    ]
+  },
+  "honchkrow": {
+    "evolution": [
+      {
+        "id": "murkrow",
+        "condition": ""
+      },
+      {
+        "id": "honchkrow",
+        "condition": "Dusk Stone"
+      }
+    ],
+    "partners": [
+      {
+        "id": "gastrodon",
+        "reason": "Electric immunity and Rock resistance help create switching options."
+      },
+      {
+        "id": "empoleon",
+        "reason": "Resists Ice, Rock and Fairy and adds special damage with recovery."
+      }
+    ]
+  },
+  "mismagius": {
+    "evolution": [
+      {
+        "id": "misdreavus",
+        "condition": ""
+      },
+      {
+        "id": "mismagius",
+        "condition": "Dusk Stone"
+      }
+    ],
+    "partners": [
+      {
+        "id": "umbreon",
+        "reason": "Resists Ghost and Dark and supplies delayed Wish support."
+      },
+      {
+        "id": "scizor",
+        "reason": "Adds physical priority and U-turn to complement special damage."
+      }
+    ]
+  },
+  "froslass": {
+    "evolution": [
+      {
+        "id": "snorunt",
+        "condition": ""
+      },
+      {
+        "id": "froslass",
+        "condition": "Dawn Stone on female Snorunt"
+      }
+    ],
+    "partners": [
+      {
+        "id": "umbreon",
+        "reason": "Resists Ghost and Dark and adds bulk alongside a frailer support member."
+      },
+      {
+        "id": "milotic",
+        "reason": "Resists Fire and Steel and provides recovery with Water damage."
+      }
+    ]
+  },
+  "bronzong": {
+    "evolution": [
+      {
+        "id": "bronzor",
+        "condition": ""
+      },
+      {
+        "id": "bronzong",
+        "condition": "Level 33"
+      }
+    ],
+    "partners": [
+      {
+        "id": "umbreon",
+        "reason": "Resists Ghost and Dark and provides delayed recovery through Wish."
+      },
+      {
+        "id": "milotic",
+        "reason": "Resists Fire and adds special damage with direct recovery."
+      }
+    ]
+  },
+  "forretress": {
+    "evolution": [
+      {
+        "id": "pineco",
+        "condition": ""
+      },
+      {
+        "id": "forretress",
+        "condition": "Level 31"
+      }
+    ],
+    "partners": [
+      {
+        "id": "milotic",
+        "reason": "Resists Fire and provides recovery plus special Water attacks."
+      },
+      {
+        "id": "houndoom",
+        "reason": "Flash Fire normally grants Fire immunity and adds special pressure."
+      }
+    ]
   }
 };

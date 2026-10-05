@@ -192,3 +192,10 @@ Added clearly labeled feedback@example.com placeholder and Cloudflare build-vari
 - New notes cover weather affecting both teams, Boots not extending rain, sand's Rock-only Special Defense boost, Gen 9 snow versus hail, Aurora Veil's weather requirement and Dark-target immunity to opponent-targeted Prankster status moves. Whimsicott explicitly uses a Sun Stone evolution.
 - `ASTRO_TELEMETRY_DISABLED=1 npm run check` passes lint/typecheck, 28 tests, build and 198 static SEO routes.
 - All 96 rendered guides pass 390px and 1366px checks for overflow, four move cards, section order, local guide links and disclosures. Remote artwork delivery, ranked-format legality and hydrated builder interactions are excluded from this static check.
+
+## Guide batch 17 — 2026-10-05
+- Added Houndoom, Honchkrow, Mismagius, Froslass, Bronzong and Forretress: 102 build guides and 102 computed teammate pages. README count updated.
+- All 96 earlier guides were included in mechanics and rendered-page regression checks. Tests cover all 408 moves including pre-evolution learning, abilities, items, natures and evolution-chain structure.
+- New notes cover Sucker Punch conditions, losing Moxie boosts on switching, Froslass's female Snorunt/Dawn Stone requirement, Ghost typing not blocking all hazard removal, Bronzong's chosen Levitate versus Heatproof and Forretress's four-times Fire weakness.
+- `ASTRO_TELEMETRY_DISABLED=1 npm run check` passes lint/typecheck, 28 tests, build and 210 static SEO routes.
+- All 102 rendered guides pass 390px and 1366px checks for overflow, four move cards, section order, local guide links and disclosures. Remote artwork delivery, ranked-format legality and hydrated builder interactions are excluded from this static check.
