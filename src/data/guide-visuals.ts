@@ -714,5 +714,161 @@ export const guideVisuals: Record<string, { evolution: { id: string; condition: 
         "reason": "Resists Fighting attacks and adds special damage."
       }
     ]
+  },
+  "meowscarada": {
+    "evolution": [
+      {
+        "id": "sprigatito",
+        "condition": ""
+      },
+      {
+        "id": "floragato",
+        "condition": "Level 16"
+      },
+      {
+        "id": "meowscarada",
+        "condition": "Level 36"
+      }
+    ],
+    "partners": [
+      {
+        "id": "corviknight",
+        "reason": "Resists Bug, Fairy, Flying and Poison; both need a Fire answer."
+      },
+      {
+        "id": "arcanine",
+        "reason": "Resists Bug, Fire and Ice attacks."
+      }
+    ]
+  },
+  "skeledirge": {
+    "evolution": [
+      {
+        "id": "fuecoco",
+        "condition": ""
+      },
+      {
+        "id": "crocalor",
+        "condition": "Level 16"
+      },
+      {
+        "id": "skeledirge",
+        "condition": "Level 36"
+      }
+    ],
+    "partners": [
+      {
+        "id": "umbreon",
+        "reason": "Resists Ghost and Dark attacks."
+      },
+      {
+        "id": "gastrodon",
+        "reason": "Resists Rock and has Water immunity with Storm Drain."
+      }
+    ]
+  },
+  "quaquaval": {
+    "evolution": [
+      {
+        "id": "quaxly",
+        "condition": ""
+      },
+      {
+        "id": "quaxwell",
+        "condition": "Level 16"
+      },
+      {
+        "id": "quaquaval",
+        "condition": "Level 36"
+      }
+    ],
+    "partners": [
+      {
+        "id": "garchomp",
+        "reason": "Immune to Electric attacks; Quaquaval resists Ice."
+      },
+      {
+        "id": "corviknight",
+        "reason": "Resists Grass, Psychic and Fairy; both need an Electric answer."
+      }
+    ]
+  },
+  "dragapult": {
+    "evolution": [
+      {
+        "id": "dreepy",
+        "condition": ""
+      },
+      {
+        "id": "drakloak",
+        "condition": "Level 50"
+      },
+      {
+        "id": "dragapult",
+        "condition": "Level 60"
+      }
+    ],
+    "partners": [
+      {
+        "id": "scizor",
+        "reason": "Resists Ice, Dragon and Fairy; Dragapult resists Fire."
+      },
+      {
+        "id": "clefable",
+        "reason": "Resists Dark and is immune to Dragon attacks."
+      }
+    ]
+  },
+  "haxorus": {
+    "evolution": [
+      {
+        "id": "axew",
+        "condition": ""
+      },
+      {
+        "id": "fraxure",
+        "condition": "Level 38"
+      },
+      {
+        "id": "haxorus",
+        "condition": "Level 48"
+      }
+    ],
+    "partners": [
+      {
+        "id": "scizor",
+        "reason": "Resists Ice, Dragon and Fairy attacks."
+      },
+      {
+        "id": "primarina",
+        "reason": "Resists Ice and is immune to Dragon attacks."
+      }
+    ]
+  },
+  "goodra": {
+    "evolution": [
+      {
+        "id": "goomy",
+        "condition": ""
+      },
+      {
+        "id": "sliggoo",
+        "condition": "Level 40"
+      },
+      {
+        "id": "goodra",
+        "condition": "Level 50 or higher + level up in overworld rain (not Rain Dance)"
+      }
+    ],
+    "partners": [
+      {
+        "id": "corviknight",
+        "reason": "Resists Dragon and Fairy; takes neutral Ice damage."
+      },
+      {
+        "id": "scizor",
+        "reason": "Resists Ice, Dragon and Fairy attacks."
+      }
+    ]
   }
 };

@@ -112,3 +112,10 @@ Added clearly labeled feedback@example.com placeholder and Cloudflare build-vari
 - Added explicit “does not evolve” copy for single-species evolution displays. Support examples explain Spore immunity and sleep rules, Haze resetting all stat changes, full-HP Sturdy, Disguise HP loss and Rest sleep turns.
 - `npm run check` passes lint/typecheck, 28 tests, build and 66 SEO route checks. The final single-species display change also rebuilt successfully.
 - Browser checks on all 30 rendered guides at 390px and 1366px pass for overflow, four move cards, section order, local guide links and disclosures. Remote artwork delivery, battle legality and hydrated builder behavior are not covered by this static guide check.
+
+## Guide batch 6 — 2026-10-05
+- Added Meowscarada, Skeledirge, Quaquaval, Dragapult, Haxorus and Goodra: 36 build guides and 36 computed teammate pages.
+- Rechecked all five previous batches alongside this batch. Fixed tests cover all 144 starter moves including inherited moves, abilities, items, natures and evolution-chain structure.
+- New content explains Choice locking, Torch Song and Aqua Step boosts, Mold Breaker not removing type immunities, Assault Vest restrictions and Goodra's overworld-rain evolution condition.
+- `npm run check`: lint/typecheck, 28 tests, static build and 78 SEO route checks pass.
+- All 36 rendered guides pass browser checks at 390px and 1366px for overflow, move cards, section order, local guide links and disclosures. This remains a static guide check; remote artwork delivery, competitive legality and hydrated builder behavior are excluded.
