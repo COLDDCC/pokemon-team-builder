@@ -1006,5 +1006,145 @@ export const guideVisuals: Record<string, { evolution: { id: string; condition: 
         "reason": "Immune to Fighting attacks; both need a Steel answer."
       }
     ]
+  },
+  "flareon": {
+    "evolution": [
+      {
+        "id": "eevee",
+        "condition": ""
+      },
+      {
+        "id": "flareon",
+        "condition": "Fire Stone"
+      }
+    ],
+    "partners": [
+      {
+        "id": "gyarados",
+        "reason": "Immune to Ground and resists Water attacks."
+      },
+      {
+        "id": "gastrodon",
+        "reason": "Resists Rock and has Water immunity with Storm Drain."
+      }
+    ]
+  },
+  "espeon": {
+    "evolution": [
+      {
+        "id": "eevee",
+        "condition": ""
+      },
+      {
+        "id": "espeon",
+        "condition": "High friendship + level up during daytime; avoid meeting Sylveon\u2019s conditions"
+      }
+    ],
+    "partners": [
+      {
+        "id": "sylveon",
+        "reason": "Resists Bug and Dark attacks."
+      },
+      {
+        "id": "umbreon",
+        "reason": "Resists Ghost and Dark attacks."
+      }
+    ]
+  },
+  "tentacruel": {
+    "evolution": [
+      {
+        "id": "tentacool",
+        "condition": ""
+      },
+      {
+        "id": "tentacruel",
+        "condition": "Level 30"
+      }
+    ],
+    "partners": [
+      {
+        "id": "garchomp",
+        "reason": "Immune to Electric; Tentacruel resists Ice attacks."
+      },
+      {
+        "id": "corviknight",
+        "reason": "Immune to Ground and resists Psychic; both need an Electric answer."
+      }
+    ]
+  },
+  "krookodile": {
+    "evolution": [
+      {
+        "id": "sandile",
+        "condition": ""
+      },
+      {
+        "id": "krokorok",
+        "condition": "Level 29"
+      },
+      {
+        "id": "krookodile",
+        "condition": "Level 40"
+      }
+    ],
+    "partners": [
+      {
+        "id": "corviknight",
+        "reason": "Resists Grass, Bug and Fairy; takes neutral Ice and Fighting damage."
+      },
+      {
+        "id": "milotic",
+        "reason": "Resists Water and Ice attacks."
+      }
+    ]
+  },
+  "breloom": {
+    "evolution": [
+      {
+        "id": "shroomish",
+        "condition": ""
+      },
+      {
+        "id": "breloom",
+        "condition": "Level 23 or higher; delay evolution to learn Spore as Shroomish"
+      }
+    ],
+    "partners": [
+      {
+        "id": "magnezone",
+        "reason": "Resists Flying and Fairy attacks; both need a Fire answer."
+      },
+      {
+        "id": "milotic",
+        "reason": "Resists Fire and Ice attacks."
+      }
+    ]
+  },
+  "chandelure": {
+    "evolution": [
+      {
+        "id": "litwick",
+        "condition": ""
+      },
+      {
+        "id": "lampent",
+        "condition": "Level 41"
+      },
+      {
+        "id": "chandelure",
+        "condition": "Dusk Stone"
+      }
+    ],
+    "partners": [
+      {
+        "id": "umbreon",
+        "reason": "Resists Ghost and Dark attacks."
+      },
+      {
+        "id": "gastrodon",
+        "reason": "Resists Rock and has Water immunity with Storm Drain."
+      }
+    ]
   }
 };

@@ -126,3 +126,10 @@ Added clearly labeled feedback@example.com placeholder and Cloudflare build-vari
 - Evolution conditions explicitly scope Magnezone/Leafeon/Glaceon stones to Generation 9 and Milotic's Prism Scale trade to Scarlet/Violet. New cautions explain trapping exceptions, inactive abilities without required status/weather and delayed Wish recovery.
 - `npm run check` passes lint/typecheck, 28 tests, build and 90 static SEO routes.
 - All 42 rendered guides pass 390px and 1366px overflow, move-card, section-order, local-guide-link and disclosure checks. These checks do not validate remote artwork delivery, ranked-format legality or hydrated builder interactions.
+
+## Guide batch 8 — 2026-10-05
+- Added Flareon, Espeon, Tentacruel, Krookodile, Breloom and Chandelure: 48 build guides and 48 computed teammate pages. All eight standard Eevee evolution guides are now present.
+- All 42 prior guides were included in the fixed mechanics tests and rendered-guide browser regression checks. Checks cover all 192 starter moves including inherited moves, abilities, items, natures and evolution-chain structure.
+- Breloom's guide explicitly warns to learn Spore as Shroomish before evolution; Espeon notes daytime friendship and Sylveon condition priority. New utility notes cover Magic Bounce limitations, Ghost types blocking Rapid Spin and item-exchange limitations.
+- `npm run check`: lint/typecheck, 28 tests, build and 102 static SEO routes pass.
+- All 48 rendered guides pass 390px and 1366px overflow, move-card, section-order, local-guide-link and disclosure checks. Remote artwork delivery, ranked-format legality and hydrated builder interactions remain outside this static guide check.
