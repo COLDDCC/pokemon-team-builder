@@ -219,3 +219,9 @@ Added clearly labeled feedback@example.com placeholder and Cloudflare build-vari
 - Copy distinguishes unpublished guides from published guides excluded by filters. Unknown names produce no species link. Portrait failure hides the image while retaining the named builder action.
 - `ASTRO_TELEMETRY_DISABLED=1 npm run check` passes lint/typecheck, 28 tests, build and 210 static SEO routes.
 - Browser regression passes at 390px and 1366px for prior directory search/filter/sort/URL restoration checks plus unpublished Eevee name and leading-zero number lookup, correct prefilled URL, unknown-name handling and filtered-Pikachu messaging. All 102 static guide links remain present without JavaScript. Remote artwork requests were blocked during the test, so external image delivery is not verified.
+
+## Directory partial-name suggestions — 2026-10-05
+- Empty results now offer up to six species matching a partial name, ranked by prefix match then Pokédex number. Candidates respect type and debut-generation filters and link to prefilled teams. Exact matches retain the existing fallback rather than duplicating suggestions.
+- A published exact match excluded by filters also offers a direct Read guide action. Unknown names still produce no unrelated entry.
+- `ASTRO_TELEMETRY_DISABLED=1 npm run check` passes lint/typecheck, 28 tests, build and 210 static SEO routes.
+- Production-asset browser regressions pass at 390px and 1366px for existing search/filter/sort/URL state behavior, partial Eev-to-Eevee lookup, correct builder URL, candidate limit, type-filter exclusion and filtered Pikachu's direct guide URL. All 102 static guide links remain present without JavaScript. External artwork requests were blocked; remote image delivery is excluded.
