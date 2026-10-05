@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import PokemonSprite from '../../components/PokemonSprite';
+import { featuredPokemonIds } from '../../config/seo-pages';
+import { pokemonById } from '../../data/pokemon';
+---
+<BaseLayout title="Pokémon Team Guides | Super Pokémon Team Builder" description="Start with Pikachu, Charizard, Garchomp, Gengar, Dragonite or Lucario. Explore base stats, weaknesses and teammate suggestions."><SiteHeader/><main id="main"><h1>Pokémon team guides</h1><p>Choose a Pokémon to explore its stats, type matchups and recommended teammates.</p><div class="guide-grid">{featuredPokemonIds.map(id=>{const p=pokemonById.get(id)!;return <a class="guide-card" href={`/pokemon/${id}`}><PokemonSprite pokemon={p} size="large"/><h2>{p.name}</h2><p>{p.types.join(' / ')}</p><span>Build around {p.name} →</span></a>;})}</div><section class="seo-content"><h2>What these guides cover</h2><p>Each guide opens a team builder with that Pokémon already selected, then explains base stats, weaknesses, resistances and computed teammate options. These are casual planning guides; competitive movesets, items, abilities and EV spreads are not included.</p></section></main><SiteFooter/></BaseLayout>

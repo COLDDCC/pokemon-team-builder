@@ -309,3 +309,18 @@ test('official type assets load and selection feedback respects reduced motion',
   await expect(page.locator('.score-value')).toHaveCSS('animation-name','none');
   await expect(page.locator('.selection-flash')).toHaveCSS('animation-name','none');
 });
+
+test('guide directory, disclaimer and feedback draft are reachable', async ({ page }) => {
+  await page.goto('/pokemon');
+  await expect(page.locator('.guide-card')).toHaveCount(6);
+  await page.locator('.guide-card').first().click();
+  await expect(page.getByRole('heading',{name:'Pikachu Team Builder',exact:true})).toBeVisible();
+  await expect(page.locator('footer')).toContainText('not affiliated with or endorsed');
+  await page.getByRole('link',{name:'Feedback',exact:true}).click();
+  await page.getByLabel('Your feedback', {exact:true}).fill('The type icons could be easier to recognize.');
+  const download=page.waitForEvent('download');
+  await page.getByRole('button',{name:'Download feedback',exact:true}).click();
+  expect((await download).suggestedFilename()).toBe('pokemon-team-builder-feedback.txt');
+  await expect(page.getByRole('status')).toHaveText('Feedback downloaded. It has not been sent.');
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+});

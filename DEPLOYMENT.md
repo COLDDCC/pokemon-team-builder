@@ -33,3 +33,5 @@ This change prepares hosting configuration and instructions. It does not create 
 Official references:
 - https://developers.cloudflare.com/pages/framework-guides/deploy-an-astro-site/
 - https://vercel.com/docs/frameworks/frontend/astro
+
+Optional feedback contact: set PUBLIC_FEEDBACK_EMAIL to a real public support address before building. This enables a mailto draft on /feedback, not server-side collection. Without an address, only copy/download are offered and the page explicitly says feedback is not submitted. Never point public users to the current private repository's Issues page.

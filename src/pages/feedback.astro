@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+const rawEmail = import.meta.env.PUBLIC_FEEDBACK_EMAIL;
+const email = typeof rawEmail === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(rawEmail) ? rawEmail : '';
+---
+<BaseLayout title="Feedback | Super Pokémon Team Builder" description="Report a problem or suggest an improvement to the Pokémon team builder." noindex><SiteHeader/><main id="main"><h1>Help improve this builder</h1><p>Found a bug, confusing recommendation, or missing feature? Tell us what happened.</p><section class="seo-content feedback-panel"><form id="feedback-form" data-email={email}><label>Feedback type<select name="category"><option>Bug report</option><option>Feature suggestion</option><option>Data or recommendation issue</option><option>Other feedback</option></select></label><label>Your feedback<textarea name="message" rows="6" required maxlength="5000" placeholder="What happened? What did you expect? For a bug, include your browser and the steps to reproduce it."></textarea></label><label>Page or team link (optional)<input name="page" type="url" maxlength="2000" placeholder="https://superpokemonteambuilder.com/" /></label><p>Feedback stays in your browser until you send it. Avoid passwords or other private information.</p><div class="toolbar-actions">{email && <button class="button primary" type="submit">Open email draft</button>}<button class="button secondary" type="submit" data-copy>Copy feedback</button><button class="button secondary" type="submit" data-download>Download feedback</button></div><p id="feedback-status" role="status">{email ? 'Sending opens your email app; review the draft and press Send there.' : 'Email feedback is not available yet. You can prepare and copy or download your feedback; this page does not submit it.'}</p></form></section></main><SiteFooter/></BaseLayout>
+<script>
+const form=document.querySelector<HTMLFormElement>('#feedback-form');
+form?.addEventListener('submit',async event=>{
+ event.preventDefault(); const data=new FormData(form);const status=document.querySelector<HTMLElement>('#feedback-status')!;
+ const text=`Feedback type: ${data.get('category')}\n\n${data.get('message')}\n\nPage/team: ${data.get('page') || 'Not provided'}`;
+ const button=(event as SubmitEvent).submitter;
+ if(button?.hasAttribute('data-copy')){try{await navigator.clipboard.writeText(text);status.textContent='Feedback copied. It has not been sent.';}catch{status.textContent='Copy is unavailable. Use Download feedback instead.';}}
+ else if(button?.hasAttribute('data-download')){const url=URL.createObjectURL(new Blob([text],{type:'text/plain;charset=utf-8'}));const link=document.createElement('a');link.href=url;link.download='pokemon-team-builder-feedback.txt';link.click();URL.revokeObjectURL(url);status.textContent='Feedback downloaded. It has not been sent.';}
+ else if(form.dataset.email){window.location.href=`mailto:${form.dataset.email}?subject=${encodeURIComponent('Pokémon Team Builder feedback')}&body=${encodeURIComponent(text)}`;status.textContent='Email draft opened. Review it and press Send in your email app.';}
+});
+</script>

@@ -61,3 +61,6 @@ The small lock on a selected Pokémon protects it from recommendations, includin
 Type filter symbols use the original SVG assets from the official Japanese Pokémon Pokédex (zukan.pokemon.co.jp). They have accessible names, hover titles and a short selected-type label; each has a 44px touch target.
 
 Selecting or replacing a Pokémon triggers one soft golden flash on that slot. An actual total-score change triggers one short bounce of the score number. Reduced-motion preferences disable both effects; scores update immediately.
+
+## Guides, feedback and disclaimer
+/pokemon lists the six curated species guides with portrait links; each guide keeps the prefilled builder, stats and type analysis. The shared footer includes feedback, attribution and score limitations. /feedback lets users prepare, copy or download a report without sending it. Configure PUBLIC_FEEDBACK_EMAIL to enable an email draft action; the user must send the draft from their mail app. No feedback is collected by a backend, and the private GitHub repository is not exposed as a public reporting destination.

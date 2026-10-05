@@ -76,3 +76,7 @@ Validation: npm run check passed (25 unit tests, lint/typecheck/build/static SEO
 ## Search and immediate type row — 2026-10-05
 Picker search reduced to 36px on desktop; official type buttons sit directly below it in one always-visible row. Narrow touch screens retain 44px targets and allow the type strip to scroll horizontally without page overflow. Filters now expands the generation selector.
 Validation: npm run check passed; eight affected desktop/mobile browser tests passed, including search, filters, accessibility, asset loads, viewport handling and effects. Interactive preview filter/selection checked and desktop screenshot reviewed.
+
+## Guide directory, feedback and footer disclaimer — 2026-10-05
+Added /pokemon portrait directory linking the six existing data-backed species/teammate guides and a Guides navigation link. Added /feedback with validated draft, copy/download, and optional configured email-draft action; no fake submission or link to inaccessible private Issues. Shared footer explains unofficial ownership and heuristic limitations. Corrected stale About artwork description.
+Validation: npm run check passed, including 25 unit tests and 18 static SEO pages. Three desktop/mobile guide/feedback/first-screen tests passed; one desktop-only case skipped on mobile. Public feedback receipt still requires the owner's support email configuration.
