@@ -199,3 +199,10 @@ Added clearly labeled feedback@example.com placeholder and Cloudflare build-vari
 - New notes cover Sucker Punch conditions, losing Moxie boosts on switching, Froslass's female Snorunt/Dawn Stone requirement, Ghost typing not blocking all hazard removal, Bronzong's chosen Levitate versus Heatproof and Forretress's four-times Fire weakness.
 - `ASTRO_TELEMETRY_DISABLED=1 npm run check` passes lint/typecheck, 28 tests, build and 210 static SEO routes.
 - All 102 rendered guides pass 390px and 1366px checks for overflow, four move cards, section order, local guide links and disclosures. Remote artwork delivery, ranked-format legality and hydrated builder interactions are excluded from this static check.
+
+## Guide directory discovery — 2026-10-05
+- Added name/exact Pokédex-number search, official type-icon filters, combined search/type matching, result counts, clear filters, empty results and number/name sorting to the 102-guide directory. Cards now show Pokédex numbers and use two columns on mobile.
+- Kept all guide links in static HTML. Controls only appear after their script is ready, preserving no-JavaScript browsing and crawlable links.
+- `ASTRO_TELEMETRY_DISABLED=1 npm run check` passes lint/typecheck, 28 tests, build and 210 static SEO routes.
+- Browser checks against generated production assets pass at 390px and 1366px: leading-zero number search, punctuation-insensitive Porygon-Z search, combined mismatches, type-only matching, selection ARIA state, reset, name and number sorting, no horizontal overflow and no page errors. A separate JavaScript-disabled browser confirms all 102 static guide links remain present.
+- Browser assets were served through an intercepted local test origin; external image requests were blocked. Remote artwork delivery and production network performance are not covered. The single-process test browser failed when opening a second context; rerunning the no-JavaScript check in a separate browser completed successfully.

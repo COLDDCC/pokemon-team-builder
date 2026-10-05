@@ -3,7 +3,58 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import PokemonSprite from '../../components/PokemonSprite';
+import TypeIcon from '../../components/TypeIcon';
 import { featuredPokemonIds } from '../../config/seo-pages';
-import { pokemonById } from '../../data/pokemon';
+import { pokemonById, normalizeSearch } from '../../data/pokemon';
+import { pokemonTypes } from '../../data/pokemon/schema';
+const guides = featuredPokemonIds.map(id => pokemonById.get(id)!).sort((a,b) => a.number-b.number);
 ---
-<BaseLayout title="Pokémon Team Guides | Super Pokémon Team Builder" description={`Explore ${featuredPokemonIds.length} Pokémon build guides with starter movesets, evolution chains, type weaknesses and teammate ideas.`}><SiteHeader/><main id="main"><h1>Pokémon team guides</h1><p>Choose a Pokémon to explore its stats, type matchups and recommended teammates.</p><div class="guide-grid">{featuredPokemonIds.map(id=>{const p=pokemonById.get(id)!;return <a class="guide-card" href={`/pokemon/${id}`}><PokemonSprite pokemon={p} size="large"/><h2>{p.name}</h2><p>{p.types.join(' / ')}</p><span>Build around {p.name} →</span></a>;})}</div><section class="seo-content"><h2>What these guides cover</h2><p>Each guide explains a casual Generation 9 starter moveset, item, ability and nature, plus type matchups, evolution and teammate ideas. Try the Pokémon in the team builder or follow a teammate’s guide. These examples do not include EV spreads or Tera types and are not ranked-format recommendations.</p></section></main><SiteFooter/></BaseLayout>
+<BaseLayout title="Pokémon Team Guides | Super Pokémon Team Builder" description={`Explore ${guides.length} Pokémon build guides with starter movesets, evolution chains, type weaknesses and teammate ideas.`}>
+<SiteHeader/><main id="main"><h1>Pokémon team guides</h1><p>Choose a Pokémon for moves, evolution, weaknesses and teammate ideas.</p>
+<div class="directory-controls" id="guide-controls" hidden>
+<div class="directory-search"><label for="guide-search">Find a guide</label><input id="guide-search" type="search" placeholder="Name or Pokédex number" autocomplete="off"/><label for="guide-sort" class="sort-label">Sort</label><select id="guide-sort"><option value="number">Pokédex number</option><option value="name">Name A–Z</option></select></div>
+<div class="directory-types" role="group" aria-label="Filter guides by type"><button type="button" data-type="" aria-pressed="true">All</button>{pokemonTypes.map(type => <button type="button" data-type={type} aria-label={type} title={type} aria-pressed="false"><TypeIcon type={type}/></button>)}</div>
+<div class="directory-status"><p id="guide-count" role="status" aria-live="polite">{guides.length} guides</p><button id="guide-reset" type="button" hidden>Clear filters</button></div>
+</div>
+<div class="guide-grid" id="guide-grid">{guides.map(p => <a class="guide-card" href={`/pokemon/${p.id}`} data-name={p.name} data-search={normalizeSearch(p.name)} data-number={p.number} data-types={p.types.join(',')}><PokemonSprite pokemon={p} size="large"/><small>#{String(p.number).padStart(3,'0')}</small><h2>{p.name}</h2><p>{p.types.join(' / ')}</p><span>View guide →</span></a>)}</div>
+<p id="guide-empty" hidden>No published guide matches. Try another name, number or type.</p>
+<section class="seo-content"><h2>What these guides cover</h2><p>Each guide explains a casual Generation 9 starter moveset, item, ability and nature, plus type matchups, evolution and teammate ideas. Try the Pokémon in the team builder or follow a teammate’s guide. These examples do not include EV spreads or Tera types and are not ranked-format recommendations.</p></section>
+</main><SiteFooter/></BaseLayout>
+<script>
+const controls = document.querySelector<HTMLElement>('#guide-controls')!;
+const search = document.querySelector<HTMLInputElement>('#guide-search')!;
+const sort = document.querySelector<HTMLSelectElement>('#guide-sort')!;
+const grid = document.querySelector<HTMLElement>('#guide-grid')!;
+const cards = Array.from(grid.querySelectorAll<HTMLAnchorElement>('.guide-card'));
+const buttons = Array.from(controls.querySelectorAll<HTMLButtonElement>('[data-type]'));
+const count = document.querySelector<HTMLElement>('#guide-count')!;
+const reset = document.querySelector<HTMLButtonElement>('#guide-reset')!;
+const empty = document.querySelector<HTMLElement>('#guide-empty')!;
+let selectedType = '';
+function update() {
+ const query = search.value.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');
+ const numeric = /^\d+$/.test(query);
+ let visible = 0;
+ for (const card of cards) {
+  const matchesName = !query || (numeric ? Number(card.dataset.number) === Number(query) : card.dataset.search!.includes(query));
+  card.hidden = !(matchesName && (!selectedType || card.dataset.types!.split(',').includes(selectedType)));
+  if (!card.hidden) visible++;
+ }
+ for (const button of buttons) button.setAttribute('aria-pressed', String(button.dataset.type === selectedType));
+ count.textContent = `${visible} of ${cards.length} guides${selectedType ? ` · ${selectedType}` : ''}`;
+ reset.hidden = !search.value && !selectedType;
+ empty.hidden = visible !== 0;
+}
+search.addEventListener('input',update);
+for(const button of buttons) button.addEventListener('click',()=>{selectedType=button.dataset.type!;update();});
+reset.addEventListener('click',()=>{search.value='';selectedType='';update();search.focus();});
+sort.addEventListener('change',()=>{
+ cards.sort((a,b)=>sort.value==='name' ? a.dataset.name!.localeCompare(b.dataset.name!,'en') : Number(a.dataset.number)-Number(b.dataset.number));
+ grid.append(...cards);
+});
+controls.hidden=false;
+update();
+</script>
+<style>
+.directory-controls{border:1px solid #dce5ed;background:#fff;border-radius:14px;padding:14px}.directory-controls[hidden],.guide-card[hidden],#guide-empty[hidden],#guide-reset[hidden]{display:none}.directory-search{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.directory-search label{font-size:.88rem;font-weight:600}.directory-search input{flex:1;min-width:140px;padding:9px 12px;border:1px solid #9db5db;border-radius:9px;font:inherit}.directory-search select{padding:9px;border:1px solid #9db5db;border-radius:9px;font:inherit;background:white}.directory-types{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}.directory-types button{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1px solid #dce5ed;border-radius:10px;background:white;cursor:pointer}.directory-types button[aria-pressed="true"]{background:#fff4bd;border:2px solid #c68b14}.directory-status{display:flex;align-items:center;justify-content:space-between;gap:10px}.directory-status p{margin:12px 0 0;font-size:.85rem;color:#536477}.directory-status button{margin-top:10px;min-height:44px}.guide-card small{margin-top:7px;color:#536477}.directory-controls :focus-visible{outline:3px solid #1765ad;outline-offset:3px}@media(max-width:600px){.directory-search label:first-child{width:100%}.directory-search input{width:100%;flex-basis:100%}.guide-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.guide-card{padding:12px}.guide-card h2{font-size:1rem}.guide-card p{font-size:.8rem}.directory-search select{flex:1;min-width:0}}
+</style>

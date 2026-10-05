@@ -64,3 +64,6 @@ Selecting or replacing a Pokémon triggers one soft golden flash on that slot. A
 
 ## Guides, feedback and disclaimer
 /pokemon lists the curated species guides with portrait links; each guide keeps the prefilled builder, stats and type analysis. The shared footer includes feedback, attribution and score limitations. /feedback lets users prepare, copy or download a report without sending it. Configure PUBLIC_FEEDBACK_EMAIL to enable an email draft action; the user must send the draft from their mail app. No feedback is collected by a backend, and the private GitHub repository is not exposed as a public reporting destination.
+
+## Finding a guide
+The guide directory supports name or exact Pokédex-number search, one type filter using official type icons, live result counts, clearing filters and sorting by Pokédex number or name. Search tolerates punctuation and accents. All published portrait links are rendered statically and remain available without JavaScript; mobile cards use two columns.
