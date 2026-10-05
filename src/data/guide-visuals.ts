@@ -590,5 +590,129 @@ export const guideVisuals: Record<string, { evolution: { id: string; condition: 
         "reason": "Resists Poison and can pressure Steel types with Earthquake."
       }
     ]
+  },
+  "amoonguss": {
+    "evolution": [
+      {
+        "id": "foongus",
+        "condition": ""
+      },
+      {
+        "id": "amoonguss",
+        "condition": "Level 39"
+      }
+    ],
+    "partners": [
+      {
+        "id": "corviknight",
+        "reason": "Resists Flying and Psychic; both still need a Fire answer."
+      },
+      {
+        "id": "gastrodon",
+        "reason": "Resists Fire; Amoonguss resists its Grass weakness."
+      }
+    ]
+  },
+  "skarmory": {
+    "evolution": [
+      {
+        "id": "skarmory",
+        "condition": ""
+      }
+    ],
+    "partners": [
+      {
+        "id": "gastrodon",
+        "reason": "Immune to Electric and resists Fire attacks."
+      },
+      {
+        "id": "garchomp",
+        "reason": "Immune to Electric and resists Fire; needs an Ice answer."
+      }
+    ]
+  },
+  "quagsire": {
+    "evolution": [
+      {
+        "id": "wooper",
+        "condition": ""
+      },
+      {
+        "id": "quagsire",
+        "condition": "Level 20"
+      }
+    ],
+    "partners": [
+      {
+        "id": "corviknight",
+        "reason": "Resists Grass attacks and is immune to Ground."
+      },
+      {
+        "id": "venusaur",
+        "reason": "Resists Grass and provides special damage."
+      }
+    ]
+  },
+  "toxapex": {
+    "evolution": [
+      {
+        "id": "mareanie",
+        "condition": ""
+      },
+      {
+        "id": "toxapex",
+        "condition": "Level 38"
+      }
+    ],
+    "partners": [
+      {
+        "id": "garchomp",
+        "reason": "Immune to Electric; Toxapex resists Ice attacks."
+      },
+      {
+        "id": "corviknight",
+        "reason": "Immune to Ground and resists Psychic; both need an Electric answer."
+      }
+    ]
+  },
+  "mimikyu": {
+    "evolution": [
+      {
+        "id": "mimikyu",
+        "condition": ""
+      }
+    ],
+    "partners": [
+      {
+        "id": "umbreon",
+        "reason": "Resists Ghost; Mimikyu is immune to Fighting attacks."
+      },
+      {
+        "id": "arcanine",
+        "reason": "Resists Steel; adds Intimidate support against physical attackers."
+      }
+    ]
+  },
+  "snorlax": {
+    "evolution": [
+      {
+        "id": "munchlax",
+        "condition": ""
+      },
+      {
+        "id": "snorlax",
+        "condition": "High friendship + level up"
+      }
+    ],
+    "partners": [
+      {
+        "id": "mimikyu",
+        "reason": "Immune to Fighting; Snorlax is immune to Ghost attacks."
+      },
+      {
+        "id": "clefable",
+        "reason": "Resists Fighting attacks and adds special damage."
+      }
+    ]
   }
 };

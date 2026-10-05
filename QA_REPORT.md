@@ -105,3 +105,10 @@ Added clearly labeled feedback@example.com placeholder and Cloudflare build-vari
 - Directory description now derives its guide count from the published configuration rather than a manually maintained number.
 - All 24 rendered guides passed 390px and 1366px overflow, section-order, local-guide-link and disclosure checks. Lint/typecheck, 28 tests, build and 54 SEO route checks passed before the description change; the final description change also rebuilt successfully.
 - These checks cover rendered guide structure and mechanics references, not ranked-format legality, win rates, remote image delivery or hydrated builder interactions.
+
+## Guide batch 5 — 2026-10-05
+- Added Amoonguss, Skarmory, Quagsire, Toxapex, Mimikyu and Snorlax: 30 guides and 30 computed teammate pages.
+- Included all 24 older guides in the mechanics and rendered-page regression checks. All 120 moves (including pre-evolution learning), abilities, items, natures and evolution-chain structure pass the fixed guide tests.
+- Added explicit “does not evolve” copy for single-species evolution displays. Support examples explain Spore immunity and sleep rules, Haze resetting all stat changes, full-HP Sturdy, Disguise HP loss and Rest sleep turns.
+- `npm run check` passes lint/typecheck, 28 tests, build and 66 SEO route checks. The final single-species display change also rebuilt successfully.
+- Browser checks on all 30 rendered guides at 390px and 1366px pass for overflow, four move cards, section order, local guide links and disclosures. Remote artwork delivery, battle legality and hydrated builder behavior are not covered by this static guide check.
