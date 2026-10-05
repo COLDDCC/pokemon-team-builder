@@ -30,7 +30,7 @@ The local dataset is derived from MIT-licensed @pkmn/dex; see DATA_SOURCES.md an
 Run `npx playwright install chromium`, then `npm run test:e2e`. The suite builds and previews production output and checks real builder interactions at desktop and mobile sizes.
 
 ## SEO scope
-The build includes two focused calculator routes, one casual format route and 90 curated Pokémon analysis/teammate pairs. No thousands of thin pages are generated. Page templates prefill the relevant Pokémon; an explicit team query overrides this default. Canonical URLs omit team parameters. The sitemap lists static indexable routes.
+The build includes two focused calculator routes, one casual format route and 96 curated Pokémon analysis/teammate pairs. No thousands of thin pages are generated. Page templates prefill the relevant Pokémon; an explicit team query overrides this default. Canonical URLs omit team parameters. The sitemap lists static indexable routes.
 
 ## Release checks and deployment
 See QA_REPORT.md for the local verification results and remaining launch configuration. See DEPLOYMENT.md for Cloudflare Pages or Vercel import settings. A deployment has not been performed.

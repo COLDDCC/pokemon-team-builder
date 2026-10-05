@@ -185,3 +185,10 @@ Added clearly labeled feedback@example.com placeholder and Cloudflare build-vari
 - New notes cover male Kirlia's Dawn Stone condition, Mach Punch inherited learning, Guts retaining burn chip damage, Volt Switch being blocked by immunity, Sticky Web's grounded-target requirement, Compound Eyes not guaranteeing accuracy and Magic Guard avoiding Life Orb recoil.
 - `ASTRO_TELEMETRY_DISABLED=1 npm run check` passes lint/typecheck, 28 tests, build and 186 static SEO routes.
 - All 90 rendered guides pass 390px and 1366px checks for overflow, four move cards, section order, local guide links and disclosures. Remote artwork delivery, ranked-format legality and hydrated builder interactions are excluded from this static check.
+
+## Guide batch 16 — 2026-10-05
+- Added Pelipper, Torkoal, Hippowdon, Abomasnow, Whimsicott and Klefki: 96 build guides and 96 computed teammate pages. Updated README count.
+- All 90 earlier guides were included in mechanics and rendered-page regression checks. Tests cover all 384 moves including pre-evolution learning, abilities, items, natures and evolution-chain structure.
+- New notes cover weather affecting both teams, Boots not extending rain, sand's Rock-only Special Defense boost, Gen 9 snow versus hail, Aurora Veil's weather requirement and Dark-target immunity to opponent-targeted Prankster status moves. Whimsicott explicitly uses a Sun Stone evolution.
+- `ASTRO_TELEMETRY_DISABLED=1 npm run check` passes lint/typecheck, 28 tests, build and 198 static SEO routes.
+- All 96 rendered guides pass 390px and 1366px checks for overflow, four move cards, section order, local guide links and disclosures. Remote artwork delivery, ranked-format legality and hydrated builder interactions are excluded from this static check.
