@@ -1,3 +1,4 @@
+import { featuredPokemonIds } from '../src/config/seo-pages';
 import AxeBuilder from '@axe-core/playwright';
 import { test, expect } from '@playwright/test';
 test('edit six slots, prevent duplicates, replace, remove and restore a shared team', async ({ page, context }) => {
@@ -312,9 +313,9 @@ test('official type assets load and selection feedback respects reduced motion',
 
 test('guide directory, disclaimer and feedback draft are reachable', async ({ page }) => {
   await page.goto('/pokemon');
-  await expect(page.locator('.guide-card')).toHaveCount(6);
-  await page.locator('.guide-card').first().click();
-  await expect(page.getByRole('heading',{name:'Pikachu Team Builder',exact:true})).toBeVisible();
+  await expect(page.locator('.guide-card')).toHaveCount(featuredPokemonIds.length);
+  await page.locator('.guide-card[href="/pokemon/pikachu"]').click();
+  await expect(page.getByRole('heading',{name:'Pikachu Build Guide',exact:true})).toBeVisible();
   await expect(page.locator('footer')).toContainText('not affiliated with or endorsed');
   await page.getByRole('link',{name:'Feedback',exact:true}).click();
   await page.getByLabel('Your feedback', {exact:true}).fill('The type icons could be easier to recognize.');
