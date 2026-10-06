@@ -335,13 +335,13 @@ header { padding: 14px 0; }
  .recommend-card { gap: 3px; padding: 8px; }
 }
 
-/* Empty side columns reserved for future 160px or 300px desktop ads. */
-@media (min-width: 1280px) {
- .site-frame { display: grid; grid-template-columns: 160px minmax(0,1120px) 160px; gap: 24px; width: calc(100% - 32px); max-width: 1488px; }
+/* Stable ad space and a narrower centered tool on laptop and desktop. */
+@media (min-width: 1024px) {
+ .site-frame { display: grid; grid-template-columns: 160px minmax(0,960px) 160px; gap: 40px; width: calc(100% - 32px); max-width: 1360px; }
  .ad-rail { display: block; width: 160px; min-height: 600px; }
 }
 @media (min-width: 1800px) {
- .site-frame { grid-template-columns: 300px minmax(0,1120px) 300px; max-width: 1768px; }
+ .site-frame { grid-template-columns: 300px minmax(0,960px) 300px; max-width: 1640px; }
  .ad-rail { width: 300px; }
 }
 @media (min-width: 1280px) {

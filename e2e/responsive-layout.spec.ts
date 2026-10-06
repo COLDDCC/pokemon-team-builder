@@ -10,8 +10,13 @@ test('ad columns and revised team layout remain usable across screen sizes', asy
     await page.getByRole('button', { name: 'Try example', exact: true }).click();
     await expect(page.getByTestId('slot-5').getByRole('heading')).toHaveText('Dragonite');
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+    const body = (await page.locator('main').boundingBox())!;
+    if (width >= 1024) {
+      expect(body.width).toBeLessThanOrEqual(960);
+      expect(body.x).toBeGreaterThanOrEqual(200);
+    }
     const rails = page.locator('.ad-rail');
-    if (width >= 1280) {
+    if (width >= 1024) {
       await expect(rails.first()).toBeVisible();
       expect((await rails.first().boundingBox())!.width).toBe(width >= 1800 ? 300 : 160);
       const roster = (await page.locator('.team-grid').boundingBox())!;
