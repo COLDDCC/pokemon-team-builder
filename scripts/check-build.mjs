@@ -1,7 +1,7 @@
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import assert from 'node:assert/strict';
 import { site as config } from '../src/config/site.ts';
-import { indexablePaths } from '../src/config/seo-pages.ts';
+import { featuredPokemonIds, indexablePaths } from '../src/config/seo-pages.ts';
 const site = config.url;
 const sitemap = readFileSync('dist/sitemap.xml', 'utf8');
 const paths = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
@@ -21,3 +21,6 @@ assert.ok(readFileSync('dist/404.html', 'utf8').includes('noindex, follow'));
 assert.ok(readFileSync('dist/robots.txt', 'utf8').includes(`${site}/sitemap.xml`));
 assert.ok(existsSync('dist/og.png'));
 console.log(`Verified ${paths.length} static SEO pages, 404, robots and OG image`);
+
+const generatedSpecies = readdirSync('dist/pokemon', {withFileTypes:true}).filter(entry => entry.isDirectory()).map(entry => entry.name).sort();
+assert.deepEqual(generatedSpecies, [...featuredPokemonIds].sort(), 'Only published species may generate pages');

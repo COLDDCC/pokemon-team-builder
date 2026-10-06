@@ -1,0 +1,45 @@
+name: Prepare daily guide
+on:
+  schedule:
+    - cron: '0 12 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+concurrency:
+  group: daily-guide-release
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: vars.GUIDE_RELEASE_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          ref: archive/102-guides
+          path: guide-archive
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node scripts/release-next-guide.mjs guide-archive
+      - run: npm run check
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - name: Open or update the next guide pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          rm -rf guide-archive
+          if git diff --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git checkout -B release/next-guide
+          git add src/config/seo-pages.ts src/data/guides.ts src/data/guide-visuals.ts
+          git commit -m 'Publish next queued Pokemon guide'
+          git push --force-with-lease origin release/next-guide
+          if ! gh pr view release/next-guide >/dev/null 2>&1; then
+            gh pr create --base main --head release/next-guide --title 'Publish next queued Pokemon guide' --body 'Adds one archived species to the published guide list, routes and sitemap. Full code and browser checks passed in the preparation workflow. Review and merge to publish.'
+          fi

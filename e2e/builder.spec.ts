@@ -125,6 +125,8 @@ test('accessible empty, populated and picker states', async ({ page }) => {
   await expect(page.getByRole('button', { name: 'Add Pokémon to slot 1', exact: true })).toBeEnabled();
   expect((await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze()).violations).toEqual([]);
   await page.goto('/pokemon/garchomp');
+  await page.locator('#build-team').scrollIntoViewIfNeeded();
+  await expect(page.getByRole('button', {name:'Add Pokémon to slot 2',exact:true})).toBeEnabled();
   await expect(page.getByTestId('slot-0').getByRole('heading', {name:'Garchomp',exact:true})).toBeVisible();
   expect((await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze()).violations).toEqual([]);
   await page.getByRole('button', {name:'Add Pokémon to slot 2',exact:true}).click();
