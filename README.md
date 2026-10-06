@@ -49,9 +49,9 @@ The picker now collapses filters until requested, displays active filters, and p
 The site uses a Pokémon-inspired light palette: warm white surfaces, blue headings, yellow primary actions, and red selection accents. Shared CSS applies the same theme to the picker, scores, recommendations, and static routes.
 
 ## Compact first screen
-The home title and description are shortened. Desktop team editing and live scores sit side by side, with compact recommendation actions underneath. Rules, saved teams, recommendation reasons and detailed analysis expand on demand. Try example loads six familiar Pokémon only into an empty team and can be cleared. At 1366×768, the example team, live score and recommendation action fit without page scrolling; smaller screens retain responsive layouts and the picker’s score/Done footer.
+The home title and description are shortened. The centered workspace keeps side margins; live score dimensions sit directly below the six team cards in a compact row, with recommendation actions underneath. Share team follows the total score in the team toolbar. Rules, saved teams, recommendation reasons and detailed analysis expand on demand. Try example loads six familiar Pokémon only into an empty team and can be cleared. At 1366×768, the example team, live score and recommendation action fit without page scrolling; smaller screens retain responsive layouts and the picker’s score/Done footer.
 
-Desktop side rails are reserved without ad scripts: 120px per side at widths ≥1440px and 160px at ≥1536px. The central tool stays at up to 1120px; smaller screens hide the rails.
+The central tool stays at up to 1120px with at least 32px side margins on desktop and 12px on narrow screens. The browser tab uses a red-and-white Poké Ball SVG icon.
 
 ## Automatic improvements and favorite locks
 Recommendations default to Auto: incomplete teams fill their first empty slot; full teams compare all six unlocked replacement positions and show the six best distinct candidates. Each card identifies the outgoing teammate, uses the unchanged deterministic score, and offers expandable reasons. Manual slot selection remains available.

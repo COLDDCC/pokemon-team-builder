@@ -304,3 +304,45 @@ header { padding: 14px 0; }
  .tool-workspace { grid-template-columns: minmax(0,1fr); }
  .tool-workspace > * { min-width: 0; }
 }
+
+/* Center the workspace and keep the team summary directly below its roster. */
+.site-frame { display: block; width: min(1120px, calc(100% - 64px)); max-width: 1120px; margin-inline: auto; }
+.site-content > header, .site-content > main, .site-content > footer { width: 100%; }
+.ad-rail { display: none; }
+.tool-workspace { grid-template-columns: minmax(0,1fr); }
+.tool-workspace > .builder, .tool-workspace > .recommendations, .tool-workspace > .data-credit { grid-column: 1; grid-row: auto; }
+.builder > .analysis { display: block; margin: 12px 0 0; }
+.builder .analysis-overview { display: block; }
+.builder .score-details { padding: 10px 12px; }
+.builder .score-details h2 { font-size: 13px; margin: 0 0 8px; }
+.builder .dimension-grid { grid-template-columns: repeat(4,minmax(0,1fr)); gap: 16px; }
+.builder .dimension > div { font-size: 12px; margin-bottom: 4px; }
+.builder .dimension meter { height: 8px; }
+.builder .analysis-note { font-size: 11px; line-height: 1.4; margin: 6px 0 0; }
+.builder .analysis > details { margin: 6px 0 0; padding: 8px 12px; }
+.builder .analysis summary { font-size: 12px; }
+.team-bottom-actions:empty { display: none; }
+.builder-toolbar .toolbar-actions { flex-wrap: wrap; }
+.builder-toolbar .toolbar-score { margin-right: 0; }
+@media (max-width: 600px) {
+ .site-frame { width: calc(100% - 24px); }
+ .builder .dimension-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px 16px; }
+ .builder-toolbar .toolbar-actions { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+
+.tool-workspace > .analysis-details { display: block; grid-column: 1; grid-row: auto; }
+.builder .live-message { min-height: 0; line-height: 1.4; margin: 6px 0 0; }
+@media (min-width: 1100px) {
+ .builder .team-card { min-height: 158px; }
+ .builder .team-card > .sprite-large { width: 56px; height: 56px; }
+ .builder .analysis-note { margin-top: 4px; }
+ .builder .score-details { padding: 8px 12px; }
+}
+@media (min-width: 1100px) {
+ .builder .team-card { min-height: 140px; padding-top: 10px; }
+ .builder .team-card > .sprite-large { width: 48px; height: 48px; }
+ .builder .score-details h2 { margin-bottom: 4px; }
+ .builder .saved-teams { margin-top: 6px; padding: 6px 8px; }
+ .recommendations { padding: 10px; }
+ .recommend-card { gap: 3px; padding: 8px; }
+}
