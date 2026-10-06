@@ -256,3 +256,11 @@ Added clearly labeled feedback@example.com placeholder and Cloudflare build-vari
 - lint, typecheck, all 28 unit tests, production build and generated route/sitemap checks passed. Both new mobile regression tests passed individually.
 - The local portable Chromium crashes when contexts are reused during the full suite; full browser validation uses GitHub's standard Chromium runner. Real iOS/Safari and software-keyboard testing remain unverified.
 - Full GitHub browser review additionally reproduced mobile overflow after expanding detailed analysis. The implicit grid column used the table's intrinsic width; constrained the mobile workspace to `minmax(0, 1fr)` and allowed grid children to shrink. Added an overflow assertion after expanding methodology. The previously failing mobile analysis/clear-team scenario now passes locally without forced clicks or scrolling workarounds.
+
+## First-six editorial refinement — 2026-10-06
+- Added a purpose and limitation for all 24 moves, more concrete entry/setup guidance, and reciprocal support plus remaining weaknesses for all 12 partner cards. Corrected Corviknight's Rock matchup to neutral damage.
+- Checked evolution conditions against the installed Showdown Dex; checked all six items, abilities, natures and move names. Existing data tests verify Gen 9 learning sources.
+- Move-note and loadout grids now shrink and wrap on small screens; the mobile item card spans both columns for readable item names.
+- Changed daily-release merging to preserve edited current records and their type declarations. A temporary fixture with deliberately stale archived Pikachu content verified all six current records survive while exactly one archived species is appended.
+- Local lint, typecheck, 28 unit tests, production build and route checks pass. Production browser checks cover all six guides at 320, 390, 768 and 1366 pixels, with four move explanations, two partner cards and no horizontal overflow per page.
+- Published scope remains six species; the release schedule remains gated.

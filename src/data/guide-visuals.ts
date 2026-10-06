@@ -17,11 +17,11 @@ export const guideVisuals: Record<string, { evolution: { id: string; condition: 
     "partners": [
       {
         "id": "corviknight",
-        "reason": "Ground immunity and a sturdier switch-in."
+        "reason": "Corviknight is immune to Ground, Pikachu\u2019s only type weakness. Pikachu threatens Water targets for it. Both still need a plan for strong Fire attackers."
       },
       {
         "id": "gastrodon",
-        "reason": "Immune to Electric attacks; resists Fire and Rock."
+        "reason": "Gastrodon resists Fire and Rock and provides a sturdier option. Pikachu pressures Water targets, while its Electric typing resists neither Ground nor Grass: add a Grass answer."
       }
     ]
   },
@@ -43,11 +43,11 @@ export const guideVisuals: Record<string, { evolution: { id: string; condition: 
     "partners": [
       {
         "id": "gastrodon",
-        "reason": "Resists Rock and is immune to Electric attacks."
+        "reason": "Gastrodon resists Rock and is immune to Electric, covering two Charizard weaknesses. Charizard resists Grass 4\u00d7, helping with Gastrodon\u2019s 4\u00d7 Grass weakness."
       },
       {
         "id": "corviknight",
-        "reason": "Resists Rock; shares an Electric weakness, so keep a Ground partner."
+        "reason": "Corviknight takes neutral Rock damage, not resisted damage, and resists Dragon and Fairy. Both are weak to Electric; pair them with an Electric immunity such as Gastrodon."
       }
     ]
   },
@@ -69,11 +69,11 @@ export const guideVisuals: Record<string, { evolution: { id: string; condition: 
     "partners": [
       {
         "id": "corviknight",
-        "reason": "Resists Fairy and Dragon; takes neutral Ice damage."
+        "reason": "Corviknight resists Fairy and Dragon and is immune to Ground. Ice damage is neutral, so do not treat it as an Ice resistance. Garchomp is immune to its Electric weakness."
       },
       {
         "id": "azumarill",
-        "reason": "Resists Ice and is immune to Dragon attacks."
+        "reason": "Azumarill resists Ice and is immune to Dragon. Garchomp covers its Electric weakness, but neither resists Fairy; add a Steel teammate for that matchup."
       }
     ]
   },
@@ -95,11 +95,11 @@ export const guideVisuals: Record<string, { evolution: { id: string; condition: 
     "partners": [
       {
         "id": "corviknight",
-        "reason": "Immune to Ground; resists Psychic attacks."
+        "reason": "Corviknight is immune to Ground and resists Psychic, covering two Gengar weaknesses. Gengar can pressure some Fairy targets, but both still need help against Fire coverage."
       },
       {
         "id": "clefable",
-        "reason": "Resists Dark attacks; adds a Fairy option."
+        "reason": "Clefable resists Dark for Gengar. Gengar resists Poison for Clefable, but the pair still needs a Ground answer and a teammate that can handle Steel targets."
       }
     ]
   },
@@ -121,11 +121,11 @@ export const guideVisuals: Record<string, { evolution: { id: string; condition: 
     "partners": [
       {
         "id": "scizor",
-        "reason": "Resists Ice, Dragon and Fairy attacks."
+        "reason": "Scizor resists Ice, Dragon and Fairy. Dragonite resists Fire for Scizor\u2019s 4\u00d7 Fire weakness; preserve its HP before relying on that switch."
       },
       {
         "id": "gastrodon",
-        "reason": "Resists Rock; takes neutral Ice damage."
+        "reason": "Gastrodon resists Rock and is immune to Electric. Dragonite resists Grass 4\u00d7 for Gastrodon. Gastrodon takes neutral Ice damage, so add a true Ice resistance."
       }
     ]
   },
@@ -143,11 +143,11 @@ export const guideVisuals: Record<string, { evolution: { id: string; condition: 
     "partners": [
       {
         "id": "gyarados",
-        "reason": "Immune to Ground and resists Fire and Fighting."
+        "reason": "Gyarados is immune to Ground and resists Fire and Fighting, covering all Lucario type weaknesses. Its own 4\u00d7 Electric weakness still needs an answer."
       },
       {
         "id": "slowbro",
-        "reason": "Resists Fire and Fighting; adds a bulky Water option."
+        "reason": "Slowbro resists Fire and Fighting and supplies physical bulk. Lucario resists Dark, Grass and Bug for Slowbro, but neither is immune to Ground."
       }
     ]
   }
