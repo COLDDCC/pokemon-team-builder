@@ -224,18 +224,6 @@ header { padding: 14px 0; }
  .team-card > .sprite-large { width: 64px; height: 64px; }
 }
 
-/* Reserve side rails without ad scripts or visible placeholder banners. */
-.site-content { min-width: 0; }
-.ad-rail { display: none; }
-@media (min-width: 1440px) {
- .site-frame { display: grid; grid-template-columns: 120px minmax(0,1120px) 120px; gap: 20px; max-width: 1400px; width: calc(100% - 32px); margin: auto; }
- .site-content > header, .site-content > main, .site-content > footer { width: 100%; }
- .ad-rail { display: block; min-height: 600px; }
-}
-@media (min-width: 1536px) {
- .site-frame { grid-template-columns: 160px minmax(0,1120px) 160px; max-width: 1480px; }
-}
-
 /* One compact brand/intro block; select Pokémon by portrait. */
 .brand-block { min-width: 0; }
 .brand-title { margin: 0; font-size: inherit; letter-spacing: normal; }
@@ -345,4 +333,18 @@ header { padding: 14px 0; }
  .builder .saved-teams { margin-top: 6px; padding: 6px 8px; }
  .recommendations { padding: 10px; }
  .recommend-card { gap: 3px; padding: 8px; }
+}
+
+/* Empty side columns reserved for future 160px or 300px desktop ads. */
+@media (min-width: 1280px) {
+ .site-frame { display: grid; grid-template-columns: 160px minmax(0,1120px) 160px; gap: 24px; width: calc(100% - 32px); max-width: 1488px; }
+ .ad-rail { display: block; width: 160px; min-height: 600px; }
+}
+@media (min-width: 1800px) {
+ .site-frame { grid-template-columns: 300px minmax(0,1120px) 300px; max-width: 1768px; }
+ .ad-rail { width: 300px; }
+}
+@media (min-width: 1280px) {
+ .tool-workspace { gap: 8px; }
+ .recommend-card { row-gap: 2px; }
 }

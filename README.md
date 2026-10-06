@@ -51,7 +51,7 @@ The site uses a Pokémon-inspired light palette: warm white surfaces, blue headi
 ## Compact first screen
 The home title and description are shortened. The centered workspace keeps side margins; live score dimensions sit directly below the six team cards in a compact row, with recommendation actions underneath. Share team follows the total score in the team toolbar. Rules, saved teams, recommendation reasons and detailed analysis expand on demand. Try example loads six familiar Pokémon only into an empty team and can be cleared. At 1366×768, the example team, live score and recommendation action fit without page scrolling; smaller screens retain responsive layouts and the picker’s score/Done footer.
 
-The central tool stays at up to 1120px with at least 32px side margins on desktop and 12px on narrow screens. The browser tab uses a red-and-white Poké Ball SVG icon.
+The central tool stays at up to 1120px. At viewport widths of 1280px and above, each side reserves a 160px ad column with a 24px gap; at 1800px and above, each column expands to 300px. These columns are empty and hidden on tablets and phones, which retain 12px side margins. The browser tab uses a red-and-white Poké Ball SVG icon.
 
 ## Automatic improvements and favorite locks
 Recommendations default to Auto: incomplete teams fill their first empty slot; full teams compare all six unlocked replacement positions and show the six best distinct candidates. Each card identifies the outgoing teammate, uses the unchanged deterministic score, and offers expandable reasons. Manual slot selection remains available.
