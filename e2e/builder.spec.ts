@@ -77,6 +77,7 @@ test('analysis updates live and exposes the damage matrix and methodology', asyn
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   await page.getByText('How is the score calculated?', { exact: true }).click();
   await expect(page.getByText('Small teams are provisional', { exact: false })).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   await page.getByRole('button', { name: 'Clear team', exact: true }).click();
   await expect(page.getByTestId('team-score')).toHaveText('0/ 100');
 });

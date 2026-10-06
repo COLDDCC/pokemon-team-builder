@@ -298,3 +298,9 @@ header { padding: 14px 0; }
  .builder-toolbar .toolbar-score .score-number { font-size: 22px; }
  .builder-toolbar .toolbar-actions button { min-height: 44px; }
 }
+
+/* Expanded analysis tables must not widen the implicit mobile grid column. */
+@media (max-width: 1099px) {
+ .tool-workspace { grid-template-columns: minmax(0,1fr); }
+ .tool-workspace > * { min-width: 0; }
+}
