@@ -289,3 +289,12 @@ header { padding: 14px 0; }
 /* Search first, immediately accessible type symbols underneath. */
 .picker-search-row .search-label input{height:36px;padding:6px 10px;min-height:0}.picker-search-row .close-button,.picker-search-row button[aria-controls="pokemon-filters"]{height:36px;min-height:36px;padding:4px 8px}.picker-controls>.type-icon-filters{flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;gap:2px;margin-top:6px;padding:2px 0 4px;scrollbar-width:thin;max-width:100%}.picker-controls>.type-icon-filters .type-filter-button{flex:0 0 36px;width:36px;height:36px;padding:1px}.picker-controls .filter-fields{grid-template-columns:1fr;margin-top:6px}.picker-controls .filter-fields label{max-width:180px}@media(pointer:coarse){.picker-controls>.type-icon-filters .type-filter-button{flex-basis:44px;width:44px;height:44px}.picker-search-row .search-label input,.picker-search-row .close-button,.picker-search-row button[aria-controls="pokemon-filters"]{height:44px;min-height:44px}}@media(max-width:520px){.picker-search-row .active-type-name{display:none}}
 .guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:20px 0}.guide-card{display:flex;flex-direction:column;align-items:center;padding:18px;background:#fff;border:1px solid #ccd9ef;border-radius:16px;text-decoration:none;color:#2456a6}.guide-card h2{font-size:18px;margin:8px 0}.guide-card p{margin:4px 0 12px;color:#526782}.guide-card span{font-size:12px}.feedback-panel{max-width:680px}.feedback-panel form{display:grid;gap:14px}.feedback-panel label{display:grid;gap:6px}.feedback-panel textarea{width:100%;font:inherit;padding:12px;border:1px solid #9db5db;border-radius:10px;resize:vertical}.feedback-panel p{font-size:13px;margin:0}footer p{max-width:100%;line-height:1.6}
+
+/* Keep the mobile team heading and actions above the roster. */
+@media (max-width: 600px) {
+ .builder-toolbar { flex-direction: column; align-items: stretch; gap: 10px; }
+ .builder-toolbar .toolbar-actions { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); width: 100%; gap: 6px; }
+ .builder-toolbar .toolbar-score { justify-content: center; align-items: center; min-width: 0; }
+ .builder-toolbar .toolbar-score .score-number { font-size: 22px; }
+ .builder-toolbar .toolbar-actions button { min-height: 44px; }
+}

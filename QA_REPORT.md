@@ -246,3 +246,12 @@ Added clearly labeled feedback@example.com placeholder and Cloudflare build-vari
 - Corrected stale directory E2E assumptions: guide count uses the curated ID list, navigation selects Pikachu explicitly rather than assuming the first number-sorted card is Pikachu, and the heading matches the current build-guide title.
 - Lint and typecheck pass with zero diagnostics; production build and the 210-route static check pass. Search/filter and official-icon/reduced-motion E2E cases passed on desktop and mobile. The initial combined run hit the single-process browser's context reuse failure; isolated lock/recommendation runs passed on both projects.
 - The corrected guide-directory/navigation/feedback E2E test also passes in isolated desktop and mobile runs. No product behavior changes were needed for the audited workflows.
+
+## Prelaunch interaction review — 2026-10-06
+- Published scope remains six species, with their build-guide and teammate routes. Unpublished Corviknight routes return 404.
+- Reviewed rendered home, guide and directory pages at desktop and mobile sizes. Corrected the mobile toolbar's narrow stacked action column using a two-column action grid.
+- Added error fallback for static guide/directory artwork outside hydrated React islands; interactive image handling remains owned by React.
+- Walked picker selection and recommendation application at 320, 390, 768 and 1366 pixels. Displayed target scores matched actual updates; no horizontal overflow or page JavaScript errors.
+- Opened the picker on all six guide pages and checked 96 internal link instances without broken responses.
+- lint, typecheck, all 28 unit tests, production build and generated route/sitemap checks passed. Both new mobile regression tests passed individually.
+- The local portable Chromium crashes when contexts are reused during the full suite; full browser validation uses GitHub's standard Chromium runner. Real iOS/Safari and software-keyboard testing remain unverified.

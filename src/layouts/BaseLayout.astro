@@ -40,3 +40,21 @@ const safeJson = JSON.stringify(jsonld).replace(/</g, '\u003c');
   </head>
   <body><a class="skip" href="#main">Skip to content</a><div class="site-frame"><aside class="ad-rail" data-ad-slot="left" aria-hidden="true"></aside><div class="site-content"><slot /></div><aside class="ad-rail" data-ad-slot="right" aria-hidden="true"></aside></div></body>
 </html>
+<script>
+// Static React markup has no React error handler until an island hydrates.
+// Keep the existing React handler responsible for all interactive islands.
+for (const img of document.querySelectorAll<HTMLImageElement>('.pokemon-sprite img')) {
+  if (img.closest('astro-island')) continue;
+  const fallback = () => {
+    if (img.parentElement?.querySelector('.sprite-fallback')) return;
+    const number = img.getAttribute('src')?.match(/\/(\d+)\.png$/)?.[1];
+    const label = document.createElement('span');
+    label.className = 'sprite-fallback';
+    label.textContent = number ? `#${number}` : 'Pokémon';
+    img.style.display = 'none';
+    img.parentElement?.append(label);
+  };
+  img.addEventListener('error', fallback, { once: true });
+  if (img.complete && img.naturalWidth === 0) fallback();
+}
+</script>

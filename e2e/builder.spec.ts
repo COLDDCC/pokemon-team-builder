@@ -327,3 +327,35 @@ test('guide directory, disclaimer and feedback draft are reachable', async ({ pa
   await expect(page.getByRole('status')).toHaveText('Feedback downloaded. It has not been sent.');
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });
+
+test('static guide artwork has a fallback and unpublished guides stay unreachable', async ({page, request}) => {
+  await page.route('https://cdn.jsdelivr.net/gh/PokeAPI/sprites@*/sprites/pokemon/other/official-artwork/*.png', route => route.abort());
+  await page.goto('/pokemon');
+  const first = page.locator('.guide-card').first();
+  await first.scrollIntoViewIfNeeded();
+  await expect(first.locator('.sprite-fallback')).toBeVisible();
+  await expect(first.locator('img')).toBeHidden();
+  await first.click();
+  await expect(page.locator('.guide-hero .sprite-fallback')).toBeVisible();
+  await expect(page.getByRole('heading', {level:1})).toContainText('Build Guide');
+  if (!featuredPokemonIds.some(id => id === 'corviknight' as string)) {
+    expect((await request.get('/pokemon/corviknight')).status()).toBe(404);
+    expect((await request.get('/pokemon/corviknight/best-teammates')).status()).toBe(404);
+  }
+});
+
+test('directory filters and reset preserve all published guide links', async ({page}) => {
+  await page.goto('/pokemon');
+  await page.getByRole('searchbox', {name:'Find a guide'}).fill('445');
+  await expect(page.locator('.guide-card:visible')).toHaveCount(1);
+  await expect(page.locator('.guide-card:visible')).toContainText('Garchomp');
+  await page.getByRole('button', {name:'Clear filters',exact:true}).click();
+  await expect(page.locator('.guide-card:visible')).toHaveCount(featuredPokemonIds.length);
+  await page.getByRole('searchbox', {name:'Find a guide'}).fill('zzzzzz');
+  await expect(page.locator('.guide-card:visible')).toHaveCount(0);
+  await expect(page.locator('#guide-empty')).toBeVisible();
+  await page.getByRole('button', {name:'Clear filters',exact:true}).click();
+  await page.getByLabel('Sort', {exact:true}).selectOption('name');
+  await expect(page.locator('.guide-card').first()).toContainText('Charizard');
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
