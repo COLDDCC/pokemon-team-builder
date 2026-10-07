@@ -1,4 +1,4 @@
-import raw from './pokemon.json';
+import raw from './pokemon.json' with { type: 'json' };
 import { validatePokemonData } from './schema';
 export const pokemon = validatePokemonData(raw);
 export const pokemonById = new Map(pokemon.map(p => [p.id, p]));
