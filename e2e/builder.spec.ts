@@ -149,7 +149,8 @@ test('saved teams survive reload and load, clear and recommendations can be rest
   await expect(page.getByTestId('slot-3').getByRole('heading', {name:'Gengar',exact:true})).toBeVisible();
   await page.reload();
   await page.getByText('Saved teams · 1', {exact:true}).click();
-  await page.getByRole('button', {name:'Clear team',exact:true}).click();
+  await expect(page.getByRole('button', {name:'Clear team',exact:true})).toBeDisabled();
+  expect(new URL(page.url()).search).toBe('');
   await page.getByRole('button', {name:'Load Adventure',exact:true}).click();
   await expect(page.getByTestId('slot-0').getByRole('heading', {name:'Pikachu',exact:true})).toBeVisible();
   await expect(page.getByRole('button', {name:'Add Pokémon to slot 2',exact:true})).toBeVisible();
@@ -251,7 +252,7 @@ test('sprites appear in team, picker and recommendations with a safe image failu
   await page.getByRole('button',{name:'Close Pokémon picker',exact:true}).click();
   await page.unroute('https://cdn.jsdelivr.net/gh/PokeAPI/sprites@*/sprites/pokemon/other/official-artwork/*.png');
   await page.route('https://cdn.jsdelivr.net/gh/PokeAPI/sprites@*/sprites/pokemon/other/official-artwork/*.png', route=>route.abort());
-  await page.reload();
+  await page.goto('/pokemon/pikachu/best-teammates');
   await expect(page.getByTestId('slot-0').locator('.sprite-fallback')).toHaveText('#25');
   await expect(page.getByTestId('slot-0').getByRole('heading',{name:'Pikachu',exact:true})).toBeVisible();
   await page.getByRole('button',{name:'Replace Pikachu',exact:true}).click();
