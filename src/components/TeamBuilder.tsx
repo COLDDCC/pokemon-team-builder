@@ -9,7 +9,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { formats, getFormat, isAllowed } from '../data/formats';
 import { normalizeSearch, pokemon, pokemonById } from '../data/pokemon';
 import { pokemonTypes, type Pokemon } from '../data/pokemon/schema';
-import { emptyTeam, parseTeamState, setTeamSlot, teamUrl, type TeamState } from '../lib/url-state';
+import { emptyTeam, parseTeamState, setTeamSlot, type TeamState } from '../lib/url-state';
 function TypeBadges({ item }: { item: Pokemon }) {
   return <span className="type-badges">{item.types.map(t => <span key={t} className={`type-badge type-${t.toLowerCase()}`}>{t}</span>)}</span>;
 }
@@ -30,7 +30,6 @@ export default function TeamBuilder({ initialPokemon, focus = 'all' }: { initial
   const [generation, setGeneration] = useState('');
   const [limit, setLimit] = useState(60);
   const [message, setMessage] = useState('');
-  const [shareLink, setShareLink] = useState('');
   const pendingPickerEffect = useRef({slots: [] as number[], scoreChanged: false});
   const dialog = useRef<HTMLDialogElement>(null);
   const search = useRef<HTMLInputElement>(null);
@@ -46,10 +45,10 @@ export default function TeamBuilder({ initialPokemon, focus = 'all' }: { initial
       const parsed = params.has('team') || params.has('v') || params.has('format') ? parseTeamState(window.location.search) : { state: initialPokemon ? setTeamSlot(emptyTeam(), 0, initialPokemon) : emptyTeam(), repaired: false };
       setTeam(parsed.state); setLockedIds([]); setScoreChange(null);
       setMessage(parsed.repaired ? 'Some invalid or duplicate entries in this link were removed.' : '');
-      setShareLink('');
+      if (window.location.search) window.history.replaceState(window.history.state, '', window.location.pathname + window.location.hash);
     };
     restore();
-    try { setSavedTeams(parseSavedTeams(localStorage.getItem(savedTeamsKey))); } catch { /* Storage may be blocked; sharing still works. */ }
+    try { setSavedTeams(parseSavedTeams(localStorage.getItem(savedTeamsKey))); } catch { /* Editing still works when storage is blocked. */ }
     setReady(true);
     window.addEventListener('popstate', restore);
     return () => window.removeEventListener('popstate', restore);
@@ -91,14 +90,13 @@ export default function TeamBuilder({ initialPokemon, focus = 'all' }: { initial
     setEditEffect(old => ({revision: old.revision + 1, slots: next.slots.flatMap((id, index) => id && id !== team.slots[index] ? [index] : []), scoreRevision: old.scoreRevision + (after !== analysis.total ? 1 : 0)}));
     setScoreChange({before: analysis.total, after});
     setLockedIds(ids => ids.filter(id => next.slots.includes(id)));
-    setTeam(next); setShareLink(''); setMessage(notice);
-    window.history.replaceState(null, '', teamUrl(window.location.href, next));
+    setTeam(next); setMessage(notice);
   }
   function persistSaved(next: SavedTeam[], notice: string) {
     try {
       localStorage.setItem(savedTeamsKey, serializeSavedTeams(next));
       setSavedTeams(next); setMessage(notice); return true;
-    } catch { setMessage('Browser storage is unavailable or full. Use Share team to keep a copy.'); return false; }
+    } catch { setMessage('Browser storage is unavailable or full. Your current team remains editable.'); return false; }
   }
   function saveTeam() {
     if (!count || !teamName.trim()) return;
@@ -132,15 +130,9 @@ export default function TeamBuilder({ initialPokemon, focus = 'all' }: { initial
       dialog.current?.querySelector('.picker-results-scroll')?.scrollTo(0, 0);
     } else closePicker();
   }
-  async function share() {
-    const link = teamUrl(window.location.href, team);
-    setShareLink(link);
-    try { await navigator.clipboard.writeText(link); setMessage('Team link copied. Open it in another browser to restore your team.'); }
-    catch { setMessage('Copy the team link below to share your team.'); }
-  }
   return <div className="tool-workspace">
     <section className="builder" aria-labelledby="team-title">
-      <div className="builder-toolbar"><div><p className="eyebrow">TEAM WORKSPACE</p><h2 id="team-title">Your team <span className="count">{count} / 6</span></h2></div><div className="toolbar-actions"><button className="button primary" disabled={!ready || count === 6} onClick={e => openSlot(team.slots.findIndex(id => !id), e.currentTarget, true)}>Build team</button><div className="toolbar-score" aria-live="polite"><span className="score-number" data-testid="team-score"><span key={editEffect.scoreRevision} className={`score-value${editEffect.scoreRevision ? ' score-bounce' : ''}`}>{analysis.total}</span><span>/ 100</span></span><span>{analysis.rating}</span></div><button className="button secondary" disabled={!ready} onClick={share}>Share team ↗</button><button className="button secondary" disabled={!ready || count > 0} onClick={() => update({...emptyTeam(), slots: ['pikachu', 'charizard', 'blastoise', 'venusaur', 'gengar', 'dragonite']}, 'Example team loaded. Try a recommendation to improve it.')}>Try example</button><button className="button secondary" disabled={!ready || !count} onClick={() => update(emptyTeam(), 'Team cleared.')}>Clear team</button></div></div>
+      <div className="builder-toolbar"><div><p className="eyebrow">TEAM WORKSPACE</p><h2 id="team-title">Your team <span className="count">{count} / 6</span></h2></div><div className="toolbar-actions"><button className="button primary" disabled={!ready || count === 6} onClick={e => openSlot(team.slots.findIndex(id => !id), e.currentTarget, true)}>Build team</button><div className="toolbar-score" aria-live="polite"><span className="score-number" data-testid="team-score"><span key={editEffect.scoreRevision} className={`score-value${editEffect.scoreRevision ? ' score-bounce' : ''}`}>{analysis.total}</span><span>/ 100</span></span><span>{analysis.rating}</span></div><button className="button secondary" disabled={!ready || count > 0} onClick={() => update({...emptyTeam(), slots: ['pikachu', 'charizard', 'blastoise', 'venusaur', 'gengar', 'dragonite']}, 'Example team loaded. Try a recommendation to improve it.')}>Try example</button><button className="button secondary" disabled={!ready || !count} onClick={() => update(emptyTeam(), 'Team cleared.')}>Clear team</button></div></div>
       <details className="format-settings"><summary>Gen 9 · National Dex · Casual <span>Settings & scope</span></summary><div className="format-fields"><label>Game<select aria-label="Game" value="gen9" onChange={() => {}}><option value="gen9">Generation 9</option></select></label><label>Format<select aria-label="Format" value={team.format} onChange={e => update({ ...team, format: e.target.value }, 'Format updated.')} >{formats.map(f => <option value={f.id} key={f.id}>{f.name}</option>)}</select></label></div>
       <details className="format-note"><summary>Format scope · casual planning</summary><p>{format.description}</p></details></details>
       <div className="team-grid">{members.map((p, index) => <article className={`team-card ${p ? 'filled' : ''}`} key={index} data-testid={`slot-${index}`}>
@@ -150,14 +142,13 @@ export default function TeamBuilder({ initialPokemon, focus = 'all' }: { initial
       <TeamAnalysis team={selectedPokemon} analysis={analysis} focus={focus} variant="overview"/>
       <div className="team-bottom-actions">{scoreChange && <span className="score-change" role="status">{scoreChange.before} → {scoreChange.after} · {scoreChange.after - scoreChange.before > 0 ? '+' : ''}{scoreChange.after - scoreChange.before} points</span>}</div>
       <p className="live-message" role="status">{message || (ready ? 'Click any empty slot to start. Search 1,025 Pokémon by name or Pokédex number.' : 'Loading team workspace…')}</p>
-      {shareLink && <label className="share-field">Your team link<input readOnly value={shareLink} onFocus={e => e.currentTarget.select()}/></label>}
       <details className="saved-teams"><summary>Saved teams · {savedTeams.length}</summary>
-        <p>Keep up to 20 teams in this browser. Use Share team to move them to another device. Clearing browser data removes saved teams.</p>
+        <p>Keep up to 20 teams in this browser. Clearing browser data removes saved teams.</p>
         <form className="save-team-form" onSubmit={e => { e.preventDefault(); saveTeam(); }}><label>Team name<input value={teamName} maxLength={60} onChange={e => setTeamName(e.target.value)} placeholder="My adventure team" /></label><button className="button secondary" disabled={!ready || !count || !teamName.trim()}>Save current team</button></form>
         {!savedTeams.length && <p>No saved teams yet.</p>}
         <ul>{savedTeams.map(saved => <li key={saved.id}><div><strong>{saved.name}</strong><span>{saved.state.slots.filter(Boolean).length}/6 · {saved.state.slots.flatMap(id => id ? [pokemonById.get(id)!.name] : []).join(', ')}</span></div><div className="toolbar-actions"><button className="button secondary" onClick={() => update(saved.state, `${saved.name} loaded.`)} aria-label={`Load ${saved.name}`}>Load</button><button className="button secondary" onClick={() => persistSaved(savedTeams.filter(t => t.id !== saved.id), `${saved.name} deleted.`)} aria-label={`Delete ${saved.name}`}>Delete</button></div></li>)}</ul>
       </details>
-      <noscript><p>Enable JavaScript to search, edit, and share your Pokémon team.</p></noscript>
+      <noscript><p>Enable JavaScript to search and edit your Pokémon team.</p></noscript>
     </section>
     <TeamRecommendations lockedIds={lockedIds} state={team} currentScore={analysis.total} apply={applyRecommendation}/>
     <TeamAnalysis team={selectedPokemon} analysis={analysis} focus={focus} variant="details"/>

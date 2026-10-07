@@ -22,8 +22,7 @@ test('ad columns and revised team layout remain usable across screen sizes', asy
       const roster = (await page.locator('.team-grid').boundingBox())!;
       expect((await page.locator('.builder > .analysis').boundingBox())!.y).toBeGreaterThanOrEqual(roster.y + roster.height);
     } else await expect(rails.first()).toBeHidden();
-    await page.getByRole('button', { name: 'Share team', exact: false }).click();
-    await expect(page.getByLabel('Your team link')).toHaveValue(/team=/);
+    expect(new URL(page.url()).search).toBe('');
     await page.getByText('Detailed type analysis · all 18 types', { exact: true }).click();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
     await page.getByRole('button', { name: 'Replace Pikachu', exact: true }).click();

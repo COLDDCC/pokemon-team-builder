@@ -1,7 +1,8 @@
+import { pokemonById } from '../src/data/pokemon';
 import { featuredPokemonIds } from '../src/config/seo-pages';
 import AxeBuilder from '@axe-core/playwright';
 import { test, expect } from '@playwright/test';
-test('edit six slots, prevent duplicates, replace, remove and restore a shared team', async ({ page, context }) => {
+test('edit six slots, prevent duplicates, replace, remove and keep a clean URL', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.goto('/');
@@ -19,14 +20,8 @@ test('edit six slots, prevent duplicates, replace, remove and restore a shared t
   await page.getByRole('button', { name: 'Choose Garchomp', exact: true }).click();
   await page.getByRole('button', { name: 'Remove Venusaur', exact: true }).click();
   await expect(page.getByRole('button', { name: 'Add Pokémon to slot 3', exact: true })).toBeVisible();
-  await page.getByRole('button', { name: 'Share team', exact: false }).click();
-  const link = await page.getByRole('textbox', { name: 'Your team link' }).inputValue();
-  const other = await context.newPage();
-  await other.goto(link);
-  await expect(other.getByTestId('slot-0').getByRole('heading', { name: 'Pikachu', exact: true })).toBeVisible();
-  await expect(other.getByTestId('slot-1').getByRole('heading', { name: 'Garchomp', exact: true })).toBeVisible();
-  await expect(other.getByRole('button', { name: 'Add Pokémon to slot 3', exact: true })).toBeVisible();
-  await expect(other.getByTestId('slot-5').getByRole('heading', { name: 'Dragonite', exact: true })).toBeVisible();
+  expect(new URL(page.url()).search).toBe('');
+  await expect(page.getByRole('button', {name: /Share team/})).toHaveCount(0);
   await page.getByRole('button', { name: 'Clear team', exact: true }).click();
   await expect(page.getByRole('button', { name: /Add Pokémon to slot/ })).toHaveCount(6);
   expect(errors).toEqual([]);
@@ -53,14 +48,12 @@ test('search and filters work with keyboard dialog dismissal and no horizontal o
   await expect(add).toBeFocused();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 });
-test('malformed links repair safely and blocked clipboard has a manual fallback', async ({ page }) => {
+test('malformed links repair safely and remove their query parameters', async ({ page }) => {
   await page.addInitScript(() => Object.defineProperty(navigator, 'clipboard', { value: { writeText: () => Promise.reject(new Error('blocked')) }, configurable: true }));
   await page.goto('/?v=1&format=unknown&team=pikachu,pikachu,nope');
   await expect(page.getByText('Some invalid or duplicate entries in this link were removed.', { exact: true })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Pikachu', exact: true })).toHaveCount(1);
-  await page.getByRole('button', { name: 'Share team', exact: false }).click();
-  await expect(page.getByText('Copy the team link below to share your team.', { exact: true })).toBeVisible();
-  await expect(page.getByRole('textbox', { name: 'Your team link' })).toHaveValue(/team=pikachu/);
+  expect(new URL(page.url()).search).toBe('');
 });
 test('analysis updates live and exposes the damage matrix and methodology', async ({ page }) => {
   await page.goto('/?v=1&team=charizard,moltres,hooh');
@@ -90,7 +83,8 @@ test('recommendations apply the displayed score and target an explicit replaceme
   const expected = await first.getAttribute('data-new-score');
   await first.getByRole('button').click();
   await expect(page.getByTestId('team-score')).toHaveText(`${expected}/ 100`);
-  expect(new URL(page.url()).searchParams.get('team')?.split(',')[3]).toBe(addedId);
+  await expect(page.getByTestId('slot-3').getByRole('heading')).toHaveText(pokemonById.get(addedId!)!.name);
+  expect(new URL(page.url()).search).toBe('');
   await page.getByLabel('Slot to optimize', { exact: true }).selectOption('0');
   await expect(page.getByText('Replacing Charizard in slot 1.', { exact: false })).toBeVisible();
   const replacement = page.getByTestId('recommendation').first();
@@ -98,8 +92,8 @@ test('recommendations apply the displayed score and target an explicit replaceme
   const replacementScore = await replacement.getAttribute('data-new-score');
   await replacement.getByRole('button').click();
   await expect(page.getByTestId('team-score')).toHaveText(`${replacementScore}/ 100`);
-  const ids = new URL(page.url()).searchParams.get('team')?.split(',');
-  expect(ids?.[0]).toBe(replacementId); expect(ids?.[1]).toBe('moltres'); expect(ids?.[3]).toBe(addedId);
+  await expect(page.getByTestId('slot-0').getByRole('heading')).toHaveText(pokemonById.get(replacementId!)!.name);
+  expect(new URL(page.url()).search).toBe('');
 });
 test('SEO routes prefill their Pokémon, honor explicit share state and expose metadata', async ({ page, request }) => {
   await page.goto('/pokemon/garchomp/best-teammates');
@@ -167,7 +161,7 @@ test('saved teams survive reload and load, clear and recommendations can be rest
   await expect(page.getByText('No saved teams yet.', {exact:true})).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
-test('blocked storage keeps editing and sharing usable', async ({ page }) => {
+test('blocked storage keeps editing usable', async ({ page }) => {
   await page.addInitScript(() => {
     Object.defineProperty(window, 'localStorage', {get() {throw new Error('blocked');}});
   });
@@ -176,8 +170,7 @@ test('blocked storage keeps editing and sharing usable', async ({ page }) => {
   await page.getByRole('textbox', {name:'Team name',exact:true}).fill('Backup');
   await page.getByRole('button', {name:'Save current team',exact:true}).click();
   await expect(page.getByRole('status').filter({hasText:'Browser storage is unavailable or full.'})).toBeVisible();
-  await page.getByRole('button', {name:'Share team',exact:false}).click();
-  await expect(page.getByRole('textbox', {name:'Your team link',exact:true})).toHaveValue(/team=pikachu/);
+  expect(new URL(page.url()).search).toBe('');
 });
 
 test('continuous building fills six slots without reopening and permits stopping early', async ({page}) => {

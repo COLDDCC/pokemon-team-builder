@@ -13,12 +13,12 @@ Requires Node.js 24 and npm. Run `npm ci`, then `npm run dev`. Open the local ad
 - `npm run preview` — serve the built output locally.
 
 ## Current scope
-Phase 0–6 implementation complete: validated local 1,025-species dataset, casual format, six-slot React builder, name/number search, type/generation filters, add/remove/replace, duplicate protection and versioned share URLs. Deterministic type analysis and four explainable scores are implemented. Computed recommendations evaluate all eligible local candidates for a selected empty or occupied slot, show the real score delta, and apply the change in one click. The last 24 team/slot queries are cached. See DATA_SOURCES.md for scope and attribution.
+Phase 0–6 implementation complete: validated local 1,025-species dataset, casual format, six-slot React builder, name/number search, type/generation filters, add/remove/replace, duplicate protection and clean URLs without team parameters. Deterministic type analysis and four explainable scores are implemented. Computed recommendations evaluate all eligible local candidates for a selected empty or occupied slot, show the real score delta, and apply the change in one click. The last 24 team/slot queries are cached. See DATA_SOURCES.md for scope and attribution.
 
 Read PRODUCT_SPEC.md for the supplied plan and TODO.md for the next phases. The team builder is hydrated with React; SEO content remains static. Styling uses plain CSS until the functional UI phase needs further tooling.
 
 ## Architecture
-`src/components`: interactive UI; `src/data/pokemon`: local dataset; `src/data/formats`: rules; `src/lib/scoring`: deterministic scoring; `src/lib/recommendations`: candidate evaluation; `src/lib/url-state`: share state; `src/config`: shared configuration; `src/pages`: static routes.
+`src/components`: interactive UI; `src/data/pokemon`: local dataset; `src/data/formats`: rules; `src/lib/scoring`: deterministic scoring; `src/lib/recommendations`: candidate evaluation; `src/lib/url-state`: team validation and legacy state parsing; `src/config`: shared configuration; `src/pages`: static routes.
 
 ## Deployment
 Build with `npm ci && npm run build`; publish `dist/` to Cloudflare Pages or Vercel. This commit does not deploy or change DNS. The centralized origin in src/config/site.ts is shared by Astro, metadata, robots and sitemap. No environment secrets are needed. Optional GA4 and GSC public identifiers are documented in .env.example; analytics is omitted when no valid ID is configured.
@@ -77,3 +77,5 @@ Guide and teammate pages include a compact, static breadcrumb path back to the g
 
 ## Staged guide release
 Launch includes Pikachu, Charizard, Garchomp, Gengar, Dragonite and Lucario (six species, each with a build guide and teammate page). The remaining 96 guides are preserved on `archive/102-guides`, not included in main. Daily release is disabled until launch. After launch, set the repository Actions variable `GUIDE_RELEASE_ENABLED` to `true`. The release workflow proposes one species per day in a pull request; review and merge after the quality checks pass. This also requires allowing GitHub Actions to create pull requests. No deployment is configured by this change.
+
+Team edits never write state into the address bar. Share-link UI is disabled by user request. Legacy team links are read once and their query string is removed.

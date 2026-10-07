@@ -69,7 +69,7 @@ function update() {
   fallbackGuide.href = `/pokemon/${match.id}`;
   fallbackName.textContent = match.name;
   fallbackDescription.textContent = published ? 'This guide is excluded by your filters. You can still start a team.' : 'No guide yet. You can still explore this Pokémon in the team builder.';
-  fallbackLink.href = `/?v=1&team=${match.id}`;
+  fallbackLink.href = '/';
   const art = `https://cdn.jsdelivr.net/gh/PokeAPI/sprites@a3a1432e688ea028f12c51371d5253037cb9f17b/sprites/pokemon/other/official-artwork/${match.number}.png`;
   if(fallbackArt.getAttribute('src') !== art) { fallbackArt.hidden=false;fallbackArt.src=art; }
  }
@@ -78,7 +78,7 @@ function update() {
  suggestionGrid.replaceChildren();
  for(const p of candidates) {
   const link = document.createElement('a');
-  link.href = `/?v=1&team=${p.id}`;
+  link.href = '/';
   const art = document.createElement('img');
   art.src = `https://cdn.jsdelivr.net/gh/PokeAPI/sprites@a3a1432e688ea028f12c51371d5253037cb9f17b/sprites/pokemon/other/official-artwork/${p.number}.png`;
   art.width=64;art.height=64;art.alt='';art.loading='lazy';
@@ -87,11 +87,7 @@ function update() {
   const number = document.createElement('small');number.textContent=`#${String(p.number).padStart(3,'0')} · Build team →`;
   link.append(art,name,number);suggestionGrid.append(link);
  }
- const url = new URL(location.href);
- for(const [key,value] of [['q',search.value.trim()],['type',selectedType],['gen',generation.value],['sort',sort.value==='name'?'name':'']]) {
-  if(value) url.searchParams.set(key,value); else url.searchParams.delete(key);
- }
- try { history.replaceState(history.state,'',url); } catch { /* Filtering still works if history is unavailable. */ }
+ if(location.search) history.replaceState(history.state, '', location.pathname + location.hash);
 }
 function restore() {
  const params = new URL(location.href).searchParams;
