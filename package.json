@@ -5,12 +5,15 @@
   "scripts": {
     "test": "vitest run",
     "dev": "astro dev",
+    "predev": "npm run sprites:generate",
     "lint": "eslint .",
     "typecheck": "astro check",
     "build": "astro build",
+    "prebuild": "npm run sprites:generate",
     "preview": "astro preview",
     "check": "npm run lint && npm run typecheck && npm test && npm run build && npm run check:build",
     "data:generate": "node scripts/generate-data.mjs",
+    "sprites:generate": "node scripts/generate-sprites.mjs",
     "test:e2e": "playwright test",
     "check:build": "node scripts/check-build.mjs",
     "audit": "node scripts/audit.mjs"
@@ -36,6 +39,7 @@
     "eslint-plugin-astro": "^3.2.1",
     "globals": "^17.13.0",
     "lighthouse": "^13.5.0",
+    "sharp": "^0.35.5",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.71.0",
     "vitest": "^5.0.3"

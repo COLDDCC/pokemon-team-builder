@@ -28,6 +28,8 @@ After the actual production domain is reachable over HTTPS, verify Search Consol
 ## Validation before release
 `npm ci`, `npm run check`, `npx playwright install --with-deps chromium`, `npm run test:e2e`.
 
+`prebuild` generates the 1,025 resized sprites into `public/sprites/`, so a build needs outbound access to the pinned jsDelivr commit and publishes roughly 23 MB of extra static files. `npm run check:build` fails when either size is incomplete, which is why a host that builds in CI needs network egress rather than a pre-committed image set.
+
 This change prepares hosting configuration and instructions. It does not create a Cloudflare/Vercel project, alter DNS, deploy the site, register Search Console or configure a real analytics account.
 
 Official references:

@@ -27,3 +27,10 @@ The Phase 2 builder supports editing and sharing. Type analysis, deterministic s
 - [x] Respond to VisualViewport height/offset changes and restore background scrolling on close.
 - [x] Restore keyboard focus to an enabled toolbar action when filling the last slot disables the original opener.
 - [x] Replace letter tokens with PokéAPI sprites in team cards, search results and recommendations, with fixed dimensions and request-failure fallback.
+- [x] Serve artwork from the site origin: build-time 160px/320px WebP for all 1,025 species replaces the 475px jsDelivr PNG, cutting one picker page from 8.63 MB to about 0.4 MB.
+
+## Sprite delivery follow-ups
+- [ ] Re-run `npm run audit` on the built output and compare Lighthouse LCP and network weight against the recorded CDN baseline.
+- [ ] Confirm sprite weight against a real mobile budget after deployment; 23 MB now lives on the origin, so the host's static file cache and bandwidth limits are worth checking.
+- [ ] Consider committing the generated WebP set (or caching `.sprite-cache/` in Actions) if CI build time or CDN egress becomes a problem.
+- Alternate forms and cosmetic sprites remain unavailable; the pinned upstream is keyed by National Dex number and the pool is base species only.

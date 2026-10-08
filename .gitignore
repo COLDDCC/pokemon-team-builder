@@ -1,6 +1,8 @@
 node_modules/
 dist/
 .astro/
+public/sprites/
+.sprite-cache/
 .env
 .env.*
 !.env.example

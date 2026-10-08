@@ -5,6 +5,8 @@ Astro + React + TypeScript foundation for superpokemonteambuilder.com.
 ## Local development
 Requires Node.js 24 and npm. Run `npm ci`, then `npm run dev`. Open the local address printed by Astro.
 
+`predev` and `prebuild` generate the sprite set into the ignored `public/sprites/`, so the first command on a fresh clone downloads 1,025 pinned artworks and needs network access. Reruns are incremental. Use `npm run sprites:generate -- --force` after changing sizes or quality.
+
 - `npm run lint` — ESLint for Astro, JavaScript and TypeScript.
 - `npm run typecheck` — Astro and TypeScript diagnostics.
 - `npm test` — non-interactive Vitest.
@@ -24,7 +26,7 @@ Read PRODUCT_SPEC.md for the supplied plan and TODO.md for the next phases. The 
 Build with `npm ci && npm run build`; publish `dist/` to Cloudflare Pages or Vercel. This commit does not deploy or change DNS. The centralized origin in src/config/site.ts is shared by Astro, metadata, robots and sitemap. No environment secrets are needed. Optional GA4 and GSC public identifiers are documented in .env.example; analytics is omitted when no valid ID is configured.
 
 ## Data and rights
-The local dataset is derived from MIT-licensed @pkmn/dex; see DATA_SOURCES.md and THIRD_PARTY_NOTICES.md. PokéAPI sprites are loaded from a pinned jsDelivr source; no sprite binaries are bundled. Pokémon and related names belong to their respective owners; this is an unofficial fan project. Data licenses and sprite attribution must be documented before Phase 1 assets are added.
+The local dataset is derived from MIT-licensed @pkmn/dex; see DATA_SOURCES.md and THIRD_PARTY_NOTICES.md. PokéAPI official artwork is fetched from a pinned upstream commit at build time, resized to 160px and 320px WebP, and served from this site's own origin; the generated files are ignored by git rather than committed. Pokémon and related names belong to their respective owners; this is an unofficial fan project. Data licenses and sprite attribution must be documented before Phase 1 assets are added.
 
 ## Browser checks
 Run `npx playwright install chromium`, then `npm run test:e2e`. The suite builds and previews production output and checks real builder interactions at desktop and mobile sizes.

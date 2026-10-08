@@ -47,7 +47,7 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ## PokéAPI sprites
-Source: PokeAPI/sprites, commit a3a1432e688ea028f12c51371d5253037cb9f17b, official-artwork images loaded through jsDelivr.
+Source: PokeAPI/sprites, commit a3a1432e688ea028f12c51371d5253037cb9f17b, official-artwork images. The build downloads each pinned PNG through jsDelivr, resizes it to 160px and 320px WebP with `scripts/generate-sprites.mjs`, and serves those files from the site origin. The resized copies are derivative works of the same upstream images; no re-authoring or third-party redraw is involved.
 Upstream LICENCE.txt states: "All image contents within are Copyright The Pokémon Company." The repository is distributed under CC0 1.0 Universal. The repository license does not transfer third-party Pokémon copyrights or trademarks. Source and full license: https://github.com/PokeAPI/sprites/blob/a3a1432e688ea028f12c51371d5253037cb9f17b/LICENCE.txt
 
 Official type icon artwork: original Japanese Pokémon Pokédex SVG assets, https://zukan.pokemon.co.jp/. © Pokémon. © Nintendo/Creatures Inc./GAME FREAK inc. The 18 assets are used as type identifiers on this unofficial fan tool; they are not covered by the software's MIT data licenses.

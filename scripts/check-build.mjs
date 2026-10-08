@@ -1,4 +1,4 @@
-import { readFileSync, existsSync, readdirSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import assert from 'node:assert/strict';
 import { site as config } from '../src/config/site.ts';
 import { featuredPokemonIds, indexablePaths } from '../src/config/seo-pages.ts';
@@ -24,3 +24,17 @@ console.log(`Verified ${paths.length} static SEO pages, 404, robots and OG image
 
 const generatedSpecies = readdirSync('dist/pokemon', {withFileTypes:true}).filter(entry => entry.isDirectory()).map(entry => entry.name).sort();
 assert.deepEqual(generatedSpecies, [...featuredPokemonIds].sort(), 'Only published species may generate pages');
+
+const expectedSprites = new Set(JSON.parse(readFileSync('src/data/pokemon/pokemon.json', 'utf8')).map(entry => `${entry.number}.webp`));
+let spriteBytes = 0;
+for (const width of [160, 320]) {
+  const directory = `dist/sprites/official/${width}`;
+  assert.ok(existsSync(directory), `${directory} is missing. Build runs sprites:generate; a bare astro build has no artwork.`);
+  const files = readdirSync(directory, { withFileTypes: true }).map(entry => entry.name);
+  assert.deepEqual(new Set(files), expectedSprites, `${directory} must hold exactly one WebP per species`);
+  const empty = files.filter(name => statSync(`${directory}/${name}`).size === 0);
+  assert.deepEqual(empty, [], `${directory} contains empty sprites`);
+  spriteBytes += files.reduce((total, name) => total + statSync(`${directory}/${name}`).size, 0);
+}
+assert.ok(spriteBytes < 40 * 1048576, `Bundled sprites should stay resized and local (${(spriteBytes / 1048576).toFixed(1)} MB)`);
+console.log(`Verified 1025 local sprites in both sizes (${(spriteBytes / 1048576).toFixed(1)} MB, ${(spriteBytes / expectedSprites.size / 1024).toFixed(1)} KB per species)`);

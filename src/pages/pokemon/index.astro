@@ -70,7 +70,7 @@ function update() {
   fallbackName.textContent = match.name;
   fallbackDescription.textContent = published ? 'This guide is excluded by your filters. You can still start a team.' : 'No guide yet. You can still explore this Pokémon in the team builder.';
   fallbackLink.href = '/';
-  const art = `https://cdn.jsdelivr.net/gh/PokeAPI/sprites@a3a1432e688ea028f12c51371d5253037cb9f17b/sprites/pokemon/other/official-artwork/${match.number}.png`;
+  const art = `/sprites/official/160/${match.number}.webp`;
   if(fallbackArt.getAttribute('src') !== art) { fallbackArt.hidden=false;fallbackArt.src=art; }
  }
  const candidates = !visible && query.length >= 2 && !match && !numeric ? species.filter(p=>p.search.includes(query) && (!selectedType || p.types.includes(selectedType)) && (!generation.value || String(p.generation)===generation.value)).sort((a,b)=>Number(b.search.startsWith(query))-Number(a.search.startsWith(query)) || a.number-b.number).slice(0,6) : [];
@@ -80,7 +80,7 @@ function update() {
   const link = document.createElement('a');
   link.href = '/';
   const art = document.createElement('img');
-  art.src = `https://cdn.jsdelivr.net/gh/PokeAPI/sprites@a3a1432e688ea028f12c51371d5253037cb9f17b/sprites/pokemon/other/official-artwork/${p.number}.png`;
+  art.src = `/sprites/official/160/${p.number}.webp`;
   art.width=64;art.height=64;art.alt='';art.loading='lazy';
   art.addEventListener('error',()=>{art.hidden=true;});
   const name = document.createElement('strong');name.textContent=p.name;
