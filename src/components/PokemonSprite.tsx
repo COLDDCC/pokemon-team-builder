@@ -10,7 +10,10 @@ export default function PokemonSprite({ pokemon, size = 'small', eager = false }
     if (image.current?.complete && image.current.naturalWidth === 0) setFailed(true);
   }, [pokemon.number]);
   const width = spriteWidth[size];
+  // Small cards sit at 42–100 CSS pixels, so 160px covers 1x and 2x; 3x phones need the 320px file.
+  const src = `/sprites/official/${width}/${pokemon.number}.webp`;
+  const srcSet = size === 'small' ? `/sprites/official/160/${pokemon.number}.webp 1x, /sprites/official/320/${pokemon.number}.webp 2x` : undefined;
   return <span className={`pokemon-sprite sprite-${size}`} aria-hidden="true">
-    {failed ? <span className="sprite-fallback">#{pokemon.number}</span> : <img ref={image} key={pokemon.number} src={`/sprites/official/${width}/${pokemon.number}.webp`} alt="" width={width} height={width} loading={eager ? 'eager' : 'lazy'} decoding="async" onError={() => setFailed(true)}/>}
+    {failed ? <span className="sprite-fallback">#{pokemon.number}</span> : <img ref={image} key={pokemon.number} src={src} srcSet={srcSet} alt="" width={width} height={width} loading={eager ? 'eager' : 'lazy'} decoding="async" onError={() => setFailed(true)}/>}
   </span>;
 }

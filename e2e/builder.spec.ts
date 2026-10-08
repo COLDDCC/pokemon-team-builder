@@ -250,6 +250,7 @@ test('sprites are served from the local build and fall back safely', async ({pag
   await page.getByRole('button',{name:'Add Pokémon to slot 2',exact:true}).click();
   await page.getByRole('searchbox').fill('Charizard');
   await expect(page.getByRole('button',{name:'Choose Charizard',exact:true}).locator('img')).toHaveAttribute('src',/\/sprites\/official\/160\/6\.webp$/);
+  await expect(page.getByRole('button',{name:'Choose Charizard',exact:true}).locator('img')).toHaveAttribute('srcset','/sprites/official/160/6.webp 1x, /sprites/official/320/6.webp 2x');
   await page.getByRole('button',{name:'Close Pokémon picker',exact:true}).click();
   expect([...spriteHosts]).toEqual([]);
   await page.route('**/sprites/official/**', route=>route.abort());
