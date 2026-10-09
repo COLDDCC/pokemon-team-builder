@@ -38,3 +38,9 @@ for (const width of [160, 320]) {
 }
 assert.ok(spriteBytes < 40 * 1048576, `Bundled sprites should stay resized and local (${(spriteBytes / 1048576).toFixed(1)} MB)`);
 console.log(`Verified 1025 local sprites in both sizes (${(spriteBytes / 1048576).toFixed(1)} MB, ${(spriteBytes / expectedSprites.size / 1024).toFixed(1)} KB per species)`);
+
+const scoreFont = 'dist/fonts/archivo-black-digits.woff2';
+assert.ok(statSync(scoreFont).size > 0, `${scoreFont} is missing or empty: the team score would fall back to the body font.`);
+const bundledCss = readdirSync('dist/_astro').filter(name => name.endsWith('.css')).map(name => readFileSync(`dist/_astro/${name}`, 'utf8')).join('');
+assert.ok(bundledCss.includes('/fonts/archivo-black-digits.woff2'), 'The bundled CSS must reference the score font by its origin-absolute path.');
+console.log(`Verified the score font ships (${statSync(scoreFont).size} B) and is referenced by the bundled CSS`);

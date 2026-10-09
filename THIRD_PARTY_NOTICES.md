@@ -51,3 +51,10 @@ Source: PokeAPI/sprites, commit a3a1432e688ea028f12c51371d5253037cb9f17b, offici
 Upstream LICENCE.txt states: "All image contents within are Copyright The Pokémon Company." The repository is distributed under CC0 1.0 Universal. The repository license does not transfer third-party Pokémon copyrights or trademarks. Source and full license: https://github.com/PokeAPI/sprites/blob/a3a1432e688ea028f12c51371d5253037cb9f17b/LICENCE.txt
 
 Official type icon artwork: original Japanese Pokémon Pokédex SVG assets, https://zukan.pokemon.co.jp/. © Pokémon. © Nintendo/Creatures Inc./GAME FREAK inc. The 18 assets are used as type identifiers on this unofficial fan tool; they are not covered by the software's MIT data licenses.
+
+## Archivo Black (team score digits)
+Source: Google Fonts `ofl/archivoblack` — https://github.com/google/fonts/tree/main/ofl/archivoblack. `public/fonts/archivo-black-digits.woff2` (3,620 bytes, weight 400) is the digits-only subset (U+0030–U+0039) that Google Fonts serves for that family, downloaded from fonts.gstatic.com on 2026-10-08 and committed to this repository. It is referenced once, as the team score number, under the CSS family name `Score Digits`; that alias is a local naming choice, not a license requirement — this font's copyright line declares no Reserved Font Name.
+
+Copyright 2017 The Archivo Black Project Authors (https://github.com/Omnibus-Type/ArchivoBlack).
+
+Licensed under the SIL Open Font License, Version 1.1. Condition 2 requires the copyright notice and license to accompany each copy of the Font Software, so the full license text is served next to the font at `/fonts/OFL.txt` and stored in this repository at `public/fonts/OFL.txt`. License: http://scripts.sil.org/OFL

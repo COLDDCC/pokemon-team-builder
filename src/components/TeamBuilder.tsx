@@ -10,6 +10,7 @@ import { formats, getFormat, isAllowed } from '../data/formats';
 import { normalizeSearch, pokemon, pokemonById } from '../data/pokemon';
 import { pokemonTypes, type Pokemon } from '../data/pokemon/schema';
 import { emptyTeam, parseTeamState, setTeamSlot, type TeamState } from '../lib/url-state';
+const scoreRollMs = 300;
 function TypeBadges({ item }: { item: Pokemon }) {
   return <span className="type-badges">{item.types.map(t => <span key={t} className={`type-badge type-${t.toLowerCase()}`}>{t}</span>)}</span>;
 }
@@ -38,6 +39,30 @@ export default function TeamBuilder({ initialPokemon, focus = 'all' }: { initial
   const members = team.slots.map(id => id ? pokemonById.get(id) : undefined);
   const selectedPokemon = useMemo(() => team.slots.flatMap(id => { const p = id ? pokemonById.get(id) : undefined; return p ? [p] : []; }), [team]);
   const analysis = useMemo(() => analyzeTeam(selectedPokemon), [selectedPokemon]);
+  const [shownScore, setShownScore] = useState(analysis.total);
+  const shownScoreRef = useRef(analysis.total);
+  const targetScoreRef = useRef(analysis.total);
+  const rollingScore = useRef(false);
+  targetScoreRef.current = analysis.total;
+  useEffect(() => { shownScoreRef.current = shownScore; }, [shownScore]);
+  useEffect(() => {
+    if (!editEffect.scoreRevision) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { setShownScore(targetScoreRef.current); return; }
+    const from = shownScoreRef.current;
+    const start = performance.now();
+    rollingScore.current = true;
+    let frame = requestAnimationFrame(function step(now: number) {
+      const to = targetScoreRef.current;
+      const k = Math.min(1, (now - start) / scoreRollMs);
+      const next = k < 1 ? Math.round(from + (to - from) * (1 - (1 - k) ** 3)) : to;
+      setShownScore(next);
+      if (next === to && k >= 1) { rollingScore.current = false; return; }
+      frame = requestAnimationFrame(step);
+    });
+    return () => { rollingScore.current = false; cancelAnimationFrame(frame); };
+  }, [editEffect.scoreRevision]);
+  useEffect(() => { if (!rollingScore.current) setShownScore(targetScoreRef.current); }, [analysis.total]);
+  const scoreUp = !scoreChange || scoreChange.after >= scoreChange.before;
   const count = selectedPokemon.length;
   useEffect(() => {
     const restore = () => {
@@ -132,7 +157,7 @@ export default function TeamBuilder({ initialPokemon, focus = 'all' }: { initial
   }
   return <div className="tool-workspace">
     <section className="builder" aria-labelledby="team-title">
-      <div className="builder-toolbar"><div><p className="eyebrow">TEAM WORKSPACE</p><h2 id="team-title">Your team <span className="count">{count} / 6</span></h2></div><div className="toolbar-actions"><button className="button primary" disabled={!ready || count === 6} onClick={e => openSlot(team.slots.findIndex(id => !id), e.currentTarget, true)}>Build team</button><div className="toolbar-score" aria-live="polite"><span className="score-number" data-testid="team-score"><span key={editEffect.scoreRevision} className={`score-value${editEffect.scoreRevision ? ' score-bounce' : ''}`}>{analysis.total}</span><span>/ 100</span></span><span>{analysis.rating}</span></div><button className="button secondary" disabled={!ready || count > 0} onClick={() => update({...emptyTeam(), slots: ['pikachu', 'charizard', 'blastoise', 'venusaur', 'gengar', 'dragonite']}, 'Example team loaded. Try a recommendation to improve it.')}>Try example</button><button className="button secondary" disabled={!ready || !count} onClick={() => update(emptyTeam(), 'Team cleared.')}>Clear team</button></div></div>
+      <div className="builder-toolbar"><div><p className="eyebrow">TEAM WORKSPACE</p><h2 id="team-title">Your team <span className="count">{count} / 6</span></h2></div><div className="toolbar-actions"><button className="button primary" disabled={!ready || count === 6} onClick={e => openSlot(team.slots.findIndex(id => !id), e.currentTarget, true)}>Build team</button><div className="toolbar-score" aria-live="polite"><span className="visually-hidden">{`Team score ${analysis.total} of 100`}</span><span className="score-number" data-testid="team-score"><span key={editEffect.scoreRevision} className={`score-value${editEffect.scoreRevision ? scoreUp ? ' score-up' : ' score-down' : ''}`} aria-hidden="true">{shownScore}</span><span>/ 100</span></span><span>{analysis.rating}</span></div><button className="button secondary" disabled={!ready || count > 0} onClick={() => update({...emptyTeam(), slots: ['pikachu', 'charizard', 'blastoise', 'venusaur', 'gengar', 'dragonite']}, 'Example team loaded. Try a recommendation to improve it.')}>Try example</button><button className="button secondary" disabled={!ready || !count} onClick={() => update(emptyTeam(), 'Team cleared.')}>Clear team</button></div></div>
       <details className="format-settings"><summary>Gen 9 · National Dex · Casual <span>Settings & scope</span></summary><div className="format-fields"><label>Game<select aria-label="Game" value="gen9" onChange={() => {}}><option value="gen9">Generation 9</option></select></label><label>Format<select aria-label="Format" value={team.format} onChange={e => update({ ...team, format: e.target.value }, 'Format updated.')} >{formats.map(f => <option value={f.id} key={f.id}>{f.name}</option>)}</select></label></div>
       <details className="format-note"><summary>Format scope · casual planning</summary><p>{format.description}</p></details></details>
       <div className="team-grid">{members.map((p, index) => <article className={`team-card ${p ? 'filled' : ''}`} key={index} data-testid={`slot-${index}`}>

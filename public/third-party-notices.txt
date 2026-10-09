@@ -52,3 +52,8 @@ Repository distribution: CC0 1.0 Universal. Image copyright: The Pokémon Compan
 License: https://github.com/PokeAPI/sprites/blob/a3a1432e688ea028f12c51371d5253037cb9f17b/LICENCE.txt
 
 Type icon artwork: original SVG assets from the official Japanese Pokémon Pokédex, https://zukan.pokemon.co.jp/. © Pokémon. © Nintendo/Creatures Inc./GAME FREAK inc. This tool is unofficial and is not endorsed by these owners.
+
+Team score digits: Archivo Black, from Google Fonts ofl/archivoblack, https://github.com/google/fonts/tree/main/ofl/archivoblack
+Shipped file: /fonts/archivo-black-digits.woff2 (3,620 bytes, weight 400), Google's digits-only (U+0030-U+0039) subset, committed 2026-10-08. Referenced under the CSS family name "Score Digits".
+Copyright 2017 The Archivo Black Project Authors (https://github.com/Omnibus-Type/ArchivoBlack)
+License: SIL Open Font License, Version 1.1 — full text served at /fonts/OFL.txt and stored at public/fonts/OFL.txt

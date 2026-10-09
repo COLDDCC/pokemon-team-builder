@@ -274,3 +274,59 @@ Added clearly labeled feedback@example.com placeholder and Cloudflare build-vari
 - lint, typecheck, 28 unit tests, production build and `check:build` pass. `check:build` now asserts both sprite directories hold exactly one non-empty WebP per species and stay under a 40 MB budget.
 - Verified in a real browser against the built output: team card uses `/sprites/official/320/25.webp`, picker card `/sprites/official/160/6.webp`, guide hero decodes at 320px, and no HTTP request leaves the site origin. With sprite requests aborted, the React island and the non-hydrated static guide pages both fall back to the Dex number while names and type badges stay visible.
 - The full 40-case Playwright suite could not be validated end to end locally: the portable Chromium build dies on context reuse partway through a serial run (10 of 20 desktop cases and the mobile project fail with `Target page, context or browser has been closed`), and the installed Edge crashes under the suite's `--single-process` launch arguments. This matches the previously recorded local-browser limitation. Both changed browser cases pass when run individually — `sprites are served from the local build and fall back safely` passes in the desktop and mobile projects, and `static guide artwork has a fallback…` passes alone — and GitHub's standard Chromium runner covers the whole suite.
+
+## Score typography — 2026-10-08
+Reported: the score that updates on each pick looks too plain for a game. Measured first, on the built site at 1280px: `[data-testid="team-score"] .score-value` computed to **14px / weight 500**, identical to the grey `/ 100` beside it, because `.score-number span { font-size: 14px; font-weight: 500 }` also matched the number span and the declared `28px / 850` never reached the digits. `font-synthesis: none` plus an `Inter` stack that this repository never loads meant no weight could be recovered. That is a silent CSS collision, not a taste problem; the fix scopes the suffix rule to `.score-number > span:last-child`.
+
+Treatment: digits set in Archivo Black with an action-game damage-number recipe copied from a reference site the user named (genshindamagecalculator.com). The reference's own computed styles were read from the live page rather than guessed at: family `Archivo Black`, `color rgb(255,180,60)`, `3px rgb(74,44,18)` text stroke, `paint-order: stroke`, `linear-gradient(rgb(255,253,244), rgb(255,233,168) 45%, rgb(255,180,60))` clipped to text, no text-shadow. Two faces were tried before this — Titan One, then Press Start 2P at the user's pick — and both were set aside when the user pointed at the reference. No asset, font file or code was taken from that site; the font subset is ours from Google Fonts.
+
+Two adaptations were needed. The reference sets its number at 36px on a dark UI; ours is 28px, so a literal 3px stroke was too heavy and the derived widths were re-measured. The stroke is therefore declared in `em` (`.09em`) so it tracks the 28px and 22px breakpoints instead of being pinned to one size: it computes to **2.52px at 1280px and 1.98px at ≤600px**. `paint-order: stroke fill` is load-bearing — without it the stroke paints over the gradient and eats the counters.
+
+Verified after the change (`getComputedStyle`, built site, `deviceScaleFactor: 2`):
+
+| Viewport | `.score-value` | stroke | `/ 100` suffix | Toolbar `scrollWidth` = `clientWidth` | Document overflow |
+| --- | --- | --- | --- | --- | --- |
+| 1280px | 28px, `Score Digits` | 2.52px | 14px | 822 = 822 | none |
+| 390px | 22px, `Score Digits` | 1.98px | 14px | 340 = 340 | none |
+| 360px | 22px, `Score Digits` | 1.98px | 14px | 310 = 310 | none |
+
+Widths with the number forced to `100`: `.toolbar-score` is 124px at 1280px. On mobile `.toolbar-score` is a grid cell, so its 167px (390px) and 152px (360px) are the *track* widths set by the container, not the content — the content measures 104px in both, i.e. 63px and 48px of slack. An earlier revision of this report read those track widths as content widths and claimed "3px of slack"; that was a measurement error and is corrected here. Digit advance widths are uniform (`88`, `69` and `47` all measure 29.4px, `100` 44.0px), so the number does not nudge the layout when it crosses from two digits to three.
+
+Contrast — the honest caveat, and it is a real difference from the reference: this gradient was designed for a dark UI. Against our page background `#fffdf5` the gold bottom stop `#ffb43c` is **1.74:1**, the 45% stop `#ffe9a8` is 1.18:1 and the top stop `#fffdf4` is **1.00:1** — effectively invisible at the top of every glyph. WCAG's 3:1 for large text is met by none of the fills; only the `#4a2c12` outline carries the digits, at **12.42:1**, and because `paint-order` makes it a 2.5px ring around a 28px glyph the number is still unambiguous. Ratios come from the sRGB relative-luminance formula against `--page`. The previous pass kept a blue `#2456a6` fill (6.97:1) precisely to avoid this; the gold fill is what the user asked for and is a one-line change back.
+
+Payload: one same-origin request for `archivo-black-digits.woff2`, **3,620 bytes**, `font-display: swap`, no `<link rel=preload>`. Requests counted per page against `astro preview`: `/`, `/weakness-calculator` and `/type-coverage` fetch it once each; `/about` and `/pokemon` fetch it zero times, because `@font-face` resolves only when a `.score-value` digit renders. Confirmed again after the swap by watching `.woff2` requests at all three viewports. No third-party font host is contacted.
+
+Faces measured and set aside, each rendered in the real toolbar (width of "82" at 28px / "100" at 22px): Titan One 36 / 42px, Rubik Mono One 48 / 57px, Silkscreen 49 / 55px (its `8` reads as `#` at 28px), Modak 32 / 34px (counters fill in), Bungee Shade 44 / 52px (ships its own shadow, which fights the CSS ring), Lilita One 31 / 37px, Faster One 45 / 50px, Jersey 15 23 / 27px, Press Start 2P, plus Orbitron, Tektur, Chakra Petch, Rajdhani, Space Grotesk and Bungee in the earlier round.
+
+Guards: `npm run check:build` asserts the font ships non-empty and that the bundled CSS references it by origin-absolute path; `e2e/builder.spec.ts` asserts the digits use the `Score Digits` family and are at least 1.5× the suffix size. `npm run lint`, `npm run typecheck`, `npm test` (28 tests) and the amended e2e case on both projects pass. The full 40-case suite still cannot run in this environment (Playwright limitation recorded above), so this case was executed in isolation with `-g`.
+
+Not done: the `/ 100` suffix, the rating word, the `45 → 52 · +7 points` line and the `+N pts` badges keep the body font — the subset ships ten glyphs, so extending the display face to those lines needs a larger subset and a check that `→` and `+` exist in it.
+
+## Score change effect — 2026-10-08
+Asked to make the moment the score changes land harder. What existed: one 480 ms `score-bounce`, `translateY(-5px) scale(1.12)` at 35% — a nudge. The number also snapped to its new value instantly, which is the main reason the change read as flat.
+
+Now, per score change: the digits **roll** old → new over 300 ms (`requestAnimationFrame`, cubic ease-out, integers only), then everything else fires on a 300 ms delay so the impact lands exactly when the roll stops. Gain plays `score-slam` (660 ms: overshoot to 1.52 with a −3° tilt, squash to 0.86, rebound to 1.15, settle) plus `score-flash` (420 ms, `filter: brightness()` peaking at 2.7 — the gold blows out to white at the hit, like a damage number) plus `score-shock` (a `::after` ring, `scale(.3)`→`2.3`, opacity .95→0). A loss plays `score-shake` instead — sink to 0.74, three-frame horizontal shake, blue ring — so direction is legible without reading the digits.
+
+Sequencing detail: with `animation-fill-mode: both`, the 0% frame is held for the whole 300 ms delay, so every 0% keyframe has to be the resting state (`scale(1)`, `brightness(1)`, `opacity:0` on the ring). The first draft started the flash at `brightness(2.6)`, which left the digits blown out *while they rolled*.
+
+Measured on the built site by pausing `document.getAnimations()` at fixed times (`deviceScaleFactor: 2`, 1280px):
+
+| Animation time | `getComputedStyle().transform` | `filter` |
+| --- | --- | --- |
+| 201 ms (during the roll) | identity | `brightness(1) saturate(1)` |
+| 400 ms (100 ms into the slam) | `matrix(1.512, −0.078, …)` → scale 1.51, −3° | `brightness(2.38) saturate(0.55)` |
+| 560 ms | scale 0.862 | `brightness(1.30) saturate(1.11)` |
+| 700 ms | scale 1.149 | `brightness(1.01)` |
+| 1100 ms | identity | `brightness(1) saturate(1)` |
+
+Layout: transforms only, so nothing reflows. At the impact frame `documentElement.scrollWidth == clientWidth` at both 1280px and 390px (1280/1280, 390/390) and no horizontal overflow appears; the scaled number does reach ~24px above the toolbar row (number top 67.8 vs toolbar top 92), which is intentional and harmless because the ring is `pointer-events:none`. Digit advance widths are uniform, so the roll never nudges `/ 100`.
+
+Accessibility: a rolling number inside `aria-live="polite"` would have announced ~30 times per change. `.score-value` is now `aria-hidden="true"` and a `.visually-hidden` span in `.toolbar-score` carries `Team score N of 100`, so the live region fires once with the final value. It is the first child, not the last, because `.toolbar-score > span:last-child { font-size: 12px }` styles the rating word and `.score-number > span:last-child` styles `/ 100` — appending it would have re-skinned both.
+
+Robustness: the roll's target is read from a ref each frame rather than captured at start, and a separate effect syncs the displayed number whenever `analysis.total` moves without a revision bump. Without that, a team change arriving through the URL sync path (`setTeam` at line 65, which does not bump `scoreRevision`) would have left the digits stuck on the old score permanently.
+
+Reduced motion: the JS jumps straight to the final value and CSS sets `animation: none`. That override had to move *below* the animation shorthands at the end of the file — a media query adds no specificity, so the earlier block lost the cascade and the impact kept running. Caught by the existing `toHaveCSS('animation-name','none')` assertion, which is why it is covered rather than assumed.
+
+Guards: `e2e/builder.spec.ts` now asserts `animation-name` matches `score-(slam|shake), score-flash`, a `0.3s, 0.3s` delay pair and `both` fill on both animations, plus the reduced-motion `none`. The one-shot `textContent()` read of the score in the saved-teams case is preceded by a poll that the rolled digits have caught up with the hidden live value — with the number animating, that read could otherwise capture a mid-roll value and make the case flaky. `analysis updates live`, `official type assets…`, `saved teams survive…`, `edit six slots…`, `accessible empty…`, `recommendations apply…`, `continuous building…` and `automatic replacements…` all pass on both projects when run in isolation (the local Playwright context-reuse limitation above still blocks a full serial run).
+
+Pre-existing failure, not from this change: `desktop core tools fit the first screen` asserts the first recommendation button ends at or above 768px at 1366×768; it measures **782.67px**, 14.67px below the fold. Verified unrelated by stashing the whole score change and re-running against the branch HEAD, which fails with the identical `782.671875`, and by confirming that removing the score markup from the live DOM leaves the button at the same y. `origin/main` (c6e9f60) fails the same way locally, yet its last push is green on GitHub's runner in both `Quality checks` and `Deploy GitHub Pages`, so this is a local-Chromium difference at that viewport (font metrics or scrollbar width on Windows), not a live regression. Nothing was changed to chase it.

@@ -64,6 +64,13 @@ test('analysis updates live and exposes the damage matrix and methodology', asyn
   await page.getByRole('searchbox').fill('Excadrill');
   await page.getByRole('button', { name: 'Choose Excadrill', exact: true }).click();
   await expect.poll(async () => Number(await page.getByTestId('score-defense').textContent())).toBeGreaterThan(before);
+  const scoreType = await page.evaluate(() => {
+    const number = document.querySelector<HTMLElement>('[data-testid="team-score"] .score-value')!;
+    const suffix = number.parentElement!.querySelector<HTMLElement>('span:last-child')!;
+    return { number: parseFloat(getComputedStyle(number).fontSize), suffix: parseFloat(getComputedStyle(suffix).fontSize), family: getComputedStyle(number).fontFamily };
+  });
+  expect(scoreType.family).toContain('Score Digits');
+  expect(scoreType.number).toBeGreaterThanOrEqual(scoreType.suffix * 1.5);
   await page.getByText('Detailed type analysis · all 18 types', { exact: true }).click();
   const rock = page.getByRole('row').filter({ has: page.getByRole('rowheader', { name: 'Rock', exact: true }) });
   await expect(rock.getByRole('cell', { name: '4×', exact: true })).toHaveCount(3);
@@ -154,6 +161,10 @@ test('saved teams survive reload and load, clear and recommendations can be rest
   await page.getByRole('button', {name:'Load Adventure',exact:true}).click();
   await expect(page.getByTestId('slot-0').getByRole('heading', {name:'Pikachu',exact:true})).toBeVisible();
   await expect(page.getByRole('button', {name:'Add Pokémon to slot 2',exact:true})).toBeVisible();
+  await expect.poll(() => page.evaluate(() => {
+    const bar = document.querySelector<HTMLElement>('.toolbar-score')!;
+    return bar.querySelector<HTMLElement>('.visually-hidden')!.textContent === `Team score ${bar.querySelector<HTMLElement>('.score-value')!.textContent} of 100`;
+  })).toBe(true);
   const previousScore = await page.getByTestId('team-score').textContent();
   await page.getByTestId('recommendation').first().getByRole('button').click();
   await page.getByRole('button', {name:'Load Adventure',exact:true}).click();
@@ -304,7 +315,9 @@ test('official type assets load and selection feedback respects reduced motion',
   await page.getByRole('button',{name:'Choose Pikachu',exact:true}).click();
   await page.getByRole('button',{name:/Done/}).click();
   await expect(page.getByTestId('slot-0').locator('.selection-flash')).toHaveCount(1);
-  await expect(page.locator('.score-value')).toHaveCSS('animation-name','score-bounce');
+  await expect(page.locator('.score-value')).toHaveCSS('animation-name',/^score-(slam|shake), score-flash$/);
+  await expect(page.locator('.score-value')).toHaveCSS('animation-delay','0.3s, 0.3s');
+  await expect(page.locator('.score-value')).toHaveCSS('animation-fill-mode','both, both');
   await page.emulateMedia({reducedMotion:'reduce'});
   await expect(page.locator('.score-value')).toHaveCSS('animation-name','none');
   await expect(page.locator('.selection-flash')).toHaveCSS('animation-name','none');
