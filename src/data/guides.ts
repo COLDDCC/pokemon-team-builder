@@ -15,7 +15,7 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
     "caution": "Its low bulk makes direct switches risky. Ground types block Electric attacks; coverage does not guarantee a safe matchup.",
     "partners": "A Flying teammate can cover Ground attacks; a bulky Water partner can absorb hits Pikachu cannot.",
     "alternative": "raichu",
-    "alternativeReason": "Raichu offers more Speed and bulk, but cannot use Light Ball\u2019s boost.",
+    "alternativeReason": "Raichu offers more Speed and bulk, but cannot use Light Ball’s boost.",
     "moveNotes": {
       "Thunderbolt": "Reliable Electric damage; Ground types are immune.",
       "Volt Switch": "Deal damage and switch out; Ground types block the pivot.",
@@ -35,10 +35,10 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
       "Will-O-Wisp"
     ],
     "plan": "Heavy-Duty Boots prevent entry-hazard damage while held. Bring Charizard into a favorable matchup, use Flamethrower against Steel targets, and use Will-O-Wisp when a physical attacker is likely to switch in.",
-    "caution": "Rock attacks deal 4\u00d7 damage. Boots do not reduce direct Rock damage, and losing the item leaves it vulnerable to Stealth Rock.",
+    "caution": "Rock attacks deal 4× damage. Boots do not reduce direct Rock damage, and losing the item leaves it vulnerable to Stealth Rock.",
     "partners": "A Water or Ground partner can help against Rock types. Check that the rest of the team can handle Electric attackers.",
     "alternative": "arcanine",
-    "alternativeReason": "Arcanine offers a different Fire role with Intimidate, without Charizard\u2019s Ground immunity.",
+    "alternativeReason": "Arcanine offers a different Fire role with Intimidate, without Charizard’s Ground immunity.",
     "moveNotes": {
       "Flamethrower": "Reliable Fire damage against Steel, Grass and Ice targets.",
       "Air Slash": "Flying damage with a chance to flinch if Charizard moves first.",
@@ -58,10 +58,10 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
       "Stealth Rock"
     ],
     "plan": "Choose between setting Stealth Rock and boosting with Swords Dance according to the matchup. Rough Skin punishes contact attacks.",
-    "caution": "Ice attacks deal 4\u00d7 damage. Fairy types ignore Dragon Claw, and Flying types ignore Earthquake. This set has no Fire coverage, so Steel/Flying opponents such as Corviknight can stop both attacks.",
+    "caution": "Ice attacks deal 4× damage. Fairy types ignore Dragon Claw, and Flying types ignore Earthquake. This set has no Fire coverage, so Steel/Flying opponents such as Corviknight can stop both attacks.",
     "partners": "A Steel teammate can resist Ice, Dragon and Fairy attacks. A special attacker helps avoid relying entirely on physical damage.",
     "alternative": "flygon",
-    "alternativeReason": "Flygon adds Levitate\u2019s Ground immunity but has lower Attack and bulk.",
+    "alternativeReason": "Flygon adds Levitate’s Ground immunity but has lower Attack and bulk.",
     "moveNotes": {
       "Earthquake": "Strong Ground damage; Flying types and Levitate avoid it.",
       "Dragon Claw": "Dragon damage without locking into the move; Fairy types are immune.",
@@ -81,7 +81,7 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
       "Nasty Plot"
     ],
     "plan": "Bring Gengar in through a safe pivot, then attack with Shadow Ball or Sludge Bomb. Use Nasty Plot only when the opponent is forced out or cannot threaten a knockout. Life Orb adds damage but costs HP after a damaging hit.",
-    "caution": "Gengar has Cursed Body in Generation 9, not Levitate. Ground attacks can hit it, and Focus Blast\u2019s accuracy makes it an unreliable emergency answer.",
+    "caution": "Gengar has Cursed Body in Generation 9, not Levitate. Ground attacks can hit it, and Focus Blast’s accuracy makes it an unreliable emergency answer.",
     "partners": "A Flying teammate can switch into Ground attacks. A bulky partner can help create safer opportunities to bring Gengar in.",
     "alternative": "alakazam",
     "alternativeReason": "Alakazam is another fast special attacker for broader National Dex planning; availability differs by game.",
@@ -104,7 +104,7 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
       "Dragon Claw"
     ],
     "plan": "Keep Dragonite at full HP so Multiscale halves incoming damage. Boots help preserve that protection against entry hazards. Use a safe turn for Dragon Dance, then select coverage or Extreme Speed to finish a weakened target.",
-    "caution": "Ice attacks deal 4\u00d7 damage, and chip damage disables Multiscale until HP is fully restored. Ghost types ignore Extreme Speed and Fairy types ignore Dragon Claw. Without Normal Tera, Extreme Speed has no same-type bonus.",
+    "caution": "Ice attacks deal 4× damage, and chip damage disables Multiscale until HP is fully restored. Ghost types ignore Extreme Speed and Fairy types ignore Dragon Claw. Without Normal Tera, Extreme Speed has no same-type bonus.",
     "partners": "Steel teammates can cover Ice, Dragon and Fairy attacks. Support that preserves full HP helps its ability work.",
     "alternative": "salamence",
     "alternativeReason": "Salamence offers a different Dragon/Flying attacker with Intimidate, but lacks Multiscale and Extreme Speed.",
@@ -137,5 +137,175 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
       "Extreme Speed": "High-priority Normal attack; Ghost types are immune.",
       "Meteor Mash": "Steel damage for Fairy targets; can raise Attack but may miss."
     }
+  },
+  "corviknight": {
+    "role": "Defensive pivot",
+    "item": "Leftovers",
+    "ability": "Pressure",
+    "nature": "Impish",
+    "moves": [
+      "Brave Bird",
+      "Body Press",
+      "Roost",
+      "U-turn"
+    ],
+    "plan": "Use Roost to recover after taking a hit, then U-turn to bring an attacker in. Body Press uses Defense rather than Attack.",
+    "caution": "Fire and Electric attacks are super effective. Brave Bird recoil and repeated hits can wear it down; Roost temporarily removes Flying typing for that turn.",
+    "partners": "A Ground partner covers Electric attacks; a Water partner helps against Fire attackers.",
+    "alternative": "skarmory",
+    "alternativeReason": "Skarmory shares Steel/Flying typing, but offers a different support movepool."
+  },
+  "gastrodon": {
+    "role": "Bulky special attacker and recovery support",
+    "item": "Leftovers",
+    "ability": "Storm Drain",
+    "nature": "Calm",
+    "moves": [
+      "Earth Power",
+      "Surf",
+      "Ice Beam",
+      "Recover"
+    ],
+    "plan": "Switch into a predicted Water attack to activate Storm Drain, then attack or use Recover. Storm Drain grants Water immunity and raises Special Attack when hit by Water moves.",
+    "caution": "Grass attacks deal 4× damage. Its low Speed makes it vulnerable to strong attackers, and Storm Drain does not protect against Grass coverage.",
+    "partners": "A Steel/Flying or Fire teammate can resist Grass attacks. Add a faster attacker to complement its low Speed.",
+    "alternative": "quagsire",
+    "alternativeReason": "Quagsire shares Water/Ground typing but uses different abilities and an alternative defensive role."
+  },
+  "scizor": {
+    "role": "Physical setup attacker with priority",
+    "item": "Leftovers",
+    "ability": "Technician",
+    "nature": "Adamant",
+    "moves": [
+      "Bullet Punch",
+      "U-turn",
+      "Swords Dance",
+      "Close Combat"
+    ],
+    "plan": "Use Swords Dance when a switch gives you room. Technician boosts Bullet Punch, while U-turn can maintain momentum when staying in is unsafe.",
+    "caution": "Fire attacks deal 4× damage. U-turn removes Swords Dance boosts when Scizor leaves the field, so decide whether to pivot or commit to attacking.",
+    "partners": "A Water teammate can resist Fire. A special attacker helps avoid a team focused entirely on physical damage.",
+    "alternative": "lucario",
+    "alternativeReason": "Lucario provides Steel typing and priority with a different offensive toolkit and weaknesses."
+  },
+  "azumarill": {
+    "role": "Physical attacker with priority",
+    "item": "Sitrus Berry",
+    "ability": "Huge Power",
+    "nature": "Adamant",
+    "moves": [
+      "Liquidation",
+      "Play Rough",
+      "Aqua Jet",
+      "Belly Drum"
+    ],
+    "plan": "Belly Drum maximizes Attack at the cost of half your maximum HP. A Sitrus Berry can restore some HP when its activation threshold is met; Aqua Jet gives priority.",
+    "caution": "Setup is risky and fails without enough HP. Grass, Electric and Poison attacks threaten it; priority does not guarantee a knockout.",
+    "partners": "A Ground partner can cover Electric attacks. A Steel teammate can help against Poison attacks.",
+    "alternative": "primarina",
+    "alternativeReason": "Primarina shares Water/Fairy typing but attacks primarily with Special Attack."
+  },
+  "gyarados": {
+    "role": "Physical setup attacker",
+    "item": "Heavy-Duty Boots",
+    "ability": "Intimidate",
+    "nature": "Jolly",
+    "moves": [
+      "Waterfall",
+      "Earthquake",
+      "Ice Fang",
+      "Dragon Dance"
+    ],
+    "plan": "Intimidate lowers the opposing Pokémon’s Attack on entry unless an immunity or effect prevents it. Find a safe turn for Dragon Dance, then attack.",
+    "caution": "Electric attacks deal 4× damage. Intimidate does not weaken special attacks, and Boots only protect from entry hazards.",
+    "partners": "A Ground teammate provides Electric immunity. A Steel teammate can help cover Rock attacks.",
+    "alternative": "dragonite",
+    "alternativeReason": "Dragonite offers another Flying setup attacker, exchanging Water typing and Intimidate for a different role."
+  },
+  "clefable": {
+    "role": "Bulky special setup attacker",
+    "item": "Leftovers",
+    "ability": "Magic Guard",
+    "nature": "Bold",
+    "moves": [
+      "Moonblast",
+      "Calm Mind",
+      "Moonlight",
+      "Flamethrower"
+    ],
+    "plan": "Use Calm Mind to raise Special Attack and Special Defense, then recover with Moonlight when needed. Magic Guard prevents most indirect damage.",
+    "caution": "Poison and Steel attacks are super effective. Magic Guard does not prevent direct attacks or all status effects; Moonlight recovery changes with weather.",
+    "partners": "A Steel teammate can switch into Poison attacks. A Fire or Ground attacker can help pressure Steel types.",
+    "alternative": "azumarill",
+    "alternativeReason": "Azumarill offers Fairy typing with a physical attacking role and Water coverage."
+  },
+  "raichu": {
+    "role": "Fast special pivot",
+    "item": "Life Orb",
+    "ability": "Lightning Rod",
+    "nature": "Timid",
+    "moves": [
+      "Thunderbolt",
+      "Volt Switch",
+      "Grass Knot",
+      "Surf"
+    ],
+    "plan": "Use Volt Switch against a favorable matchup to bring another teammate in. Lightning Rod grants Electric immunity and can raise Special Attack.",
+    "caution": "Ground types block Electric moves. Low bulk and Life Orb recoil make repeated direct switches risky.",
+    "partners": "A Flying teammate covers Ground attacks. Add a bulky partner to handle hits Raichu cannot take.",
+    "alternative": "pikachu",
+    "alternativeReason": "Pikachu trades Raichu’s higher Speed and bulk for access to Light Ball."
+  },
+  "arcanine": {
+    "role": "Physical attacker with recovery",
+    "item": "Heavy-Duty Boots",
+    "ability": "Intimidate",
+    "nature": "Adamant",
+    "moves": [
+      "Flare Blitz",
+      "Extreme Speed",
+      "Will-O-Wisp",
+      "Morning Sun"
+    ],
+    "plan": "Intimidate can soften a physical attacker on entry. Burn a suitable target or attack, then use Morning Sun when a safe turn appears.",
+    "caution": "Flare Blitz causes recoil. Water, Ground and Rock attacks threaten it, and Morning Sun recovery depends on weather.",
+    "partners": "A Flying partner covers Ground attacks; a bulky Water partner can help against Rock and Water attackers.",
+    "alternative": "charizard",
+    "alternativeReason": "Charizard provides Ground immunity and a special attacking option, but has a 4× Rock weakness."
+  },
+  "flygon": {
+    "role": "Physical pivot and Ground coverage",
+    "item": "Choice Scarf",
+    "ability": "Levitate",
+    "nature": "Jolly",
+    "moves": [
+      "Earthquake",
+      "Dragon Claw",
+      "U-turn",
+      "Stone Edge"
+    ],
+    "plan": "Choice Scarf raises Speed but locks Flygon into the first move it uses until it switches. Use U-turn when a matchup favors a teammate.",
+    "caution": "Ice attacks deal 4× damage. Fairy types ignore Dragon Claw and Flying types avoid Earthquake; a Choice lock can give opponents a free turn.",
+    "partners": "A Steel teammate can cover Fairy and Dragon attacks; a Water teammate helps against Ice attackers.",
+    "alternative": "garchomp",
+    "alternativeReason": "Garchomp offers higher Attack and bulk but lacks Levitate’s Ground immunity."
+  },
+  "salamence": {
+    "role": "Physical setup attacker",
+    "item": "Heavy-Duty Boots",
+    "ability": "Intimidate",
+    "nature": "Jolly",
+    "moves": [
+      "Dragon Dance",
+      "Dragon Claw",
+      "Earthquake",
+      "Dual Wingbeat"
+    ],
+    "plan": "Use Intimidate to soften a physical attacker, then look for a safe Dragon Dance turn. Boots help protect Salamence from entry hazards.",
+    "caution": "Ice attacks deal 4× damage. Intimidate does not reduce special damage, and Fairy types are immune to Dragon Claw.",
+    "partners": "A Steel partner can resist Ice, Dragon and Fairy attacks. Add a special attacker for damage variety.",
+    "alternative": "dragonite",
+    "alternativeReason": "Dragonite offers Multiscale and Extreme Speed, but has lower base Speed."
   }
 };

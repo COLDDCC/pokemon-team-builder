@@ -366,6 +366,8 @@ test('directory filters and reset preserve all published guide links', async ({p
   await expect(page.locator('#guide-empty')).toBeVisible();
   await page.getByRole('button', {name:'Clear filters',exact:true}).click();
   await page.getByLabel('Sort', {exact:true}).selectOption('name');
-  await expect(page.locator('.guide-card').first()).toContainText('Charizard');
+  const directoryNames = await page.locator('.guide-card').evaluateAll(cards => cards.map(card => card.dataset.name!));
+  expect(directoryNames).toEqual([...directoryNames].sort((a, b) => a.localeCompare(b, 'en')));
+  await expect(page.locator('.guide-card').first()).toContainText(directoryNames[0]);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
