@@ -1,0 +1,20 @@
+---
+import type { Pokemon } from '../data/pokemon/schema';
+import type { PokemonGuide } from '../data/guides';
+import { guideDepth } from '../data/guide-depth';
+import GuideText from './GuideText.astro';
+interface Props { pokemon: Pokemon; alternative: Pokemon; guide: PokemonGuide }
+const {pokemon:p, alternative, guide}=Astro.props;
+const depth=guideDepth[p.id];
+const stats=[['HP','hp'],['Attack','atk'],['Defense','def'],['Sp. Attack','spa'],['Sp. Defense','spd'],['Speed','spe']] as const;
+---
+{depth && <>
+<section class="guide-panel guide-reading" id="battle-plan"><p class="reading-label">BATTLE PLAN</p><h2>When to attack, set up or switch</h2><p class="reading-lead"><GuideText text={guide.plan}/></p>{depth.decisions.map(d=><article class="decision"><h3>{d.when}</h3><p><GuideText text={d.action}/></p></article>)}<details><summary>What does a safe pivot mean?</summary><p>A teammate uses a switching move to bring {p.name} in. A slower pivot may take the opponent’s hit first. Turn order and the opponent’s move still matter.</p></details></section>
+<section class="guide-panel guide-reading" id="mechanics"><p class="reading-label">ITEM &amp; ABILITY</p><h2>How this build works</h2><p class="reading-lead"><GuideText text={depth.mechanism}/></p><p><strong>Watch the tradeoff.</strong> <GuideText text={guide.caution}/></p><p class="reading-note">These battle mechanics do not change the builder’s type-and-base-stat score. The tool does not simulate moves, abilities, held items or damage.</p></section>
+<section class="guide-panel guide-reading" id="alternatives"><p class="reading-label">COMPARE YOUR OPTIONS</p><h2>{p.name} or {alternative.name}?</h2><p class="reading-lead">{guide.alternativeReason}</p><div class="stat-comparison"><table><caption>Base stats · standard forms in the local Generation 9 dataset</caption><thead><tr><th scope="col">Stat</th><th scope="col">{p.name}</th><th scope="col">{alternative.name}</th></tr></thead><tbody>{stats.map(([label,key])=><tr><th scope="row">{label}</th><td>{p.stats[key]}</td><td>{alternative.stats[key]}</td></tr>)}</tbody></table></div><p class="reading-note">Base stats are not final battle stats. Level, nature, IVs, EVs and battle effects affect the result. Check availability in your game before choosing an alternative.</p></section>
+</>}
+<style>
+.guide-reading{border:1px solid #dce5ed;background:#fff;border-radius:12px;padding:26px 30px;margin:20px 0;scroll-margin-top:16px}.guide-reading h2{font-size:25px;line-height:1.25;letter-spacing:-.5px;margin:0 0 18px}.guide-reading h3{font-size:17px;line-height:1.4;margin-bottom:8px}.guide-reading p{font-size:16px;line-height:1.75;max-width:68ch;color:#405368}.guide-reading :global(strong){font-weight:750;color:#1d334b}.guide-reading details{border-top:1px solid #e7ebef;padding-top:5px;margin-top:20px}.guide-reading summary{font-size:14px;line-height:1.6;min-height:44px;padding:10px 0;cursor:pointer;color:#244a67}@media(max-width:600px){.guide-reading{padding:20px 17px}.guide-reading h2{font-size:22px}}
+
+.reading-label{font-size:10px!important;letter-spacing:1.5px;color:#786c48!important;margin:0 0 10px}.reading-lead{font-size:18px!important;line-height:1.65!important;color:#243d55!important}.decision{max-width:72ch;border-top:1px solid #e4e9ee;padding:18px 0}.decision h3{margin-top:0}.decision p{margin-bottom:0}.reading-note{font-size:13px!important;line-height:1.65!important;color:#617285!important}.stat-comparison{overflow-x:auto}.stat-comparison table{width:100%;border-collapse:collapse;text-align:left;font-size:14px}.stat-comparison caption{text-align:left;font-size:12px;color:#617285;padding-bottom:12px}.stat-comparison th,.stat-comparison td{padding:11px 12px;border-bottom:1px solid #e1e7ed}.stat-comparison thead{background:#f2f6fa}.stat-comparison tbody th{font-weight:500}
+</style>
