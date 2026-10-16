@@ -9,26 +9,27 @@ export interface Analysis {
   rating: 'Poor' | 'Fair' | 'Good' | 'Excellent' | 'No team'; defense: DefenseRow[]; coverage: CoverageRow[]; insights: Insight[];
 }
 const clampScore = (v: number) => Math.round(Math.max(0, Math.min(100, v)));
-export function analyzeTeam(team: readonly Pokemon[]): Analysis {
+export function analyzeTeam(team: readonly Pokemon[], generation = 9): Analysis {
   if (team.length > c.maxTeamSize) throw new Error('A team can contain at most six Pokémon');
-  const defense: DefenseRow[] = targetTypes.map(type => {
-    const multipliers = team.map(p => effectiveness(type, p.types));
+  const activeTypes = targetTypes.filter(t => generation !== 3 || t !== 'Fairy');
+  const defense: DefenseRow[] = activeTypes.map(type => {
+    const multipliers = team.map(p => effectiveness(type, p.types, generation));
     return { type, multipliers, weak: team.filter((_, i) => multipliers[i] > 1).map(p => p.id), quadruple: team.filter((_, i) => multipliers[i] === 4).map(p => p.id), resist: team.filter((_, i) => multipliers[i] < 1).map(p => p.id), immune: team.filter((_, i) => multipliers[i] === 0).map(p => p.id) };
   });
-  const coverage: CoverageRow[] = targetTypes.map(type => {
-    const hits = team.map(p => Math.max(...p.types.map(attack => effectiveness(attack, [type]))));
+  const coverage: CoverageRow[] = activeTypes.map(type => {
+    const hits = team.map(p => Math.max(...p.types.map(attack => effectiveness(attack, [type], generation))));
     const multiplier = hits.length ? Math.max(...hits) : 0;
     return { type, multiplier, attackers: team.filter((_, i) => hits[i] > 1).map(p => p.id) };
   });
   if (!team.length) return { total: 0, scores: { offense: 0, defense: 0, coverage: 0, synergy: 0 }, rating: 'No team', defense, coverage, insights: [{ kind: 'info', text: 'Add your first Pokémon to see its strengths and weaknesses.' }] };
-  const neutral = coverage.filter(row => row.multiplier >= 1).length / targetTypes.length;
-  const superEffective = coverage.filter(row => row.multiplier > 1).length / targetTypes.length;
+  const neutral = coverage.filter(row => row.multiplier >= 1).length / activeTypes.length;
+  const superEffective = coverage.filter(row => row.multiplier > 1).length / activeTypes.length;
   const attackPower = team.reduce((sum, p) => sum + Math.min(1, Math.max(p.stats.atk, p.stats.spa) / c.offense.attackStatScale), 0) / team.length;
-  const resistance = defense.filter(row => row.resist.length).length / targetTypes.length;
+  const resistance = defense.filter(row => row.resist.length).length / activeTypes.length;
   const weaknessPressure = defense.reduce((sum, row) => sum
     + (row.resist.length === 0 ? row.weak.length / team.length * c.defense.unprotectedWeaknessPenalty : 0)
     + Math.max(0, row.weak.length - 1) / team.length * c.defense.repeatedWeaknessPenalty
-    + row.quadruple.length / team.length * c.defense.quadruplePenalty, 0) / targetTypes.length;
+    + row.quadruple.length / team.length * c.defense.quadruplePenalty, 0) / activeTypes.length;
   let weaknessPairs = 0, rescuedPairs = 0;
   for (const row of defense) for (const id of row.weak) { weaknessPairs++; if (row.resist.some(other => other !== id)) rescuedPairs++; }
   const rescue = weaknessPairs ? rescuedPairs / weaknessPairs : 1;
@@ -53,7 +54,7 @@ export function analyzeTeam(team: readonly Pokemon[]): Analysis {
   if (repeated) insights.push({ kind: 'warning', text: `${repeated.weak.length} teammates share a ${repeated.type} weakness. You have a resistance, but switching options are limited.` });
   const quadruple = defense.find(row => row.quadruple.length);
   if (quadruple) insights.push({ kind: 'warning', text: `${team.filter(p => quadruple.quadruple.includes(p.id)).map(p => p.name).join(', ')} takes 4× damage from ${quadruple.type} attacks by type.` });
-  insights.push({ kind: 'info', text: `Your own types can hit ${coverage.filter(row => row.multiplier > 1).length} of 18 single-type targets super effectively. Actual move coverage can differ.` });
+  insights.push({ kind: 'info', text: `Your own types can hit ${coverage.filter(row => row.multiplier > 1).length} of ${activeTypes.length} single-type targets super effectively. Actual move coverage can differ.` });
   if (rescue > 0) insights.push({ kind: 'positive', text: `Teammate resistances cover ${Math.round(rescue * 100)}% of member–type weaknesses.` });
   if (!fast) insights.push({ kind: 'info', text: `No teammate has a base Speed of ${c.synergy.fastSpeed} or higher. Consider adding a faster option.` });
   return { total, scores, rating, defense, coverage, insights: insights.slice(0, c.maxInsights) };

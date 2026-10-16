@@ -1,10 +1,10 @@
 import { defaultFormat, getFormat, isAllowed } from '../../data/formats';
 import { pokemonById } from '../../data/pokemon';
 export interface TeamState { format: string; slots: (string | null)[]; }
-export const emptyTeam = (): TeamState => ({ format: defaultFormat.id, slots: Array(6).fill(null) });
-export function parseTeamState(search: string): { state: TeamState; repaired: boolean } {
+export const emptyTeam = (format = defaultFormat.id): TeamState => ({ format: getFormat(format).id, slots: Array(6).fill(null) });
+export function parseTeamState(search: string, fallbackFormat = defaultFormat.id): { state: TeamState; repaired: boolean } {
   const params = new URLSearchParams(search);
-  const format = getFormat(params.get('format'));
+  const format = getFormat(params.get('format') ?? fallbackFormat);
   const state: TeamState = { format: format.id, slots: Array(6).fill(null) };
   let repaired = Boolean(params.get('format') && params.get('format') !== format.id);
   if (params.has('v') && params.get('v') !== '1') return { state, repaired: true };

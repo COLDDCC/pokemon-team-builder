@@ -349,3 +349,11 @@ Pre-existing failure, reproduced on an unmodified `main` checkout with the same 
 Not certified, carried forward from the archive's own note: the Dex checks cover abilities, items, natures, Gen 9 learn sources and evolution conditions, but "do not certify every prose claim or ranked-format legality". The pages say Gen 9 · National Dex · casual, and that is the framing they were written to.
 
 Still disabled: `vars.GUIDE_RELEASE_ENABLED` has never been set, so the 12:00 UTC cron keeps skipping (3 skipped runs, 0 open PRs) — this batch was published by hand rather than through the schedule. 86 species remain queued; the next five are Primarina, Slowbro, Blastoise, Venusaur, Tyranitar.
+
+## Generation 3 extension — 2026-10-16
+- Added `/games/gen-3`, the 386-species historical snapshot and 17-type chart from locked @pkmn/dex. Shared picker, displayed analysis and recommendation scoring use the active format.
+- `npm run lint`, `npm run typecheck`, `npm test` (36 tests), `npm run build` and `npm run check:build` passed. Build validation covered 99 indexable pages, including the new canonical and sitemap entry, plus local artwork and existing guide content.
+- Playwright regression: 44 passed, 2 desktop-only tests skipped on the mobile project. Covered historical typings, excluded later species, applied-score consistency, saves/reload, switching formats, and existing modern builder interactions/accessibility/guide routes.
+- Browser checks used local Chromium 153 with GPU disabled because this container's standard browser download was truncated and its SwiftShader initialization failed. No production browser flags were changed.
+- Inspected desktop (1366×768) and 320px mobile screenshots. Desktop roster bounds: y=204 to 373px; roster and four score dimensions fit above the fold. No document horizontal overflow at 320px. Mobile retains the existing scrolling two-column roster.
+- Scope: all 386 cross-game base species, not game-specific encounter/trading/event eligibility, tier legality, moves, abilities, items or damage simulation. This local verification does not confirm production deployment or search indexing.

@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import TeamBuilder from '../../components/TeamBuilder';
+---
+<BaseLayout title="Gen 3 Pokémon Team Builder — 386 Pokémon & Weakness Analysis" description="Build a Generation 3 Pokémon team with historical types, base stats, the 17-type chart and instant teammate recommendations. Plan across Ruby, Sapphire, Emerald, FireRed and LeafGreen.">
+  <SiteHeader/>
+  <main id="main" class="compact-home">
+    <h1 class="gen3-title">Gen 3 Pokémon Team Builder</h1>
+    <TeamBuilder initialFormat="gen3-national-casual" client:load/>
+    <section class="seo-content" aria-labelledby="gen3-planning">
+      <h2 id="gen3-planning">Plan a Generation 3 team</h2>
+      <p>Choose up to six Pokémon from the first 386 species. See shared weaknesses, type coverage and suggestions that recalculate your score before you add a teammate. The builder uses <strong>Generation 3 types and base stats</strong>, including historical typings such as pure Psychic Gardevoir and pure Steel Mawile.</p>
+      <h2>Which game are you playing?</h2>
+      <div class="matrix-scroll"><table><caption>How to use this cross-game planning pool</caption><thead><tr><th scope="col">Game</th><th scope="col">Planning advice</th></tr></thead><tbody>
+        <tr><th scope="row">Ruby / Sapphire / Emerald</th><td>Start with your Hoenn starter and compare teammates. This pool also includes species that require trading or other games; it is not a Hoenn encounter list.</td></tr>
+        <tr><th scope="row">FireRed / LeafGreen</th><td>Plan your Kanto team and later cross-game additions. Check version exclusives, evolution access and postgame restrictions before choosing a final roster.</td></tr>
+        <tr><th scope="row">Gen 3 battles / ADV</th><td>Compare typing and base stats across the full generation. Tier bans, moves, items, abilities and competitive legality are not validated.</td></tr>
+      </tbody></table></div>
+      <h2>What changes from a modern team builder?</h2>
+      <ul><li><strong>17 types, no Fairy.</strong> Clefable is Normal, Gardevoir is Psychic and Mawile is Steel in this generation.</li><li><strong>Steel resists Ghost and Dark.</strong> Both the defensive matrix and teammate recommendations use the historical chart.</li><li><strong>Historical base stats.</strong> Later stat buffs are excluded, so comparisons reflect the third generation.</li><li><strong>Physical and special attacks follow move type.</strong> Normal, Fighting, Flying, Poison, Ground, Rock, Bug, Ghost and Steel are physical; Fire, Water, Grass, Electric, Psychic, Ice, Dragon and Dark are special. This tool compares typing and base-stat signals; it does not evaluate movesets or damage.</li></ul>
+      <h2>How to choose your next teammate</h2>
+      <ol><li>Add a favorite or starter using <strong>Build team</strong>.</li><li>Check <strong>Key insights</strong> for shared weaknesses that have no resisting teammate.</li><li>Compare recommended additions and their score changes. Lock favorites before replacing members of a full team.</li><li>Open the detailed matrix to inspect all 17 attacking types, then save your team in this browser.</li></ol>
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does Gen 3 mean only Pokémon introduced in Hoenn?</summary><p>No. Generation 3 includes the earlier Kanto and Johto species as well, for a total of 386. The picker’s generation filter refers to when a species debuted, not whether it can be caught in a particular game.</p></details>
+      <details><summary>Can I use this as an Emerald team builder?</summary><p>Yes, for typing and base-stat planning. Check how each teammate is obtained separately: this National Dex pool does not enforce Emerald encounters, trading, events or story progress.</p></details>
+      <details><summary>Does the score predict whether my team will win?</summary><p>No. It is a transparent planning heuristic based on types and base stats. Abilities such as Levitate, moves, items, levels and battle decisions can change the actual matchup.</p></details>
+      <p>Data source: <a href="https://github.com/pkmn/dex">@pkmn/dex / Pokémon Showdown</a>, generated locally from its Generation 3 dataset. Compare the <a href="/games/gen-9-national-dex">Gen 9 builder</a>, or explore <a href="/pokemon">Pokémon guides using modern data</a>.</p>
+    </section>
+  </main>
+  <SiteFooter/>
+</BaseLayout>
+<style>.compact-home > .gen3-title {font-size:clamp(1.15rem, 2.5vw, 1.6rem);margin:.5rem 0 .75rem;letter-spacing:-.5px;}</style>

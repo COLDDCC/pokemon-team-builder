@@ -90,3 +90,8 @@ All published build guides use `EvolutionCards.astro`: local artwork, a static n
 Editorial approach informed by Clarity (MIT): https://github.com/addyosmani/clarity. No third-party card-effect code or textures were copied.
 
 Review dates are data, not page copy: `src/data/guide-review.ts` records the moveset review date once and one battle-notes entry per release batch. Add the new batch's ids and date when releasing guides — `src/data/guide-review.test.ts` fails when a published species has no date, and `scripts/check-build.mjs` fails when a built page does not show it.
+
+## Generation 3 planning
+`/games/gen-3` opens the builder in `gen3-national-casual`. The shared Game/Format controls also switch between Gen 3 and Gen 9, retaining eligible members and reporting removals. Clear/example actions preserve the active format; browser saves retain it. The Gen 3 pool contains 386 base species, historical typings/base stats and 17 types, including Steel resistance to Ghost and Dark. Picker filters, analysis denominators and recommendations all follow the active generation. Reproduce both historical snapshots with `npm run data:generate` using the locked @pkmn/dex.
+
+The Gen 3 page is linked in navigation and included in the sitemap with its own canonical, title and description. The tool precedes game guidance and FAQs; desktop roster/score visibility at 1366×768 is covered by the Gen 3 browser suite. This is a cross-game National Dex planning pool, not a version encounter list or legality validator. No moves, abilities, items or battle damage are modeled; physical/special role indicators remain base-stat proxies.

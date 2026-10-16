@@ -34,3 +34,5 @@ The Phase 2 builder supports editing and sharing. Type analysis, deterministic s
 - [ ] Confirm sprite weight against a real mobile budget after deployment; 23 MB now lives on the origin, so the host's static file cache and bandwidth limits are worth checking.
 - [ ] Consider committing the generated WebP set (or caching `.sprite-cache/` in Actions) if CI build time or CDN egress becomes a problem.
 - Alternate forms and cosmetic sprites remain unavailable; the pinned upstream is keyed by National Dex number and the pool is base species only.
+
+- Gen 3 follow-up: source per-version encounter/trading/event/postgame availability before offering Emerald or FireRed/LeafGreen availability filters. Current Gen 3 scope is explicitly the cross-game 386-species National Dex, without tier bans, abilities or moveset legality.

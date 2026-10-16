@@ -1,5 +1,4 @@
-import { getFormat, isAllowed } from '../../data/formats';
-import { pokemon, pokemonById } from '../../data/pokemon';
+import { getFormat, isAllowed, pokemonForFormat, pokemonInFormat } from '../../data/formats';
 import type { Pokemon } from '../../data/pokemon/schema';
 import { analyzeTeam, type Analysis } from '../scoring';
 import { scoringConfig } from '../scoring/config';
@@ -7,7 +6,7 @@ import { setTeamSlot, type TeamState } from '../url-state';
 export interface Recommendation { pokemon: Pokemon; targetSlot: number; newScore: number; delta: number; reasons: string[]; }
 const cache = new Map<string, readonly Recommendation[]>();
 const CACHE_LIMIT = 24;
-const members = (state: TeamState) => state.slots.flatMap(id => { const p = id ? pokemonById.get(id) : undefined; return p ? [p] : []; });
+const members = (state: TeamState) => state.slots.flatMap(id => { const p = id ? pokemonInFormat(id, getFormat(state.format)) : undefined; return p ? [p] : []; });
 function explain(before: Analysis, after: Analysis): string[] {
   const reasons: string[] = [];
   for (const row of before.defense.filter(r => r.weak.length && !r.resist.length)) {
@@ -28,13 +27,13 @@ export function recommend(state: TeamState, targetSlot: number): readonly Recomm
   const key = JSON.stringify([scoringConfig.version, state.format, state.slots, targetSlot]);
   const cached = cache.get(key);
   if (cached) return cached;
-  const format = getFormat(state.format), before = analyzeTeam(current);
+  const format = getFormat(state.format), before = analyzeTeam(current, format.generation);
   const existing = new Set(state.slots);
   const results: Recommendation[] = [];
-  for (const candidate of pokemon) {
+  for (const candidate of pokemonForFormat(format)) {
     if (existing.has(candidate.id) || !isAllowed(candidate, format)) continue;
     const next = setTeamSlot(state, targetSlot, candidate.id);
-    const after = analyzeTeam(members(next));
+    const after = analyzeTeam(members(next), format.generation);
     const delta = after.total - before.total;
     if (delta > 0) results.push({ pokemon: candidate, targetSlot, newScore: after.total, delta, reasons: explain(before, after) });
   }
