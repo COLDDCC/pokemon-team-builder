@@ -44,3 +44,12 @@ assert.ok(statSync(scoreFont).size > 0, `${scoreFont} is missing or empty: the t
 const bundledCss = readdirSync('dist/_astro').filter(name => name.endsWith('.css')).map(name => readFileSync(`dist/_astro/${name}`, 'utf8')).join('');
 assert.ok(bundledCss.includes('/fonts/archivo-black-digits.woff2'), 'The bundled CSS must reference the score font by its origin-absolute path.');
 console.log(`Verified the score font ships (${statSync(scoreFont).size} B) and is referenced by the bundled CSS`);
+
+for (const id of featuredPokemonIds) {
+  const html = readFileSync(`dist/pokemon/${id}/index.html`, 'utf8');
+  assert.ok(html.includes('class="holo-card"'), `${id} must have an accessible card collection`);
+  assert.ok(html.includes('id="battle-plan"') && html.includes('id="mechanics"') && html.includes('id="alternatives"'), `${id} is missing reviewed depth content`);
+  assert.ok(html.indexOf('class="holo-card"') < html.indexOf('aria-label="Breadcrumb"'), `${id} breadcrumb must follow the card-first content`);
+  assert.ok(html.includes('id="build-team"') && html.includes('astro-island'), `${id} must retain its interactive builder`);
+}
+console.log(`Verified card-first layout, editorial depth and retained builder on ${featuredPokemonIds.length} guides`);
