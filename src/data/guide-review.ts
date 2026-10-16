@@ -24,6 +24,13 @@ const battleNoteBatches = [
       'quaquaval', 'dragapult', 'haxorus', 'goodra',
     ],
   },
+  {
+    addedOn: '2026-10-16',
+    speciesIds: [
+      'magnezone', 'milotic', 'jolteon', 'vaporeon', 'leafeon', 'glaceon',
+      'flareon', 'espeon', 'tentacruel', 'krookodile',
+    ],
+  },
 ];
 
 const dateNames = ['January', 'February', 'March', 'April', 'May', 'June',
