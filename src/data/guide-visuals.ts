@@ -870,5 +870,233 @@ export const guideVisuals: Record<string, { evolution: { id: string; condition: 
         "reason": "Resists Ice, Dragon and Fairy attacks."
       }
     ]
+  },
+  "magnezone": {
+    "evolution": [
+      {
+        "id": "magnemite",
+        "condition": ""
+      },
+      {
+        "id": "magneton",
+        "condition": "Level 30"
+      },
+      {
+        "id": "magnezone",
+        "condition": "Thunder Stone (Generation 9)"
+      }
+    ],
+    "partners": [
+      {
+        "id": "gyarados",
+        "reason": "Immune to Ground and resists Fire and Fighting."
+      },
+      {
+        "id": "gastrodon",
+        "reason": "Resists Fire; Magnezone resists its Grass weakness."
+      }
+    ]
+  },
+  "milotic": {
+    "evolution": [
+      {
+        "id": "feebas",
+        "condition": ""
+      },
+      {
+        "id": "milotic",
+        "condition": "Trade while holding Prism Scale (Scarlet/Violet)"
+      }
+    ],
+    "partners": [
+      {
+        "id": "garchomp",
+        "reason": "Immune to Electric; Milotic resists Ice attacks."
+      },
+      {
+        "id": "corviknight",
+        "reason": "Resists Grass; both still need an Electric answer."
+      }
+    ]
+  },
+  "jolteon": {
+    "evolution": [
+      {
+        "id": "eevee",
+        "condition": ""
+      },
+      {
+        "id": "jolteon",
+        "condition": "Thunder Stone"
+      }
+    ],
+    "partners": [
+      {
+        "id": "corviknight",
+        "reason": "Immune to Ground; Jolteon covers its Electric weakness."
+      },
+      {
+        "id": "gastrodon",
+        "reason": "Adds bulk and resists Fire and Rock attacks."
+      }
+    ]
+  },
+  "vaporeon": {
+    "evolution": [
+      {
+        "id": "eevee",
+        "condition": ""
+      },
+      {
+        "id": "vaporeon",
+        "condition": "Water Stone"
+      }
+    ],
+    "partners": [
+      {
+        "id": "garchomp",
+        "reason": "Immune to Electric; Vaporeon resists Ice attacks."
+      },
+      {
+        "id": "scizor",
+        "reason": "Resists Grass; Vaporeon resists Scizor’s Fire weakness."
+      }
+    ]
+  },
+  "leafeon": {
+    "evolution": [
+      {
+        "id": "eevee",
+        "condition": ""
+      },
+      {
+        "id": "leafeon",
+        "condition": "Leaf Stone (Generation 9)"
+      }
+    ],
+    "partners": [
+      {
+        "id": "corviknight",
+        "reason": "Immune to Poison and resists Flying and Bug attacks."
+      },
+      {
+        "id": "arcanine",
+        "reason": "Resists Fire, Ice and Bug attacks."
+      }
+    ]
+  },
+  "glaceon": {
+    "evolution": [
+      {
+        "id": "eevee",
+        "condition": ""
+      },
+      {
+        "id": "glaceon",
+        "condition": "Ice Stone (Generation 9)"
+      }
+    ],
+    "partners": [
+      {
+        "id": "milotic",
+        "reason": "Resists Fire and Steel attacks."
+      },
+      {
+        "id": "mimikyu",
+        "reason": "Immune to Fighting attacks; both need a Steel answer."
+      }
+    ]
+  },
+  "flareon": {
+    "evolution": [
+      {
+        "id": "eevee",
+        "condition": ""
+      },
+      {
+        "id": "flareon",
+        "condition": "Fire Stone"
+      }
+    ],
+    "partners": [
+      {
+        "id": "gyarados",
+        "reason": "Immune to Ground and resists Water attacks."
+      },
+      {
+        "id": "gastrodon",
+        "reason": "Resists Rock and has Water immunity with Storm Drain."
+      }
+    ]
+  },
+  "espeon": {
+    "evolution": [
+      {
+        "id": "eevee",
+        "condition": ""
+      },
+      {
+        "id": "espeon",
+        "condition": "High friendship + level up during daytime; avoid meeting Sylveon’s conditions"
+      }
+    ],
+    "partners": [
+      {
+        "id": "sylveon",
+        "reason": "Resists Bug and Dark attacks."
+      },
+      {
+        "id": "umbreon",
+        "reason": "Resists Ghost and Dark attacks."
+      }
+    ]
+  },
+  "tentacruel": {
+    "evolution": [
+      {
+        "id": "tentacool",
+        "condition": ""
+      },
+      {
+        "id": "tentacruel",
+        "condition": "Level 30"
+      }
+    ],
+    "partners": [
+      {
+        "id": "garchomp",
+        "reason": "Immune to Electric; Tentacruel resists Ice attacks."
+      },
+      {
+        "id": "corviknight",
+        "reason": "Immune to Ground and resists Psychic; both need an Electric answer."
+      }
+    ]
+  },
+  "krookodile": {
+    "evolution": [
+      {
+        "id": "sandile",
+        "condition": ""
+      },
+      {
+        "id": "krokorok",
+        "condition": "Level 29"
+      },
+      {
+        "id": "krookodile",
+        "condition": "Level 40"
+      }
+    ],
+    "partners": [
+      {
+        "id": "corviknight",
+        "reason": "Resists Grass, Bug and Fairy; takes neutral Ice and Fighting damage."
+      },
+      {
+        "id": "milotic",
+        "reason": "Resists Water and Ice attacks."
+      }
+    ]
   }
 };

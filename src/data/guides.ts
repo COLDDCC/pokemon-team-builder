@@ -647,5 +647,175 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
     "partners": "A Steel teammate can resist Ice, Dragon and Fairy attacks. A physically sturdy partner helps complement its special bulk.",
     "alternative": "primarina",
     "alternativeReason": "Primarina offers a Water/Fairy special attacker with Dragon immunity and a different defensive profile."
+  },
+  "magnezone": {
+    "role": "Special attacker and Steel trapping",
+    "item": "Leftovers",
+    "ability": "Magnet Pull",
+    "nature": "Modest",
+    "moves": [
+      "Thunderbolt",
+      "Flash Cannon",
+      "Volt Switch",
+      "Thunder Wave"
+    ],
+    "plan": "Magnet Pull can prevent opposing Steel types from switching, with exceptions such as Ghost typing or escape effects. Use Electric and Steel attacks or pivot with Volt Switch when appropriate.",
+    "caution": "Ground attacks deal 4× damage; Fire and Fighting attacks are also super effective. Trapping a target does not guarantee you can defeat it, and Ground types block Electric moves.",
+    "partners": "A Flying teammate covers Ground attacks. A Water partner can help against Fire attackers.",
+    "alternative": "raichu",
+    "alternativeReason": "Raichu offers more Speed and a different Electric pivot role, without Steel typing or trapping."
+  },
+  "milotic": {
+    "role": "Bulky Water support with recovery",
+    "item": "Leftovers",
+    "ability": "Marvel Scale",
+    "nature": "Bold",
+    "moves": [
+      "Surf",
+      "Ice Beam",
+      "Recover",
+      "Haze"
+    ],
+    "plan": "Use Recover to stay healthy in a favorable matchup. Haze resets stat changes on the field; Marvel Scale raises Defense while Milotic has a status condition.",
+    "caution": "Electric and Grass attacks are super effective. This set does not activate Marvel Scale by itself, and Haze also removes your own boosts.",
+    "partners": "A Ground teammate covers Electric attacks. A Grass-resistant teammate helps with its other weakness.",
+    "alternative": "slowbro",
+    "alternativeReason": "Slowbro offers physical defense and Regenerator with an additional Psychic typing."
+  },
+  "jolteon": {
+    "role": "Fast special pivot",
+    "item": "Choice Specs",
+    "ability": "Volt Absorb",
+    "nature": "Timid",
+    "moves": [
+      "Thunderbolt",
+      "Volt Switch",
+      "Shadow Ball",
+      "Hyper Voice"
+    ],
+    "plan": "Choice Specs boosts Special Attack but locks Jolteon into one move until it switches. Volt Absorb grants Electric immunity and restores HP when an Electric move activates it.",
+    "caution": "Ground attacks are super effective and Ground types block Electric moves. Low bulk and a Choice lock can make a prediction costly.",
+    "partners": "A Flying teammate can cover Ground attacks. A bulky teammate helps absorb hits Jolteon cannot take.",
+    "alternative": "raichu",
+    "alternativeReason": "Raichu offers Lightning Rod and different coverage options at lower base Speed."
+  },
+  "vaporeon": {
+    "role": "Bulky Water support and Wish recovery",
+    "item": "Leftovers",
+    "ability": "Water Absorb",
+    "nature": "Bold",
+    "moves": [
+      "Surf",
+      "Ice Beam",
+      "Wish",
+      "Protect"
+    ],
+    "plan": "Water Absorb grants Water immunity and can restore HP. Wish heals on the following turn; Protect can help Vaporeon receive that recovery.",
+    "caution": "Electric and Grass attacks are super effective. Wish takes a turn to resolve, and passive turns can give an opponent setup opportunities.",
+    "partners": "A Ground partner covers Electric attacks. A Steel or Fire teammate can resist Grass attacks.",
+    "alternative": "milotic",
+    "alternativeReason": "Milotic offers immediate recovery through Recover and stat-reset utility with Haze."
+  },
+  "leafeon": {
+    "role": "Physical Grass setup attacker",
+    "item": "Leftovers",
+    "ability": "Leaf Guard",
+    "nature": "Jolly",
+    "moves": [
+      "Leaf Blade",
+      "Swords Dance",
+      "Knock Off",
+      "Synthesis"
+    ],
+    "plan": "Use a safe turn for Swords Dance, then attack with Leaf Blade or remove a suitable item with Knock Off. Synthesis provides recovery that depends on weather.",
+    "caution": "Fire, Ice, Poison, Flying and Bug attacks are super effective. Leaf Guard only prevents eligible status conditions in harsh sunlight; this set does not create sun itself.",
+    "partners": "A Steel teammate can cover several weaknesses. A Water partner helps against Fire and Ice attackers.",
+    "alternative": "meowscarada",
+    "alternativeReason": "Meowscarada offers higher Speed and U-turn, with Dark typing and less physical bulk."
+  },
+  "glaceon": {
+    "role": "Special Ice attacker",
+    "item": "Choice Specs",
+    "ability": "Snow Cloak",
+    "nature": "Modest",
+    "moves": [
+      "Ice Beam",
+      "Freeze-Dry",
+      "Shadow Ball",
+      "Water Pulse"
+    ],
+    "plan": "Choice Specs boosts Special Attack while locking you into one move until you switch. Freeze-Dry is super effective against Water types, unlike most Ice attacks.",
+    "caution": "Fire, Fighting, Rock and Steel attacks are super effective. Low Speed makes safe entry important; Snow Cloak needs the relevant weather and may be restricted by a format’s rules.",
+    "partners": "A Water teammate can resist Fire and Steel attacks. A Ghost or Fairy teammate can help against Fighting attacks.",
+    "alternative": "sylveon",
+    "alternativeReason": "Sylveon offers a Fairy special attacking role with fewer type weaknesses and Wish support."
+  },
+  "flareon": {
+    "role": "Physical Fire attacker",
+    "item": "Leftovers",
+    "ability": "Flash Fire",
+    "nature": "Adamant",
+    "moves": [
+      "Flare Blitz",
+      "Quick Attack",
+      "Trailblaze",
+      "Protect"
+    ],
+    "plan": "Flash Fire grants Fire immunity and boosts Fire attacks when activated by a Fire move. Trailblaze raises Speed after a successful hit; Quick Attack provides priority.",
+    "caution": "Water, Ground and Rock attacks are super effective. Flare Blitz causes recoil, and one Speed boost does not guarantee you move first.",
+    "partners": "A Flying partner covers Ground attacks. A bulky Water teammate helps against Rock and Water attackers.",
+    "alternative": "arcanine",
+    "alternativeReason": "Arcanine offers higher Speed and Intimidate with a similar physical Fire role."
+  },
+  "espeon": {
+    "role": "Special setup attacker with reflected support moves",
+    "item": "Leftovers",
+    "ability": "Magic Bounce",
+    "nature": "Timid",
+    "moves": [
+      "Psychic",
+      "Shadow Ball",
+      "Dazzling Gleam",
+      "Calm Mind"
+    ],
+    "plan": "Magic Bounce reflects eligible status moves, including many hazard and status attempts. Use a safe turn to boost Special Attack and Special Defense with Calm Mind.",
+    "caution": "Bug, Ghost and Dark attacks are super effective. Magic Bounce does not stop direct attacks or every status move; Dark types are immune to Psychic.",
+    "partners": "A Fairy teammate can resist Bug and Dark attacks. A Dark partner can resist Ghost attacks.",
+    "alternative": "gardevoir",
+    "alternativeReason": "Gardevoir adds Fairy typing and a different support toolkit, with lower base Speed."
+  },
+  "tentacruel": {
+    "role": "Specially bulky hazard support",
+    "item": "Heavy-Duty Boots",
+    "ability": "Clear Body",
+    "nature": "Timid",
+    "moves": [
+      "Surf",
+      "Sludge Bomb",
+      "Rapid Spin",
+      "Toxic Spikes"
+    ],
+    "plan": "Rapid Spin can remove entry hazards from your side and raise Speed if it successfully hits. Toxic Spikes can pressure eligible grounded opponents, while Boots protect Tentacruel on entry.",
+    "caution": "Electric, Ground and Psychic attacks are super effective. Ghost types block Rapid Spin, and grounded Poison types can absorb Toxic Spikes. This set has no healing move.",
+    "partners": "A Ground partner covers Electric attacks. A Flying or Steel partner can help cover Ground or Psychic attacks.",
+    "alternative": "toxapex",
+    "alternativeReason": "Toxapex offers recovery and Regenerator, exchanging Rapid Spin and Speed for a slower defensive role."
+  },
+  "krookodile": {
+    "role": "Physical pivot and coverage attacker",
+    "item": "Choice Scarf",
+    "ability": "Intimidate",
+    "nature": "Jolly",
+    "moves": [
+      "Earthquake",
+      "Crunch",
+      "Stone Edge",
+      "Knock Off"
+    ],
+    "plan": "Choice Scarf raises Speed while locking Krookodile into one move until it switches. Intimidate can soften a physical attacker, and Knock Off can remove an eligible item.",
+    "caution": "Water, Grass, Ice, Fighting, Bug and Fairy attacks are super effective. Flying types are immune to Earthquake; Choice locking and inaccurate Stone Edge require careful decisions.",
+    "partners": "A Steel/Flying teammate can cover several weaknesses. A Water partner can help against Water and Ice attackers.",
+    "alternative": "garchomp",
+    "alternativeReason": "Garchomp offers higher base Speed and Dragon typing with a different physical attacking role."
   }
 };
