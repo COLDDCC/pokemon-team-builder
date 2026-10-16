@@ -192,7 +192,7 @@ export default function TeamBuilder({ initialPokemon, focus = 'all' }: { initial
       })}</div>
       {!results.length && <div className="no-results"><p>No Pokémon match these filters. Try another name, number, or type.</p><button className="button secondary" onClick={() => { setQuery(''); setType(''); setGeneration(''); setLimit(60); search.current?.focus(); }}>Reset search and filters</button></div>}
       {results.length > limit && <button className="button secondary load-more" onClick={() => setLimit(old => old + 60)}>Show more Pokémon ({results.length - limit} remaining)</button>}
-      </div><div className="picker-footer"><p role="status">{pickerNotice && <span>{pickerNotice}<br/></span>}{count}/6 selected</p><button className="button primary" onClick={closePicker}>Done · {count}/6</button></div>
+      </div><div className="picker-footer"><p role="status">{pickerNotice && <span>{pickerNotice}<br/></span>}{count}/6 selected{(focus === 'all' || focus === 'analyzer') && <> · Team score {analysis.total}</>}</p><button className="button primary" onClick={closePicker}>Done · {count}/6</button></div>
     </dialog>
     <p className="data-credit">Data: Pokémon Showdown / @pkmn/dex · Sprites: PokéAPI contributors · Base species only</p>
   </div>;
