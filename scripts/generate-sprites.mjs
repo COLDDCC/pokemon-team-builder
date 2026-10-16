@@ -53,7 +53,7 @@ async function emit(number) {
     const target = output(number, width);
     if (!force && existsSync(target) && (await readFile(target)).length) continue;
     await writeFile(target, await sharp(png).resize(width, width, { fit: 'inside' })
-      .webp({ quality: QUALITY, effort: 6 }).toBuffer());
+      .webp({ quality: QUALITY, effort: 3 }).toBuffer());
   }
 }
 
