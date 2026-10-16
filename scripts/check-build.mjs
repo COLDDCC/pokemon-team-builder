@@ -2,6 +2,7 @@ import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import assert from 'node:assert/strict';
 import { site as config } from '../src/config/site.ts';
 import { featuredPokemonIds, indexablePaths } from '../src/config/seo-pages.ts';
+import { reviewDatesFor } from '../src/data/guide-review.ts';
 const site = config.url;
 const sitemap = readFileSync('dist/sitemap.xml', 'utf8');
 const paths = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
@@ -51,5 +52,8 @@ for (const id of featuredPokemonIds) {
   assert.ok(html.includes('id="battle-plan"') && html.includes('id="mechanics"') && html.includes('id="alternatives"'), `${id} is missing reviewed depth content`);
   assert.ok(html.indexOf('class="holo-card"') < html.indexOf('aria-label="Breadcrumb"'), `${id} breadcrumb must follow the card-first content`);
   assert.ok(html.includes('id="build-team"') && html.includes('astro-island'), `${id} must retain its interactive builder`);
+  const reviewed = reviewDatesFor(id);
+  assert.ok(html.includes(reviewed.battleNotes), `${id} must show the date its battle notes were added (${reviewed.battleNotes})`);
+  assert.ok(!/Reviewed October 6, 2026/.test(html) || reviewed.battleNotes === reviewed.moveset, `${id} shows a hardcoded review date`);
 }
 console.log(`Verified card-first layout, editorial depth and retained builder on ${featuredPokemonIds.length} guides`);
