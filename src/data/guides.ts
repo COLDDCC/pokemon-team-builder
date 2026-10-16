@@ -307,5 +307,175 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
     "partners": "A Steel partner can resist Ice, Dragon and Fairy attacks. Add a special attacker for damage variety.",
     "alternative": "dragonite",
     "alternativeReason": "Dragonite offers Multiscale and Extreme Speed, but has lower base Speed."
+  },
+  "primarina": {
+    "role": "Special setup attacker",
+    "item": "Leftovers",
+    "ability": "Torrent",
+    "nature": "Modest",
+    "moves": [
+      "Surf",
+      "Moonblast",
+      "Calm Mind",
+      "Psychic"
+    ],
+    "plan": "Use Calm Mind when you have a safe turn to boost Special Attack and Special Defense. Water and Fairy attacks provide its main coverage.",
+    "caution": "Grass, Electric and Poison attacks are super effective. Its low Speed and lack of recovery in this set can make extended exchanges difficult.",
+    "partners": "A Ground teammate covers Electric and resists Poison. A Steel partner can help with Grass and Poison attacks.",
+    "alternative": "azumarill",
+    "alternativeReason": "Azumarill shares Water/Fairy typing but uses Huge Power for physical attacks and Aqua Jet priority."
+  },
+  "slowbro": {
+    "role": "Physical defense and recovery support",
+    "item": "Leftovers",
+    "ability": "Regenerator",
+    "nature": "Bold",
+    "moves": [
+      "Surf",
+      "Psychic",
+      "Slack Off",
+      "Thunder Wave"
+    ],
+    "plan": "Regenerator restores part of Slowbro’s HP when it switches out. Use Slack Off to recover while staying in or Thunder Wave against a suitable target.",
+    "caution": "Electric, Grass, Bug, Ghost and Dark attacks are super effective. Ground types are immune to Thunder Wave; paralysis is not a universal answer.",
+    "partners": "A Fairy partner can resist Dark and Bug attacks. A Ground partner covers Electric attacks.",
+    "alternative": "gastrodon",
+    "alternativeReason": "Gastrodon provides Electric immunity and Storm Drain, but has a 4× Grass weakness."
+  },
+  "blastoise": {
+    "role": "Special setup attacker",
+    "item": "White Herb",
+    "ability": "Torrent",
+    "nature": "Modest",
+    "moves": [
+      "Shell Smash",
+      "Surf",
+      "Ice Beam",
+      "Aura Sphere"
+    ],
+    "plan": "Shell Smash raises Attack, Special Attack and Speed while lowering both defenses. White Herb can restore those lowered stats once, giving you a safer chance to attack.",
+    "caution": "Setup still needs a safe turn. Grass and Electric attacks are super effective; White Herb is consumed after activation.",
+    "partners": "A Ground teammate covers Electric attacks. A Steel or Fire teammate can resist Grass attacks.",
+    "alternative": "primarina",
+    "alternativeReason": "Primarina adds Fairy typing and higher Special Attack, but uses a different setup approach."
+  },
+  "venusaur": {
+    "role": "Special attacker with sleep support",
+    "item": "Black Sludge",
+    "ability": "Overgrow",
+    "nature": "Modest",
+    "moves": [
+      "Giga Drain",
+      "Sludge Bomb",
+      "Sleep Powder",
+      "Earth Power"
+    ],
+    "plan": "Use a suitable sleep opportunity to create room for an attack. Giga Drain restores HP while dealing damage, and Black Sludge provides recovery for Poison types.",
+    "caution": "Sleep Powder can miss and fails against Grass types and other protected targets. Fire, Ice, Flying and Psychic attacks are super effective. Check your format’s sleep rules.",
+    "partners": "A Steel teammate can resist Flying and Psychic attacks. A Water teammate helps against Fire and Ice attacks.",
+    "alternative": "amoonguss",
+    "alternativeReason": "Amoonguss shares Grass/Poison typing and offers a slower, bulkier support role."
+  },
+  "tyranitar": {
+    "role": "Physical attacker with sand support",
+    "item": "Leftovers",
+    "ability": "Sand Stream",
+    "nature": "Adamant",
+    "moves": [
+      "Stone Edge",
+      "Crunch",
+      "Earthquake",
+      "Dragon Dance"
+    ],
+    "plan": "Sand Stream starts a sandstorm on entry. Rock types gain Special Defense in sand; look for a safe Dragon Dance turn before attacking.",
+    "caution": "Fighting attacks deal 4× damage. Sand can damage teammates that are not protected, and Stone Edge can miss.",
+    "partners": "A Flying or Fairy teammate can resist Fighting attacks. Check the effects of sand on every teammate.",
+    "alternative": "garchomp",
+    "alternativeReason": "Garchomp offers a faster physical attacker and Ground coverage, without starting sand."
+  },
+  "gardevoir": {
+    "role": "Special attacker with team healing support",
+    "item": "Choice Scarf",
+    "ability": "Trace",
+    "nature": "Timid",
+    "moves": [
+      "Moonblast",
+      "Psychic",
+      "Mystical Fire",
+      "Healing Wish"
+    ],
+    "plan": "Choice Scarf raises Speed and locks Gardevoir into one move until it switches. Healing Wish sacrifices Gardevoir to heal the next suitable teammate that enters.",
+    "caution": "Poison, Ghost and Steel attacks are super effective. Trace’s value depends on the copied ability; a Choice lock can leave you in an unfavorable matchup.",
+    "partners": "A Steel teammate can cover Poison and Steel attacks. A Dark teammate helps against Ghost attacks.",
+    "alternative": "sylveon",
+    "alternativeReason": "Sylveon offers a slower Fairy special attacker with Pixilate and a different defensive profile."
+  },
+  "umbreon": {
+    "role": "Defensive support with recovery",
+    "item": "Leftovers",
+    "ability": "Synchronize",
+    "nature": "Calm",
+    "moves": [
+      "Foul Play",
+      "Wish",
+      "Protect",
+      "Snarl"
+    ],
+    "plan": "Foul Play uses the target’s Attack stat. Wish heals on the following turn; Protect can help Umbreon receive that recovery, while Snarl lowers opposing Special Attack when it hits.",
+    "caution": "Fighting, Bug and Fairy attacks are super effective. Passive turns can give opponents opportunities to set up, and Wish recovery takes time.",
+    "partners": "A Fairy teammate can resist Fighting and Bug attacks. A Steel teammate helps cover Fairy attacks.",
+    "alternative": "clefable",
+    "alternativeReason": "Clefable provides Fairy typing and a special setup option, with different weaknesses."
+  },
+  "sylveon": {
+    "role": "Special attacker and healing support",
+    "item": "Leftovers",
+    "ability": "Pixilate",
+    "nature": "Modest",
+    "moves": [
+      "Hyper Voice",
+      "Wish",
+      "Protect",
+      "Calm Mind"
+    ],
+    "plan": "Pixilate converts Hyper Voice into a boosted Fairy attack. Use Wish and Protect for delayed recovery or Calm Mind when a safe setup turn appears.",
+    "caution": "Poison and Steel attacks are super effective. Low Speed and delayed Wish healing make turn planning important.",
+    "partners": "A Steel teammate can cover Poison attacks. A Ground or Fire attacker can pressure Steel types.",
+    "alternative": "gardevoir",
+    "alternativeReason": "Gardevoir offers higher Speed and Psychic coverage, without Pixilate."
+  },
+  "amoonguss": {
+    "role": "Defensive support and sleep pressure",
+    "item": "Black Sludge",
+    "ability": "Regenerator",
+    "nature": "Bold",
+    "moves": [
+      "Spore",
+      "Giga Drain",
+      "Sludge Bomb",
+      "Clear Smog"
+    ],
+    "plan": "Regenerator restores HP when Amoonguss switches out. Spore can create a safe turn against an eligible target; Clear Smog removes stat changes if it hits.",
+    "caution": "Grass types and other protected targets are immune to Spore. Steel types are immune to Clear Smog. Fire, Ice, Flying and Psychic attacks are super effective; check your format’s sleep rules.",
+    "partners": "A Steel teammate can resist Flying and Psychic attacks. A Water teammate helps with Fire and Ice attackers.",
+    "alternative": "venusaur",
+    "alternativeReason": "Venusaur shares Grass/Poison typing but offers more Speed and a different attacking role."
+  },
+  "skarmory": {
+    "role": "Physical defense and hazard support",
+    "item": "Rocky Helmet",
+    "ability": "Sturdy",
+    "nature": "Impish",
+    "moves": [
+      "Spikes",
+      "Roost",
+      "Body Press",
+      "Whirlwind"
+    ],
+    "plan": "Use favorable physical matchups to set Spikes or recover with Roost. Whirlwind can remove a setup attacker from the field when its effect is not blocked.",
+    "caution": "Fire and Electric attacks are super effective. Sturdy needs full HP; hazards and chip damage can disable it. Roost temporarily removes Flying typing for that turn.",
+    "partners": "A Ground teammate covers Electric attacks. A Water partner helps against Fire attackers.",
+    "alternative": "corviknight",
+    "alternativeReason": "Corviknight shares Steel/Flying typing and offers a pivoting role with U-turn."
   }
 };
