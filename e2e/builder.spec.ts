@@ -346,7 +346,11 @@ test('static guide artwork has a fallback and unpublished guides stay unreachabl
   await expect(first.locator('.sprite-fallback')).toBeVisible();
   await expect(first.locator('img')).toBeHidden();
   await first.click();
-  await expect(page.locator('.guide-hero .sprite-fallback')).toBeVisible();
+  await expect(page.locator('.evolution-stage.current .sprite-fallback')).toBeVisible();
+  for (const card of await page.locator('.holo-card').all()) {
+    await expect(card.locator('.sprite-fallback')).toBeVisible();
+    await expect(card.locator('img')).toBeHidden();
+  }
   await expect(page.getByRole('heading', {level:1})).toContainText('Build Guide');
   if (!featuredPokemonIds.some(id => id === 'corviknight' as string)) {
     expect((await request.get('/pokemon/corviknight')).status()).toBe(404);
