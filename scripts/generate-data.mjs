@@ -7,6 +7,11 @@ const rows = Dex.forGen(9).species.all()
 if (rows.length !== 1025 || new Set(rows.map(s => s.number)).size !== 1025) throw new Error('Expected exactly 1025 base species');
 writeFileSync(new URL('../src/data/pokemon/pokemon.json', import.meta.url), JSON.stringify(rows) + '\n');
 console.log(`Generated ${rows.length} base species`);
+// Random-picker categories come from the same pinned modern Dex as the base pool.
+writeFileSync(new URL('../src/data/pokemon/random-metadata.json', import.meta.url), JSON.stringify(Object.fromEntries(rows.map(p => {
+  const species = Dex.forGen(9).species.get(p.id);
+  return [p.id, { special: species.tags.some(tag => ['Restricted Legendary', 'Sub-Legendary', 'Mythical'].includes(tag)), fullyEvolved: species.evos.length === 0 }];
+}))) + '\n');
 
 const types = Dex.forGen(9).types.all().filter(t => t.name !== 'Stellar');
 const chart = Object.fromEntries(types.map(attacker => [attacker.name,

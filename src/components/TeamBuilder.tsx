@@ -68,8 +68,23 @@ export default function TeamBuilder({ initialPokemon, initialFormat, focus = 'al
     const restore = () => {
       const params = new URLSearchParams(window.location.search);
       const parsed = params.has('team') || params.has('v') || params.has('format') ? parseTeamState(window.location.search, initialFormat) : { state: initialPokemon ? setTeamSlot(emptyTeam(initialFormat), 0, initialPokemon) : emptyTeam(initialFormat), repaired: false };
-      setTeam(parsed.state); setLockedIds([]); setScoreChange(null);
-      setMessage(parsed.repaired ? 'Some invalid or duplicate entries in this link were removed.' : '');
+      let transferred = parsed.state;
+      let imported = false;
+      if (window.location.pathname === '/') {
+        try {
+          const raw = sessionStorage.getItem('pokemon-random-team-transfer');
+          sessionStorage.removeItem('pokemon-random-team-transfer');
+          if (raw) {
+            const value = JSON.parse(raw);
+            if (Array.isArray(value.ids) && value.ids.every((id: unknown) => typeof id === 'string') && typeof value.created === 'number' && Date.now() - value.created >= 0 && Date.now() - value.created < 300000) {
+              transferred = parseTeamState('?team=' + encodeURIComponent(value.ids.slice(0, 6).join(','))).state;
+              imported = true;
+            }
+          }
+        } catch { /* Builder remains usable without session storage. */ }
+      }
+      setTeam(transferred); setLockedIds([]); setScoreChange(null);
+      setMessage(imported ? 'Random Pokémon loaded. Saved teams are unchanged.' : parsed.repaired ? 'Some invalid or duplicate entries in this link were removed.' : '');
       if (window.location.search) window.history.replaceState(window.history.state, '', window.location.pathname + window.location.hash);
     };
     restore();
@@ -164,7 +179,7 @@ export default function TeamBuilder({ initialPokemon, initialFormat, focus = 'al
   }
   return <div className="tool-workspace">
     <section className="builder" aria-labelledby="team-title">
-      <div className="builder-toolbar"><div><p className="eyebrow">TEAM WORKSPACE</p><h2 id="team-title">Your team <span className="count">{count} / 6</span></h2></div><div className="toolbar-actions"><button className="button primary" disabled={!ready || count === 6} onClick={e => openSlot(team.slots.findIndex(id => !id), e.currentTarget, true)}>Build team</button><div className="toolbar-score" aria-live="polite"><span className="visually-hidden">{`Team score ${analysis.total} of 100`}</span><span className="score-number" data-testid="team-score"><span key={editEffect.scoreRevision} className={`score-value${editEffect.scoreRevision ? scoreUp ? ' score-up' : ' score-down' : ''}`} aria-hidden="true">{shownScore}</span><span>/ 100</span></span><span>{analysis.rating}</span></div><button className="button secondary" disabled={!ready || count > 0} onClick={() => update({...emptyTeam(team.format), slots: format.generation === 3 ? ['swampert', 'gardevoir', 'breloom', 'manectric', 'flygon', 'aggron'] : ['pikachu', 'charizard', 'blastoise', 'venusaur', 'gengar', 'dragonite']}, 'Example team loaded. Try a recommendation to improve it.')}>Try example</button><button className="button secondary" disabled={!ready || !count} onClick={() => update(emptyTeam(team.format), 'Team cleared.')}>Clear team</button></div></div>
+      <div className="builder-toolbar"><div><p className="eyebrow">TEAM WORKSPACE</p><h2 id="team-title">Your team <span className="count">{count} / 6</span></h2></div><div className="toolbar-actions"><button className="button primary" disabled={!ready || count === 6} onClick={e => openSlot(team.slots.findIndex(id => !id), e.currentTarget, true)}>Build team</button><div className="toolbar-score" aria-live="polite"><span className="visually-hidden">{`Team score ${analysis.total} of 100`}</span><span className="score-number" data-testid="team-score"><span key={editEffect.scoreRevision} className={`score-value${editEffect.scoreRevision ? scoreUp ? ' score-up' : ' score-down' : ''}`} aria-hidden="true">{shownScore}</span><span>/ 100</span></span><span>{analysis.rating}</span></div><button className="button secondary" disabled={!ready || count > 0} onClick={() => update({...emptyTeam(team.format), slots: format.generation === 3 ? ['swampert', 'gardevoir', 'breloom', 'manectric', 'flygon', 'aggron'] : ['pikachu', 'charizard', 'blastoise', 'venusaur', 'gengar', 'dragonite']}, 'Example team loaded. Try a recommendation to improve it.')}>Try example</button><a className="button secondary" href="/random-pokemon-generator#team">Generate a random team</a><button className="button secondary" disabled={!ready || !count} onClick={() => update(emptyTeam(team.format), 'Team cleared.')}>Clear team</button></div></div>
       <details className="format-settings"><summary>Gen {format.generation} · National Dex · Casual <span>Settings & scope</span></summary><div className="format-fields"><label>Game<select aria-label="Game" value={format.generation} onChange={e => changeFormat(formats.find(f => f.generation === Number(e.target.value))!.id)}>{formats.map(f => <option key={f.id} value={f.generation}>{f.game}</option>)}</select></label><label>Format<select aria-label="Format" value={team.format} onChange={e => changeFormat(e.target.value)} >{formats.map(f => <option value={f.id} key={f.id}>{f.name}</option>)}</select></label></div>
       <details className="format-note"><summary>Format scope · casual planning</summary><p>{format.description}</p></details></details>
       <div className="team-grid">{members.map((p, index) => <article className={`team-card ${p ? 'filled' : ''}`} key={index} data-testid={`slot-${index}`}>

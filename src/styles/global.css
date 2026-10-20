@@ -364,3 +364,15 @@ header { padding: 14px 0; }
 @keyframes score-shock{0%{transform:scale(.3);opacity:0}12%{opacity:.95}65%{opacity:.3}100%{transform:scale(2.3);opacity:0}}
 /* Must stay after the animation shorthands: a media query adds no specificity, so an earlier block loses the cascade and leaves the impact running. */
 @media(prefers-reduced-motion:reduce){.score-up,.score-down,.score-up::after,.score-down::after{animation:none}}
+
+/* Random picker: compact controls before supporting content. */
+.random-page h1{font-size:clamp(1.5rem,3vw,2rem);margin-bottom:.35rem}
+.random-workspace{border:1px solid var(--border,#ddd);border-radius:16px;padding:18px;background:var(--surface,#fff)}
+.random-controls{display:grid;grid-template-columns:1fr 1.5fr 1fr auto;gap:12px;align-items:end}
+.random-controls label{display:grid;gap:6px;font-size:.85rem;font-weight:600;min-width:0}
+.random-controls select{width:100%;min-height:44px}
+.random-advanced{margin-top:14px;font-size:.85rem}.random-advanced summary{cursor:pointer}.random-advanced label{display:inline-flex;align-items:center;gap:8px;margin:12px 18px 0 0}.random-advanced input{width:auto}.random-advanced p{max-width:75ch}
+.random-results{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.random-card{border:1px solid #ddd;border-radius:12px;text-align:center;padding:12px;min-width:0}.random-card .pokemon-sprite{display:block;width:120px;height:120px;margin:auto}.random-card .pokemon-sprite img{width:100%;height:100%;object-fit:contain}.random-card h2{font-size:1.1rem;margin:6px 0}.random-card p{margin:6px 0 12px}.random-card>div,.random-actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}.random-actions{margin-top:16px}.single-result{grid-template-columns:minmax(0,300px);justify-content:center}.single-result .pokemon-sprite{width:160px;height:160px}.random-empty{grid-column:1/-1;padding:45px 12px;text-align:center;border:1px dashed #bbb;border-radius:12px}.random-card button[aria-pressed=true]{background:#e2edf5;border-color:#547b98}
+@media(max-width:640px){.random-workspace{padding:12px}.random-controls{grid-template-columns:1fr 1fr;gap:10px}.random-results{grid-template-columns:repeat(2,minmax(0,1fr))}.random-results.single-result{grid-template-columns:minmax(0,300px)}.random-card .pokemon-sprite{width:92px;height:92px}.single-result .pokemon-sprite{width:140px;height:140px}.random-card{padding:8px}.random-card .button{padding:8px 10px;font-size:.8rem}}
+
+.random-page{padding-top:18px}.random-page>.intro{margin:6px 0 16px;font-size:15px}.random-controls select{font-size:16px;padding:8px}header nav{flex-wrap:wrap}
