@@ -255,13 +255,15 @@ test('sprites are served from the local build and fall back safely', async ({pag
   page.on('request', request => { const url = new URL(request.url()); if (url.protocol.startsWith('http') && url.host !== '127.0.0.1:4321') spriteHosts.add(url.host); });
   await page.goto('/?v=1&team=pikachu');
   const selected = page.getByTestId('slot-0').locator('img');
-  await expect(selected).toHaveAttribute('src', /\/sprites\/official\/320\/25\.webp$/);
-  await expect.poll(()=>selected.evaluate((el:HTMLImageElement)=>el.complete && el.naturalWidth>0)).toBe(true);
+  await expect(selected).toHaveAttribute('src', /\/sprites\/official\/160\/25\.webp$/);
+  await expect(selected).toHaveAttribute('srcset', '/sprites/official/160/25.webp 160w, /sprites/official/320/25.webp 320w');
+  await expect(selected).toHaveAttribute('sizes', '(max-width: 520px) 96px, 112px');
+  await expect.poll(()=>selected.evaluate((el:HTMLImageElement)=>el.complete && /\/sprites\/official\/(160|320)\/25\.webp$/.test(el.currentSrc))).toBe(true);
   await expect(page.getByTestId('recommendation').first().locator('img')).toHaveCount(1);
   await page.getByRole('button',{name:'Add Pokémon to slot 2',exact:true}).click();
   await page.getByRole('searchbox').fill('Charizard');
   await expect(page.getByRole('button',{name:'Choose Charizard',exact:true}).locator('img')).toHaveAttribute('src',/\/sprites\/official\/160\/6\.webp$/);
-  await expect(page.getByRole('button',{name:'Choose Charizard',exact:true}).locator('img')).toHaveAttribute('srcset','/sprites/official/160/6.webp 1x, /sprites/official/320/6.webp 2x');
+  await expect(page.getByRole('button',{name:'Choose Charizard',exact:true}).locator('img')).toHaveAttribute('srcset','/sprites/official/160/6.webp 160w, /sprites/official/320/6.webp 320w');
   await page.getByRole('button',{name:'Close Pokémon picker',exact:true}).click();
   expect([...spriteHosts]).toEqual([]);
   await page.route('**/sprites/official/**', route=>route.abort());

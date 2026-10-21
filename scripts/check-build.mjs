@@ -57,3 +57,13 @@ for (const id of featuredPokemonIds) {
   assert.ok(!/Reviewed October 6, 2026/.test(html) || reviewed.battleNotes === reviewed.moveset, `${id} shows a hardcoded review date`);
 }
 console.log(`Verified card-first layout, editorial depth and retained builder on ${featuredPokemonIds.length} guides`);
+
+const directory = readFileSync('dist/pokemon/index.html', 'utf8');
+const directorySprites = [...directory.matchAll(/<img[^>]*?official\/\d+\/\d+\.webp[^>]*?>/g)].map(match => match[0]);
+assert.equal(directorySprites.length, featuredPokemonIds.length, 'The directory should render exactly one sprite per published guide');
+for (const img of directorySprites) {
+  assert.ok(!img.includes('src="/sprites/official/320/'), `A directory card ships the 320px file as its default src: ${img}`);
+  assert.ok(img.includes(' 160w, ') && img.includes(' 320w'), 'Directory sprites must offer both widths for the browser to choose');
+  assert.ok(/sizes="[^"]*px[^"]*"/.test(img), 'Directory sprites need a sizes hint, otherwise srcset falls back to the viewport width');
+}
+console.log(`Verified ${directorySprites.length} directory sprites default to 160px and opt into 320px through srcset/sizes`);
