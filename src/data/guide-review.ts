@@ -45,6 +45,13 @@ const battleNoteBatches = [
       'chesnaught', 'rillaboom', 'cinderace', 'inteleon',
     ],
   },
+  {
+    addedOn: '2026-10-21',
+    speciesIds: [
+      'greninja', 'emboar', 'metagross', 'hydreigon', 'garganacl', 'electivire',
+      'talonflame', 'staraptor', 'heracross', 'weavile',
+    ],
+  },
 ];
 
 const dateNames = ['January', 'February', 'March', 'April', 'May', 'June',

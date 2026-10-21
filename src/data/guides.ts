@@ -1157,5 +1157,175 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
     "partners": "A Ground teammate covers Electric attacks. A Grass-resistant defensive partner gives it safer opportunities to enter.",
     "alternative": "primarina",
     "alternativeReason": "Primarina offers more bulk and Fairy typing at the cost of Speed."
+  },
+  "greninja": {
+    "role": "Fast special attacker and pivot",
+    "item": "Heavy-Duty Boots",
+    "ability": "Torrent",
+    "nature": "Timid",
+    "moves": [
+      "Surf",
+      "Dark Pulse",
+      "Ice Beam",
+      "U-turn"
+    ],
+    "plan": "Use its Speed to attack a favorable matchup or U-turn into a teammate. Surf gives consistent Water damage; Dark Pulse and Ice Beam provide additional coverage.",
+    "caution": "Low bulk makes direct switches risky. U-turn is physical and is included for switching utility. This example uses Torrent, so it does not change typing through Protean or use Battle Bond.",
+    "partners": "A Ground teammate covers Electric attacks. A Steel partner resists Grass, Bug and Fairy; cover Fighting separately.",
+    "alternative": "inteleon",
+    "alternativeReason": "Inteleon offers a fast Water special attacker without Dark typing or its extra weaknesses."
+  },
+  "emboar": {
+    "role": "Physical attacker with recoil damage",
+    "item": "Choice Band",
+    "ability": "Reckless",
+    "nature": "Adamant",
+    "moves": [
+      "Flare Blitz",
+      "Close Combat",
+      "Wild Charge",
+      "Knock Off"
+    ],
+    "plan": "Choice Band boosts Attack and locks Emboar into one move until switching. Reckless boosts Flare Blitz and Wild Charge, making their immediate damage useful in a favorable matchup.",
+    "caution": "Reckless does not remove recoil and does not boost Close Combat or Knock Off. Low Speed, recoil and Close Combat’s defense drops can quickly wear Emboar down.",
+    "partners": "A Flying teammate covers Ground and resists Fighting. Healing support helps manage recoil; account for Water and Psychic attacks too.",
+    "alternative": "infernape",
+    "alternativeReason": "Infernape offers more Speed and pivoting instead of this slower, recoil-heavy approach."
+  },
+  "metagross": {
+    "role": "Bulky physical attacker with priority",
+    "item": "Leftovers",
+    "ability": "Clear Body",
+    "nature": "Adamant",
+    "moves": [
+      "Meteor Mash",
+      "Zen Headbutt",
+      "Earthquake",
+      "Bullet Punch"
+    ],
+    "plan": "Use its resistances to find a favorable entry, then attack or finish a weakened eligible target with Bullet Punch. Clear Body prevents many opponent-induced stat drops.",
+    "caution": "Clear Body does not prevent all ways of lowering stats or direct damage. Fire, Ground, Ghost and Dark attacks are super effective. Meteor Mash and Zen Headbutt can miss.",
+    "partners": "A Flying teammate covers Ground. A Dark partner resists Ghost and Dark; a Water teammate helps cover Fire attacks.",
+    "alternative": "scizor",
+    "alternativeReason": "Scizor provides Technician-boosted Steel priority and U-turn, with a different defensive profile."
+  },
+  "hydreigon": {
+    "role": "Special setup attacker",
+    "item": "Leftovers",
+    "ability": "Levitate",
+    "nature": "Timid",
+    "moves": [
+      "Dark Pulse",
+      "Dragon Pulse",
+      "Flamethrower",
+      "Nasty Plot"
+    ],
+    "plan": "Levitate normally provides Ground immunity. Find a safe Nasty Plot turn before attacking; Flamethrower offers coverage against Steel targets that resist Dragon Pulse.",
+    "caution": "Fairy attacks deal 4× damage and Fairy types ignore Dragon Pulse. Ice, Fighting, Bug and Dragon attacks also threaten it. Effects such as Mold Breaker can bypass Levitate.",
+    "partners": "A Steel teammate can resist Fairy, Ice, Bug and Dragon attacks. Add physical damage to avoid relying only on special attackers.",
+    "alternative": "dragapult",
+    "alternativeReason": "Dragapult offers more Speed and Ghost typing, with a different attacking toolkit."
+  },
+  "garganacl": {
+    "role": "Defensive pressure and recovery",
+    "item": "Leftovers",
+    "ability": "Sturdy",
+    "nature": "Impish",
+    "moves": [
+      "Salt Cure",
+      "Recover",
+      "Body Press",
+      "Protect"
+    ],
+    "plan": "Use Salt Cure against an eligible target to apply ongoing damage, then Recover or Protect when the matchup permits. Body Press uses Defense rather than Attack.",
+    "caution": "Sturdy requires full HP and can be broken by hazards or chip damage. This set uses Sturdy, not Purifying Salt, so it has no ability-based status immunity or Ghost damage reduction. Water, Grass, Fighting, Ground and Steel attacks are super effective.",
+    "partners": "A Flying teammate covers Ground and can resist Fighting. A Grass partner resists Water and Grass; check Steel attacks too.",
+    "alternative": "tyranitar",
+    "alternativeReason": "Tyranitar offers a more attacking Rock role and sand support, with Dark typing and different weaknesses."
+  },
+  "electivire": {
+    "role": "Physical attacker with Electric immunity",
+    "item": "Life Orb",
+    "ability": "Motor Drive",
+    "nature": "Jolly",
+    "moves": [
+      "Thunder Punch",
+      "Ice Punch",
+      "Earthquake",
+      "Knock Off"
+    ],
+    "plan": "A predicted Electric attack can activate Motor Drive, granting immunity to that attack and raising Speed. Attack with Thunder Punch or use coverage against a suitable target.",
+    "caution": "Motor Drive is not an unconditional Speed boost and can be bypassed by some ability-ignoring effects. Life Orb costs HP. Ground attacks are super effective; Flying types avoid Earthquake.",
+    "partners": "A Flying teammate covers Ground attacks. A special attacker helps avoid relying entirely on physical damage.",
+    "alternative": "jolteon",
+    "alternativeReason": "Jolteon offers greater natural Speed and special attacks with Volt Absorb instead of Motor Drive."
+  },
+  "talonflame": {
+    "role": "Fast physical pivot with recovery",
+    "item": "Heavy-Duty Boots",
+    "ability": "Flame Body",
+    "nature": "Jolly",
+    "moves": [
+      "Brave Bird",
+      "Flare Blitz",
+      "Roost",
+      "U-turn"
+    ],
+    "plan": "Use U-turn to bring in a teammate or attack a favorable target. Roost helps recover recoil damage. Flame Body can burn an attacker that makes contact, but activation is not guaranteed.",
+    "caution": "Rock attacks deal 4× damage. Boots only protect against entry hazards; both main attacks cause recoil. This example uses Flame Body, so it does not gain Gale Wings priority.",
+    "partners": "A Ground teammate covers Electric attacks. A Water partner resists Water and can help handle Rock attackers.",
+    "alternative": "staraptor",
+    "alternativeReason": "Staraptor offers Normal typing and Close Combat with a different pivoting role."
+  },
+  "staraptor": {
+    "role": "Physical attacker and pivot",
+    "item": "Choice Scarf",
+    "ability": "Reckless",
+    "nature": "Jolly",
+    "moves": [
+      "Brave Bird",
+      "Double-Edge",
+      "Close Combat",
+      "U-turn"
+    ],
+    "plan": "Choice Scarf raises Speed but locks Staraptor into one move until switching. Reckless boosts Brave Bird and Double-Edge; U-turn keeps switching momentum when staying in is unsafe.",
+    "caution": "Reckless does not remove recoil or boost Close Combat. Close Combat lowers both defenses. Electric, Ice and Rock attacks are super effective, and this set has no recovery move.",
+    "partners": "A Ground teammate covers Electric attacks. A Steel partner resists Ice and Rock; healing support helps manage recoil.",
+    "alternative": "talonflame",
+    "alternativeReason": "Talonflame offers Fire typing and Roost instead of Normal attacks and Close Combat."
+  },
+  "heracross": {
+    "role": "Physical attacker with status-powered damage",
+    "item": "Flame Orb",
+    "ability": "Guts",
+    "nature": "Adamant",
+    "moves": [
+      "Close Combat",
+      "Megahorn",
+      "Facade",
+      "Knock Off"
+    ],
+    "plan": "Flame Orb burns an eligible Heracross at the end of the turn. Guts boosts Attack while statused and prevents the usual burn reduction to physical damage; Facade gains power from status.",
+    "caution": "Burn still causes ongoing HP loss, so this set wears down over time. Flying attacks deal 4× damage, Megahorn can miss, and Close Combat lowers both defenses.",
+    "partners": "A Steel teammate can resist Flying, Psychic and Fairy attacks. A Water partner helps against Fire attackers.",
+    "alternative": "breloom",
+    "alternativeReason": "Breloom offers Spore and Mach Punch instead of Guts and Bug coverage."
+  },
+  "weavile": {
+    "role": "Fast physical setup attacker with priority",
+    "item": "Heavy-Duty Boots",
+    "ability": "Pressure",
+    "nature": "Jolly",
+    "moves": [
+      "Knock Off",
+      "Ice Spinner",
+      "Ice Shard",
+      "Swords Dance"
+    ],
+    "plan": "Use a safe Swords Dance turn before attacking. Ice Shard gives priority against weakened eligible targets; Knock Off pressures removable held items.",
+    "caution": "Fighting attacks deal 4× damage. Low bulk limits safe setup turns, and Boots do not reduce direct attacks. Ice Spinner removes terrain, which can also disrupt your own team.",
+    "partners": "A Flying or Fairy partner can help against Fighting attacks. A Water teammate resists Fire and Steel attacks.",
+    "alternative": "mamoswine",
+    "alternativeReason": "Mamoswine offers Electric immunity and Ground attacks, with lower Speed and different weaknesses."
   }
 };

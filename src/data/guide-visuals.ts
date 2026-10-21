@@ -1614,5 +1614,253 @@ export const guideVisuals: Record<string, { evolution: { id: string; condition: 
         "reason": "Resists Grass and offers a sturdier pivot with U-turn."
       }
     ]
+  },
+  "greninja": {
+    "evolution": [
+      {
+        "id": "froakie",
+        "condition": ""
+      },
+      {
+        "id": "frogadier",
+        "condition": "Level 16"
+      },
+      {
+        "id": "greninja",
+        "condition": "Level 36"
+      }
+    ],
+    "partners": [
+      {
+        "id": "garchomp",
+        "reason": "Electric immunity and physical damage complement special attacks."
+      },
+      {
+        "id": "corviknight",
+        "reason": "Resists Grass, Bug and Fairy and offers a sturdier pivot."
+      }
+    ]
+  },
+  "emboar": {
+    "evolution": [
+      {
+        "id": "tepig",
+        "condition": ""
+      },
+      {
+        "id": "pignite",
+        "condition": "Level 17"
+      },
+      {
+        "id": "emboar",
+        "condition": "Level 36"
+      }
+    ],
+    "partners": [
+      {
+        "id": "gyarados",
+        "reason": "Ground immunity plus Water and Fighting resistance help switching."
+      },
+      {
+        "id": "umbreon",
+        "reason": "Psychic immunity and delayed Wish healing support a recoil attacker."
+      }
+    ]
+  },
+  "metagross": {
+    "evolution": [
+      {
+        "id": "beldum",
+        "condition": ""
+      },
+      {
+        "id": "metang",
+        "condition": "Level 20"
+      },
+      {
+        "id": "metagross",
+        "condition": "Level 45"
+      }
+    ],
+    "partners": [
+      {
+        "id": "gyarados",
+        "reason": "Immune to Ground and resists Fire, complementing Steel typing."
+      },
+      {
+        "id": "umbreon",
+        "reason": "Resists Ghost and Dark and can provide Wish support."
+      }
+    ]
+  },
+  "hydreigon": {
+    "evolution": [
+      {
+        "id": "deino",
+        "condition": ""
+      },
+      {
+        "id": "zweilous",
+        "condition": "Level 50"
+      },
+      {
+        "id": "hydreigon",
+        "condition": "Level 64"
+      }
+    ],
+    "partners": [
+      {
+        "id": "scizor",
+        "reason": "Resists Fairy, Ice, Bug and Dragon and adds physical priority."
+      },
+      {
+        "id": "empoleon",
+        "reason": "Resists Fairy, Ice, Bug and Dragon and provides recovery."
+      }
+    ]
+  },
+  "garganacl": {
+    "evolution": [
+      {
+        "id": "nacli",
+        "condition": ""
+      },
+      {
+        "id": "naclstack",
+        "condition": "Level 24"
+      },
+      {
+        "id": "garganacl",
+        "condition": "Level 38"
+      }
+    ],
+    "partners": [
+      {
+        "id": "corviknight",
+        "reason": "Ground immunity and resistances to Grass and Steel help cover weaknesses; Fighting damage is neutral."
+      },
+      {
+        "id": "rillaboom",
+        "reason": "Resists Water and Grass and adds faster physical pressure."
+      }
+    ]
+  },
+  "electivire": {
+    "evolution": [
+      {
+        "id": "elekid",
+        "condition": ""
+      },
+      {
+        "id": "electabuzz",
+        "condition": "Level 30"
+      },
+      {
+        "id": "electivire",
+        "condition": "Trade holding Electirizer"
+      }
+    ],
+    "partners": [
+      {
+        "id": "corviknight",
+        "reason": "Ground immunity and U-turn help position an attacker safely."
+      },
+      {
+        "id": "milotic",
+        "reason": "Adds special damage and recovery alongside this physical attacker."
+      }
+    ]
+  },
+  "talonflame": {
+    "evolution": [
+      {
+        "id": "fletchling",
+        "condition": ""
+      },
+      {
+        "id": "fletchinder",
+        "condition": "Level 17"
+      },
+      {
+        "id": "talonflame",
+        "condition": "Level 35"
+      }
+    ],
+    "partners": [
+      {
+        "id": "gastrodon",
+        "reason": "Electric immunity and Rock resistance cover two weaknesses."
+      },
+      {
+        "id": "milotic",
+        "reason": "Resists Water and supplies recovery plus special damage."
+      }
+    ]
+  },
+  "staraptor": {
+    "evolution": [
+      {
+        "id": "starly",
+        "condition": ""
+      },
+      {
+        "id": "staravia",
+        "condition": "Level 14"
+      },
+      {
+        "id": "staraptor",
+        "condition": "Level 34"
+      }
+    ],
+    "partners": [
+      {
+        "id": "gastrodon",
+        "reason": "Electric immunity and Rock resistance help create switching options."
+      },
+      {
+        "id": "empoleon",
+        "reason": "Resists Ice and Rock and adds special damage with recovery."
+      }
+    ]
+  },
+  "heracross": {
+    "evolution": [
+      {
+        "id": "heracross",
+        "condition": ""
+      }
+    ],
+    "partners": [
+      {
+        "id": "empoleon",
+        "reason": "Resists Flying, Psychic and Fairy and adds special damage."
+      },
+      {
+        "id": "milotic",
+        "reason": "Resists Fire and supplies recovery alongside a worn-down attacker."
+      }
+    ]
+  },
+  "weavile": {
+    "evolution": [
+      {
+        "id": "sneasel",
+        "condition": ""
+      },
+      {
+        "id": "weavile",
+        "condition": "Level up at night holding Razor Claw"
+      }
+    ],
+    "partners": [
+      {
+        "id": "gyarados",
+        "reason": "Resists Fighting, Fire and Steel and provides Ground immunity."
+      },
+      {
+        "id": "clefable",
+        "reason": "Resists Fighting and adds a bulkier special attacking option."
+      }
+    ]
   }
 };
