@@ -817,5 +817,175 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
     "partners": "A Steel/Flying teammate can cover several weaknesses. A Water partner can help against Water and Ice attackers.",
     "alternative": "garchomp",
     "alternativeReason": "Garchomp offers higher base Speed and Dragon typing with a different physical attacking role."
+  },
+  "breloom": {
+    "role": "Physical attacker with priority and sleep pressure",
+    "item": "Focus Sash",
+    "ability": "Technician",
+    "nature": "Adamant",
+    "moves": [
+      "Bullet Seed",
+      "Mach Punch",
+      "Spore",
+      "Swords Dance"
+    ],
+    "plan": "Technician boosts eligible low-power moves, including Mach Punch and each Bullet Seed hit. Spore can create a setup opportunity against a target that is not immune.",
+    "caution": "Flying attacks deal 4× damage. Focus Sash requires full HP, and Grass types or other protected targets ignore Spore. In Generation 9, learn Spore as Shroomish before evolving; check your format’s sleep rules.",
+    "partners": "A Steel teammate can resist Flying and Fairy attacks. A Water teammate helps against Fire and Ice attackers.",
+    "alternative": "meowscarada",
+    "alternativeReason": "Meowscarada offers a faster Grass attacker and U-turn, without Mach Punch or Spore."
+  },
+  "chandelure": {
+    "role": "Special attacker and Choice disruption",
+    "item": "Choice Specs",
+    "ability": "Flash Fire",
+    "nature": "Modest",
+    "moves": [
+      "Flamethrower",
+      "Shadow Ball",
+      "Energy Ball",
+      "Trick"
+    ],
+    "plan": "Choice Specs boosts Special Attack but locks Chandelure into one move until it switches. Trick can exchange items with an eligible target; Flash Fire grants Fire immunity.",
+    "caution": "Water, Ground, Rock, Ghost and Dark attacks are super effective. Not every item can be exchanged, and a Choice lock can leave you vulnerable to a switch-in.",
+    "partners": "A Dark partner can resist Ghost and Dark attacks. A Ground or Water teammate can help against Rock attackers.",
+    "alternative": "skeledirge",
+    "alternativeReason": "Skeledirge shares Fire/Ghost typing but offers Unaware, recovery and a bulkier setup role."
+  },
+  "meganium": {
+    "role": "Screen support and recovery",
+    "item": "Light Clay",
+    "ability": "Overgrow",
+    "nature": "Bold",
+    "moves": [
+      "Reflect",
+      "Light Screen",
+      "Giga Drain",
+      "Synthesis"
+    ],
+    "plan": "Set the screen that matches the opposing attacker. Light Clay extends Reflect and Light Screen to eight turns; Giga Drain provides damage and some recovery.",
+    "caution": "Screens do not make setup safe against every attack. Critical hits bypass their damage reduction, and Synthesis recovery depends on weather. Fire, Ice, Flying, Poison and Bug attacks are super effective.",
+    "partners": "A Steel teammate helps cover several Grass weaknesses. Add an attacker that can use the turns created by screens.",
+    "alternative": "venusaur",
+    "alternativeReason": "Venusaur adds Poison typing and a more attacking Grass role, with different support options."
+  },
+  "typhlosion": {
+    "role": "Fast special attacker",
+    "item": "Choice Scarf",
+    "ability": "Blaze",
+    "nature": "Timid",
+    "moves": [
+      "Eruption",
+      "Flamethrower",
+      "Focus Blast",
+      "Shadow Ball"
+    ],
+    "plan": "Use Eruption while HP is high. Its power decreases with remaining HP, so Flamethrower gives a consistent Fire option after taking damage. Choice Scarf raises Speed.",
+    "caution": "Choice Scarf locks you into one move until switching. Hazards and chip damage weaken Eruption; Focus Blast can miss. This guide covers standard Typhlosion, not the Hisuian form.",
+    "partners": "Hazard removal helps preserve Eruption power. A Ground partner can cover Electric attacks aimed at a Water teammate and pressure Rock types.",
+    "alternative": "charizard",
+    "alternativeReason": "Charizard offers Ground immunity and a different Fire role, with a much larger Rock weakness."
+  },
+  "feraligatr": {
+    "role": "Physical setup attacker",
+    "item": "Life Orb",
+    "ability": "Sheer Force",
+    "nature": "Jolly",
+    "moves": [
+      "Dragon Dance",
+      "Liquidation",
+      "Ice Punch",
+      "Crunch"
+    ],
+    "plan": "Find a safe Dragon Dance turn, then use the three damaging moves. Sheer Force boosts their power by removing their secondary effects; qualifying attacks also avoid Life Orb recoil.",
+    "caution": "Sheer Force removes Liquidation’s Defense drop, Ice Punch’s freeze chance and Crunch’s Defense drop. It does not remove every attack effect or guarantee a knockout. Grass and Electric attacks threaten it.",
+    "partners": "A Ground teammate covers Electric attacks. A Steel teammate resists Grass and helps create setup opportunities.",
+    "alternative": "gyarados",
+    "alternativeReason": "Gyarados adds Ground immunity and Intimidate, but has a four-times Electric weakness."
+  },
+  "sceptile": {
+    "role": "Fast special attacker",
+    "item": "Life Orb",
+    "ability": "Overgrow",
+    "nature": "Timid",
+    "moves": [
+      "Giga Drain",
+      "Dragon Pulse",
+      "Focus Blast",
+      "Leaf Storm"
+    ],
+    "plan": "Use Sceptile’s Speed to pressure a favorable matchup. Giga Drain restores some HP; Leaf Storm offers a stronger Grass attack when the immediate damage matters.",
+    "caution": "Leaf Storm sharply lowers Special Attack after hitting, often encouraging a switch. Life Orb costs HP and Focus Blast can miss. This standard form does not have Mega Sceptile’s Dragon typing.",
+    "partners": "A Steel teammate covers Ice, Flying, Poison and Bug attacks. A Water teammate helps against Fire attackers.",
+    "alternative": "meowscarada",
+    "alternativeReason": "Meowscarada provides a faster physical Grass option with Dark typing and a different movepool."
+  },
+  "blaziken": {
+    "role": "Physical setup attacker",
+    "item": "Heavy-Duty Boots",
+    "ability": "Speed Boost",
+    "nature": "Adamant",
+    "moves": [
+      "Protect",
+      "Swords Dance",
+      "Flare Blitz",
+      "Close Combat"
+    ],
+    "plan": "Protect can help collect an end-of-turn Speed Boost. Use Swords Dance only when the matchup allows another setup turn; attack once the opening is ready.",
+    "caution": "Protect does not stop every move and gives opponents a setup opportunity. Flare Blitz recoil and Close Combat’s defense drops shorten its staying power; Speed boosts do not overcome priority.",
+    "partners": "A Flying teammate covers Ground attacks. A Fairy teammate helps against opposing Fighting attackers; account for Water and Psychic attacks too.",
+    "alternative": "lucario",
+    "alternativeReason": "Lucario offers a physical setup role with Steel typing and Extreme Speed instead of Speed Boost."
+  },
+  "swampert": {
+    "role": "Bulky attacker and hazard support",
+    "item": "Leftovers",
+    "ability": "Torrent",
+    "nature": "Relaxed",
+    "moves": [
+      "Earthquake",
+      "Liquidation",
+      "Stealth Rock",
+      "Roar"
+    ],
+    "plan": "Set Stealth Rock in a favorable matchup, then attack or use Roar to force an eligible opponent out. Leftovers provides gradual recovery.",
+    "caution": "Grass attacks deal four-times damage. This set has no direct recovery move; repeated hits wear it down. Roar acts late and fails against protected targets or effects that block forced switching.",
+    "partners": "A Grass-resistant teammate protects its main weakness. Add a faster attacker because Swampert has low Speed.",
+    "alternative": "gastrodon",
+    "alternativeReason": "Gastrodon offers Recover and Storm Drain, with a more special attacking approach."
+  },
+  "torterra": {
+    "role": "Physical setup attacker",
+    "item": "White Herb",
+    "ability": "Overgrow",
+    "nature": "Adamant",
+    "moves": [
+      "Shell Smash",
+      "Earthquake",
+      "Seed Bomb",
+      "Rock Slide"
+    ],
+    "plan": "Use a safe turn for Shell Smash, which raises Attack, Special Attack and Speed while lowering both defenses. White Herb can restore the lowered stats once.",
+    "caution": "Ice attacks deal 4× damage. White Herb is consumed and setup remains risky; Flying types avoid Earthquake. Rock Slide can miss.",
+    "partners": "A Steel teammate can cover Ice and Flying attacks. Add special damage so the team does not depend only on physical attacks.",
+    "alternative": "swampert",
+    "alternativeReason": "Swampert trades Grass typing and Shell Smash for Water typing and hazard support."
+  },
+  "infernape": {
+    "role": "Fast physical attacker and pivot",
+    "item": "Heavy-Duty Boots",
+    "ability": "Blaze",
+    "nature": "Jolly",
+    "moves": [
+      "Close Combat",
+      "Flare Blitz",
+      "U-turn",
+      "Mach Punch"
+    ],
+    "plan": "Pressure a favorable target with its main attacks, or use U-turn to bring in a teammate. Mach Punch provides priority against a weakened eligible target.",
+    "caution": "Flare Blitz causes recoil and Close Combat lowers both defenses. Ghost types ignore Close Combat and Mach Punch; priority does not guarantee a knockout.",
+    "partners": "A Flying teammate covers Ground attacks. A Dark teammate can switch into Psychic attacks; check Water and Flying coverage elsewhere.",
+    "alternative": "blaziken",
+    "alternativeReason": "Blaziken offers Speed Boost and setup instead of this immediate pivoting approach."
   }
 };

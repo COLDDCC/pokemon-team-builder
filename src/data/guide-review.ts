@@ -31,6 +31,13 @@ const battleNoteBatches = [
       'flareon', 'espeon', 'tentacruel', 'krookodile',
     ],
   },
+  {
+    addedOn: '2026-10-16',
+    speciesIds: [
+      'breloom', 'chandelure', 'meganium', 'typhlosion', 'feraligatr', 'sceptile',
+      'blaziken', 'swampert', 'torterra', 'infernape',
+    ],
+  },
 ];
 
 const dateNames = ['January', 'February', 'March', 'April', 'May', 'June',

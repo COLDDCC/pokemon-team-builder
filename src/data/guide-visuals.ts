@@ -1098,5 +1098,261 @@ export const guideVisuals: Record<string, { evolution: { id: string; condition: 
         "reason": "Resists Water and Ice attacks."
       }
     ]
+  },
+  "breloom": {
+    "evolution": [
+      {
+        "id": "shroomish",
+        "condition": ""
+      },
+      {
+        "id": "breloom",
+        "condition": "Level 23 or higher; delay evolution to learn Spore as Shroomish"
+      }
+    ],
+    "partners": [
+      {
+        "id": "magnezone",
+        "reason": "Resists Flying and Fairy attacks; both need a Fire answer."
+      },
+      {
+        "id": "milotic",
+        "reason": "Resists Fire and Ice attacks."
+      }
+    ]
+  },
+  "chandelure": {
+    "evolution": [
+      {
+        "id": "litwick",
+        "condition": ""
+      },
+      {
+        "id": "lampent",
+        "condition": "Level 41"
+      },
+      {
+        "id": "chandelure",
+        "condition": "Dusk Stone"
+      }
+    ],
+    "partners": [
+      {
+        "id": "umbreon",
+        "reason": "Resists Ghost and Dark attacks."
+      },
+      {
+        "id": "gastrodon",
+        "reason": "Resists Rock and has Water immunity with Storm Drain."
+      }
+    ]
+  },
+  "meganium": {
+    "evolution": [
+      {
+        "id": "chikorita",
+        "condition": ""
+      },
+      {
+        "id": "bayleef",
+        "condition": "Level 16"
+      },
+      {
+        "id": "meganium",
+        "condition": "Level 32"
+      }
+    ],
+    "partners": [
+      {
+        "id": "scizor",
+        "reason": "Resists Ice, Flying, Poison and Bug; can use screen turns to set up."
+      },
+      {
+        "id": "gyarados",
+        "reason": "Resists Fire and Bug and can use Dragon Dance behind screens."
+      }
+    ]
+  },
+  "typhlosion": {
+    "evolution": [
+      {
+        "id": "cyndaquil",
+        "condition": ""
+      },
+      {
+        "id": "quilava",
+        "condition": "Level 14"
+      },
+      {
+        "id": "typhlosion",
+        "condition": "Level 36"
+      }
+    ],
+    "partners": [
+      {
+        "id": "tentacruel",
+        "reason": "Rapid Spin can remove hazards to help preserve Eruption power."
+      },
+      {
+        "id": "gastrodon",
+        "reason": "Resists Rock and provides Water immunity through Storm Drain."
+      }
+    ]
+  },
+  "feraligatr": {
+    "evolution": [
+      {
+        "id": "totodile",
+        "condition": ""
+      },
+      {
+        "id": "croconaw",
+        "condition": "Level 18"
+      },
+      {
+        "id": "feraligatr",
+        "condition": "Level 30"
+      }
+    ],
+    "partners": [
+      {
+        "id": "garchomp",
+        "reason": "Electric immunity and Stealth Rock support complement physical setup."
+      },
+      {
+        "id": "scizor",
+        "reason": "Resists Grass and offers priority when Dragon Dance is unsafe."
+      }
+    ]
+  },
+  "sceptile": {
+    "evolution": [
+      {
+        "id": "treecko",
+        "condition": ""
+      },
+      {
+        "id": "grovyle",
+        "condition": "Level 16"
+      },
+      {
+        "id": "sceptile",
+        "condition": "Level 36"
+      }
+    ],
+    "partners": [
+      {
+        "id": "corviknight",
+        "reason": "Resists several Grass weaknesses and can pivot with U-turn."
+      },
+      {
+        "id": "milotic",
+        "reason": "Resists Fire and Ice and provides recovery alongside a frailer attacker."
+      }
+    ]
+  },
+  "blaziken": {
+    "evolution": [
+      {
+        "id": "torchic",
+        "condition": ""
+      },
+      {
+        "id": "combusken",
+        "condition": "Level 16"
+      },
+      {
+        "id": "blaziken",
+        "condition": "Level 36"
+      }
+    ],
+    "partners": [
+      {
+        "id": "gyarados",
+        "reason": "Immune to Ground and resists Water and Fighting attacks."
+      },
+      {
+        "id": "umbreon",
+        "reason": "Immune to Psychic and can offer delayed recovery through Wish."
+      }
+    ]
+  },
+  "swampert": {
+    "evolution": [
+      {
+        "id": "mudkip",
+        "condition": ""
+      },
+      {
+        "id": "marshtomp",
+        "condition": "Level 16"
+      },
+      {
+        "id": "swampert",
+        "condition": "Level 36"
+      }
+    ],
+    "partners": [
+      {
+        "id": "corviknight",
+        "reason": "Resists Grass and provides Ground immunity plus U-turn support."
+      },
+      {
+        "id": "chandelure",
+        "reason": "Resists Grass and adds special damage against Steel opponents."
+      }
+    ]
+  },
+  "torterra": {
+    "evolution": [
+      {
+        "id": "turtwig",
+        "condition": ""
+      },
+      {
+        "id": "grotle",
+        "condition": "Level 18"
+      },
+      {
+        "id": "torterra",
+        "condition": "Level 32"
+      }
+    ],
+    "partners": [
+      {
+        "id": "corviknight",
+        "reason": "Resists Flying and can pivot an attacker into play; Ice damage is neutral."
+      },
+      {
+        "id": "milotic",
+        "reason": "Resists Fire and Ice and supplies a special attacking option."
+      }
+    ]
+  },
+  "infernape": {
+    "evolution": [
+      {
+        "id": "chimchar",
+        "condition": ""
+      },
+      {
+        "id": "monferno",
+        "condition": "Level 14"
+      },
+      {
+        "id": "infernape",
+        "condition": "Level 36"
+      }
+    ],
+    "partners": [
+      {
+        "id": "gyarados",
+        "reason": "Immune to Ground and resists Water and Fighting attacks."
+      },
+      {
+        "id": "umbreon",
+        "reason": "Psychic immunity and Wish support help a recoil-prone attacker."
+      }
+    ]
   }
 };
