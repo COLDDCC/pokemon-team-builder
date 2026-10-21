@@ -32,7 +32,7 @@ const battleNoteBatches = [
     ],
   },
   {
-    addedOn: '2026-10-16',
+    addedOn: '2026-10-20',
     speciesIds: [
       'breloom', 'chandelure', 'meganium', 'typhlosion', 'feraligatr', 'sceptile',
       'blaziken', 'swampert', 'torterra', 'infernape',
