@@ -146,6 +146,9 @@ test('unknown routes and unsupported URL versions have safe fallbacks', async ({
 
 test('saved teams survive reload and load, clear and recommendations can be restored', async ({ page }) => {
   await page.goto('/?v=1&team=pikachu,,,gengar');
+  // The panel is server-rendered before React restores the URL team, so text typed into the name
+  // field during that window is overwritten by hydration and the save button never enables.
+  await expect(page.locator('.live-message')).not.toHaveText('Loading team workspace…');
   await page.getByText('Saved teams · 0', {exact:true}).click();
   await page.getByRole('textbox', {name:'Team name',exact:true}).fill('Adventure');
   await page.getByRole('button', {name:'Save current team',exact:true}).click();
@@ -178,6 +181,7 @@ test('blocked storage keeps editing usable', async ({ page }) => {
     Object.defineProperty(window, 'localStorage', {get() {throw new Error('blocked');}});
   });
   await page.goto('/?v=1&team=pikachu');
+  await expect(page.locator('.live-message')).not.toHaveText('Loading team workspace…');
   await page.getByText('Saved teams · 0', {exact:true}).click();
   await page.getByRole('textbox', {name:'Team name',exact:true}).fill('Backup');
   await page.getByRole('button', {name:'Save current team',exact:true}).click();
