@@ -38,6 +38,13 @@ const battleNoteBatches = [
       'blaziken', 'swampert', 'torterra', 'infernape',
     ],
   },
+  {
+    addedOn: '2026-10-21',
+    speciesIds: [
+      'empoleon', 'serperior', 'incineroar', 'decidueye', 'samurott', 'delphox',
+      'chesnaught', 'rillaboom', 'cinderace', 'inteleon',
+    ],
+  },
 ];
 
 const dateNames = ['January', 'February', 'March', 'April', 'May', 'June',
