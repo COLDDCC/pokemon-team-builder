@@ -66,6 +66,12 @@ const battleNoteBatches = [
       'hippowdon', 'abomasnow', 'whimsicott', 'klefki',
     ],
   },
+  {
+    addedOn: '2026-10-21',
+    speciesIds: [
+      'houndoom', 'honchkrow', 'mismagius', 'froslass', 'bronzong', 'forretress',
+    ],
+  },
 ];
 
 const dateNames = ['January', 'February', 'March', 'April', 'May', 'June',

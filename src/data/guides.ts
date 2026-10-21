@@ -1667,5 +1667,107 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
     "partners": "A Flying teammate covers Ground attacks. A Water partner resists Fire; add damage so the team can use its screen turns.",
     "alternative": "meganium",
     "alternativeReason": "Meganium offers screen support and Giga Drain with different weaknesses and no Prankster."
+  },
+  "houndoom": {
+    "role": "Special setup attacker with Fire immunity",
+    "item": "Heavy-Duty Boots",
+    "ability": "Flash Fire",
+    "nature": "Timid",
+    "moves": [
+      "Flamethrower",
+      "Dark Pulse",
+      "Sludge Bomb",
+      "Nasty Plot"
+    ],
+    "plan": "A predicted Fire attack can activate Flash Fire, providing Fire immunity and strengthening its Fire attacks. Use a safe Nasty Plot turn before attacking a favorable target.",
+    "caution": "Water, Fighting, Ground and Rock attacks are super effective. Boots do not reduce direct damage and coverage does not guarantee a safe matchup. Ability-ignoring effects can bypass Flash Fire.",
+    "partners": "A Flying teammate covers Ground and can resist Fighting. A Water partner helps against Water and Rock attackers.",
+    "alternative": "chandelure",
+    "alternativeReason": "Chandelure offers Ghost typing and a different Flash Fire special attacking role."
+  },
+  "honchkrow": {
+    "role": "Physical attacker with conditional priority",
+    "item": "Heavy-Duty Boots",
+    "ability": "Moxie",
+    "nature": "Adamant",
+    "moves": [
+      "Brave Bird",
+      "Night Slash",
+      "Sucker Punch",
+      "U-turn"
+    ],
+    "plan": "Moxie raises Attack after Honchkrow knocks out an opposing Pokémon. Sucker Punch offers priority when its target is preparing an attacking move; U-turn provides switching utility.",
+    "caution": "Sucker Punch fails if its conditions are not met. Brave Bird causes recoil, and switching out loses Moxie boosts. Electric, Ice, Rock and Fairy attacks threaten it.",
+    "partners": "A Ground teammate covers Electric. A Steel partner can resist Ice, Rock and Fairy; add special damage in remaining slots.",
+    "alternative": "staraptor",
+    "alternativeReason": "Staraptor offers a different Flying physical role with Normal attacks and Close Combat."
+  },
+  "mismagius": {
+    "role": "Fast special setup attacker",
+    "item": "Life Orb",
+    "ability": "Levitate",
+    "nature": "Timid",
+    "moves": [
+      "Shadow Ball",
+      "Dazzling Gleam",
+      "Mystical Fire",
+      "Nasty Plot"
+    ],
+    "plan": "Find a safe Nasty Plot turn, then attack with Ghost damage or coverage. Levitate normally provides Ground immunity; Mystical Fire lowers Special Attack when its effect applies.",
+    "caution": "Life Orb costs HP. Ghost and Dark attacks are super effective and Normal targets ignore Shadow Ball. Levitate can be bypassed by effects such as Mold Breaker; setup does not increase physical bulk.",
+    "partners": "A Dark teammate helps against Ghost and Dark attacks. Add a physical attacker to complement special setup.",
+    "alternative": "gengar",
+    "alternativeReason": "Gengar adds Poison typing and greater Special Attack, but does not have Levitate in Generation 9."
+  },
+  "froslass": {
+    "role": "Fast hazard support and special attacker",
+    "item": "Focus Sash",
+    "ability": "Cursed Body",
+    "nature": "Timid",
+    "moves": [
+      "Spikes",
+      "Taunt",
+      "Ice Beam",
+      "Shadow Ball"
+    ],
+    "plan": "Use Spikes against a suitable matchup or Taunt to block an eligible target’s status moves. Ghost typing prevents opposing Rapid Spin from hitting Froslass; attack when support is unsafe.",
+    "caution": "Focus Sash requires full HP and hazards or chip damage can disable it. Fire, Rock, Ghost, Dark and Steel attacks threaten it. Cursed Body activation is not guaranteed; Ghost typing does not block every hazard-removal method.",
+    "partners": "A Dark teammate helps against Ghost and Dark attacks. A Water partner resists Fire and Steel; check Rock attackers too.",
+    "alternative": "mismagius",
+    "alternativeReason": "Mismagius offers special setup and Levitate instead of Ice typing and Spikes."
+  },
+  "bronzong": {
+    "role": "Defensive hazard support and physical pressure",
+    "item": "Leftovers",
+    "ability": "Levitate",
+    "nature": "Impish",
+    "moves": [
+      "Stealth Rock",
+      "Body Press",
+      "Iron Defense",
+      "Psychic"
+    ],
+    "plan": "Set Stealth Rock in a favorable matchup or use Iron Defense to improve physical bulk and Body Press damage. Body Press uses Defense rather than Attack; Levitate normally provides Ground immunity.",
+    "caution": "Fire, Ghost and Dark attacks are super effective. This set uses Levitate, not Heatproof, so it does not reduce Fire damage. Low Speed and lack of direct recovery can make it passive; Ghost types ignore Body Press.",
+    "partners": "A Dark teammate helps against Ghost and Dark. A Water partner resists Fire; add faster damage elsewhere.",
+    "alternative": "metagross",
+    "alternativeReason": "Metagross offers greater physical attacking pressure instead of this Iron Defense support role."
+  },
+  "forretress": {
+    "role": "Hazard support and removal pivot",
+    "item": "Leftovers",
+    "ability": "Sturdy",
+    "nature": "Relaxed",
+    "moves": [
+      "Spikes",
+      "Rapid Spin",
+      "Volt Switch",
+      "Body Press"
+    ],
+    "plan": "Set Spikes or use Rapid Spin to remove hazards from your side against a suitable target. Volt Switch provides switching utility while Body Press uses its Defense for damage.",
+    "caution": "Fire attacks deal 4× damage. Ghost targets block Rapid Spin and Ground targets block Volt Switch. Sturdy requires full HP; repeated hits wear it down because this set has no direct recovery move.",
+    "partners": "A Fire-resistant teammate helps cover its largest weakness. Add special damage and a way to bring in an attacker after support turns.",
+    "alternative": "donphan",
+    "alternativeReason": "Donphan offers Ground typing and Earthquake with hazard removal instead of Bug/Steel typing."
   }
 };
