@@ -59,6 +59,13 @@ const battleNoteBatches = [
       'porygonz', 'dusknoir', 'gallade', 'conkeldurr',
     ],
   },
+  {
+    addedOn: '2026-10-21',
+    speciesIds: [
+      'luxray', 'magmortar', 'galvantula', 'reuniclus', 'pelipper', 'torkoal',
+      'hippowdon', 'abomasnow', 'whimsicott', 'klefki',
+    ],
+  },
 ];
 
 const dateNames = ['January', 'February', 'March', 'April', 'May', 'June',

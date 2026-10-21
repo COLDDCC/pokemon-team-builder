@@ -2114,5 +2114,229 @@ export const guideVisuals: Record<string, { evolution: { id: string; condition: 
         "reason": "Adds fast special attacks against targets immune to Fighting and Normal."
       }
     ]
+  },
+  "luxray": {
+    "evolution": [
+      {
+        "id": "shinx",
+        "condition": ""
+      },
+      {
+        "id": "luxio",
+        "condition": "Level 15"
+      },
+      {
+        "id": "luxray",
+        "condition": "Level 30"
+      }
+    ],
+    "partners": [
+      {
+        "id": "corviknight",
+        "reason": "Ground immunity and U-turn provide complementary switching options."
+      },
+      {
+        "id": "milotic",
+        "reason": "Adds special damage and direct recovery alongside a recoil attacker."
+      }
+    ]
+  },
+  "magmortar": {
+    "evolution": [
+      {
+        "id": "magby",
+        "condition": ""
+      },
+      {
+        "id": "magmar",
+        "condition": "Level 30"
+      },
+      {
+        "id": "magmortar",
+        "condition": "Trade holding Magmarizer"
+      }
+    ],
+    "partners": [
+      {
+        "id": "gyarados",
+        "reason": "Ground immunity and Water resistance help cover weaknesses."
+      },
+      {
+        "id": "gastrodon",
+        "reason": "Resists Rock and provides Water immunity through Storm Drain."
+      }
+    ]
+  },
+  "galvantula": {
+    "evolution": [
+      {
+        "id": "joltik",
+        "condition": ""
+      },
+      {
+        "id": "galvantula",
+        "condition": "Level 36"
+      }
+    ],
+    "partners": [
+      {
+        "id": "milotic",
+        "reason": "Resists Fire and adds recovery plus Water attacks against Rock targets."
+      },
+      {
+        "id": "gallade",
+        "reason": "Adds physical damage and can benefit from slower grounded opponents."
+      }
+    ]
+  },
+  "reuniclus": {
+    "evolution": [
+      {
+        "id": "solosis",
+        "condition": ""
+      },
+      {
+        "id": "duosion",
+        "condition": "Level 32"
+      },
+      {
+        "id": "reuniclus",
+        "condition": "Level 41"
+      }
+    ],
+    "partners": [
+      {
+        "id": "umbreon",
+        "reason": "Resists Ghost and Dark and provides another defensive support option."
+      },
+      {
+        "id": "scizor",
+        "reason": "Resists Bug and adds physical damage with priority."
+      }
+    ]
+  },
+  "pelipper": {
+    "evolution": [
+      {
+        "id": "wingull",
+        "condition": ""
+      },
+      {
+        "id": "pelipper",
+        "condition": "Level 25"
+      }
+    ],
+    "partners": [
+      {
+        "id": "kingdra",
+        "reason": "Swift Swim benefits from rain and adds special attacking pressure."
+      },
+      {
+        "id": "gastrodon",
+        "reason": "Electric immunity and Rock resistance help cover weaknesses."
+      }
+    ]
+  },
+  "torkoal": {
+    "evolution": [
+      {
+        "id": "torkoal",
+        "condition": ""
+      }
+    ],
+    "partners": [
+      {
+        "id": "garchomp",
+        "reason": "Resists Rock and adds faster physical damage with Electric immunity."
+      },
+      {
+        "id": "blissey",
+        "reason": "Adds special defensive support alongside Torkoal’s higher physical Defense."
+      }
+    ]
+  },
+  "hippowdon": {
+    "evolution": [
+      {
+        "id": "hippopotas",
+        "condition": ""
+      },
+      {
+        "id": "hippowdon",
+        "condition": "Level 34"
+      }
+    ],
+    "partners": [
+      {
+        "id": "corviknight",
+        "reason": "Resists Grass and avoids sand damage; Ice damage is neutral."
+      },
+      {
+        "id": "metagross",
+        "reason": "Resists Grass and Ice and avoids sand damage through Steel typing."
+      }
+    ]
+  },
+  "abomasnow": {
+    "evolution": [
+      {
+        "id": "snover",
+        "condition": ""
+      },
+      {
+        "id": "abomasnow",
+        "condition": "Level 40"
+      }
+    ],
+    "partners": [
+      {
+        "id": "milotic",
+        "reason": "Resists Fire and offers recovery plus special damage."
+      },
+      {
+        "id": "gyarados",
+        "reason": "Resists Fire and can use Dragon Dance during protected turns."
+      }
+    ]
+  },
+  "whimsicott": {
+    "evolution": [
+      {
+        "id": "cottonee",
+        "condition": ""
+      },
+      {
+        "id": "whimsicott",
+        "condition": "Sun Stone"
+      }
+    ],
+    "partners": [
+      {
+        "id": "metagross",
+        "reason": "Immune to Poison and resists Ice and Flying, adding physical damage."
+      },
+      {
+        "id": "gallade",
+        "reason": "Adds physical attacks and can benefit from temporary Speed support."
+      }
+    ]
+  },
+  "klefki": {
+    "evolution": [
+      {
+        "id": "klefki",
+        "condition": ""
+      }
+    ],
+    "partners": [
+      {
+        "id": "gyarados",
+        "reason": "Immune to Ground and resists Fire; can set up with Dragon Dance."
+      },
+      {
+        "id": "gastrodon",
+        "reason": "Resists Fire and provides recovery plus special attacking options."
+      }
+    ]
   }
 };
