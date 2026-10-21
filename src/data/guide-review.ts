@@ -52,6 +52,13 @@ const battleNoteBatches = [
       'talonflame', 'staraptor', 'heracross', 'weavile',
     ],
   },
+  {
+    addedOn: '2026-10-21',
+    speciesIds: [
+      'mamoswine', 'donphan', 'blissey', 'slowking', 'poliwrath', 'kingdra',
+      'porygonz', 'dusknoir', 'gallade', 'conkeldurr',
+    ],
+  },
 ];
 
 const dateNames = ['January', 'February', 'March', 'April', 'May', 'June',

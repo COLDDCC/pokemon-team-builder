@@ -1862,5 +1862,257 @@ export const guideVisuals: Record<string, { evolution: { id: string; condition: 
         "reason": "Resists Fighting and adds a bulkier special attacking option."
       }
     ]
+  },
+  "mamoswine": {
+    "evolution": [
+      {
+        "id": "swinub",
+        "condition": ""
+      },
+      {
+        "id": "piloswine",
+        "condition": "Level 33"
+      },
+      {
+        "id": "mamoswine",
+        "condition": "Level up knowing Ancient Power"
+      }
+    ],
+    "partners": [
+      {
+        "id": "gyarados",
+        "reason": "Resists Water, Fighting and Steel and is immune to Ground."
+      },
+      {
+        "id": "corviknight",
+        "reason": "Resists Grass and Steel and provides Ground immunity; Fighting damage is neutral."
+      }
+    ]
+  },
+  "donphan": {
+    "evolution": [
+      {
+        "id": "phanpy",
+        "condition": ""
+      },
+      {
+        "id": "donphan",
+        "condition": "Level 25"
+      }
+    ],
+    "partners": [
+      {
+        "id": "corviknight",
+        "reason": "Resists Grass and can pivot another teammate into play; Ice damage is neutral."
+      },
+      {
+        "id": "milotic",
+        "reason": "Resists Water and Ice and adds special damage with recovery."
+      }
+    ]
+  },
+  "blissey": {
+    "evolution": [
+      {
+        "id": "happiny",
+        "condition": ""
+      },
+      {
+        "id": "chansey",
+        "condition": "Level up in daytime holding Oval Stone"
+      },
+      {
+        "id": "blissey",
+        "condition": "High friendship + level up"
+      }
+    ],
+    "partners": [
+      {
+        "id": "corviknight",
+        "reason": "Adds physical defense and U-turn support; Fighting damage is neutral."
+      },
+      {
+        "id": "gengar",
+        "reason": "Immune to Fighting and adds faster special attacking pressure."
+      }
+    ]
+  },
+  "slowking": {
+    "evolution": [
+      {
+        "id": "slowpoke",
+        "condition": ""
+      },
+      {
+        "id": "slowking",
+        "condition": "Trade holding King's Rock"
+      }
+    ],
+    "partners": [
+      {
+        "id": "umbreon",
+        "reason": "Resists Ghost and Dark and gives a different defensive support option."
+      },
+      {
+        "id": "garchomp",
+        "reason": "Electric immunity and physical damage complement this special set."
+      }
+    ]
+  },
+  "poliwrath": {
+    "evolution": [
+      {
+        "id": "poliwag",
+        "condition": ""
+      },
+      {
+        "id": "poliwhirl",
+        "condition": "Level 25"
+      },
+      {
+        "id": "poliwrath",
+        "condition": "Water Stone"
+      }
+    ],
+    "partners": [
+      {
+        "id": "empoleon",
+        "reason": "Resists Flying, Psychic and Fairy and supplies special damage; Grass damage is neutral."
+      },
+      {
+        "id": "garchomp",
+        "reason": "Electric immunity and faster physical pressure support the team."
+      }
+    ]
+  },
+  "kingdra": {
+    "evolution": [
+      {
+        "id": "horsea",
+        "condition": ""
+      },
+      {
+        "id": "seadra",
+        "condition": "Level 32"
+      },
+      {
+        "id": "kingdra",
+        "condition": "Trade holding Dragon Scale"
+      }
+    ],
+    "partners": [
+      {
+        "id": "scizor",
+        "reason": "Resists Dragon and Fairy and adds physical priority."
+      },
+      {
+        "id": "empoleon",
+        "reason": "Resists Dragon and Fairy and provides a recoverable defensive option."
+      }
+    ]
+  },
+  "porygonz": {
+    "evolution": [
+      {
+        "id": "porygon",
+        "condition": ""
+      },
+      {
+        "id": "porygon2",
+        "condition": "Trade holding Up-Grade"
+      },
+      {
+        "id": "porygonz",
+        "condition": "Trade holding Dubious Disc"
+      }
+    ],
+    "partners": [
+      {
+        "id": "gengar",
+        "reason": "Immune to Fighting and can pressure targets that ignore Normal attacks."
+      },
+      {
+        "id": "gyarados",
+        "reason": "Resists Fighting and adds physical damage with Intimidate support."
+      }
+    ]
+  },
+  "dusknoir": {
+    "evolution": [
+      {
+        "id": "duskull",
+        "condition": ""
+      },
+      {
+        "id": "dusclops",
+        "condition": "Level 37"
+      },
+      {
+        "id": "dusknoir",
+        "condition": "Trade holding Reaper Cloth"
+      }
+    ],
+    "partners": [
+      {
+        "id": "umbreon",
+        "reason": "Resists Ghost and Dark and provides delayed Wish recovery."
+      },
+      {
+        "id": "primarina",
+        "reason": "Resists Dark and adds stronger special attacks plus Fairy coverage."
+      }
+    ]
+  },
+  "gallade": {
+    "evolution": [
+      {
+        "id": "ralts",
+        "condition": ""
+      },
+      {
+        "id": "kirlia",
+        "condition": "Level 20"
+      },
+      {
+        "id": "gallade",
+        "condition": "Dawn Stone on male Kirlia"
+      }
+    ],
+    "partners": [
+      {
+        "id": "empoleon",
+        "reason": "Resists Flying and Fairy and adds special damage with recovery."
+      },
+      {
+        "id": "umbreon",
+        "reason": "Resists Ghost and offers delayed Wish support for a Life Orb attacker."
+      }
+    ]
+  },
+  "conkeldurr": {
+    "evolution": [
+      {
+        "id": "timburr",
+        "condition": ""
+      },
+      {
+        "id": "gurdurr",
+        "condition": "Level 25"
+      },
+      {
+        "id": "conkeldurr",
+        "condition": "Trade"
+      }
+    ],
+    "partners": [
+      {
+        "id": "empoleon",
+        "reason": "Resists Flying, Psychic and Fairy and supplies special damage."
+      },
+      {
+        "id": "gengar",
+        "reason": "Adds fast special attacks against targets immune to Fighting and Normal."
+      }
+    ]
   }
 };
