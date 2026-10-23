@@ -2,7 +2,7 @@
 - [ ] Decide whether to add a base-stat-total (BST) range filter. Competing generators offer it; it can use local base-stat data without new sources.
 - [ ] Shiny mode: no shiny artwork is in the pipeline. Needs a sourced asset set and licence notes before any shiny feature ships.
 - [ ] Game-specific availability (encounters, versions) remains out of scope until per-version data is sourced.
-- [ ] Verify whether the GitHub Pages mirror is served on a separate host. If it is not the primary domain, set `NOINDEX_DEPLOY=true` for that build only.
+- [x] Checked: the GitHub Pages project URL 302-redirects to http://superpokemonteambuilder.com/, so GitHub Pages serves the primary domain. Keep `NOINDEX_DEPLOY` unset for this workflow; setting it would deindex the live site.
 
 # Next phases
 - [x] Phase 1: choose and document a single initial format, data source/license, sprite attribution, and validated local dataset. Do not imply current competitive legality without a verified ruleset.
