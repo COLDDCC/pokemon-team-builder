@@ -2,7 +2,10 @@
 import { site } from '../config/site';
 import '../styles/global.css';
 interface Props { title?: string; description?: string; noindex?: boolean; schema?: Record<string, unknown>; }
-const { title = site.title, description = site.description, noindex = false, schema } = Astro.props;
+const { title = site.title, description = site.description, schema } = Astro.props;
+// Opt-in only: set NOINDEX_DEPLOY=true for a mirror host (e.g. the GitHub Pages copy) that must not compete with the canonical domain.
+// Never enable it for a build that serves the primary domain, or the whole site drops out of search.
+const noindex = Astro.props.noindex === true || process.env.NOINDEX_DEPLOY === 'true';
 const path = Astro.url.pathname === '/' ? '/' : Astro.url.pathname.replace(/\/$/, '');
 const canonical = new URL(path, site.url).toString();
 const image = new URL('/og.png', site.url).toString();
