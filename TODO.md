@@ -12,19 +12,21 @@
 - [x] Phase 5: SEO routes, sitemap, robots, OG and structured data; analytics only after configuration.
 - [x] Phase 6: keyboard/mobile/browser QA, invalid URLs, performance and deployment.
 
-The Phase 2 builder supports editing and sharing. Type analysis, deterministic scores and computed recommendations are now available. Hosting and DNS are not configured by this change.
+The builder supports editing, deterministic type analysis, scores and computed recommendations. Team edits keep URLs clean; share-link UI is disabled. See README.md for current behavior.
 
-## Launch configuration still needed
-- Choose Cloudflare Pages or Vercel, import this repository, deploy and connect the custom domain.
-- Add actual GA4/GSC identifiers if wanted, rebuild and submit the sitemap after HTTPS is live.
-- Verify production redirects, headers, 404 and domain ownership; run a production performance check.
-- Review the implemented tool visually. Pokémon artwork remains placeholders; alternate forms and competitive rules are outside this MVP.
+## Deployment and remaining verification
+- [x] GitHub Pages serves the primary domain, superpokemonteambuilder.com. Quality checks and Pages deployment passed for commit `29ae7f3` (verified October 28, 2026).
+- [ ] Add actual GA4/GSC identifiers if wanted, rebuild and submit the sitemap after verifying ownership.
+- [ ] Verify production HTTPS redirects, response headers and 404 behavior; run a production performance check.
+- [ ] Validate the current tool visually on physical mobile devices. Local official artwork is implemented; alternate forms and competitive legality remain outside scope.
+- Saving and sharing are not a current development priority. Share-link UI remains disabled; preserve existing browser-local saves.
+- Daily guide preparation is gated by `GUIDE_RELEASE_ENABLED`; scheduled runs are skipped while disabled. All 102 archived guides are already published, so there is no remaining release queue.
 
 ## Pre-launch usability update
 - [x] Browser-local named team saves (20 maximum), explicit load/delete and storage failure fallback.
-- [x] Undo the last 20 team edits, including clear, load and recommendation changes.
+- [x] Direct per-member remove buttons replace the former Undo action.
 - [x] Explain score tier thresholds using the centralized scoring configuration.
-- Artwork/forms and actual game-specific availability remain follow-up work; scoring remains a casual planning heuristic.
+- Alternate forms and actual game-specific availability remain follow-up work; scoring remains a casual planning heuristic.
 - [x] Continuous six-slot selection with explicit Done, duplicate protection and one-pick replacement behavior.
 - [x] Full-screen mobile picker with persistent controls and scrolling results; larger touch targets.
 - [x] Show previous/current score and signed difference after team edits.
