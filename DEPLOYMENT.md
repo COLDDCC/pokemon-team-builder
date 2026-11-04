@@ -39,3 +39,9 @@ Official references:
 Optional feedback contact: set PUBLIC_FEEDBACK_EMAIL to a real public support address before building. This enables a mailto draft on /feedback, not server-side collection. Without an address, only copy/download are offered and the page explicitly says feedback is not submitted. Never point public users to the current private repository's Issues page.
 
 Feedback placeholder: feedback@example.com is deliberately nonfunctional and clearly labeled on /feedback. In Cloudflare Pages, set the build environment variable PUBLIC_FEEDBACK_EMAIL to your real support mailbox and redeploy. Creating a variable does not create a mailbox; use an existing address or separately configure mail routing. The fake example.com address never enables the Send draft button.
+
+## Current production: GitHub Pages URL conventions
+
+The active deployment is GitHub Pages via `.github/workflows/deploy-pages.yml`, not Cloudflare Pages or Vercel. Public HTML page routes use a **trailing slash** (`/pokemon/garchomp/`), matching directory-style `index.html` output and GitHub Pages redirects. Sitemap entries, internal links, canonical, and `og:url` must match. Static files such as `/sitemap.xml`, `/robots.txt`, and `/og.png` do not get a trailing slash.
+
+`public/_headers` is **not honored on GitHub Pages**; it is only a configuration artifact for alternative hosts. `vercel.json` is **not currently used**. The deployment sections above describe optional alternatives, not the active production host.

@@ -16,8 +16,8 @@ const guides = featuredPokemonIds.map(id => pokemonById.get(id)!).sort((a,b) => 
 <div class="directory-types" role="group" aria-label="Filter guides by type"><button type="button" data-type="" aria-pressed="true">All</button>{pokemonTypes.map(type => <button type="button" data-type={type} aria-label={type} title={type} aria-pressed="false"><TypeIcon type={type}/></button>)}</div>
 <p id="guide-search-help" class="directory-help">Enter opens a single match · Esc clears search</p><div class="directory-status"><p id="guide-count" role="status" aria-live="polite">{guides.length} guides</p><button id="guide-reset" type="button" hidden>Clear filters</button></div>
 </div>
-<div class="guide-grid" id="guide-grid">{guides.map(p => <a class="guide-card" href={`/pokemon/${p.id}`} data-name={p.name} data-search={normalizeSearch(p.name)} data-number={p.number} data-generation={p.generation} data-types={p.types.join(',')}><PokemonSprite pokemon={p} size="large"/><small>#{String(p.number).padStart(3,'0')}</small><h2>{p.name}</h2><p>{p.types.join(' / ')}</p><span>View guide →</span></a>)}</div>
-<div id="guide-empty" hidden><p>No published guide matches. Try another name, number, type or generation.</p><div id="guide-builder-fallback" hidden><img id="fallback-art" width="96" height="96" alt=""/><div><strong id="fallback-name"></strong><p id="fallback-description"></p><div class="fallback-actions"><a id="fallback-guide" href="/pokemon" hidden>Read guide →</a><a id="fallback-link" href="/">Build a team →</a></div></div></div><div id="guide-suggestions" hidden><p>Other Pokémon you can try in the team builder:</p><div id="suggestion-grid"></div></div></div>
+<div class="guide-grid" id="guide-grid">{guides.map(p => <a class="guide-card" href={`/pokemon/${p.id}/`} data-name={p.name} data-search={normalizeSearch(p.name)} data-number={p.number} data-generation={p.generation} data-types={p.types.join(',')}><PokemonSprite pokemon={p} size="large"/><small>#{String(p.number).padStart(3,'0')}</small><h2>{p.name}</h2><p>{p.types.join(' / ')}</p><span>View guide →</span></a>)}</div>
+<div id="guide-empty" hidden><p>No published guide matches. Try another name, number, type or generation.</p><div id="guide-builder-fallback" hidden><img id="fallback-art" width="96" height="96" alt=""/><div><strong id="fallback-name"></strong><p id="fallback-description"></p><div class="fallback-actions"><a id="fallback-guide" href="/pokemon/" hidden>Read guide →</a><a id="fallback-link" href="/">Build a team →</a></div></div></div><div id="guide-suggestions" hidden><p>Other Pokémon you can try in the team builder:</p><div id="suggestion-grid"></div></div></div>
 <script type="application/json" id="directory-species" set:html={JSON.stringify(pokemon.map(p => ({id:p.id,name:p.name,number:p.number,search:normalizeSearch(p.name),types:p.types,generation:p.generation})))}/>
 <section class="seo-content"><h2>What these guides cover</h2><p>Each guide explains a casual Generation 9 starter moveset, item, ability and nature, plus type matchups, evolution and teammate ideas. Try the Pokémon in the team builder or follow a teammate’s guide. These examples do not include EV spreads or Tera types and are not ranked-format recommendations.</p></section>
 </main><SiteFooter/></BaseLayout>
@@ -66,7 +66,7 @@ function update() {
  if(match) {
   const published = cards.some(card=>Number(card.dataset.number)===match.number);
   fallbackGuide.hidden = !published;
-  fallbackGuide.href = `/pokemon/${match.id}`;
+  fallbackGuide.href = `/pokemon/${match.id}/`;
   fallbackName.textContent = match.name;
   fallbackDescription.textContent = published ? 'This guide is excluded by your filters. You can still start a team.' : 'No guide yet. You can still explore this Pokémon in the team builder.';
   fallbackLink.href = '/';

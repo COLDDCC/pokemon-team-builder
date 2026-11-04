@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test('Gen 3 uses historical types, restricts the pool, applies recommendations and preserves saves', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
-  await page.goto('/games/gen-3');
+  await page.goto('/games/gen-3/');
   await expect(page.getByRole('heading', {level: 1})).toHaveText('Gen 3 Pokémon Team Builder');
   await page.getByRole('button', {name: 'Add Pokémon to slot 1', exact: true}).click();
   await expect(page.getByRole('button', {name: 'Filter Fairy', exact: true})).toHaveCount(0);
@@ -47,7 +47,7 @@ test('switching generations keeps valid members, updates types and removes later
 test('desktop Gen 3 roster and score fit above the fold', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop');
   await page.setViewportSize({width: 1366, height: 768});
-  await page.goto('/games/gen-3');
+  await page.goto('/games/gen-3/');
   await page.getByRole('button', {name: 'Try example', exact: true}).click();
   const roster = (await page.locator('.team-grid').boundingBox())!;
   const score = (await page.locator('.builder > .analysis').boundingBox())!;
