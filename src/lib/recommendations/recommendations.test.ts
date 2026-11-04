@@ -3,7 +3,7 @@ import { pokemonById } from '../../data/pokemon';
 import { getFormat, isAllowed } from '../../data/formats';
 import { analyzeTeam } from '../scoring';
 import { emptyTeam, setTeamSlot } from '../url-state';
-import { recommend, recommendBest } from './index';
+import { recommend, recommendBest, sampleTeam } from './index';
 const team = (slots: (string | null)[]) => ({...emptyTeam(), slots});
 const members = (slots: (string | null)[]) => slots.flatMap(id => id ? [pokemonById.get(id)!] : []);
 describe('computed recommendations', () => {
@@ -71,5 +71,16 @@ describe('automatic recommendations and favorites', () => {
     const partial = team(['pikachu',null,'charizard',null,null,null]);
     expect(recommendBest(partial, ['pikachu','charizard'])).toEqual(recommend(partial, 1));
     expect(recommendBest(emptyTeam())).toEqual([]);
+  });
+});
+
+describe('static sample team', () => {
+  it('fills six distinct slots deterministically with the displayed score', () => {
+    const first = sampleTeam('garchomp');
+    expect(first).toEqual(sampleTeam('garchomp'));
+    expect(first.ids).toHaveLength(6);
+    expect(new Set(first.ids).size).toBe(6);
+    expect(first.ids[0]).toBe('garchomp');
+    expect(first.score).toBe(analyzeTeam(members(first.ids)).total);
   });
 });

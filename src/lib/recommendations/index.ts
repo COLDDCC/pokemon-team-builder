@@ -54,3 +54,27 @@ export function recommendBest(state: TeamState, lockedIds: readonly string[] = [
   const seen = new Set<string>();
   return rows.filter(r => { if (seen.has(r.pokemon.id)) return false; seen.add(r.pokemon.id); return true; }).slice(0, 6);
 }
+
+/** Build a deterministic six-member team using positive-delta suggestions first.
+ * If additions stop improving the score, fill remaining slots with the highest
+ * scoring legal candidate under the unchanged analysis function. */
+export function sampleTeam(leadId: string): { ids: string[]; score: number } {
+  let state = setTeamSlot({ format: 'gen9-national-casual', slots: Array(6).fill(null) }, 0, leadId);
+  if (!state.slots[0]) throw new Error(`Unknown starter: ${leadId}`);
+  const format = getFormat(state.format);
+  for (let slot = 1; slot < 6; slot++) {
+    let chosen = recommend(state, slot)[0]?.pokemon.id;
+    if (!chosen) {
+      let bestScore = -1;
+      for (const candidate of pokemonForFormat(format)) {
+        if (state.slots.includes(candidate.id) || !isAllowed(candidate, format)) continue;
+        const candidateTeam = setTeamSlot(state, slot, candidate.id);
+        const score = analyzeTeam(members(candidateTeam), format.generation).total;
+        if (score > bestScore) { chosen = candidate.id; bestScore = score; }
+      }
+    }
+    if (!chosen) throw new Error('Insufficient Pokémon for sample team');
+    state = setTeamSlot(state, slot, chosen);
+  }
+  return { ids: state.slots.filter((id): id is string => id !== null), score: analyzeTeam(members(state), format.generation).total };
+}
