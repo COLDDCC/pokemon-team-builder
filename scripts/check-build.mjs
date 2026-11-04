@@ -10,13 +10,25 @@ assert.equal(paths.length, indexablePaths.length + 1, 'Sitemap should include al
 assert.equal(new Set(paths).size, paths.length);
 for (const location of paths) {
   const url = new URL(location); assert.equal(url.origin, site); assert.equal(url.search, '');
-  const file = url.pathname === '/' ? 'dist/index.html' : `dist${url.pathname}/index.html`;
+  assert.ok(url.pathname.endsWith('/'), `Sitemap page URL must end with /: ${location}`);
+  const file = url.pathname === '/' ? 'dist/index.html' : `dist${url.pathname}index.html`;
   assert.ok(existsSync(file), `Missing page: ${file}`);
   const html = readFileSync(file, 'utf8');
   assert.equal((html.match(/<h1(?:>| )/g) ?? []).length, 1, `Each page needs exactly one H1: ${file}`);
   assert.ok(html.includes(`rel="canonical" href="${location}"`), `Invalid canonical: ${file}`);
+  assert.ok(html.includes(`property="og:url" content="${location}"`), `Invalid og:url: ${file}`);
   assert.ok(html.includes('application/ld+json'), `Missing structured data: ${file}`);
   assert.ok(html.includes('og:image'), `Missing OG image: ${file}`);
+}
+const scanHtml = dir => readdirSync(dir, { withFileTypes: true }).flatMap(entry => { const full = `${dir}/${entry.name}`; return entry.isDirectory() ? scanHtml(full) : entry.name.endsWith('.html') ? [full] : []; });
+for (const file of scanHtml('dist')) {
+  const html = readFileSync(file, 'utf8');
+  for (const match of html.matchAll(/href="(\/[^"#]*)/g)) {
+    const value = match[1];
+    const path = value.split('?')[0];
+    if (path === '/' || /\.[a-z0-9]{1,8}$/i.test(path)) continue;
+    assert.ok(path.endsWith('/'), `Internal page link missing trailing slash in ${file}: ${value}`);
+  }
 }
 assert.ok(readFileSync('dist/404.html', 'utf8').includes('noindex, follow'));
 assert.ok(readFileSync('dist/robots.txt', 'utf8').includes(`${site}/sitemap.xml`));

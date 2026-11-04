@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { Dex } from '@pkmn/dex';
 import { featuredPokemonIds } from '../config/seo-pages';
 import { pokemonById } from './pokemon';
+import { pokemonTypes } from './pokemon/schema';
 import { pokemonGuides } from './guides';
 import { guideVisuals } from './guide-visuals';
 const dex = Dex.forGen(9);
@@ -13,6 +14,12 @@ describe('published Pokémon guides, including previous batches', () => {
       const guide = pokemonGuides[id];
       expect(pokemonById.has(guide.alternative)).toBe(true);
       expect(guide.moves).toHaveLength(4);
+      if (guide.evs) {
+        const values = Object.values(guide.evs);
+        expect(values.every(value => Number.isInteger(value) && value >= 0 && value <= 252 && value % 4 === 0), id).toBe(true);
+        expect(values.reduce((sum, value) => sum + value, 0), id).toBeLessThanOrEqual(510);
+      }
+      if (guide.teraType) expect(pokemonTypes).toContain(guide.teraType);
       expect(new Set(guide.moves).size).toBe(4);
       for (const partner of guideVisuals[id].partners) {
         expect(pokemonById.has(partner.id)).toBe(true);

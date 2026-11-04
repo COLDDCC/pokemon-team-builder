@@ -89,8 +89,9 @@ export function formatReviewDate(iso: string): string {
   return `${dateNames[month - 1]} ${day}, ${year}`;
 }
 
-export function reviewDatesFor(id: string): { moveset: string; battleNotes: string } {
-  return { moveset: formatReviewDate(movesetReviewedOn), battleNotes: formatReviewDate(battleNotesAddedOn(id)) };
+const evReviewedIds = new Set(["blastoise","greninja","talonflame","electivire","magmortar","breloom","gallade","bronzong","samurott","galvantula","incineroar","slowking","weavile","poliwrath","hydreigon","dusknoir","decidueye","houndoom","staraptor","luxray","emboar","pelipper","meganium","metagross","hippowdon","corviknight"]);
+export function reviewDatesFor(id: string): { moveset: string; battleNotes: string; evs: string | null } {
+  return { moveset: formatReviewDate(movesetReviewedOn), battleNotes: formatReviewDate(battleNotesAddedOn(id)), evs: evReviewedIds.has(id) ? formatReviewDate('2026-11-04') : null };
 }
 
 export const reviewedSpeciesIds = battleNoteBatches.flatMap(entry => entry.speciesIds);

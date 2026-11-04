@@ -103,22 +103,23 @@ test('recommendations apply the displayed score and target an explicit replaceme
   expect(new URL(page.url()).search).toBe('');
 });
 test('SEO routes prefill their Pokémon, honor explicit share state and expose metadata', async ({ page, request }) => {
-  await page.goto('/pokemon/garchomp/best-teammates');
+  await page.goto('/pokemon/garchomp/best-teammates/');
   await expect(page.getByTestId('slot-0').getByRole('heading', { name: 'Garchomp', exact: true })).toBeVisible();
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Garchomp Teammate Suggestions');
-  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://superpokemonteambuilder.com/pokemon/garchomp/best-teammates');
-  await page.goto('/pokemon/garchomp/best-teammates?v=1&team=pikachu');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Best Garchomp Teammates');
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://superpokemonteambuilder.com/pokemon/garchomp/best-teammates/');
+  await page.goto('/pokemon/garchomp/best-teammates/?v=1&team=pikachu');
   await expect(page.getByTestId('slot-0').getByRole('heading', { name: 'Pikachu', exact: true })).toBeVisible();
-  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://superpokemonteambuilder.com/pokemon/garchomp/best-teammates');
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://superpokemonteambuilder.com/pokemon/garchomp/best-teammates/');
   const structured = JSON.parse(await page.locator('script[type="application/ld+json"]').textContent() ?? '{}');
-  expect(structured['@type']).toBe('WebApplication');
+  expect(structured['@graph'].some((item: { '@type': string }) => item['@type'] === 'WebApplication')).toBe(true);
+  expect(structured['@graph'].some((item: { '@type': string }) => item['@type'] === 'BreadcrumbList')).toBe(true);
   await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', 'https://superpokemonteambuilder.com/og.png');
   const sitemap = await request.get('/sitemap.xml');
-  expect(sitemap.ok()).toBe(true); expect(await sitemap.text()).toContain('/pokemon/garchomp/best-teammates');
+  expect(sitemap.ok()).toBe(true); expect(await sitemap.text()).toContain('/pokemon/garchomp/best-teammates/');
   expect(await sitemap.text()).not.toContain('?team=');
   expect(await (await request.get('/robots.txt')).text()).toContain('Sitemap: https://superpokemonteambuilder.com/sitemap.xml');
   expect((await request.get('/og.png')).ok()).toBe(true);
-  await page.goto('/weakness-calculator?v=1&team=charizard');
+  await page.goto('/weakness-calculator/?v=1&team=charizard');
   await expect(page.getByRole('table')).toBeVisible();
 });
 
@@ -126,7 +127,7 @@ test('accessible empty, populated and picker states', async ({ page }) => {
   await page.goto('/');
   await expect(page.getByRole('button', { name: 'Add Pokémon to slot 1', exact: true })).toBeEnabled();
   expect((await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze()).violations).toEqual([]);
-  await page.goto('/pokemon/garchomp');
+  await page.goto('/pokemon/garchomp/');
   await page.locator('#build-team').scrollIntoViewIfNeeded();
   await expect(page.getByRole('button', {name:'Add Pokémon to slot 2',exact:true})).toBeEnabled();
   await expect(page.getByTestId('slot-0').getByRole('heading', {name:'Garchomp',exact:true})).toBeVisible();
@@ -135,7 +136,7 @@ test('accessible empty, populated and picker states', async ({ page }) => {
   expect((await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze()).violations).toEqual([]);
 });
 test('unknown routes and unsupported URL versions have safe fallbacks', async ({page}) => {
-  const response = await page.goto('/this-page-does-not-exist');
+  const response = await page.goto('/this-page-does-not-exist/');
   expect(response?.status()).toBe(404);
   await expect(page.getByRole('heading', {level:1})).toHaveText('That page wandered off.');
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content','noindex, follow');
@@ -271,7 +272,7 @@ test('sprites are served from the local build and fall back safely', async ({pag
   await page.getByRole('button',{name:'Close Pokémon picker',exact:true}).click();
   expect([...spriteHosts]).toEqual([]);
   await page.route('**/sprites/official/**', route=>route.abort());
-  await page.goto('/pokemon/pikachu/best-teammates');
+  await page.goto('/pokemon/pikachu/best-teammates/');
   await expect(page.getByTestId('slot-0').locator('.sprite-fallback')).toHaveText('#25');
   await expect(page.getByTestId('slot-0').getByRole('heading',{name:'Pikachu',exact:true})).toBeVisible();
   await page.getByRole('button',{name:'Replace Pikachu',exact:true}).click();
@@ -330,9 +331,9 @@ test('official type assets load and selection feedback respects reduced motion',
 });
 
 test('guide directory, disclaimer and feedback draft are reachable', async ({ page }) => {
-  await page.goto('/pokemon');
+  await page.goto('/pokemon/');
   await expect(page.locator('.guide-card')).toHaveCount(featuredPokemonIds.length);
-  await page.locator('.guide-card[href="/pokemon/pikachu"]').click();
+  await page.locator('.guide-card[href="/pokemon/pikachu/"]').click();
   await expect(page.getByRole('heading',{name:'Pikachu Build Guide',exact:true})).toBeVisible();
   await expect(page.locator('footer')).toContainText('not affiliated with or endorsed');
   await page.getByRole('link',{name:'Feedback',exact:true}).click();
@@ -346,7 +347,7 @@ test('guide directory, disclaimer and feedback draft are reachable', async ({ pa
 
 test('static guide artwork has a fallback and unpublished guides stay unreachable', async ({page, request}) => {
   await page.route('**/sprites/official/**', route => route.abort());
-  await page.goto('/pokemon');
+  await page.goto('/pokemon/');
   const first = page.locator('.guide-card').first();
   await first.scrollIntoViewIfNeeded();
   await expect(first.locator('.sprite-fallback')).toBeVisible();
@@ -359,13 +360,13 @@ test('static guide artwork has a fallback and unpublished guides stay unreachabl
   }
   await expect(page.getByRole('heading', {level:1})).toContainText('Build Guide');
   if (!featuredPokemonIds.some(id => id === 'corviknight' as string)) {
-    expect((await request.get('/pokemon/corviknight')).status()).toBe(404);
-    expect((await request.get('/pokemon/corviknight/best-teammates')).status()).toBe(404);
+    expect((await request.get('/pokemon/corviknight/')).status()).toBe(404);
+    expect((await request.get('/pokemon/corviknight/best-teammates/')).status()).toBe(404);
   }
 });
 
 test('directory filters and reset preserve all published guide links', async ({page}) => {
-  await page.goto('/pokemon');
+  await page.goto('/pokemon/');
   await page.getByRole('searchbox', {name:'Find a guide'}).fill('445');
   await expect(page.locator('.guide-card:visible')).toHaveCount(1);
   await expect(page.locator('.guide-card:visible')).toContainText('Garchomp');

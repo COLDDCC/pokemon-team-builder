@@ -44,3 +44,12 @@ The builder supports editing, deterministic type analysis, scores and computed r
 - Alternate forms and cosmetic sprites remain unavailable; the pinned upstream is keyed by National Dex number and the pool is base species only.
 
 - Gen 3 follow-up: source per-version encounter/trading/event/postgame availability before offering Emerald or FireRed/LeafGreen availability filters. Current Gen 3 scope is explicitly the cross-game 386-species National Dex, without tier bans, abilities or moveset legality.
+
+## SEO follow-ups (data-driven)
+
+- [ ] Review GSC every 2–4 weeks and add 10–20 carefully reviewed Pokémon guides per batch, only where search demand and source-backed content justify them. Avoid publishing hundreds of thin pages.
+- [ ] Evaluate demand for `pokemon legends za team builder`, `meganium build za`, `pelipper build champions`, `gen 4 pokemon team builder`, and `fire red team builder`. Require reliable game-specific data, rules and attribution before implementation; do not imply the Gen 9 casual pool is game-legal.
+- [ ] Off-site outreach: contribute useful tool posts where rules permit on Reddit r/pokemonteams and r/stunfisk, and consider submissions to appropriate independent tool directories. Never spam or manufacture endorsements.
+- [ ] Watch Brazilian, Philippine and Indian GSC impressions; do not localize until clicks and conversion justify language-specific editorial review.
+- [ ] Two to four weeks after canonical URL deployment, compare duplicate trailing-slash indexing, canonical selections and teammate-page CTR; target CTR ≥3% against the reported ~0.4% baseline.
+- [ ] Resolve product-spec conflict before any shareable sample-team state: `PRODUCT_SPEC.md` currently prohibits encoding team state in URLs; respect it when designing a static sample team action.

@@ -1,4 +1,5 @@
-export interface PokemonGuide { role: string; item: string; ability: string; nature: string; moves: string[]; moveNotes?: Record<string, string>; plan: string; caution: string; partners: string; alternative: string; alternativeReason: string; }
+import type { PokemonType } from './pokemon/schema';
+export interface PokemonGuide { role: string; item: string; ability: string; nature: string; evs?: { hp?: number; atk?: number; def?: number; spa?: number; spd?: number; spe?: number }; teraType?: PokemonType; moves: string[]; moveNotes?: Record<string, string>; plan: string; caution: string; partners: string; alternative: string; alternativeReason: string; }
 export const pokemonGuides: Record<string, PokemonGuide> = {
   "pikachu": {
     "role": "Fast special attacker",
@@ -143,6 +144,7 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
     "item": "Leftovers",
     "ability": "Pressure",
     "nature": "Impish",
+    "evs": {"hp":252,"def":252,"spd":4},
     "moves": [
       "Brave Bird",
       "Body Press",
@@ -347,6 +349,7 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
     "item": "White Herb",
     "ability": "Torrent",
     "nature": "Modest",
+    "evs": {"spa":252,"spd":4,"spe":252},
     "moves": [
       "Shell Smash",
       "Surf",
@@ -823,6 +826,7 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
     "item": "Focus Sash",
     "ability": "Technician",
     "nature": "Adamant",
+    "evs": {"atk":252,"spd":4,"spe":252},
     "moves": [
       "Bullet Seed",
       "Mach Punch",
@@ -857,6 +861,7 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
     "item": "Light Clay",
     "ability": "Overgrow",
     "nature": "Bold",
+    "evs": {"hp":252,"def":252,"spd":4},
     "moves": [
       "Reflect",
       "Light Screen",
@@ -1027,6 +1032,7 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
     "item": "Heavy-Duty Boots",
     "ability": "Intimidate",
     "nature": "Careful",
+    "evs": {"hp":252,"def":4,"spd":252},
     "moves": [
       "Flare Blitz",
       "Knock Off",
@@ -1044,6 +1050,7 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
     "item": "Leftovers",
     "ability": "Overgrow",
     "nature": "Adamant",
+    "evs": {"hp":252,"atk":252,"spd":4},
     "moves": [
       "Spirit Shackle",
       "Leaf Blade",
@@ -1061,6 +1068,7 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
     "item": "Life Orb",
     "ability": "Torrent",
     "nature": "Adamant",
+    "evs": {"hp":4,"atk":252,"spe":252},
     "moves": [
       "Swords Dance",
       "Liquidation",
@@ -1163,6 +1171,7 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
     "item": "Heavy-Duty Boots",
     "ability": "Torrent",
     "nature": "Timid",
+    "evs": {"spa":252,"spd":4,"spe":252},
     "moves": [
       "Surf",
       "Dark Pulse",
@@ -1180,6 +1189,7 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
     "item": "Choice Band",
     "ability": "Reckless",
     "nature": "Adamant",
+    "evs": {"hp":252,"atk":252,"spd":4},
     "moves": [
       "Flare Blitz",
       "Close Combat",
@@ -1197,6 +1207,7 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
     "item": "Leftovers",
     "ability": "Clear Body",
     "nature": "Adamant",
+    "evs": {"hp":252,"atk":252,"spd":4},
     "moves": [
       "Meteor Mash",
       "Zen Headbutt",
@@ -1214,6 +1225,7 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
     "item": "Leftovers",
     "ability": "Levitate",
     "nature": "Timid",
+    "evs": {"hp":4,"spa":252,"spe":252},
     "moves": [
       "Dark Pulse",
       "Dragon Pulse",
@@ -1248,6 +1260,7 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
     "item": "Life Orb",
     "ability": "Motor Drive",
     "nature": "Jolly",
+    "evs": {"atk":252,"spd":4,"spe":252},
     "moves": [
       "Thunder Punch",
       "Ice Punch",
@@ -1265,6 +1278,7 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
     "item": "Heavy-Duty Boots",
     "ability": "Flame Body",
     "nature": "Jolly",
+    "evs": {"atk":252,"spd":4,"spe":252},
     "moves": [
       "Brave Bird",
       "Flare Blitz",
@@ -1282,6 +1296,7 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
     "item": "Choice Scarf",
     "ability": "Reckless",
     "nature": "Jolly",
+    "evs": {"atk":252,"spd":4,"spe":252},
     "moves": [
       "Brave Bird",
       "Double-Edge",
@@ -1316,6 +1331,7 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
     "item": "Heavy-Duty Boots",
     "ability": "Pressure",
     "nature": "Jolly",
+    "evs": {"atk":252,"spd":4,"spe":252},
     "moves": [
       "Knock Off",
       "Ice Spinner",
@@ -1384,6 +1400,7 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
     "item": "Leftovers",
     "ability": "Regenerator",
     "nature": "Calm",
+    "evs": {"hp":252,"def":4,"spd":252},
     "moves": [
       "Surf",
       "Psychic",
@@ -1401,6 +1418,7 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
     "item": "Leftovers",
     "ability": "Water Absorb",
     "nature": "Adamant",
+    "evs": {"hp":252,"atk":252,"spd":4},
     "moves": [
       "Drain Punch",
       "Liquidation",
@@ -1452,6 +1470,7 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
     "item": "Leftovers",
     "ability": "Frisk",
     "nature": "Adamant",
+    "evs": {"hp":252,"atk":252,"spd":4},
     "moves": [
       "Shadow Punch",
       "Shadow Sneak",
@@ -1469,6 +1488,7 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
     "item": "Life Orb",
     "ability": "Sharpness",
     "nature": "Jolly",
+    "evs": {"atk":252,"spd":4,"spe":252},
     "moves": [
       "Sacred Sword",
       "Psycho Cut",
@@ -1503,6 +1523,7 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
     "item": "Heavy-Duty Boots",
     "ability": "Intimidate",
     "nature": "Adamant",
+    "evs": {"hp":4,"atk":252,"spe":252},
     "moves": [
       "Wild Charge",
       "Crunch",
@@ -1520,6 +1541,7 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
     "item": "Heavy-Duty Boots",
     "ability": "Flame Body",
     "nature": "Modest",
+    "evs": {"hp":4,"spa":252,"spe":252},
     "moves": [
       "Flamethrower",
       "Thunderbolt",
@@ -1537,6 +1559,7 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
     "item": "Focus Sash",
     "ability": "Compound Eyes",
     "nature": "Timid",
+    "evs": {"hp":4,"spa":252,"spe":252},
     "moves": [
       "Sticky Web",
       "Thunder",
@@ -1571,6 +1594,7 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
     "item": "Heavy-Duty Boots",
     "ability": "Drizzle",
     "nature": "Bold",
+    "evs": {"hp":252,"def":252,"spd":4},
     "moves": [
       "Surf",
       "Hurricane",
@@ -1605,6 +1629,7 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
     "item": "Leftovers",
     "ability": "Sand Stream",
     "nature": "Impish",
+    "evs": {"hp":252,"def":252,"spd":4},
     "moves": [
       "Earthquake",
       "Slack Off",
@@ -1673,6 +1698,7 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
     "item": "Heavy-Duty Boots",
     "ability": "Flash Fire",
     "nature": "Timid",
+    "evs": {"hp":4,"spa":252,"spe":252},
     "moves": [
       "Flamethrower",
       "Dark Pulse",
@@ -1741,6 +1767,7 @@ export const pokemonGuides: Record<string, PokemonGuide> = {
     "item": "Leftovers",
     "ability": "Levitate",
     "nature": "Impish",
+    "evs": {"hp":252,"def":252,"spd":4},
     "moves": [
       "Stealth Rock",
       "Body Press",
