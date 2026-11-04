@@ -111,7 +111,8 @@ test('SEO routes prefill their Pokémon, honor explicit share state and expose m
   await expect(page.getByTestId('slot-0').getByRole('heading', { name: 'Pikachu', exact: true })).toBeVisible();
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://superpokemonteambuilder.com/pokemon/garchomp/best-teammates/');
   const structured = JSON.parse(await page.locator('script[type="application/ld+json"]').textContent() ?? '{}');
-  expect(structured['@type']).toBe('WebApplication');
+  expect(structured['@graph'].some((item: { '@type': string }) => item['@type'] === 'WebApplication')).toBe(true);
+  expect(structured['@graph'].some((item: { '@type': string }) => item['@type'] === 'BreadcrumbList')).toBe(true);
   await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', 'https://superpokemonteambuilder.com/og.png');
   const sitemap = await request.get('/sitemap.xml');
   expect(sitemap.ok()).toBe(true); expect(await sitemap.text()).toContain('/pokemon/garchomp/best-teammates/');
