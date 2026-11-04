@@ -105,7 +105,7 @@ test('recommendations apply the displayed score and target an explicit replaceme
 test('SEO routes prefill their Pokémon, honor explicit share state and expose metadata', async ({ page, request }) => {
   await page.goto('/pokemon/garchomp/best-teammates/');
   await expect(page.getByTestId('slot-0').getByRole('heading', { name: 'Garchomp', exact: true })).toBeVisible();
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Garchomp Teammate Suggestions');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Best Garchomp Teammates');
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://superpokemonteambuilder.com/pokemon/garchomp/best-teammates/');
   await page.goto('/pokemon/garchomp/best-teammates/?v=1&team=pikachu');
   await expect(page.getByTestId('slot-0').getByRole('heading', { name: 'Pikachu', exact: true })).toBeVisible();

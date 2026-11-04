@@ -14,10 +14,12 @@ import TypeIcon from '../../../components/TypeIcon';
 import { guideVisuals } from '../../../data/guide-visuals';
 import { reviewDatesFor } from '../../../data/guide-review';
 import { pokemonGuides } from '../../../data/guides';
+import { buildGuideSeo } from '../../../lib/seo-text';
 import { analyzeTeam } from '../../../lib/scoring';
 export function getStaticPaths() { return featuredPokemonIds.map(slug => ({ params: {slug}, props: {pokemon: pokemonById.get(slug)!} })); }
 const { pokemon: p } = Astro.props;
 const guide = pokemonGuides[p.id];
+const seo = buildGuideSeo(p.name, guide);
 const alternative = pokemonById.get(guide.alternative)!;
 const analysis = analyzeTeam([p]);
 const weak = analysis.defense.filter(row => row.weak.length);
@@ -26,7 +28,7 @@ const resist = analysis.defense.filter(row => row.resist.length);
 const visual = guideVisuals[p.id];
 const reviewed = reviewDatesFor(p.id);
 ---
-<BaseLayout title={`${p.name} Build Guide, Team Builder & Evolution | Super Pokémon Team Builder`} description={`Build around ${p.name}: starter moveset, item, ability, type weaknesses, teammate ideas and evolution. Try your team in the interactive builder.`}>
+<BaseLayout title={seo.title} description={seo.description}>
 <SiteHeader/><main id="main" class="guide-page">
 <section class="guide-hero card-first"><EvolutionCards current={p.id} chain={visual.evolution}/><div class="guide-identity"><p class="eyebrow">#{String(p.number).padStart(4,'0')} · GENERATION {p.generation}</p><h1>{p.name} Build Guide</h1><div class="type-row">{p.types.map(type=><span><TypeIcon type={type}/>{type}</span>)}</div><p class="role">{guide.role}</p><a class="guide-cta" href="#build-team">Build a {p.name} team ↓</a><p class="card-note">Hover or tap the cards.<br/>Custom Pokédex collection.</p></div></section>
 <nav class="guide-jumps" aria-label="Guide sections"><a href="#loadout">Moveset</a><a href="#battle-plan">Battle plan</a><a href="#alternatives">Alternatives</a><a href="#partners">Teammates</a><a href="#matchups">Weaknesses</a><a href="#evolution">Evolution</a></nav>

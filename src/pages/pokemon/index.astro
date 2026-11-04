@@ -9,7 +9,7 @@ import { pokemonById, pokemon, normalizeSearch } from '../../data/pokemon';
 import { pokemonTypes } from '../../data/pokemon/schema';
 const guides = featuredPokemonIds.map(id => pokemonById.get(id)!).sort((a,b) => a.number-b.number);
 ---
-<BaseLayout title="Pokémon Team Guides | Super Pokémon Team Builder" description={`Explore ${guides.length} Pokémon build guides with starter movesets, evolution chains, type weaknesses and teammate ideas.`}>
+<BaseLayout title="Pokémon Build Guides – Movesets, Evolution & Teams" description={`Explore ${guides.length} Pokémon build guides with starter movesets, evolution chains, type weaknesses and teammate ideas.`}>
 <SiteHeader/><main id="main"><h1>Pokémon team guides</h1><p>Choose a Pokémon for moves, evolution, weaknesses and teammate ideas.</p>
 <div class="directory-controls" id="guide-controls" hidden>
 <div class="directory-search"><label for="guide-search">Find a guide</label><input id="guide-search" type="search" aria-describedby="guide-search-help" placeholder="Name or Pokédex number" autocomplete="off" maxlength="80"/><label for="guide-generation">Debut gen</label><select id="guide-generation" title="Generation introduced, not game availability"><option value="">All generations</option>{Array.from({length:9},(_,i) => <option value={i+1}>Gen {i+1}</option>)}</select><label for="guide-sort" class="sort-label">Sort</label><select id="guide-sort"><option value="number">Pokédex number</option><option value="name">Name A–Z</option></select></div>
