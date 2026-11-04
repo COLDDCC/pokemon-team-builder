@@ -135,7 +135,7 @@ test('accessible empty, populated and picker states', async ({ page }) => {
   expect((await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze()).violations).toEqual([]);
 });
 test('unknown routes and unsupported URL versions have safe fallbacks', async ({page}) => {
-  const response = await page.goto('/this-page-does-not-exist');
+  const response = await page.goto('/this-page-does-not-exist/');
   expect(response?.status()).toBe(404);
   await expect(page.getByRole('heading', {level:1})).toHaveText('That page wandered off.');
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content','noindex, follow');
